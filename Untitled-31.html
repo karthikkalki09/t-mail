@@ -2,8 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=0.8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.9">
     <title>T-Mail - Modern Email Client</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <!-- Fonts and Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         :root {
             --primary: #4285f4;
@@ -101,20 +106,16 @@
             position: relative;
         }
 
-        .search-bar input {
-            width: 100%;
+        .search-bar .form-control {
             height: 48px;
             border-radius: 24px;
-            border: 1px solid var(--border);
-            padding: 0 20px 0 48px;
-            font-size: 16px;
+            padding-left: 48px;
             background-color: var(--light-gray);
             color: var(--text);
-            outline: none;
             transition: all 0.3s ease;
         }
 
-        .search-bar input:focus {
+        .search-bar .form-control:focus {
             background-color: var(--background);
             box-shadow: 0 1px 2px rgba(0,0,0,0.1);
         }
@@ -164,52 +165,16 @@
             cursor: pointer;
         }
 
-       /* Signup and Login Styles */
-       .signup-container, .login-container {
-        max-width: 400px;
-        margin: 100px auto;
-        padding: 20px;
-        background-color: var(--background);
-        border: 1px solid var(--border);
-        border-radius: 8px;
-    }
+        /* Signup and Login Styles */
+        .signup-container, .login-container {
+            max-width: 400px;
+            margin: 100px auto;
+            padding: 20px;
+            background-color: var(--background);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+        }
 
-    .form-group {
-        margin-bottom: 16px;
-    }
-
-    .form-group label {
-        display: block;
-        margin-bottom: 8px;
-    }
-
-    .form-group input {
-        width: 100%;
-        padding: 8px;
-        border: 1px solid var(--border);
-        border-radius: 4px;
-        background-color: var(--light-gray);
-        color: var(--text);
-    }
-
-    button[type="submit"] {
-        width: 100%;
-        padding: 10px;
-        background-color: var(--primary);
-        color: white;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-    }
-
-    button[type="submit"]:hover {
-        background-color: #3367d6;
-    }
-
-    /* Additional CSS for checkbox spacing */
-    .form-group label input[type="checkbox"] {
-        margin-right: 8px;
-    }
         /* Sidebar Styles */
         .sidebar {
             width: 280px;
@@ -234,15 +199,10 @@
             margin: 16px;
             height: 48px;
             border-radius: 24px;
-            background-color: var(--primary);
-            color: white;
-            border: none;
             font-size: 16px;
-            font-weight: 500;
             padding: 0 24px 0 16px;
             display: flex;
             align-items: center;
-            cursor: pointer;
             box-shadow: 0 1px 2px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
         }
@@ -313,21 +273,21 @@
             height: 100vh;
             overflow-y: auto;
             transition: all 0.3s ease;
+            position: relative;
         }
 
         .main-content.expanded {
             padding-left: 0;
         }
 
-        .dashboard-container {
+        .dashboard-container, .email-list-container, .email-view-container {
             padding: 24px;
             height: calc(100vh - 80px);
             overflow-y: auto;
         }
 
         .email-list-container {
-            height: calc(100vh - 80px);
-            overflow-y: auto;
+            position: relative;
         }
 
         .email-list-toolbar {
@@ -345,28 +305,6 @@
             margin-left: 8px;
             font-size: 18px;
             font-weight: 500;
-        }
-
-        .email-list-toolbar button {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 8px;
-            cursor: pointer;
-            background: none;
-            border: none;
-            color: var(--gray);
-        }
-
-        .email-list-toolbar button:hover {
-            background-color: var(--light-gray);
-        }
-
-        .email-list {
-            list-style: none;
         }
 
         .email-item {
@@ -389,7 +327,6 @@
 
         .email-checkbox {
             margin-right: 16px;
-           
         }
 
         .email-star {
@@ -441,37 +378,10 @@
         /* Email View Styles */
         .email-view-container {
             display: none;
-            padding: 24px;
-            height: calc(100vh - 80px);
-            overflow-y: auto;
         }
 
         .email-view-container.active {
             display: block;
-        }
-
-        .email-view-toolbar {
-            display: flex;
-            align-items: center;
-            margin-bottom: 16px;
-        }
-
-        .email-view-toolbar button {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 8px;
-            cursor: pointer;
-            background: none;
-            border: none;
-            color: var(--gray);
-        }
-
-        .email-view-toolbar button:hover {
-            background-color: var(--light-gray);
         }
 
         .email-view-subject {
@@ -522,6 +432,16 @@
             margin-top: 24px;
         }
 
+        .email-attachments {
+            margin-top: 20px;
+        }
+
+        .attachment-link {
+            display: block;
+            margin-top: 5px;
+            color: var(--primary);
+        }
+
         /* Compose Email Styles */
         .compose-container {
             display: none;
@@ -555,7 +475,7 @@
             font-weight: 500;
         }
 
-        .compose-actions button {
+        .compose-actions .btn {
             width: 32px;
             height: 32px;
             border-radius: 50%;
@@ -563,14 +483,7 @@
             align-items: center;
             justify-content: center;
             margin-left: 8px;
-            cursor: pointer;
-            background: none;
-            border: none;
             color: var(--gray);
-        }
-
-        .compose-actions button:hover {
-            background-color: rgba(0,0,0,0.1);
         }
 
         .compose-form {
@@ -590,22 +503,34 @@
             margin-bottom: 16px;
         }
 
-        .compose-field input, .compose-field textarea {
-            width: 100%;
+        .compose-field .form-control {
             border: none;
             border-bottom: 1px solid var(--border);
             padding: 8px 0;
             font-size: 14px;
             background: none;
             color: var(--text);
-            outline: none;
         }
 
-        .compose-field textarea {
-            resize: none;
+        #composeBody {
             min-height: 200px;
-            border: none;
-            line-height: 1.6;
+            border: 1px solid var(--border);
+            padding: 8px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .attachment-area {
+            margin-top: 10px;
+        }
+
+        .attachment {
+            display: inline-block;
+            margin-right: 10px;
+            background-color: var(--light-gray);
+            padding: 5px 10px;
+            border-radius: 5px;
         }
 
         .compose-footer {
@@ -614,43 +539,6 @@
             justify-content: space-between;
             padding: 12px 16px;
             border-top: 1px solid var(--border);
-        }
-
-        .compose-send-btn {
-            padding: 8px 24px;
-            border-radius: 4px;
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            font-weight: 500;
-            cursor: pointer;
-        }
-
-        .compose-send-btn:hover {
-            background-color: #3367d6;
-        }
-
-        .compose-attachments {
-            display: flex;
-            align-items: center;
-        }
-
-        .compose-attachments button {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 8px;
-            cursor: pointer;
-            background: none;
-            border: none;
-            color: var(--gray);
-        }
-
-        .compose-attachments button:hover {
-            background-color: var(--light-gray);
         }
 
         /* Smart Features */
@@ -667,16 +555,9 @@
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            background-color: var(--primary);
-            color: white;
-            border: none;
             font-size: 20px;
             margin-top: 16px;
-            cursor: pointer;
             box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
             transition: all 0.3s ease;
         }
 
@@ -715,32 +596,19 @@
             color: var(--primary);
         }
 
-        .smart-feature-popup p {
-            margin-bottom: 16px;
-            line-height: 1.5;
+        /* Loading Spinner */
+        .loading {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 50;
         }
 
-        .smart-feature-popup .actions {
-            display: flex;
-            justify-content: flex-end;
-        }
-
-        .smart-feature-popup button {
-            padding: 8px 16px;
-            border-radius: 4px;
-            border: none;
-            margin-left: 8px;
-            cursor: pointer;
-        }
-
-        .smart-feature-popup .primary-btn {
-            background-color: var(--primary);
-            color: white;
-        }
-
-        .smart-feature-popup .secondary-btn {
-            background-color: var(--light-gray);
-            color: var(--text);
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         /* Responsive Styles */
@@ -777,14 +645,12 @@
             animation: fadeIn 0.3s ease-in-out;
         }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <div class="app">
         <!-- Header -->
         <header class="header">
-            <button class="menu-toggle" id="menuToggle">
+            <button class="btn menu-toggle" id="menuToggle">
                 <i class="fas fa-bars"></i>
             </button>
             <div class="logo">
@@ -792,10 +658,10 @@
             </div>
             <div class="search-bar">
                 <i class="fas fa-search search-icon"></i>
-                <input type="text" placeholder="Search mail" id="searchInput">
+                <input type="text" class="form-control" placeholder="Search mail" id="searchInput">
             </div>
             <div class="user-actions">
-                <button class="theme-toggle" id="themeToggle">
+                <button class="btn theme-toggle" id="themeToggle">
                     <i class="fas fa-moon"></i>
                 </button>
                 <div class="user-avatar" id="userAvatar">U</div>
@@ -806,132 +672,92 @@
         <div class="signup-container" id="signupContainer">
             <h2>Create Your T-Mail Account</h2>
             <form id="signupForm">
-                <div class="form-group">
-                    <label for="fullName">Full Name</label>
-                    <input type="text" id="fullName" required>
+                <div class="mb-3">
+                    <label for="fullName" class="form-label">Full Name</label>
+                    <input type="text" class="form-control" id="fullName" required>
                 </div>
-                <div class="form-group">
-                    <label for="username">Username</label>
-                    <input type="text" id="username" required>
-                    <span>@tmail.com</span>
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="username" required>
+                        <span class="input-group-text">@tmail.com</span>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" required>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" required>
                 </div>
-                <div class="form-group">
-                    <label for="confirmPassword">Confirm Password</label>
-                    <input type="password" id="confirmPassword" required>
+                <div class="mb-3">
+                    <label for="confirmPassword" class="form-label">Confirm Password</label>
+                    <input type="password" class="form-control" id="confirmPassword" required>
                 </div>
-                <div class="form-group">
-                    <label for="dob">Date of Birth</label>
-                    <input type="date" id="dob" required>
+                <div class="mb-3">
+                    <label for="dob" class="form-label">Date of Birth</label>
+                    <input type="date" class="form-control" id="dob" required>
                 </div>
-                <div class="form-group">
-                    <input type="checkbox" id="terms" required>
-                    <label for="terms">I agree to the terms and conditions</label>
+               
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="terms" required>
+                    <label class="form-check-label" for="terms">I agree to the terms and conditions</label>
                 </div>
-                <button type="submit">Create Account</button>
+                <button type="submit" class="btn btn-primary w-100">Create Account</button>
             </form>
-            <p>Already have an account? <a href="#" id="switchToLogin">Log in</a></p>
+            <p class="mt-2">Already have an account? <a href="#" id="switchToLogin">Log in</a></p>
         </div>
 
         <!-- Login Container -->
         <div class="login-container" id="loginContainer" style="display: none;">
             <h2>Log In to T-Mail</h2>
             <form id="loginForm">
-                <div class="form-group">
-                    <label for="loginUsername">Username</label>
-                    <input type="text" id="loginUsername" required>
-                    <span>@tmail.com</span>
+                <div class="mb-3">
+                    <label for="loginUsername" class="form-label">Username</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="loginUsername" required>
+                        <span class="input-group-text">@tmail.com</span>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="loginPassword">Password</label>
-                    <input type="password" id="loginPassword" required>
+                <div class="mb-3">
+                    <label for="loginPassword" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="loginPassword" required>
                 </div>
-                <button type="submit">Log In</button>
+                <button type="submit" class="btn btn-primary w-100">Log In</button>
             </form>
-            <p>Don't have an account? <a href="#" id="switchToSignup">Sign up</a></p>
+            <p class="mt-2">Don't have an account? <a href="#" id="switchToSignup">Sign up</a></p>
         </div>
 
         <!-- Sidebar -->
         <aside class="sidebar" id="sidebar" style="display: none;">
-            <button class="compose-btn" id="composeBtn">
+            <button class="btn btn-primary compose-btn" id="composeBtn">
                 <i class="fas fa-plus compose-icon"></i>
                 Compose
             </button>
             <ul class="sidebar-menu">
                 <li>
-                    <a href="#" class="active" data-folder="inbox">
+                    <a href="#" data-folder="inbox">
                         <i class="fas fa-inbox sidebar-menu-icon"></i>
                         Inbox
-                        <span class="badge" id="inboxBadge">12</span>
+                        <span class="badge bg-primary ms-2" id="inboxBadge"></span>
                     </a>
                 </li>
-                <li>
-                    <a href="#" data-folder="starred">
-                        <i class="fas fa-star sidebar-menu-icon"></i>
-                        Starred
-                    </a>
-                </li>
-                <li>
-                    <a href="#" data-folder="sent">
-                        <i class="fas fa-paper-plane sidebar-menu-icon"></i>
-                        Sent
-                    </a>
-                </li>
-                <li>
-                    <a href="#" data-folder="drafts">
-                        <i class="fas fa-file sidebar-menu-icon"></i>
-                        Drafts
-                    </a>
-                </li>
-                <li>
-                    <a href="#" data-folder="trash">
-                        <i class="fas fa-trash sidebar-menu-icon"></i>
-                        Trash
-                    </a>
-                </li>
-                <li>
-                    <a href="#" data-folder="archive">
-                        <i class="fas fa-archive sidebar-menu-icon"></i>
-                        Archive
-                    </a>
-                </li>
+                <li><a href="#" data-folder="starred"><i class="fas fa-star sidebar-menu-icon"></i> Starred</a></li>
+                <li><a href="#" data-folder="sent"><i class="fas fa-paper-plane sidebar-menu-icon"></i> Sent</a></li>
+                <li><a href="#" data-folder="drafts"><i class="fas fa-file sidebar-menu-icon"></i> Drafts</a></li>
+                <li><a href="#" data-folder="trash"><i class="fas fa-trash sidebar-menu-icon"></i> Trash</a></li>
+                <li><a href="#" data-folder="archive"><i class="fas fa-archive sidebar-menu-icon"></i> Archive</a></li>
             </ul>
             <div class="sidebar-label">Labels</div>
             <ul class="sidebar-menu">
-                <li>
-                    <a href="#" data-folder="work">
-                        <i class="fas fa-circle sidebar-menu-icon" style="color: #4285f4; font-size: 10px;"></i>
-                        Work
-                    </a>
-                </li>
-                <li>
-                    <a href="#" data-folder="personal">
-                        <i class="fas fa-circle sidebar-menu-icon" style="color: #34a853; font-size: 10px;"></i>
-                        Personal
-                    </a>
-                </li>
-                <li>
-                    <a href="#" data-folder="finance">
-                        <i class="fas fa-circle sidebar-menu-icon" style="color: #fbbc05; font-size: 10px;"></i>
-                        Finance
-                    </a>
-                </li>
-                <li>
-                    <a href="#" data-folder="social">
-                        <i class="fas fa-circle sidebar-menu-icon" style="color: #ea4335; font-size: 10px;"></i>
-                        Social
-                    </a>
-                </li>
+                <li><a href="#" data-folder="work"><i class="fas fa-circle sidebar-menu-icon" style="color: #4285f4; font-size: 10px;"></i> Work</a></li>
+                <li><a href="#" data-folder="personal"><i class="fas fa-circle sidebar-menu-icon" style="color: #34a853; font-size: 10px;"></i> Personal</a></li>
+                <li><a href="#" data-folder="finance"><i class="fas fa-circle sidebar-menu-icon" style="color: #fbbc05; font-size: 10px;"></i> Finance</a></li>
+                <li><a href="#" data-folder="social"><i class="fas fa-circle sidebar-menu-icon" style="color: #ea4335; font-size: 10px;"></i> Social</a></li>
             </ul>
         </aside>
 
         <!-- Main Content -->
         <main class="main-content" id="mainContent" style="display: none;">
             <!-- Dashboard View -->
-            <div class="dashboard-container" id="dashboardView">
+            <div class="dashboard-container" id="dashboardView" style="display: none;">
                 <h2>Welcome to T-Mail</h2>
                 <p>Select a folder from the sidebar to view your emails.</p>
             </div>
@@ -939,62 +765,39 @@
             <!-- Email List View -->
             <div class="email-list-container" id="emailListView" style="display: none;">
                 <div class="email-list-toolbar">
-                    <button id="backToDashboard">
-                        <i class="fas fa-arrow-left"></i>
-                    </button>
+                    <button class="btn" id="backToDashboard"><i class="fas fa-arrow-left"></i></button>
                     <h2 id="folderTitle">Inbox</h2>
-                    <button id="refreshBtn">
-                        <i class="fas fa-sync-alt"></i>
-                    </button>
-                    <button id="archiveBtn">
-                        <i class="fas fa-archive"></i>
-                    </button>
-                    <button id="deleteBtn">
-                        <i class="fas fa-trash"></i>
-                    </button>
-                    <button id="markAsReadBtn">
-                        <i class="fas fa-envelope-open"></i>
-                    </button>
+                    <button class="btn" id="refreshBtn"><i class="fas fa-sync-alt"></i></button>
+                    <button class="btn" id="archiveBtn"><i class="fas fa-archive"></i></button>
+                    <button class="btn" id="deleteBtn"><i class="fas fa-trash"></i></button>
+                    <button class="btn" id="markAsReadBtn"><i class="fas fa-envelope-open"></i></button>
                     <div style="flex: 1;"></div>
-                    <button id="listViewBtn">
-                        <i class="fas fa-list"></i>
-                    </button>
+                    <button class="btn" id="listViewBtn"><i class="fas fa-list"></i></button>
                 </div>
-                <ul class="email-list" id="emailList">
-                    <!-- Emails will be loaded here -->
-                </ul>
+                <div class="loading" id="emailListLoading">
+                    <div class="spinner-border text-primary" role="status"></div>
+                </div>
+                <ul class="email-list list-unstyled" id="emailList"></ul>
             </div>
 
             <!-- Email Detail View -->
             <div class="email-view-container" id="emailView" style="display: none;">
-                <div class="email-view-toolbar">
-                    <button id="backToList">
-                        <i class="fas fa-arrow-left"></i>
-                    </button>
-                    <button id="replyBtn">
-                        <i class="fas fa-reply"></i>
-                    </button>
-                    <button id="forwardBtn">
-                        <i class="fas fa-share"></i>
-                    </button>
-                    <button id="deleteEmailBtn">
-                        <i class="fas fa-trash"></i>
-                    </button>
+                <div class="email-view-toolbar d-flex align-items-center mb-3">
+                    <button class="btn" id="backToList"><i class="fas fa-arrow-left"></i></button>
+                    <button class="btn" id="replyBtn"><i class="fas fa-reply"></i></button>
+                    <button class="btn" id="forwardBtn"><i class="fas fa-share"></i></button>
+                    <button class="btn" id="deleteEmailBtn"><i class="fas fa-trash"></i></button>
                     <div style="flex: 1;"></div>
-                    <button id="summarizeBtn">
-                        <i class="fas fa-scroll"></i>
-                    </button>
+                    <button class="btn" id="summarizeBtn"><i class="fas fa-scroll"></i></button>
                 </div>
-                <div class="email-view-header">
-                    <h1 class="email-view-subject" id="emailSubject">Meeting Tomorrow</h1>
-                    <div class="email-view-sender">
-                        <div class="sender-avatar" id="senderAvatar">J</div>
-                        <div class="sender-info">
-                            <div class="sender-name" id="senderName">John Doe</div>
-                            <div class="sender-email" id="senderEmail">john.doe@example.com</div>
-                        </div>
-                        <div class="email-view-time" id="emailTime">10:30 AM</div>
+                <h1 class="email-view-subject" id="emailSubject">Meeting Tomorrow</h1>
+                <div class="email-view-sender d-flex align-items-center">
+                    <div class="sender-avatar" id="senderAvatar">J</div>
+                    <div class="sender-info">
+                        <div class="sender-name" id="senderName">John Doe</div>
+                        <div class="sender-email" id="senderEmail">john.doe@example.com</div>
                     </div>
+                    <div class="email-view-time ms-auto" id="emailTime">10:30 AM</div>
                 </div>
                 <div class="email-view-body" id="emailBody">
                     <p>Hi there,</p>
@@ -1002,6 +805,7 @@
                     <p>Please bring your project updates and any questions you might have.</p>
                     <p>Best regards,<br>John</p>
                 </div>
+                <div class="email-attachments" id="emailAttachments"></div>
             </div>
         </main>
 
@@ -1010,84 +814,88 @@
             <div class="compose-header" id="composeHeader">
                 <div class="compose-title">New Message</div>
                 <div class="compose-actions">
-                    <button id="minimizeCompose">
-                        <i class="fas fa-minus"></i>
-                    </button>
-                    <button id="closeCompose">
-                        <i class="fas fa-times"></i>
-                    </button>
+                    <button class="btn" id="minimizeCompose"><i class="fas fa-minus"></i></button>
+                    <button class="btn" id="closeCompose"><i class="fas fa-times"></i></button>
                 </div>
             </div>
             <form class="compose-form" id="composeForm">
                 <div class="compose-fields">
                     <div class="compose-field">
-                        <input type="email" id="composeTo" placeholder="To" required>
+                        <input type="email" class="form-control" id="composeTo" placeholder="To" required>
                     </div>
                     <div class="compose-field">
-                        <input type="text" id="composeSubject" placeholder="Subject">
+                        <input type="text" class="form-control" id="composeSubject" placeholder="Subject">
                     </div>
                     <div class="compose-field">
-                        <textarea id="composeBody" placeholder="Compose email"></textarea>
+                        <div contenteditable="true" class="form-control" id="composeBody" placeholder="Compose email"></div>
                     </div>
+                    <div class="attachment-area" id="attachmentArea"></div>
                 </div>
                 <div class="compose-footer">
                     <div class="compose-attachments">
-                        <button type="button" id="attachFile">
-                            <i class="fas fa-paperclip"></i>
-                        </button>
-                        <button type="button" id="insertPhoto">
-                            <i class="fas fa-image"></i>
-                        </button>
-                        <button type="button" id="insertLink">
-                            <i class="fas fa-link"></i>
-                        </button>
+                        <button type="button" class="btn" id="attachFile"><i class="fas fa-paperclip"></i></button>
+                        <button type="button" class="btn" id="insertPhoto"><i class="fas fa-image"></i></button>
+                        <button type="button" class="btn" id="insertLink"><i class="fas fa-link"></i></button>
                     </div>
-                    <button type="submit" class="compose-send-btn" id="sendEmail">Send</button>
+                    <button type="submit" class="btn btn-primary compose-send-btn" id="sendEmail">Send</button>
                 </div>
             </form>
+            <input type="file" id="fileInput" multiple style="display: none;">
         </div>
 
         <!-- Smart Features -->
         <div class="smart-features">
-            <button class="smart-feature-btn summarize" id="summarizeFeatureBtn">
+            <button class="btn btn-warning smart-feature-btn summarize" id="summarizeFeatureBtn">
                 <i class="fas fa-scroll"></i>
             </button>
-            <button class="smart-feature-btn voice" id="voiceFeatureBtn">
+            <button class="btn btn-success smart-feature-btn voice" id="voiceFeatureBtn">
                 <i class="fas fa-microphone"></i>
             </button>
         </div>
 
         <div class="smart-feature-popup" id="summarizePopup">
             <h4>Email Summary</h4>
-            <p id="summaryText">This is a summary of the email content. Key points will be extracted automatically.</p>
-            <div class="actions">
-                <button class="secondary-btn" id="closeSummary">Close</button>
-                <button class="primary-btn" id="copySummary">Copy</button>
+            <p id="summaryText">This is a summary of the email content.</p>
+            <div class="actions d-flex justify-content-end">
+                <button class="btn btn-secondary" id="closeSummary">Close</button>
+                <button class="btn btn-primary ms-2" id="copySummary">Copy</button>
             </div>
         </div>
 
         <div class="smart-feature-popup" id="voicePopup">
             <h4>Voice to Email</h4>
-            <p id="voiceText">Press the microphone button and start speaking to compose an email with your voice.</p>
-            <div class="actions">
-                <button class="secondary-btn" id="cancelVoice">Cancel</button>
-                <button class="primary-btn" id="sendVoice">Send as Email</button>
+            <p id="voiceText">Press the microphone button to start speaking.</p>
+            <div class="actions d-flex justify-content-end">
+                <button class="btn btn-secondary" id="cancelVoice">Cancel</button>
+                <button class="btn btn-primary ms-2" id="sendVoice">Send as Email</button>
             </div>
         </div>
 
         <!-- Account Popup -->
         <div class="smart-feature-popup" id="accountPopup">
+            <div class="profile-picture mb-3">
+                <img id="profilePicture" src="" alt="Profile Picture" style="width: 100px; height: 100px; border-radius: 50%;">
+            </ aeronauticsdiv>
             <h4>Account Details</h4>
             <p><strong>Full Name:</strong> <span id="accountFullName"></span></p>
             <p><strong>Username:</strong> <span id="accountUsername"></span></p>
             <p><strong>Date of Birth:</strong> <span id="accountDob"></span></p>
-            <div class="actions">
-                <button class="secondary-btn" id="closeAccountPopup">Close</button>
-                <button class="primary-btn" id="logoutFromPopup">Log Out</button>
+          
+            <p><strong>Emails Sent:</strong> <span id="emailsSent"></span></p>
+            <p><strong>Emails Received:</strong> <span id="emailsReceived"></span></p>
+            <div class="mb-3">
+                <label for="profilePhoto" class="form-label">Profile Photo</label>
+                <input type="file" class="form-control" id="profilePhoto" accept="image/*">
+            </div>
+            <div class="actions d-flex justify-content-end">
+                <button class="btn btn-secondary" id="closeAccountPopup">Close</button>
+                <button class="btn btn-primary ms-2" id="logoutFromPopup">Log Out</button>
             </div>
         </div>
     </div>
 
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     <script>
         // DOM Elements
         const header = document.querySelector('.header');
@@ -1118,6 +926,7 @@
         const cancelVoice = document.getElementById('cancelVoice');
         const sendVoice = document.getElementById('sendVoice');
         const emailList = document.getElementById('emailList');
+        const emailListLoading = document.getElementById('emailListLoading');
         const searchInput = document.getElementById('searchInput');
         const signupContainer = document.getElementById('signupContainer');
         const loginContainer = document.getElementById('loginContainer');
@@ -1125,6 +934,9 @@
         const switchToSignup = document.getElementById('switchToSignup');
         const userAvatar = document.getElementById('userAvatar');
         const accountPopup = document.getElementById('accountPopup');
+        const profilePhoto = document.getElementById('profilePhoto');
+        const fileInput = document.getElementById('fileInput');
+        const attachmentArea = document.getElementById('attachmentArea');
 
         // State
         let currentTheme = 'light';
@@ -1132,12 +944,14 @@
         let selectedEmailId = null;
         let isListening = false;
         let recognition = null;
+        let attachments = [];
+        let insertMode = 'file'; // 'file' or 'photo'
 
         // Mock Data
         const mockEmails = {
             inbox: [
-                { id: '1', from: 'Alice', email: 'alice@example.com', subject: 'Meeting', preview: 'Let\'s meet tomorrow.', time: '10:30 AM', read: false, starred: false, body: '<p>Hi, let\'s meet tomorrow at 10 AM.</p>' },
-                { id: '2', from: 'Bob', email: 'bob@example.com', subject: 'Project Update', preview: 'Here\'s the latest update.', time: '9:15 AM', read: true, starred: true, body: '<p>The project is on track.</p>' }
+                { id: '1', from: 'Alice', email: 'alice@example.com', subject: 'Meeting', preview: 'Let\'s meet tomorrow.', time: '10:30 AM', read: false, starred: false, body: '<p>Hi, let\'s meet tomorrow at 10 AM.</p>', attachments: ['meeting_agenda.pdf'] },
+                { id: '2', from: 'Bob', email: 'bob@example.com', subject: 'Project Update', preview: 'Here\'s the latest update.', time: '9:15 AM', read: true, starred: true, body: '<p>The project is on track.</p>', attachments: ['update_report.docx', 'chart.png'] }
             ],
             sent: [],
             drafts: [],
@@ -1151,8 +965,6 @@
         };
 
         // Functions
-
-        /** Toggle the sidebar visibility */
         function toggleSidebar() {
             if (window.innerWidth > 992) {
                 sidebar.classList.toggle('hidden');
@@ -1162,7 +974,6 @@
             }
         }
 
-        /** Show the dashboard view */
         function showDashboard() {
             dashboardView.style.display = 'block';
             emailListView.style.display = 'none';
@@ -1175,26 +986,24 @@
             }
         }
 
-        /** Show the email list for a specific folder */
         function showEmailListForFolder(folder) {
             currentFolder = folder;
-            const emails = mockEmails[folder] || [];
-            renderEmailList(emails);
-            folderTitle.textContent = folder.charAt(0).toUpperCase() + folder.slice(1);
-            dashboardView.style.display = 'none';
-            emailListView.style.display = 'block';
-            emailView.style.display = 'none';
+            emailListLoading.style.display = 'block';
+            setTimeout(() => {
+                const emails = mockEmails[folder] || [];
+                renderEmailList(emails);
+                folderTitle.textContent = folder.charAt(0).toUpperCase() + folder.slice(1);
+                dashboardView.style.display = 'none';
+                emailListView.style.display = 'block';
+                emailView.style.display = 'none';
+                emailListLoading.style.display = 'none';
+            }, 500); // Simulated delay for dynamic feel
         }
 
-        /** Render emails into the email list */
         function renderEmailList(emails) {
             emailList.innerHTML = '';
             if (emails.length === 0) {
-                const li = document.createElement('li');
-                li.textContent = 'No emails in this folder';
-                li.style.padding = '16px';
-                li.style.color = 'var(--gray)';
-                emailList.appendChild(li);
+                emailList.innerHTML = '<li class="p-3 text-muted">No emails in this folder</li>';
                 return;
             }
             emails.forEach(email => {
@@ -1220,7 +1029,6 @@
             });
         }
 
-        /** Get an email by its ID from mock data */
         function getEmailById(id) {
             for (const folder in mockEmails) {
                 const email = mockEmails[folder].find(e => e.id === id);
@@ -1229,38 +1037,52 @@
             return null;
         }
 
-        /** Open an email in the detail view */
         function openEmail(id) {
             const email = getEmailById(id);
             if (!email) return;
             selectedEmailId = id;
-            email.read = true; // Mark as read when opened
+            email.read = true;
             document.getElementById('emailSubject').textContent = email.subject;
             document.getElementById('senderName').textContent = email.from;
             document.getElementById('senderEmail').textContent = email.email;
             document.getElementById('emailTime').textContent = email.time;
             document.getElementById('emailBody').innerHTML = email.body;
             document.getElementById('senderAvatar').textContent = email.from[0].toUpperCase();
+            const attachmentsDiv = document.getElementById('emailAttachments');
+            attachmentsDiv.innerHTML = '';
+            if (email.attachments && email.attachments.length > 0) {
+                const attachmentHeader = document.createElement('h5');
+                attachmentHeader.textContent = 'Attachments:';
+                attachmentsDiv.appendChild(attachmentHeader);
+                email.attachments.forEach(attachment => {
+                    const attachmentLink = document.createElement('a');
+                    attachmentLink.href = '#';
+                    attachmentLink.textContent = attachment;
+                    attachmentLink.className = 'attachment-link';
+                    attachmentsDiv.appendChild(attachmentLink);
+                });
+            }
             emailListView.style.display = 'none';
             emailView.style.display = 'block';
+            emailView.classList.add('fade-in');
         }
 
-        /** Show the email list view */
         function showEmailList() {
             emailView.style.display = 'none';
             emailListView.style.display = 'block';
             selectedEmailId = null;
         }
 
-        /** Open the compose window */
         function openCompose() {
             composeContainer.classList.add('active');
+            composeContainer.classList.add('fade-in');
             document.getElementById('composeTo').value = '';
             document.getElementById('composeSubject').value = '';
-            document.getElementById('composeBody').value = '';
+            document.getElementById('composeBody').innerHTML = '';
+            attachments = [];
+            updateAttachmentList();
         }
 
-        /** Minimize the compose window (mock implementation) */
         function minimizeComposeWindow() {
             composeContainer.style.display = 'none';
             setTimeout(() => {
@@ -1269,39 +1091,51 @@
             }, 0);
         }
 
-        /** Close the compose window */
         function closeComposeWindow() {
             composeContainer.classList.remove('active');
         }
 
-        /** Send an email */
-        function sendEmail(e) {
-            e.preventDefault();
-            const to = document.getElementById('composeTo').value;
-            const subject = document.getElementById('composeSubject').value;
-            const body = document.getElementById('composeBody').value;
-            const currentUser = localStorage.getItem('current_user');
-            const users = JSON.parse(localStorage.getItem('tmail_users')) || [];
-            const user = users.find(u => u.username === currentUser);
-            const newEmail = {
-                id: String(mockEmails.sent.length + 1),
-                from: user ? user.fullName : 'Me',
-                email: currentUser + '@tmail.com',
-                subject: subject,
-                preview: body.substring(0, 50) + '...',
-                time: new Date().toLocaleTimeString(),
-                read: true,
-                starred: false,
-                body: body
-            };
-            mockEmails.sent.push(newEmail);
-            closeComposeWindow();
-            if (currentFolder === 'sent') {
-                showEmailListForFolder('sent');
-            }
+        function updateAttachmentList() {
+            attachmentArea.innerHTML = '';
+            attachments.forEach(file => {
+                const attachment = document.createElement('span');
+                attachment.textContent = file.name;
+                attachment.className = 'attachment';
+                attachmentArea.appendChild(attachment);
+            });
         }
 
-        /** Toggle between light, dark, and AMOLED themes */
+        function sendEmail(e) {
+            e.preventDefault();
+            emailListLoading.style.display = 'block';
+            setTimeout(() => {
+                const to = document.getElementById('composeTo').value;
+                const subject = document.getElementById('composeSubject').value;
+                const body = document.getElementById('composeBody').innerHTML;
+                const currentUser = localStorage.getItem('current_user');
+                const users = JSON.parse(localStorage.getItem('tmail_users')) || [];
+                const user = users.find(u => u.username === currentUser);
+                const newEmail = {
+                    id: String(mockEmails.sent.length + 1),
+                    from: user ? user.fullName : 'Me',
+                    email: currentUser + '@tmail.com',
+                    subject: subject,
+                    preview: body.replace(/<[^>]+>/g, '').substring(0, 50) + '...',
+                    time: new Date().toLocaleTimeString(),
+                    read: true,
+                    starred: false,
+                    body: body,
+                    attachments: attachments.map(file => file.name)
+                };
+                mockEmails.sent.push(newEmail);
+                closeComposeWindow();
+                if (currentFolder === 'sent') {
+                    showEmailListForFolder('sent');
+                }
+                emailListLoading.style.display = 'none';
+            }, 500);
+        }
+
         function toggleTheme() {
             const themes = ['light', 'dark', 'amoled'];
             let currentThemeIndex = themes.indexOf(currentTheme);
@@ -1311,63 +1145,66 @@
             localStorage.setItem('theme', currentTheme);
         }
 
-        /** Refresh the email list */
         function refreshEmails() {
             showEmailListForFolder(currentFolder);
         }
 
-        /** Get selected email IDs */
         function getSelectedEmails() {
             const checkboxes = document.querySelectorAll('.email-checkbox:checked');
             return Array.from(checkboxes).map(checkbox => checkbox.closest('.email-item').dataset.id);
         }
 
-        /** Archive selected emails */
         function archiveEmails() {
-            const selectedIds = getSelectedEmails();
-            selectedIds.forEach(id => {
-                const email = getEmailById(id);
-                if (email) {
-                    mockEmails[currentFolder] = mockEmails[currentFolder].filter(e => e.id !== id);
-                    if (!mockEmails.archive) mockEmails.archive = [];
-                    mockEmails.archive.push(email);
-                }
-            });
-            showEmailListForFolder(currentFolder);
+            emailListLoading.style.display = 'block';
+            setTimeout(() => {
+                const selectedIds = getSelectedEmails();
+                selectedIds.forEach(id => {
+                    const email = getEmailById(id);
+                    if (email) {
+                        mockEmails[currentFolder] = mockEmails[currentFolder].filter(e => e.id !== id);
+                        if (!mockEmails.archive) mockEmails.archive = [];
+                        mockEmails.archive.push(email);
+                    }
+                });
+                showEmailListForFolder(currentFolder);
+                emailListLoading.style.display = 'none';
+            }, 500);
         }
 
-        /** Delete selected emails */
         function deleteEmails() {
-            const selectedIds = getSelectedEmails();
-            selectedIds.forEach(id => {
-                const email = getEmailById(id);
-                if (email) {
-                    mockEmails[currentFolder] = mockEmails[currentFolder].filter(e => e.id !== id);
-                    if (!mockEmails.trash) mockEmails.trash = [];
-                    mockEmails.trash.push(email);
-                }
-            });
-            showEmailListForFolder(currentFolder);
+            emailListLoading.style.display = 'block';
+            setTimeout(() => {
+                const selectedIds = getSelectedEmails();
+                selectedIds.forEach(id => {
+                    const email = getEmailById(id);
+                    if (email) {
+                        mockEmails[currentFolder] = mockEmails[currentFolder].filter(e => e.id !== id);
+                        if (!mockEmails.trash) mockEmails.trash = [];
+                        mockEmails.trash.push(email);
+                    }
+                });
+                showEmailListForFolder(currentFolder);
+                emailListLoading.style.display = 'none';
+            }, 500);
         }
 
-        /** Mark selected emails as read */
         function markAsRead() {
-            const selectedIds = getSelectedEmails();
-            selectedIds.forEach(id => {
-                const email = getEmailById(id);
-                if (email) {
-                    email.read = true;
-                }
-            });
-            showEmailListForFolder(currentFolder);
+            emailListLoading.style.display = 'block';
+            setTimeout(() => {
+                const selectedIds = getSelectedEmails();
+                selectedIds.forEach(id => {
+                    const email = getEmailById(id);
+                    if (email) email.read = true;
+                });
+                showEmailListForFolder(currentFolder);
+                emailListLoading.style.display = 'none';
+            }, 500);
         }
 
-        /** Toggle list view (placeholder) */
         function toggleListView() {
-            alert('List view is the only view implemented in this mockup.');
+            alert('List view is the only view implemented.');
         }
 
-        /** Reply to the current email */
         function replyToEmail() {
             if (selectedEmailId) {
                 const email = getEmailById(selectedEmailId);
@@ -1375,37 +1212,38 @@
                     openCompose();
                     document.getElementById('composeTo').value = email.email;
                     document.getElementById('composeSubject').value = `Re: ${email.subject}`;
-                    document.getElementById('composeBody').value = `\n\n---\n${email.body}`;
+                    document.getElementById('composeBody').innerHTML = `<br><br>---<br>${email.body}`;
                 }
             }
         }
 
-        /** Forward the current email */
         function forwardEmail() {
             if (selectedEmailId) {
                 const email = getEmailById(selectedEmailId);
                 if (email) {
                     openCompose();
                     document.getElementById('composeSubject').value = `Fwd: ${email.subject}`;
-                    document.getElementById('composeBody').value = `\n\n--- Forwarded message ---\nFrom: ${email.from}\nSubject: ${email.subject}\n\n${email.body}`;
+                    document.getElementById('composeBody').innerHTML = `<br><br>--- Forwarded message ---<br>From: ${email.from}<br>Subject: ${email.subject}<br><br>${email.body}`;
                 }
             }
         }
 
-        /** Delete the current email */
         function deleteCurrentEmail() {
-            if (selectedEmailId) {
-                const email = getEmailById(selectedEmailId);
-                if (email) {
-                    mockEmails[currentFolder] = mockEmails[currentFolder].filter(e => e.id !== selectedEmailId);
-                    if (!mockEmails.trash) mockEmails.trash = [];
-                    mockEmails.trash.push(email);
-                    showEmailList();
+            emailListLoading.style.display = 'block';
+            setTimeout(() => {
+                if (selectedEmailId) {
+                    const email = getEmailById(selectedEmailId);
+                    if (email) {
+                        mockEmails[currentFolder] = mockEmails[currentFolder].filter(e => e.id !== selectedEmailId);
+                        if (!mockEmails.trash) mockEmails.trash = [];
+                        mockEmails.trash.push(email);
+                        showEmailList();
+                    }
                 }
-            }
+                emailListLoading.style.display = 'none';
+            }, 500);
         }
 
-        /** Summarize the current email */
         function summarizeEmail() {
             if (selectedEmailId) {
                 const email = getEmailById(selectedEmailId);
@@ -1413,11 +1251,11 @@
                     const summary = email.body.replace(/<[^>]+>/g, '').substring(0, 100) + '...';
                     summaryText.textContent = summary;
                     summarizePopup.classList.add('active');
+                    summarizePopup.classList.add('fade-in');
                 }
             }
         }
 
-        /** Open the summarize popup */
         function openSummarizePopup() {
             if (selectedEmailId) {
                 const email = getEmailById(selectedEmailId);
@@ -1431,14 +1269,13 @@
                 summaryText.textContent = 'Please select an email to summarize.';
             }
             summarizePopup.classList.add('active');
+            summarizePopup.classList.add('fade-in');
         }
 
-        /** Close the summarize popup */
         function closeSummarizePopup() {
             summarizePopup.classList.remove('active');
         }
 
-        /** Copy summary text to clipboard */
         function copySummaryText() {
             const text = summaryText.textContent;
             navigator.clipboard.writeText(text).then(() => {
@@ -1446,7 +1283,6 @@
             });
         }
 
-        /** Toggle voice recognition */
         function toggleVoiceRecognition() {
             if (isListening) {
                 recognition.stop();
@@ -1456,57 +1292,49 @@
                 voiceFeatureBtn.innerHTML = '<i class="fas fa-stop"></i>';
                 voiceText.textContent = 'Listening...';
                 voicePopup.classList.add('active');
+                voicePopup.classList.add('fade-in');
             }
         }
-        /** Send voice email */
+
         function sendVoiceEmail() {
             const transcript = voiceText.textContent;
             if (transcript && transcript !== 'Listening...') {
-                const currentUser = localStorage.getItem('current_user');
-                const users = JSON.parse(localStorage.getItem('tmail_users')) || [];
-                const user = users.find(u => u.username === currentUser);
-                const newEmail = {
-                    id: String(mockEmails.sent.length + 1),
-                    from: user ? user.fullName : 'Me',
-                    email: currentUser + '@tmail.com',
-                    subject: 'Voice Email',
-                    preview: transcript.substring(0, 50) + '...',
-                    time: new Date().toLocaleTimeString(),
-                    read: true,
-                    starred: false,
-                    body: transcript
-                };
-                mockEmails.sent.push(newEmail);
-                cancelVoiceRecognition();
-                if (currentFolder === 'sent') {
-                    showEmailListForFolder('sent');
-                }
+                emailListLoading.style.display = 'block';
+                setTimeout(() => {
+                    const currentUser = localStorage.getItem('current_user');
+                    const users = JSON.parse(localStorage.getItem('tmail_users')) || [];
+                    const user = users.find(u => u.username === currentUser);
+                    const newEmail = {
+                        id: String(mockEmails.sent.length + 1),
+                        from: user ? user.fullName : 'Me',
+                        email: currentUser + '@tmail.com',
+                        subject: 'Voice Email',
+                        preview: transcript.substring(0, 50) + '...',
+                        time: new Date().toLocaleTimeString(),
+                        read: true,
+                        starred: false,
+                        body: transcript,
+                        attachments: []
+                    };
+                    mockEmails.sent.push(newEmail);
+                    cancelVoiceRecognition();
+                    if (currentFolder === 'sent') {
+                        showEmailListForFolder('sent');
+                    }
+                    emailListLoading.style.display = 'none';
+                }, 500);
             }
         }
-        /** Cancel voice recognition */
+
         function cancelVoiceRecognition() {
             if (isListening) {
                 recognition.stop();
             }
             voicePopup.classList.remove('active');
             voiceFeatureBtn.innerHTML = '<i class="fas fa-microphone"></i>';
-            voiceText.textContent = 'Press the microphone button and start speaking to compose an email with your voice.';
+            voiceText.textContent = 'Press the microphone button to start speaking.';
         }
 
-        /** Placeholder for attachment features */
-        function attachFile() {
-            alert('Attach file functionality not implemented in this mockup.');
-        }
-
-        function insertPhoto() {
-            alert('Insert photo functionality not implemented in this mockup.');
-        }
-
-        function insertLink() {
-            alert('Insert link functionality not implemented in this mockup.');
-        }
-
-        /** Calculate age from date of birth */
         function calculateAge(dob) {
             const birthDate = new Date(dob);
             const today = new Date();
@@ -1542,11 +1370,48 @@
         voiceFeatureBtn.addEventListener('click', toggleVoiceRecognition);
         cancelVoice.addEventListener('click', cancelVoiceRecognition);
         sendVoice.addEventListener('click', sendVoiceEmail);
-        document.getElementById('attachFile').addEventListener('click', attachFile);
-        document.getElementById('insertPhoto').addEventListener('click', insertPhoto);
-        document.getElementById('insertLink').addEventListener('click', insertLink);
 
-        // Handle folder navigation with sidebar hiding
+        document.getElementById('attachFile').addEventListener('click', function() {
+            insertMode = 'file';
+            fileInput.accept = '*';
+            fileInput.click();
+        });
+
+        document.getElementById('insertPhoto').addEventListener('click', function() {
+            insertMode = 'photo';
+            fileInput.accept = 'image/*';
+            fileInput.click();
+        });
+
+        document.getElementById('insertLink').addEventListener('click', function() {
+            const url = prompt('Enter the URL:');
+            if (url) {
+                const text = prompt('Enter the link text:');
+                const linkHtml = `<a href="${url}">${text || url}</a>`;
+                document.getElementById('composeBody').focus();
+                document.execCommand('insertHTML', false, linkHtml);
+            }
+        });
+
+        fileInput.addEventListener('change', function() {
+            const files = this.files;
+            if (insertMode === 'photo') {
+                Array.from(files).forEach(file => {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const imgHtml = `<img src="${e.target.result}" alt="${file.name}" style="max-width: 100%;">`;
+                        document.getElementById('composeBody').focus();
+                        document.execCommand('insertHTML', false, imgHtml);
+                    };
+                    reader.readAsDataURL(file);
+                });
+            } else {
+                attachments = attachments.concat(Array.from(files));
+                updateAttachmentList();
+            }
+            this.value = '';
+        });
+
         document.querySelectorAll('.sidebar-menu a').forEach(link => {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -1555,7 +1420,6 @@
                     showEmailListForFolder(folder);
                     document.querySelectorAll('.sidebar-menu a').forEach(a => a.classList.remove('active'));
                     this.classList.add('active');
-                    // Hide the sidebar
                     if (window.innerWidth > 992) {
                         sidebar.classList.add('hidden');
                         mainContent.classList.add('expanded');
@@ -1566,19 +1430,21 @@
             });
         });
 
-        // Handle search
         searchInput.addEventListener('input', function() {
-            const searchTerm = this.value.toLowerCase();
-            const emails = mockEmails[currentFolder] || [];
-            const filteredEmails = emails.filter(email =>
-                email.from.toLowerCase().includes(searchTerm) ||
-                email.subject.toLowerCase().includes(searchTerm) ||
-                email.preview.toLowerCase().includes(searchTerm)
-            );
-            renderEmailList(filteredEmails);
+            emailListLoading.style.display = 'block';
+            setTimeout(() => {
+                const searchTerm = this.value.toLowerCase();
+                const emails = mockEmails[currentFolder] || [];
+                const filteredEmails = emails.filter(email =>
+                    email.from.toLowerCase().includes(searchTerm) ||
+                    email.subject.toLowerCase().includes(searchTerm) ||
+                    email.preview.toLowerCase().includes(searchTerm)
+                );
+                renderEmailList(filteredEmails);
+                emailListLoading.style.display = 'none';
+            }, 300);
         });
 
-        // Handle starring emails
         emailList.addEventListener('click', function(e) {
             if (e.target.classList.contains('email-star')) {
                 const emailItem = e.target.closest('.email-item');
@@ -1596,7 +1462,6 @@
             }
         });
 
-        // Initialize speech recognition
         if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
             recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
             recognition.lang = 'en-US';
@@ -1609,7 +1474,7 @@
             };
 
             recognition.onerror = function(event) {
-                voiceText.textContent = 'Error occurred in recognition: ' + event.error;
+                voiceText.textContent = 'Error: ' + event.error;
             };
 
             recognition.onend = function() {
@@ -1621,7 +1486,6 @@
             voiceFeatureBtn.title = 'Speech recognition not supported';
         }
 
-        // Handle signup form submission
         document.getElementById('signupForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const fullName = document.getElementById('fullName').value.trim();
@@ -1629,76 +1493,37 @@
             const password = document.getElementById('password').value;
             const confirmPassword = document.getElementById('confirmPassword').value;
             const dob = document.getElementById('dob').value;
+         
             const terms = document.getElementById('terms').checked;
 
-            // Validation
-            if (!fullName) {
-                alert('Full Name is required.');
-                return;
-            }
-            if (!username) {
-                alert('Username is required.');
-                return;
-            }
-            if (!/^[a-zA-Z0-9_]+$/.test(username)) {
-                alert('Username can only contain letters, numbers, and underscores.');
-                return;
-            }
+            if (!fullName) return alert('Full Name is required.');
+            if (!username) return alert('Username is required.');
+            if (!/^[a-zA-Z0-9_]+$/.test(username)) return alert('Username can only contain letters, numbers, and underscores.');
             let users = JSON.parse(localStorage.getItem('tmail_users')) || [];
-            if (users.some(user => user.username === username)) {
-                alert('Username already exists.');
-                return;
-            }
-            if (password.length < 8) {
-                alert('Password must be at least 8 characters long.');
-                return;
-            }
-            if (password !== confirmPassword) {
-                alert('Passwords do not match.');
-                return;
-            }
-            if (!dob) {
-                alert('Date of Birth is required.');
-                return;
-            }
+            if (users.some(user => user.username === username)) return alert('Username already exists.');
+            if (password.length < 8) return alert('Password must be at least 8 characters long.');
+            if (password !== confirmPassword) return alert('Passwords do not match.');
+            if (!dob) return alert('Date of Birth is required.');
             const birthDate = new Date(dob);
             const today = new Date();
-            if (birthDate >= today) {
-                alert('Date of Birth must be in the past.');
-                return;
-            }
+            if (birthDate >= today) return alert('Date of Birth must be in the past.');
             const age = calculateAge(dob);
-            if (age < 13) {
-                alert('You must be at least 13 years old to create an account.');
-                return;
-            }
-            if (!terms) {
-                alert('You must agree to the terms and conditions.');
-                return;
-            }
+            if (age < 13) return alert('You must be at least 13 years old.');
+            if (!terms) return alert('You must agree to the terms.');
 
-            // Create user
-            const newUser = {
-                username: username,
-                password: password, // In real app, hash this
-                fullName: fullName,
-                dob: dob
-            };
+            const newUser = { username, password, fullName, dob};
             users.push(newUser);
             localStorage.setItem('tmail_users', JSON.stringify(users));
             localStorage.setItem('current_user', username);
 
-            // Show email client
             signupContainer.style.display = 'none';
             header.style.display = 'flex';
             mainContent.style.display = 'block';
             sidebar.style.display = 'block';
-            const firstLetter = fullName.charAt(0).toUpperCase();
-            userAvatar.textContent = firstLetter;
-            showDashboard();
+            userAvatar.textContent = fullName.charAt(0).toUpperCase();
+            initializeEmailView();
         });
 
-        // Handle login form submission
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const username = document.getElementById('loginUsername').value.trim();
@@ -1713,27 +1538,27 @@
                 sidebar.style.display = 'block';
                 const firstLetter = user.fullName.charAt(0).toUpperCase();
                 userAvatar.textContent = firstLetter;
-                showDashboard();
+                if (user.photo) {
+                    userAvatar.innerHTML = `<img src="${user.photo}" alt="Profile" style="width: 100%; height: 100%; border-radius: 50%;">`;
+                }
+                initializeEmailView();
             } else {
                 alert('Invalid username or password.');
             }
         });
 
-        // Handle switch to login
         switchToLogin.addEventListener('click', function(e) {
             e.preventDefault();
             signupContainer.style.display = 'none';
             loginContainer.style.display = 'block';
         });
 
-        // Handle switch to signup
         switchToSignup.addEventListener('click', function(e) {
             e.preventDefault();
             loginContainer.style.display = 'none';
             signupContainer.style.display = 'block';
         });
 
-        // Handle account popup
         userAvatar.addEventListener('click', function() {
             const currentUser = localStorage.getItem('current_user');
             if (currentUser) {
@@ -1744,7 +1569,19 @@
                     document.getElementById('accountUsername').textContent = user.username + '@tmail.com';
                     const dob = new Date(user.dob);
                     document.getElementById('accountDob').textContent = dob.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+                  
+                    const sentEmails = mockEmails.sent.length;
+                    const receivedEmails = mockEmails.inbox.length;
+                    document.getElementById('emailsSent').textContent = sentEmails;
+                    document.getElementById('emailsReceived').textContent = receivedEmails;
+                    if (user.photo) {
+                        document.getElementById('profilePicture').src = user.photo;
+                        document.getElementById('profilePicture').style.display = 'block';
+                    } else {
+                        document.getElementById('profilePicture').style.display = 'none';
+                    }
                     accountPopup.classList.add('active');
+                    accountPopup.classList.add('fade-in');
                 }
             }
         });
@@ -1764,7 +1601,35 @@
             accountPopup.classList.remove('active');
         });
 
-        // Initialize the app
+        profilePhoto.addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                if (!file.type.startsWith('image/')) {
+                    alert('Please upload an image file.');
+                    return;
+                }
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const photoData = e.target.result;
+                    const currentUser = localStorage.getItem('current_user');
+                    let users = JSON.parse(localStorage.getItem('tmail_users')) || [];
+                    const userIndex = users.findIndex(u => u.username === currentUser);
+                    if (userIndex !== -1) {
+                        users[userIndex].photo = photoData;
+                        localStorage.setItem('tmail_users', JSON.stringify(users));
+                        userAvatar.innerHTML = `<img src="${photoData}" alt="Profile" style="width: 100%; height: 100%; border-radius: 50%;">`;
+                        document.getElementById('profilePicture').src = photoData;
+                    }
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        function initializeEmailView() {
+            showEmailListForFolder('inbox');
+            document.querySelector('.sidebar-menu a[data-folder="inbox"]').classList.add('active');
+        }
+
         window.addEventListener('load', () => {
             const savedTheme = localStorage.getItem('theme');
             if (savedTheme) {
@@ -1781,10 +1646,12 @@
                 const users = JSON.parse(localStorage.getItem('tmail_users')) || [];
                 const user = users.find(u => u.username === currentUser);
                 if (user) {
-                    const firstLetter = user.fullName.charAt(0).toUpperCase();
-                    userAvatar.textContent = firstLetter;
+                    userAvatar.textContent = user.fullName.charAt(0).toUpperCase();
+                    if (user.photo) {
+                        userAvatar.innerHTML = `<img src="${user.photo}" alt="Profile" style="width: 100%; height: 100%; border-radius: 50%;">`;
+                    }
+                    initializeEmailView();
                 }
-                showDashboard();
             } else {
                 signupContainer.style.display = 'block';
                 loginContainer.style.display = 'none';
