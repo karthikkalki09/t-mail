@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=0.9">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>T-Mail - Modern Email Client</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
@@ -163,6 +163,11 @@
             font-weight: 500;
             margin-left: 16px;
             cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .user-avatar:hover {
+            transform: scale(1.1);
         }
 
         /* Signup and Login Styles */
@@ -173,6 +178,7 @@
             background-color: var(--background);
             border: 1px solid var(--border);
             border-radius: 8px;
+            transition: opacity 0.3s ease;
         }
 
         /* Sidebar Styles */
@@ -209,6 +215,7 @@
 
         .compose-btn:hover {
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
         }
 
         .compose-icon {
@@ -319,6 +326,7 @@
         .email-item:hover {
             box-shadow: 0 1px 2px rgba(0,0,0,0.1);
             background-color: var(--light-gray);
+            transform: translateX(2px);
         }
 
         .email-item.unread {
@@ -333,6 +341,7 @@
             margin-right: 16px;
             color: var(--gray);
             cursor: pointer;
+            transition: color 0.2s ease;
         }
 
         .email-star.starred {
@@ -345,12 +354,29 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            display: flex;
+            align-items: center;
+        }
+
+        .sender-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 500;
+            margin-right: 8px;
+            flex-shrink: 0;
         }
 
         .email-content {
             flex: 1;
             display: flex;
             align-items: center;
+            overflow: hidden;
         }
 
         .email-subject {
@@ -373,6 +399,16 @@
             text-align: right;
             font-size: 12px;
             color: var(--gray);
+            flex-shrink: 0;
+        }
+
+        .email-list.compact-view .email-preview,
+        .email-list.compact-view .email-time {
+            display: none;
+        }
+
+        .email-list.compact-view .email-item {
+            padding: 8px 16px;
         }
 
         /* Email View Styles */
@@ -394,19 +430,6 @@
             display: flex;
             align-items: center;
             margin-bottom: 16px;
-        }
-
-        .sender-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: var(--primary);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 500;
-            margin-right: 16px;
         }
 
         .sender-info {
@@ -440,6 +463,11 @@
             display: block;
             margin-top: 5px;
             color: var(--primary);
+            transition: color 0.2s ease;
+        }
+
+        .attachment-link:hover {
+            color: var(--secondary);
         }
 
         /* Compose Email Styles */
@@ -455,6 +483,7 @@
             box-shadow: 0 0 16px rgba(0,0,0,0.2);
             z-index: 1000;
             flex-direction: column;
+            transition: all 0.3s ease;
         }
 
         .compose-container.active {
@@ -484,6 +513,12 @@
             justify-content: center;
             margin-left: 8px;
             color: var(--gray);
+            transition: background-color 0.2s ease;
+        }
+
+        .compose-actions .btn:hover {
+            background-color: var(--gray);
+            color: var(--light);
         }
 
         .compose-form {
@@ -510,6 +545,11 @@
             font-size: 14px;
             background: none;
             color: var(--text);
+            transition: border-color 0.2s ease;
+        }
+
+        .compose-field .form-control:focus {
+            border-bottom-color: var(--primary);
         }
 
         #composeBody {
@@ -531,6 +571,12 @@
             background-color: var(--light-gray);
             padding: 5px 10px;
             border-radius: 5px;
+            transition: background-color 0.2s ease;
+        }
+
+        .attachment:hover {
+            background-color: var(--gray);
+            color: var(--light);
         }
 
         .compose-footer {
@@ -539,6 +585,18 @@
             justify-content: space-between;
             padding: 12px 16px;
             border-top: 1px solid var(--border);
+        }
+
+        .voice-compose-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 18px;
+            transition: transform 0.2s ease;
+        }
+
+        .voice-compose-btn:hover {
+            transform: scale(1.1);
         }
 
         /* Smart Features */
@@ -563,6 +621,7 @@
 
         .smart-feature-btn:hover {
             transform: scale(1.1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
         }
 
         .smart-feature-btn.voice {
@@ -585,15 +644,67 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
             z-index: 101;
             display: none;
+            transition: opacity 0.3s ease;
         }
 
         .smart-feature-popup.active {
             display: block;
+            opacity: 1;
         }
 
         .smart-feature-popup h4 {
             margin-bottom: 12px;
             color: var(--primary);
+        }
+
+        /* Profile Picture Styles */
+        .profile-picture {
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .profile-picture:hover {
+            transform: scale(1.05);
+        }
+
+        .edit-icon {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background: var(--background);
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .profile-picture.long-pressed .edit-icon {
+            opacity: 1;
+        }
+
+        .profile-actions {
+            display: none;
+            position: absolute;
+            bottom: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--background);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 5px;
+            z-index: 102;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        .profile-actions button {
+            margin: 0 5px;
         }
 
         /* Loading Spinner */
@@ -632,6 +743,23 @@
             }
             .email-sender {
                 width: 120px;
+            }
+            .voice-compose-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+            .email-list {
+                max-height: calc(100vh - 120px);
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+            .smart-feature-popup {
+                width: 90%;
+                right: 5%;
+            }
+            .profile-actions {
+                bottom: -60px;
             }
         }
 
@@ -695,7 +823,6 @@
                     <label for="dob" class="form-label">Date of Birth</label>
                     <input type="date" class="form-control" id="dob" required>
                 </div>
-               
                 <div class="mb-3 form-check">
                     <input type="checkbox" class="form-check-input" id="terms" required>
                     <label class="form-check-label" for="terms">I agree to the terms and conditions</label>
@@ -836,6 +963,7 @@
                         <button type="button" class="btn" id="attachFile"><i class="fas fa-paperclip"></i></button>
                         <button type="button" class="btn" id="insertPhoto"><i class="fas fa-image"></i></button>
                         <button type="button" class="btn" id="insertLink"><i class="fas fa-link"></i></button>
+                        <button type="button" class="btn btn-success voice-compose-btn" id="voiceComposeBtn"><i class="fas fa-microphone"></i></button>
                     </div>
                     <button type="submit" class="btn btn-primary compose-send-btn" id="sendEmail">Send</button>
                 </div>
@@ -873,25 +1001,29 @@
 
         <!-- Account Popup -->
         <div class="smart-feature-popup" id="accountPopup">
-            <div class="profile-picture mb-3">
-                <img id="profilePicture" src="" alt="Profile Picture" style="width: 100px; height: 100px; border-radius: 50%;">
-            </ aeronauticsdiv>
+            <div class="profile-picture mb-3 position-relative" style="width: 100px; height: 100px;">
+                <div id="profileLetter" class="position-absolute top-0 start-0 d-flex align-items-center justify-content-center" style="width: 100%; height: 100%; border-radius: 50%; background-color: var(--primary); color: white; font-size: 48px; font-weight: 500;"></div>
+                <img id="profilePicture" src="" alt="Profile Picture" class="position-absolute top-0 start-0" style="width: 100%; height: 100%; border-radius: 50%; display: none; filter: grayscale(100%);">
+                <button class="btn edit-icon" id="editProfileIcon" style="display: none;">
+                    <i class="fas fa-pencil-alt"></i>
+                </button>
+                <div class="profile-actions" id="profileActions" style="display: none;">
+                    <button class="btn btn-sm btn-primary" id="changeProfile">Change</button>
+                    <button class="btn btn-sm btn-danger" id="deleteProfile">Delete</button>
+                </div>
+            </div>
             <h4>Account Details</h4>
             <p><strong>Full Name:</strong> <span id="accountFullName"></span></p>
             <p><strong>Username:</strong> <span id="accountUsername"></span></p>
             <p><strong>Date of Birth:</strong> <span id="accountDob"></span></p>
-          
             <p><strong>Emails Sent:</strong> <span id="emailsSent"></span></p>
             <p><strong>Emails Received:</strong> <span id="emailsReceived"></span></p>
-            <div class="mb-3">
-                <label for="profilePhoto" class="form-label">Profile Photo</label>
-                <input type="file" class="form-control" id="profilePhoto" accept="image/*">
-            </div>
             <div class="actions d-flex justify-content-end">
                 <button class="btn btn-secondary" id="closeAccountPopup">Close</button>
                 <button class="btn btn-primary ms-2" id="logoutFromPopup">Log Out</button>
             </div>
         </div>
+        <input type="file" id="profilePhotoInput" accept="image/*" style="display: none;">
     </div>
 
     <!-- Bootstrap JS -->
@@ -934,9 +1066,16 @@
         const switchToSignup = document.getElementById('switchToSignup');
         const userAvatar = document.getElementById('userAvatar');
         const accountPopup = document.getElementById('accountPopup');
-        const profilePhoto = document.getElementById('profilePhoto');
+        const profilePicture = document.getElementById('profilePicture');
+        const profileLetter = document.getElementById('profileLetter');
+        const editProfileIcon = document.getElementById('editProfileIcon');
+        const profileActions = document.getElementById('profileActions');
+        const changeProfile = document.getElementById('changeProfile');
+        const deleteProfile = document.getElementById('deleteProfile');
+        const profilePhotoInput = document.getElementById('profilePhotoInput');
         const fileInput = document.getElementById('fileInput');
         const attachmentArea = document.getElementById('attachmentArea');
+        const voiceComposeBtn = document.getElementById('voiceComposeBtn');
 
         // State
         let currentTheme = 'light';
@@ -945,7 +1084,9 @@
         let isListening = false;
         let recognition = null;
         let attachments = [];
-        let insertMode = 'file'; // 'file' or 'photo'
+        let insertMode = 'file';
+        let listViewMode = 'detailed';
+        let longPressTimer;
 
         // Mock Data
         const mockEmails = {
@@ -997,7 +1138,7 @@
                 emailListView.style.display = 'block';
                 emailView.style.display = 'none';
                 emailListLoading.style.display = 'none';
-            }, 500); // Simulated delay for dynamic feel
+            }, 500);
         }
 
         function renderEmailList(emails) {
@@ -1013,7 +1154,10 @@
                 li.innerHTML = `
                     <input type="checkbox" class="email-checkbox">
                     <i class="fas fa-star email-star ${email.starred ? 'starred' : ''}"></i>
-                    <div class="email-sender">${email.from}</div>
+                    <div class="email-sender">
+                        <div class="sender-avatar">${email.from[0].toUpperCase()}</div>
+                        ${email.from}
+                    </div>
                     <div class="email-content">
                         <span class="email-subject">${email.subject}</span>
                         <span class="email-preview">${email.preview}</span>
@@ -1202,7 +1346,15 @@
         }
 
         function toggleListView() {
-            alert('List view is the only view implemented.');
+            if (listViewMode === 'detailed') {
+                listViewMode = 'compact';
+                emailList.classList.add('compact-view');
+                document.getElementById('listViewBtn').innerHTML = '<i class="fas fa-list-ul"></i>';
+            } else {
+                listViewMode = 'detailed';
+                emailList.classList.remove('compact-view');
+                document.getElementById('listViewBtn').innerHTML = '<i class="fas fa-list"></i>';
+            }
         }
 
         function replyToEmail() {
@@ -1296,6 +1448,22 @@
             }
         }
 
+        function startVoiceCompose() {
+            if (isListening) {
+                recognition.stop();
+            } else {
+                if (!composeContainer.classList.contains('active')) {
+                    openCompose();
+                }
+                recognition.start();
+                isListening = true;
+                voiceComposeBtn.innerHTML = '<i class="fas fa-stop"></i>';
+                voiceText.textContent = 'Listening...';
+                voicePopup.classList.add('active');
+                voicePopup.classList.add('fade-in');
+            }
+        }
+
         function sendVoiceEmail() {
             const transcript = voiceText.textContent;
             if (transcript && transcript !== 'Listening...') {
@@ -1332,7 +1500,9 @@
             }
             voicePopup.classList.remove('active');
             voiceFeatureBtn.innerHTML = '<i class="fas fa-microphone"></i>';
+            voiceComposeBtn.innerHTML = '<i class="fas fa-microphone"></i>';
             voiceText.textContent = 'Press the microphone button to start speaking.';
+            isListening = false;
         }
 
         function calculateAge(dob) {
@@ -1368,6 +1538,7 @@
         closeSummary.addEventListener('click', closeSummarizePopup);
         copySummary.addEventListener('click', copySummaryText);
         voiceFeatureBtn.addEventListener('click', toggleVoiceRecognition);
+        voiceComposeBtn.addEventListener('click', startVoiceCompose);
         cancelVoice.addEventListener('click', cancelVoiceRecognition);
         sendVoice.addEventListener('click', sendVoiceEmail);
 
@@ -1471,6 +1642,11 @@
             recognition.onresult = function(event) {
                 const transcript = event.results[0][0].transcript;
                 voiceText.textContent = transcript;
+                if (composeContainer.classList.contains('active')) {
+                    const composeBody = document.getElementById('composeBody');
+                    composeBody.innerHTML += transcript + ' ';
+                    composeBody.focus();
+                }
             };
 
             recognition.onerror = function(event) {
@@ -1480,10 +1656,13 @@
             recognition.onend = function() {
                 isListening = false;
                 voiceFeatureBtn.innerHTML = '<i class="fas fa-microphone"></i>';
+                voiceComposeBtn.innerHTML = '<i class="fas fa-microphone"></i>';
             };
         } else {
             voiceFeatureBtn.disabled = true;
             voiceFeatureBtn.title = 'Speech recognition not supported';
+            voiceComposeBtn.disabled = true;
+            voiceComposeBtn.title = 'Speech recognition not supported';
         }
 
         document.getElementById('signupForm').addEventListener('submit', function(e) {
@@ -1493,7 +1672,6 @@
             const password = document.getElementById('password').value;
             const confirmPassword = document.getElementById('confirmPassword').value;
             const dob = document.getElementById('dob').value;
-         
             const terms = document.getElementById('terms').checked;
 
             if (!fullName) return alert('Full Name is required.');
@@ -1511,7 +1689,7 @@
             if (age < 13) return alert('You must be at least 13 years old.');
             if (!terms) return alert('You must agree to the terms.');
 
-            const newUser = { username, password, fullName, dob};
+            const newUser = { username, password, fullName, dob };
             users.push(newUser);
             localStorage.setItem('tmail_users', JSON.stringify(users));
             localStorage.setItem('current_user', username);
@@ -1520,7 +1698,7 @@
             header.style.display = 'flex';
             mainContent.style.display = 'block';
             sidebar.style.display = 'block';
-            userAvatar.textContent = fullName.charAt(0).toUpperCase();
+            userAvatar.textContent = username.charAt(0).toUpperCase();
             initializeEmailView();
         });
 
@@ -1536,10 +1714,10 @@
                 header.style.display = 'flex';
                 mainContent.style.display = 'block';
                 sidebar.style.display = 'block';
-                const firstLetter = user.fullName.charAt(0).toUpperCase();
+                const firstLetter = user.username.charAt(0).toUpperCase();
                 userAvatar.textContent = firstLetter;
                 if (user.photo) {
-                    userAvatar.innerHTML = `<img src="${user.photo}" alt="Profile" style="width: 100%; height: 100%; border-radius: 50%;">`;
+                    userAvatar.innerHTML = `<img src="${user.photo}" alt="Profile" style="width: 100%; height: 100%; border-radius: 50%; filter: grayscale(100%);">`;
                 }
                 initializeEmailView();
             } else {
@@ -1569,7 +1747,6 @@
                     document.getElementById('accountUsername').textContent = user.username + '@tmail.com';
                     const dob = new Date(user.dob);
                     document.getElementById('accountDob').textContent = dob.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-                  
                     const sentEmails = mockEmails.sent.length;
                     const receivedEmails = mockEmails.inbox.length;
                     document.getElementById('emailsSent').textContent = sentEmails;
@@ -1577,7 +1754,10 @@
                     if (user.photo) {
                         document.getElementById('profilePicture').src = user.photo;
                         document.getElementById('profilePicture').style.display = 'block';
+                        document.getElementById('profileLetter').style.display = 'none';
                     } else {
+                        document.getElementById('profileLetter').textContent = user.username.charAt(0).toUpperCase();
+                        document.getElementById('profileLetter').style.display = 'flex';
                         document.getElementById('profilePicture').style.display = 'none';
                     }
                     accountPopup.classList.add('active');
@@ -1588,6 +1768,9 @@
 
         document.getElementById('closeAccountPopup').addEventListener('click', function() {
             accountPopup.classList.remove('active');
+            document.querySelector('.profile-picture').classList.remove('long-pressed');
+            editProfileIcon.style.display = 'none';
+            profileActions.style.display = 'none';
         });
 
         document.getElementById('logoutFromPopup').addEventListener('click', function() {
@@ -1599,9 +1782,62 @@
             loginContainer.style.display = 'none';
             userAvatar.textContent = 'U';
             accountPopup.classList.remove('active');
+            document.querySelector('.profile-picture').classList.remove('long-pressed');
+            editProfileIcon.style.display = 'none';
+            profileActions.style.display = 'none';
         });
 
-        profilePhoto.addEventListener('change', function(event) {
+        // Long Press Event for Profile Picture
+        const profilePictureContainer = document.querySelector('.profile-picture');
+        profilePictureContainer.addEventListener('mousedown', startLongPress);
+        profilePictureContainer.addEventListener('touchstart', startLongPress);
+        profilePictureContainer.addEventListener('mouseup', endLongPress);
+        profilePictureContainer.addEventListener('touchend', endLongPress);
+        profilePictureContainer.addEventListener('mouseleave', endLongPress);
+        profilePictureContainer.addEventListener('touchcancel', endLongPress);
+
+        function startLongPress(e) {
+            e.preventDefault();
+            longPressTimer = setTimeout(() => {
+                profilePictureContainer.classList.add('long-pressed');
+                editProfileIcon.style.display = 'flex';
+            }, 500); // 500ms for long press
+        }
+
+        function endLongPress() {
+            clearTimeout(longPressTimer);
+        }
+
+        editProfileIcon.addEventListener('click', function(e) {
+            e.stopPropagation();
+            profileActions.style.display = 'block';
+        });
+
+        changeProfile.addEventListener('click', function(e) {
+            e.stopPropagation();
+            profilePhotoInput.click();
+            profileActions.style.display = 'none';
+        });
+
+        deleteProfile.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const currentUser = localStorage.getItem('current_user');
+            let users = JSON.parse(localStorage.getItem('tmail_users')) || [];
+            const userIndex = users.findIndex(u => u.username === currentUser);
+            if (userIndex !== -1) {
+                delete users[userIndex].photo;
+                localStorage.setItem('tmail_users', JSON.stringify(users));
+                userAvatar.textContent = currentUser.charAt(0).toUpperCase();
+                document.getElementById('profilePicture').style.display = 'none';
+                document.getElementById('profileLetter').textContent = currentUser.charAt(0).toUpperCase();
+                document.getElementById('profileLetter').style.display = 'flex';
+                profilePictureContainer.classList.remove('long-pressed');
+                editProfileIcon.style.display = 'none';
+                profileActions.style.display = 'none';
+            }
+        });
+
+        profilePhotoInput.addEventListener('change', function(event) {
             const file = event.target.files[0];
             if (file) {
                 if (!file.type.startsWith('image/')) {
@@ -1617,8 +1853,13 @@
                     if (userIndex !== -1) {
                         users[userIndex].photo = photoData;
                         localStorage.setItem('tmail_users', JSON.stringify(users));
-                        userAvatar.innerHTML = `<img src="${photoData}" alt="Profile" style="width: 100%; height: 100%; border-radius: 50%;">`;
+                        userAvatar.innerHTML = `<img src="${photoData}" alt="Profile" style="width: 100%; height: 100%; border-radius: 50%; filter: grayscale(100%);">`;
                         document.getElementById('profilePicture').src = photoData;
+                        document.getElementById('profilePicture').style.display = 'block';
+                        document.getElementById('profileLetter').style.display = 'none';
+                        profilePictureContainer.classList.remove('long-pressed');
+                        editProfileIcon.style.display = 'none';
+                        profileActions.style.display = 'none';
                     }
                 };
                 reader.readAsDataURL(file);
@@ -1646,9 +1887,9 @@
                 const users = JSON.parse(localStorage.getItem('tmail_users')) || [];
                 const user = users.find(u => u.username === currentUser);
                 if (user) {
-                    userAvatar.textContent = user.fullName.charAt(0).toUpperCase();
+                    userAvatar.textContent = user.username.charAt(0).toUpperCase();
                     if (user.photo) {
-                        userAvatar.innerHTML = `<img src="${user.photo}" alt="Profile" style="width: 100%; height: 100%; border-radius: 50%;">`;
+                        userAvatar.innerHTML = `<img src="${user.photo}" alt="Profile" style="width: 100%; height: 100%; border-radius: 50%; filter: grayscale(100%);">`;
                     }
                     initializeEmailView();
                 }
