@@ -71,7 +71,6 @@
             overflow: hidden;
         }
 
-        /* Header Styles */
         .header {
             height: 64px;
             display: flex;
@@ -170,7 +169,6 @@
             transform: scale(1.1);
         }
 
-        /* Signup and Login Styles */
         .signup-container, .login-container {
             max-width: 400px;
             margin: 100px auto;
@@ -181,7 +179,6 @@
             transition: opacity 0.3s ease;
         }
 
-        /* Sidebar Styles */
         .sidebar {
             width: 280px;
             height: 100%;
@@ -273,7 +270,6 @@
             letter-spacing: 1px;
         }
 
-        /* Main Content Styles */
         .main-content {
             flex: 1;
             padding: 80px 0 0 280px;
@@ -287,7 +283,7 @@
             padding-left: 0;
         }
 
-        .dashboard-container, .email-list-container, .email-view-container {
+        .dashboard-container, .email-list-container, .email-view-container, .profile-container {
             padding: 24px;
             height: calc(100vh - 80px);
             overflow-y: auto;
@@ -411,7 +407,6 @@
             padding: 8px 16px;
         }
 
-        /* Email View Styles */
         .email-view-container {
             display: none;
         }
@@ -470,7 +465,6 @@
             color: var(--secondary);
         }
 
-        /* Compose Email Styles */
         .compose-container {
             display: none;
             position: fixed;
@@ -599,7 +593,6 @@
             transform: scale(1.1);
         }
 
-        /* Smart Features */
         .smart-features {
             position: fixed;
             bottom: 20px;
@@ -657,7 +650,6 @@
             color: var(--primary);
         }
 
-        /* Profile Picture Styles */
         .profile-picture {
             position: relative;
             cursor: pointer;
@@ -666,27 +658,6 @@
 
         .profile-picture:hover {
             transform: scale(1.05);
-        }
-
-        .edit-icon {
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            background: var(--background);
-            border: 1px solid var(--border);
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--primary);
-            opacity: 0;
-            transition: opacity 0.2s ease;
-        }
-
-        .profile-picture.long-pressed .edit-icon {
-            opacity: 1;
         }
 
         .profile-actions {
@@ -707,7 +678,6 @@
             margin: 0 5px;
         }
 
-        /* Loading Spinner */
         .loading {
             display: none;
             position: absolute;
@@ -717,12 +687,35 @@
             z-index: 50;
         }
 
+        .profile-container {
+            padding: 24px;
+        }
+
+        .profile-toolbar {
+            margin-bottom: 24px;
+        }
+
+        .profile-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 20px;
+        }
+
+        .profile-details p {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
 
-        /* Responsive Styles */
         @media (max-width: 992px) {
             .sidebar {
                 transform: translateX(-280px);
@@ -761,9 +754,14 @@
             .profile-actions {
                 bottom: -60px;
             }
+            .profile-content {
+                text-align: center;
+            }
+            .profile-details p {
+                text-align: left;
+            }
         }
 
-        /* Animations */
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
@@ -776,7 +774,6 @@
 </head>
 <body>
     <div class="app">
-        <!-- Header -->
         <header class="header">
             <button class="btn menu-toggle" id="menuToggle">
                 <i class="fas fa-bars"></i>
@@ -796,7 +793,6 @@
             </div>
         </header>
 
-        <!-- Signup Container -->
         <div class="signup-container" id="signupContainer">
             <h2>Create Your T-Mail Account</h2>
             <form id="signupForm">
@@ -832,7 +828,6 @@
             <p class="mt-2">Already have an account? <a href="#" id="switchToLogin">Log in</a></p>
         </div>
 
-        <!-- Login Container -->
         <div class="login-container" id="loginContainer" style="display: none;">
             <h2>Log In to T-Mail</h2>
             <form id="loginForm">
@@ -852,7 +847,6 @@
             <p class="mt-2">Don't have an account? <a href="#" id="switchToSignup">Sign up</a></p>
         </div>
 
-        <!-- Sidebar -->
         <aside class="sidebar" id="sidebar" style="display: none;">
             <button class="btn btn-primary compose-btn" id="composeBtn">
                 <i class="fas fa-plus compose-icon"></i>
@@ -881,15 +875,12 @@
             </ul>
         </aside>
 
-        <!-- Main Content -->
         <main class="main-content" id="mainContent" style="display: none;">
-            <!-- Dashboard View -->
             <div class="dashboard-container" id="dashboardView" style="display: none;">
                 <h2>Welcome to T-Mail</h2>
                 <p>Select a folder from the sidebar to view your emails.</p>
             </div>
 
-            <!-- Email List View -->
             <div class="email-list-container" id="emailListView" style="display: none;">
                 <div class="email-list-toolbar">
                     <button class="btn" id="backToDashboard"><i class="fas fa-arrow-left"></i></button>
@@ -907,7 +898,6 @@
                 <ul class="email-list list-unstyled" id="emailList"></ul>
             </div>
 
-            <!-- Email Detail View -->
             <div class="email-view-container" id="emailView" style="display: none;">
                 <div class="email-view-toolbar d-flex align-items-center mb-3">
                     <button class="btn" id="backToList"><i class="fas fa-arrow-left"></i></button>
@@ -917,26 +907,37 @@
                     <div style="flex: 1;"></div>
                     <button class="btn" id="summarizeBtn"><i class="fas fa-scroll"></i></button>
                 </div>
-                <h1 class="email-view-subject" id="emailSubject">Meeting Tomorrow</h1>
+                <h1 class="email-view-subject" id="emailSubject"></h1>
                 <div class="email-view-sender d-flex align-items-center">
-                    <div class="sender-avatar" id="senderAvatar">J</div>
+                    <div class="sender-avatar" id="senderAvatar"></div>
                     <div class="sender-info">
-                        <div class="sender-name" id="senderName">John Doe</div>
-                        <div class="sender-email" id="senderEmail">john.doe@example.com</div>
+                        <div class="sender-name" id="senderName"></div>
+                        <div class="sender-email" id="senderEmail"></div>
                     </div>
-                    <div class="email-view-time ms-auto" id="emailTime">10:30 AM</div>
+                    <div class="email-view-time ms-auto" id="emailTime"></div>
                 </div>
-                <div class="email-view-body" id="emailBody">
-                    <p>Hi there,</p>
-                    <p>Just a reminder about our meeting tomorrow at 10 AM in the conference room.</p>
-                    <p>Please bring your project updates and any questions you might have.</p>
-                    <p>Best regards,<br>John</p>
-                </div>
+                <div class="email-view-body" id="emailBody"></div>
                 <div class="email-attachments" id="emailAttachments"></div>
+            </div>
+
+            <div class="profile-container" id="profileView" style="display: none;">
+                <div class="profile-toolbar d-flex align-items-center mb-3">
+                    <button class="btn" id="backFromProfile"><i class="fas fa-arrow-left"></i></button>
+                    <h2>Profile</h2>
+                </div>
+                <div class="profile-content">
+                    <div class="profile-avatar" style="width: 100px; height: 100px; margin: 0 auto;"></div>
+                    <div class="profile-details mt-3">
+                        <p><strong>Full Name:</strong> <span id="profileFullName"></span></p>
+                        <p><strong>Username:</strong> <span id="profileUsername"></span></p>
+                        <p><strong>Date of Birth:</strong> <span id="profileDob"></span></p>
+                        <p><strong>Emails Sent:</strong> <span id="profileEmailsSent"></span></p>
+                        <p><strong>Emails Received:</strong> <span id="profileEmailsReceived"></span></p>
+                    </div>
+                </div>
             </div>
         </main>
 
-        <!-- Compose Email -->
         <div class="compose-container" id="composeContainer">
             <div class="compose-header" id="composeHeader">
                 <div class="compose-title">New Message</div>
@@ -971,7 +972,6 @@
             <input type="file" id="fileInput" multiple style="display: none;">
         </div>
 
-        <!-- Smart Features -->
         <div class="smart-features">
             <button class="btn btn-warning smart-feature-btn summarize" id="summarizeFeatureBtn">
                 <i class="fas fa-scroll"></i>
@@ -999,17 +999,13 @@
             </div>
         </div>
 
-        <!-- Account Popup -->
         <div class="smart-feature-popup" id="accountPopup">
             <div class="profile-picture mb-3 position-relative" style="width: 100px; height: 100px;">
                 <div id="profileLetter" class="position-absolute top-0 start-0 d-flex align-items-center justify-content-center" style="width: 100%; height: 100%; border-radius: 50%; background-color: var(--primary); color: white; font-size: 48px; font-weight: 500;"></div>
                 <img id="profilePicture" src="" alt="Profile Picture" class="position-absolute top-0 start-0" style="width: 100%; height: 100%; border-radius: 50%; display: none; filter: grayscale(100%);">
-                <button class="btn edit-icon" id="editProfileIcon" style="display: none;">
-                    <i class="fas fa-pencil-alt"></i>
-                </button>
                 <div class="profile-actions" id="profileActions" style="display: none;">
-                    <button class="btn btn-sm btn-primary" id="changeProfile">Change</button>
-                    <button class="btn btn-sm btn-danger" id="deleteProfile">Delete</button>
+                    <button class="btn btn-sm btn-primary" id="changeProfile"><i class="fas fa-pencil-alt"></i></button>
+                    <button class="btn btn-sm btn-danger" id="deleteProfile"><i class="fas fa-trash"></i></button>
                 </div>
             </div>
             <h4>Account Details</h4>
@@ -1018,7 +1014,8 @@
             <p><strong>Date of Birth:</strong> <span id="accountDob"></span></p>
             <p><strong>Emails Sent:</strong> <span id="emailsSent"></span></p>
             <p><strong>Emails Received:</strong> <span id="emailsReceived"></span></p>
-            <div class="actions d-flex justify-content-end">
+            <button class="btn btn-primary mt-3" id="viewProfileBtn">View Profile</button>
+            <div class="actions d-flex justify-content-end mt-3">
                 <button class="btn btn-secondary" id="closeAccountPopup">Close</button>
                 <button class="btn btn-primary ms-2" id="logoutFromPopup">Log Out</button>
             </div>
@@ -1026,10 +1023,8 @@
         <input type="file" id="profilePhotoInput" accept="image/*" style="display: none;">
     </div>
 
-    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     <script>
-        // DOM Elements
         const header = document.querySelector('.header');
         const menuToggle = document.getElementById('menuToggle');
         const sidebar = document.getElementById('sidebar');
@@ -1043,6 +1038,7 @@
         const dashboardView = document.getElementById('dashboardView');
         const emailListView = document.getElementById('emailListView');
         const emailView = document.getElementById('emailView');
+        const profileView = document.getElementById('profileView');
         const backToList = document.getElementById('backToList');
         const backToDashboard = document.getElementById('backToDashboard');
         const folderTitle = document.getElementById('folderTitle');
@@ -1068,7 +1064,6 @@
         const accountPopup = document.getElementById('accountPopup');
         const profilePicture = document.getElementById('profilePicture');
         const profileLetter = document.getElementById('profileLetter');
-        const editProfileIcon = document.getElementById('editProfileIcon');
         const profileActions = document.getElementById('profileActions');
         const changeProfile = document.getElementById('changeProfile');
         const deleteProfile = document.getElementById('deleteProfile');
@@ -1076,8 +1071,9 @@
         const fileInput = document.getElementById('fileInput');
         const attachmentArea = document.getElementById('attachmentArea');
         const voiceComposeBtn = document.getElementById('voiceComposeBtn');
+        const viewProfileBtn = document.getElementById('viewProfileBtn');
+        const backFromProfile = document.getElementById('backFromProfile');
 
-        // State
         let currentTheme = 'light';
         let currentFolder = 'inbox';
         let selectedEmailId = null;
@@ -1086,26 +1082,16 @@
         let attachments = [];
         let insertMode = 'file';
         let listViewMode = 'detailed';
-        let longPressTimer;
 
-        // Mock Data
-        const mockEmails = {
-            inbox: [
-                { id: '1', from: 'Alice', email: 'alice@example.com', subject: 'Meeting', preview: 'Let\'s meet tomorrow.', time: '10:30 AM', read: false, starred: false, body: '<p>Hi, let\'s meet tomorrow at 10 AM.</p>', attachments: ['meeting_agenda.pdf'] },
-                { id: '2', from: 'Bob', email: 'bob@example.com', subject: 'Project Update', preview: 'Here\'s the latest update.', time: '9:15 AM', read: true, starred: true, body: '<p>The project is on track.</p>', attachments: ['update_report.docx', 'chart.png'] }
-            ],
-            sent: [],
-            drafts: [],
-            trash: [],
-            archive: [],
-            starred: [],
-            work: [],
-            personal: [],
-            finance: [],
-            social: []
-        };
+        function getEmailsForFolder(folder) {
+            const emails = JSON.parse(localStorage.getItem(`tmail_${folder}`)) || [];
+            return emails;
+        }
 
-        // Functions
+        function saveEmailsForFolder(folder, emails) {
+            localStorage.setItem(`tmail_${folder}`, JSON.stringify(emails));
+        }
+
         function toggleSidebar() {
             if (window.innerWidth > 992) {
                 sidebar.classList.toggle('hidden');
@@ -1119,6 +1105,7 @@
             dashboardView.style.display = 'block';
             emailListView.style.display = 'none';
             emailView.style.display = 'none';
+            profileView.style.display = 'none';
             if (window.innerWidth > 992) {
                 sidebar.classList.remove('hidden');
                 mainContent.classList.remove('expanded');
@@ -1131,12 +1118,13 @@
             currentFolder = folder;
             emailListLoading.style.display = 'block';
             setTimeout(() => {
-                const emails = mockEmails[folder] || [];
+                const emails = getEmailsForFolder(folder);
                 renderEmailList(emails);
                 folderTitle.textContent = folder.charAt(0).toUpperCase() + folder.slice(1);
                 dashboardView.style.display = 'none';
                 emailListView.style.display = 'block';
                 emailView.style.display = 'none';
+                profileView.style.display = 'none';
                 emailListLoading.style.display = 'none';
             }, 500);
         }
@@ -1163,6 +1151,7 @@
                         <span class="email-preview">${email.preview}</span>
                     </div>
                     <div class="email-time">${email.time}</div>
+                    ${email.attachments && email.attachments.length > 0 ? '<i class="fas fa-paperclip ms-2"></i>' : ''}
                 `;
                 li.addEventListener('click', (e) => {
                     if (!e.target.classList.contains('email-star') && !e.target.classList.contains('email-checkbox')) {
@@ -1174,18 +1163,35 @@
         }
 
         function getEmailById(id) {
-            for (const folder in mockEmails) {
-                const email = mockEmails[folder].find(e => e.id === id);
-                if (email) return email;
+            const folders = ['inbox', 'sent', 'drafts', 'trash', 'archive', 'starred', 'work', 'personal', 'finance', 'social'];
+            for (const folder of folders) {
+                const emails = getEmailsForFolder(folder);
+                const email = emails.find(e => e.id === id);
+                if (email) return { email, folder };
             }
             return null;
         }
 
         function openEmail(id) {
-            const email = getEmailById(id);
-            if (!email) return;
+            const result = getEmailById(id);
+            if (!result) return;
+            const { email, folder } = result;
             selectedEmailId = id;
             email.read = true;
+            const emails = getEmailsForFolder(folder);
+            const index = emails.findIndex(e => e.id === id);
+            if (index !== -1) {
+                emails[index].read = true;
+                saveEmailsForFolder(folder, emails);
+            }
+            if (email.starred) {
+                const starredEmails = getEmailsForFolder('starred');
+                const starredIndex = starredEmails.findIndex(e => e.id === id);
+                if (starredIndex !== -1) {
+                    starredEmails[starredIndex].read = true;
+                    saveEmailsForFolder('starred', starredEmails);
+                }
+            }
             document.getElementById('emailSubject').textContent = email.subject;
             document.getElementById('senderName').textContent = email.from;
             document.getElementById('senderEmail').textContent = email.email;
@@ -1208,13 +1214,44 @@
             }
             emailListView.style.display = 'none';
             emailView.style.display = 'block';
+            profileView.style.display = 'none';
             emailView.classList.add('fade-in');
         }
 
         function showEmailList() {
             emailView.style.display = 'none';
+            profileView.style.display = 'none';
             emailListView.style.display = 'block';
             selectedEmailId = null;
+        }
+
+        function showProfile() {
+            dashboardView.style.display = 'none';
+            emailListView.style.display = 'none';
+            emailView.style.display = 'none';
+            profileView.style.display = 'block';
+            profileView.classList.add('fade-in');
+            const currentUser = localStorage.getItem('current_user');
+            if (currentUser) {
+                const users = JSON.parse(localStorage.getItem('tmail_users')) || [];
+                const user = users.find(u => u.username === currentUser);
+                if (user) {
+                    document.getElementById('profileFullName').textContent = user.fullName;
+                    document.getElementById('profileUsername').textContent = user.username + '@tmail.com';
+                    const dob = new Date(user.dob);
+                    document.getElementById('profileDob').textContent = dob.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+                    const sentEmails = getEmailsForFolder('sent').length;
+                    const receivedEmails = getEmailsForFolder('inbox').length;
+                    document.getElementById('profileEmailsSent').textContent = sentEmails;
+                    document.getElementById('profileEmailsReceived').textContent = receivedEmails;
+                    const profileAvatar = document.querySelector('.profile-avatar');
+                    if (user.photo) {
+                        profileAvatar.innerHTML = `<img src="${user.photo}" alt="Profile" style="width: 100%; height: 100%; border-radius: 50%;">`;
+                    } else {
+                        profileAvatar.innerHTML = `<div style="width: 100%; height: 100%; border-radius: 50%; background-color: var(--primary); color: white; display: flex; align-items: center; justify-content: center; font-size: 48px; font-weight: 500;">${user.username.charAt(0).toUpperCase()}</div>`;
+                    }
+                }
+            }
         }
 
         function openCompose() {
@@ -1260,7 +1297,7 @@
                 const users = JSON.parse(localStorage.getItem('tmail_users')) || [];
                 const user = users.find(u => u.username === currentUser);
                 const newEmail = {
-                    id: String(mockEmails.sent.length + 1),
+                    id: String(Date.now()),
                     from: user ? user.fullName : 'Me',
                     email: currentUser + '@tmail.com',
                     subject: subject,
@@ -1271,7 +1308,9 @@
                     body: body,
                     attachments: attachments.map(file => file.name)
                 };
-                mockEmails.sent.push(newEmail);
+                const sentEmails = getEmailsForFolder('sent');
+                sentEmails.push(newEmail);
+                saveEmailsForFolder('sent', sentEmails);
                 closeComposeWindow();
                 if (currentFolder === 'sent') {
                     showEmailListForFolder('sent');
@@ -1303,11 +1342,26 @@
             setTimeout(() => {
                 const selectedIds = getSelectedEmails();
                 selectedIds.forEach(id => {
-                    const email = getEmailById(id);
-                    if (email) {
-                        mockEmails[currentFolder] = mockEmails[currentFolder].filter(e => e.id !== id);
-                        if (!mockEmails.archive) mockEmails.archive = [];
-                        mockEmails.archive.push(email);
+                    const result = getEmailById(id);
+                    if (result) {
+                        const { email, folder } = result;
+                        if (folder !== 'archive') {
+                            const originalEmails = getEmailsForFolder(folder);
+                            const index = originalEmails.findIndex(e => e.id === id);
+                            if (index !== -1) {
+                                originalEmails.splice(index, 1);
+                                saveEmailsForFolder(folder, originalEmails);
+                            }
+                            const archiveEmails = getEmailsForFolder('archive');
+                            archiveEmails.push(email);
+                            saveEmailsForFolder('archive', archiveEmails);
+                            const starredEmails = getEmailsForFolder('starred');
+                            const starredIndex = starredEmails.findIndex(e => e.id === id);
+                            if (starredIndex !== -1) {
+                                starredEmails.splice(starredIndex, 1);
+                                saveEmailsForFolder('starred', starredEmails);
+                            }
+                        }
                     }
                 });
                 showEmailListForFolder(currentFolder);
@@ -1320,11 +1374,26 @@
             setTimeout(() => {
                 const selectedIds = getSelectedEmails();
                 selectedIds.forEach(id => {
-                    const email = getEmailById(id);
-                    if (email) {
-                        mockEmails[currentFolder] = mockEmails[currentFolder].filter(e => e.id !== id);
-                        if (!mockEmails.trash) mockEmails.trash = [];
-                        mockEmails.trash.push(email);
+                    const result = getEmailById(id);
+                    if (result) {
+                        const { email, folder } = result;
+                        if (folder !== 'trash') {
+                            const originalEmails = getEmailsForFolder(folder);
+                            const index = originalEmails.findIndex(e => e.id === id);
+                            if (index !== -1) {
+                                originalEmails.splice(index, 1);
+                                saveEmailsForFolder(folder, originalEmails);
+                            }
+                            const trashEmails = getEmailsForFolder('trash');
+                            trashEmails.push(email);
+                            saveEmailsForFolder('trash', trashEmails);
+                            const starredEmails = getEmailsForFolder('starred');
+                            const starredIndex = starredEmails.findIndex(e => e.id === id);
+                            if (starredIndex !== -1) {
+                                starredEmails.splice(starredIndex, 1);
+                                saveEmailsForFolder('starred', starredEmails);
+                            }
+                        }
                     }
                 });
                 showEmailListForFolder(currentFolder);
@@ -1337,8 +1406,25 @@
             setTimeout(() => {
                 const selectedIds = getSelectedEmails();
                 selectedIds.forEach(id => {
-                    const email = getEmailById(id);
-                    if (email) email.read = true;
+                    const result = getEmailById(id);
+                    if (result) {
+                        const { email, folder } = result;
+                        email.read = true;
+                        const originalEmails = getEmailsForFolder(folder);
+                        const index = originalEmails.findIndex(e => e.id === id);
+                        if (index !== -1) {
+                            originalEmails[index].read = true;
+                            saveEmailsForFolder(folder, originalEmails);
+                        }
+                        if (email.starred) {
+                            const starredEmails = getEmailsForFolder('starred');
+                            const starredIndex = starredEmails.findIndex(e => e.id === id);
+                            if (starredIndex !== -1) {
+                                starredEmails[starredIndex].read = true;
+                                saveEmailsForFolder('starred', starredEmails);
+                            }
+                        }
+                    }
                 });
                 showEmailListForFolder(currentFolder);
                 emailListLoading.style.display = 'none';
@@ -1359,8 +1445,9 @@
 
         function replyToEmail() {
             if (selectedEmailId) {
-                const email = getEmailById(selectedEmailId);
-                if (email) {
+                const result = getEmailById(selectedEmailId);
+                if (result) {
+                    const { email } = result;
                     openCompose();
                     document.getElementById('composeTo').value = email.email;
                     document.getElementById('composeSubject').value = `Re: ${email.subject}`;
@@ -1371,8 +1458,9 @@
 
         function forwardEmail() {
             if (selectedEmailId) {
-                const email = getEmailById(selectedEmailId);
-                if (email) {
+                const result = getEmailById(selectedEmailId);
+                if (result) {
+                    const { email } = result;
                     openCompose();
                     document.getElementById('composeSubject').value = `Fwd: ${email.subject}`;
                     document.getElementById('composeBody').innerHTML = `<br><br>--- Forwarded message ---<br>From: ${email.from}<br>Subject: ${email.subject}<br><br>${email.body}`;
@@ -1384,12 +1472,27 @@
             emailListLoading.style.display = 'block';
             setTimeout(() => {
                 if (selectedEmailId) {
-                    const email = getEmailById(selectedEmailId);
-                    if (email) {
-                        mockEmails[currentFolder] = mockEmails[currentFolder].filter(e => e.id !== selectedEmailId);
-                        if (!mockEmails.trash) mockEmails.trash = [];
-                        mockEmails.trash.push(email);
-                        showEmailList();
+                    const result = getEmailById(selectedEmailId);
+                    if (result) {
+                        const { email, folder } = result;
+                        if (folder !== 'trash') {
+                            const originalEmails = getEmailsForFolder(folder);
+                            const index = originalEmails.findIndex(e => e.id === selectedEmailId);
+                            if (index !== -1) {
+                                originalEmails.splice(index, 1);
+                                saveEmailsForFolder(folder, originalEmails);
+                            }
+                            const trashEmails = getEmailsForFolder('trash');
+                            trashEmails.push(email);
+                            saveEmailsForFolder('trash', trashEmails);
+                            const starredEmails = getEmailsForFolder('starred');
+                            const starredIndex = starredEmails.findIndex(e => e.id === selectedEmailId);
+                            if (starredIndex !== -1) {
+                                starredEmails.splice(starredIndex, 1);
+                                saveEmailsForFolder('starred', starredEmails);
+                            }
+                            showEmailList();
+                        }
                     }
                 }
                 emailListLoading.style.display = 'none';
@@ -1398,8 +1501,9 @@
 
         function summarizeEmail() {
             if (selectedEmailId) {
-                const email = getEmailById(selectedEmailId);
-                if (email) {
+                const result = getEmailById(selectedEmailId);
+                if (result) {
+                    const { email } = result;
                     const summary = email.body.replace(/<[^>]+>/g, '').substring(0, 100) + '...';
                     summaryText.textContent = summary;
                     summarizePopup.classList.add('active');
@@ -1410,8 +1514,9 @@
 
         function openSummarizePopup() {
             if (selectedEmailId) {
-                const email = getEmailById(selectedEmailId);
-                if (email) {
+                const result = getEmailById(selectedEmailId);
+                if (result) {
+                    const { email } = result;
                     const summary = email.body.replace(/<[^>]+>/g, '').substring(0, 100) + '...';
                     summaryText.textContent = summary;
                 } else {
@@ -1473,7 +1578,7 @@
                     const users = JSON.parse(localStorage.getItem('tmail_users')) || [];
                     const user = users.find(u => u.username === currentUser);
                     const newEmail = {
-                        id: String(mockEmails.sent.length + 1),
+                        id: String(Date.now()),
                         from: user ? user.fullName : 'Me',
                         email: currentUser + '@tmail.com',
                         subject: 'Voice Email',
@@ -1484,7 +1589,9 @@
                         body: transcript,
                         attachments: []
                     };
-                    mockEmails.sent.push(newEmail);
+                    const sentEmails = getEmailsForFolder('sent');
+                    sentEmails.push(newEmail);
+                    saveEmailsForFolder('sent', sentEmails);
                     cancelVoiceRecognition();
                     if (currentFolder === 'sent') {
                         showEmailListForFolder('sent');
@@ -1516,7 +1623,6 @@
             return age;
         }
 
-        // Event Listeners
         menuToggle.addEventListener('click', toggleSidebar);
         themeToggle.addEventListener('click', toggleTheme);
         composeBtn.addEventListener('click', openCompose);
@@ -1541,6 +1647,14 @@
         voiceComposeBtn.addEventListener('click', startVoiceCompose);
         cancelVoice.addEventListener('click', cancelVoiceRecognition);
         sendVoice.addEventListener('click', sendVoiceEmail);
+        viewProfileBtn.addEventListener('click', function() {
+            accountPopup.classList.remove('active');
+            showProfile();
+        });
+        backFromProfile.addEventListener('click', function() {
+            profileView.style.display = 'none';
+            showDashboard();
+        });
 
         document.getElementById('attachFile').addEventListener('click', function() {
             insertMode = 'file';
@@ -1605,7 +1719,7 @@
             emailListLoading.style.display = 'block';
             setTimeout(() => {
                 const searchTerm = this.value.toLowerCase();
-                const emails = mockEmails[currentFolder] || [];
+                const emails = getEmailsForFolder(currentFolder);
                 const filteredEmails = emails.filter(email =>
                     email.from.toLowerCase().includes(searchTerm) ||
                     email.subject.toLowerCase().includes(searchTerm) ||
@@ -1620,14 +1734,31 @@
             if (e.target.classList.contains('email-star')) {
                 const emailItem = e.target.closest('.email-item');
                 const emailId = emailItem.dataset.id;
-                const email = getEmailById(emailId);
-                if (email) {
+                const result = getEmailById(emailId);
+                if (result) {
+                    const { email, folder } = result;
                     email.starred = !email.starred;
                     e.target.classList.toggle('starred');
-                    if (email.starred && !mockEmails.starred.some(e => e.id === email.id)) {
-                        mockEmails.starred.push(email);
-                    } else if (!email.starred) {
-                        mockEmails.starred = mockEmails.starred.filter(e => e.id !== email.id);
+                    const starredEmails = getEmailsForFolder('starred');
+                    if (email.starred) {
+                        if (!starredEmails.some(e => e.id === email.id)) {
+                            starredEmails.push(email);
+                        }
+                    } else {
+                        const index = starredEmails.findIndex(e => e.id === email.id);
+                        if (index !== -1) {
+                            starredEmails.splice(index, 1);
+                        }
+                    }
+                    saveEmailsForFolder('starred', starredEmails);
+                    const originalEmails = getEmailsForFolder(folder);
+                    const index = originalEmails.findIndex(e => e.id === email.id);
+                    if (index !== -1) {
+                        originalEmails[index].starred = email.starred;
+                        saveEmailsForFolder(folder, originalEmails);
+                    }
+                    if (currentFolder === 'starred') {
+                        showEmailListForFolder('starred');
                     }
                 }
             }
@@ -1651,6 +1782,9 @@
 
             recognition.onerror = function(event) {
                 voiceText.textContent = 'Error: ' + event.error;
+                if (event.error === 'not-allowed') {
+                    alert('Microphone access denied. Please allow microphone permissions in your browser settings.');
+                }
             };
 
             recognition.onend = function() {
@@ -1747,8 +1881,8 @@
                     document.getElementById('accountUsername').textContent = user.username + '@tmail.com';
                     const dob = new Date(user.dob);
                     document.getElementById('accountDob').textContent = dob.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-                    const sentEmails = mockEmails.sent.length;
-                    const receivedEmails = mockEmails.inbox.length;
+                    const sentEmails = getEmailsForFolder('sent').length;
+                    const receivedEmails = getEmailsForFolder('inbox').length;
                     document.getElementById('emailsSent').textContent = sentEmails;
                     document.getElementById('emailsReceived').textContent = receivedEmails;
                     if (user.photo) {
@@ -1768,8 +1902,6 @@
 
         document.getElementById('closeAccountPopup').addEventListener('click', function() {
             accountPopup.classList.remove('active');
-            document.querySelector('.profile-picture').classList.remove('long-pressed');
-            editProfileIcon.style.display = 'none';
             profileActions.style.display = 'none';
         });
 
@@ -1782,35 +1914,13 @@
             loginContainer.style.display = 'none';
             userAvatar.textContent = 'U';
             accountPopup.classList.remove('active');
-            document.querySelector('.profile-picture').classList.remove('long-pressed');
-            editProfileIcon.style.display = 'none';
             profileActions.style.display = 'none';
         });
 
-        // Long Press Event for Profile Picture
         const profilePictureContainer = document.querySelector('.profile-picture');
-        profilePictureContainer.addEventListener('mousedown', startLongPress);
-        profilePictureContainer.addEventListener('touchstart', startLongPress);
-        profilePictureContainer.addEventListener('mouseup', endLongPress);
-        profilePictureContainer.addEventListener('touchend', endLongPress);
-        profilePictureContainer.addEventListener('mouseleave', endLongPress);
-        profilePictureContainer.addEventListener('touchcancel', endLongPress);
-
-        function startLongPress(e) {
-            e.preventDefault();
-            longPressTimer = setTimeout(() => {
-                profilePictureContainer.classList.add('long-pressed');
-                editProfileIcon.style.display = 'flex';
-            }, 500); // 500ms for long press
-        }
-
-        function endLongPress() {
-            clearTimeout(longPressTimer);
-        }
-
-        editProfileIcon.addEventListener('click', function(e) {
+        profilePictureContainer.addEventListener('click', function(e) {
             e.stopPropagation();
-            profileActions.style.display = 'block';
+            profileActions.style.display = profileActions.style.display === 'block' ? 'none' : 'block';
         });
 
         changeProfile.addEventListener('click', function(e) {
@@ -1831,8 +1941,6 @@
                 document.getElementById('profilePicture').style.display = 'none';
                 document.getElementById('profileLetter').textContent = currentUser.charAt(0).toUpperCase();
                 document.getElementById('profileLetter').style.display = 'flex';
-                profilePictureContainer.classList.remove('long-pressed');
-                editProfileIcon.style.display = 'none';
                 profileActions.style.display = 'none';
             }
         });
@@ -1857,8 +1965,6 @@
                         document.getElementById('profilePicture').src = photoData;
                         document.getElementById('profilePicture').style.display = 'block';
                         document.getElementById('profileLetter').style.display = 'none';
-                        profilePictureContainer.classList.remove('long-pressed');
-                        editProfileIcon.style.display = 'none';
                         profileActions.style.display = 'none';
                     }
                 };
