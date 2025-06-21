@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=0.76">
     <title>T-Mail - Modern Email Client</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -61,6 +61,7 @@
             background-color: var(--background);
             color: var(--text);
             transition: all 0.3s ease;
+            overflow-x: hidden;
         }
 
         .app {
@@ -346,10 +347,6 @@
             transition: color 0.2s ease;
         }
 
-        .email-star.starred {
-            color: var(--warning);
-        }
-
         .email-sender {
             width: 200px;
             font-weight: 500;
@@ -428,21 +425,10 @@
         }
 
         .email-view-sender {
-            display: flex;
-            align-items: center;
             margin-bottom: 16px;
         }
 
-        .sender-info {
-            flex: 1;
-        }
-
-        .sender-name {
-            font-weight: 500;
-        }
-
-        .sender-email {
-            color: var(--gray);
+        .sender-info, .recipient-info {
             font-size: 14px;
         }
 
@@ -680,10 +666,6 @@
             box-shadow: 0 2px 6px rgba(0,0,0,0.1);
         }
 
-        .profile-actions button {
-            margin: 0 5px;
-        }
-
         .loading {
             display: none;
             position: absolute;
@@ -772,10 +754,10 @@
             .email-item {
                 padding: 8px 12px;
             }
-            .voice-compose-btn {
-                width: 50px;
-                height: 50px;
-                font-size: 20px;
+            .voice-compose-btn, .smart-feature-btn.voice {
+                width: 60px;
+                height: 60px;
+                font-size: 24px;
             }
             .email-list {
                 max-height: calc(100vh - 120px);
@@ -783,17 +765,30 @@
                 -webkit-overflow-scrolling: touch;
             }
             .smart-feature-popup {
-                width: 90%;
-                right: 5%;
+                width: 100%;
+                right: 0;
+                bottom: 0;
+                border-radius: 0;
             }
-            .profile-actions {
-                bottom: -60px;
+            .smart-feature-popup .actions button {
+                padding: 12px 24px;
+                font-size: 16px;
+            }
+            .theme-toggle, .menu-toggle {
+                width: 50px;
+                height: 50px;
             }
             .profile-content {
                 text-align: center;
             }
             .profile-details p {
                 text-align: left;
+            }
+            .container {
+                padding: 10px;
+            }
+            .button {
+                font-size: 14px;
             }
         }
 
@@ -906,20 +901,86 @@
                         <span class="badge bg-primary ms-2" id="inboxBadge"></span>
                     </a>
                 </li>
-                <li><a href="#" data-folder="starred"><i class="fas fa-star sidebar-menu-icon"></i> Starred</a></li>
-                <li><a href="#" data-folder="sent"><i class="fas fa-paper-plane sidebar-menu-icon"></i> Sent</a></li>
-                <li><a href="#" data-folder="drafts"><i class="fas fa-file sidebar-menu-icon"></i> Drafts</a></li>
-                <li><a href="#" data-folder="trash"><i class="fas fa-trash sidebar-menu-icon"></i> Trash</a></li>
-                <li><a href="#" data-folder="archive"><i class="fas fa-archive sidebar-menu-icon"></i> Archive</a></li>
-                <li><a href="#" data-folder="snoozed"><i class="fas fa-clock sidebar-menu-icon"></i> Snoozed</a></li>
-                <li><a href="#" data-folder="scheduled"><i class="fas fa-calendar-alt sidebar-menu-icon"></i> Scheduled</a></li>
+                <li>
+                    <a href="#" data-folder="starred">
+                        <i class="fas fa-star sidebar-menu-icon"></i>
+                        Starred
+                        <span class="badge bg-primary ms-2" id="starredBadge"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-folder="sent">
+                        <i class="fas fa-paper-plane sidebar-menu-icon"></i>
+                        Sent
+                        <span class="badge bg-primary ms-2" id="sentBadge"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-folder="drafts">
+                        <i class="fas fa-file sidebar-menu-icon"></i>
+                        Drafts
+                        <span class="badge bg-primary ms-2" id="draftsBadge"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-folder="trash">
+                        <i class="fas fa-trash sidebar-menu-icon"></i>
+                        Trash
+                        <span class="badge bg-primary ms-2" id="trashBadge"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-folder="archive">
+                        <i class="fas fa-archive sidebar-menu-icon"></i>
+                        Archive
+                        <span class="badge bg-primary ms-2" id="archiveBadge"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-folder="snoozed">
+                        <i class="fas fa-clock sidebar-menu-icon"></i>
+                        Snoozed
+                        <span class="badge bg-primary ms-2" id="snoozedBadge"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-folder="scheduled">
+                        <i class="fas fa-calendar-alt sidebar-menu-icon"></i>
+                        Scheduled
+                        <span class="badge bg-primary ms-2" id="scheduledBadge"></span>
+                    </a>
+                </li>
             </ul>
             <div class="sidebar-label">Labels</div>
             <ul class="sidebar-menu">
-                <li><a href="#" data-folder="work"><i class="fas fa-circle sidebar-menu-icon" style="color: #4285f4; font-size: 10px;"></i> Work</a></li>
-                <li><a href="#" data-folder="personal"><i class="fas fa-circle sidebar-menu-icon" style="color: #34a853; font-size: 10px;"></i> Personal</a></li>
-                <li><a href="#" data-folder="finance"><i class="fas fa-circle sidebar-menu-icon" style="color: #fbbc05; font-size: 10px;"></i> Finance</a></li>
-                <li><a href="#" data-folder="social"><i class="fas fa-circle sidebar-menu-icon" style="color: #ea4335; font-size: 10px;"></i> Social</a></li>
+                <li>
+                    <a href="#" data-folder="work">
+                        <i class="fas fa-circle sidebar-menu-icon" style="color: #4285f4; font-size: 10px;"></i>
+                        Work
+                        <span class="badge bg-primary ms-2" id="workBadge"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-folder="personal">
+                        <i class="fas fa-circle sidebar-menu-icon" style="color: #34a853; font-size: 10px;"></i>
+                        Personal
+                        <span class="badge bg-primary ms-2" id="personalBadge"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-folder="finance">
+                        <i class="fas fa-circle sidebar-menu-icon" style="color: #fbbc05; font-size: 10px;"></i>
+                        Finance
+                        <span class="badge bg-primary ms-2" id="financeBadge"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-folder="social">
+                        <i class="fas fa-circle sidebar-menu-icon" style="color: #ea4335; font-size: 10px;"></i>
+                        Social
+                        <span class="badge bg-primary ms-2" id="socialBadge"></span>
+                    </a>
+                </li>
             </ul>
             <ul class="sidebar-menu">
                 <li><a href="#" id="inviteLink"><i class="fas fa-user-plus sidebar-menu-icon"></i> Invite Friends</a></li>
@@ -960,11 +1021,12 @@
                     <button class="btn" id="summarizeBtn"><i class="fas fa-scroll"></i></button>
                 </div>
                 <h1 class="email-view-subject" id="emailSubject"></h1>
-                <div class="email-view-sender d-flex align-items-center">
-                    <div class="sender-avatar" id="senderAvatar"></div>
-                    <div class="sender-info">
-                        <div class="sender-name" id="senderName"></div>
-                        <div class="sender-email" id="senderEmail"></div>
+                <div class="email-view-sender d-flex align-items-center flex-wrap">
+                    <div class="sender-info me-3">
+                        <strong>From:</strong> <span id="fromName"></span> (<span id="fromEmail"></span>)
+                    </div>
+                    <div class="recipient-info me-3">
+                        <strong>To:</strong> <span id="toName"></span> (<span id="toEmail"></span>)
                     </div>
                     <div class="email-view-time ms-auto" id="emailTime"></div>
                 </div>
@@ -1022,7 +1084,8 @@
                         <button type="button" class="btn btn-success voice-compose-btn" id="voiceComposeBtn"><i class="fas fa-microphone"></i></button>
                     </div>
                     <button type="submit" class="btn btn-primary compose-send-btn" id="sendEmail">Send</button>
-                    <button type="button" class="btn" id="scheduleSendBtn"><i class="fas fa-clock"></i></button>
+                    <button type="button" class="btn" id="scheduleSendBtn"><i class="fas fa-calendar-alt"></i></button>
+                    <button type="button" class="btn" id="snoozeComposeBtn"><i class="fas fa-clock"></i></button>
                 </div>
             </form>
             <input type="file" id="fileInput" multiple style="display: none;">
@@ -1073,6 +1136,15 @@
             </div>
         </div>
 
+        <div class="smart-feature-popup" id="snoozeComposePopup">
+            <h4>Snooze Until</h4>
+            <input type="datetime-local" id="snoozeComposeTime" class="form-control mb-3">
+            <div class="actions d-flex justify-content-end">
+                <button class="btn btn-secondary" id="cancelSnoozeCompose">Cancel</button>
+                <button class="btn btn-primary ms-2" id="applySnoozeCompose">Snooze</button>
+            </div>
+        </div>
+
         <div class="smart-feature-popup" id="invitePopup">
             <h4>Invite Friends</h4>
             <div id="contactsList"></div>
@@ -1086,10 +1158,6 @@
             <div class="profile-picture mb-3 position-relative" style="width: 100px; height: 100px;">
                 <div id="profileLetter" class="position-absolute top-0 start-0 d-flex align-items-center justify-content-center" style="width: 100%; height: 100%; border-radius: 50%; background-color: var(--primary); color: white; font-size: 48px; font-weight: 500;"></div>
                 <img id="profilePicture" src="" alt="Profile Picture" class="position-absolute top-0 start-0" style="width: 100%; height: 100%; border-radius: 50%; display: none; filter: grayscale(100%);">
-                <div class="profile-actions" id="profileActions" style="display: none;">
-                    <button class="btn btn-sm btn-primary" id="changeProfile"><i class="fas fa-pencil-alt"></i></button>
-                    <button class="btn btn-sm btn-danger" id="deleteProfile"><i class="fas fa-trash"></i></button>
-                </div>
             </div>
             <h4>Account Details</h4>
             <p><strong>Full Name:</strong> <span id="accountFullName"></span></p>
@@ -1148,10 +1216,6 @@
         const accountPopup = document.getElementById('accountPopup');
         const profilePicture = document.getElementById('profilePicture');
         const profileLetter = document.getElementById('profileLetter');
-        const profileActions = document.getElementById('profileActions');
-        const changeProfile = document.getElementById('changeProfile');
-        const deleteProfile = document.getElementById('deleteProfile');
-        const profilePhotoInput = document.getElementById('profilePhotoInput');
         const fileInput = document.getElementById('fileInput');
         const attachmentArea = document.getElementById('attachmentArea');
         const voiceComposeBtn = document.getElementById('voiceComposeBtn');
@@ -1165,6 +1229,10 @@
         const scheduleSendPopup = document.getElementById('scheduleSendPopup');
         const cancelSchedule = document.getElementById('cancelSchedule');
         const applySchedule = document.getElementById('applySchedule');
+        const snoozeComposeBtn = document.getElementById('snoozeComposeBtn');
+        const snoozeComposePopup = document.getElementById('snoozeComposePopup');
+        const cancelSnoozeCompose = document.getElementById('cancelSnoozeCompose');
+        const applySnoozeCompose = document.getElementById('applySnoozeCompose');
         const inviteLink = document.getElementById('inviteLink');
         const invitePopup = document.getElementById('invitePopup');
         const cancelInvite = document.getElementById('cancelInvite');
@@ -1223,6 +1291,7 @@
                 emailView.style.display = 'none';
                 profileView.style.display = 'none';
                 emailListLoading.style.display = 'none';
+                updateBadges();
             }, 500);
         }
 
@@ -1237,19 +1306,21 @@
                 li.className = 'email-item' + (email.read ? '' : ' unread');
                 li.dataset.id = email.id;
                 let timeDisplay;
-                if (currentFolder === 'snoozed' && email.snoozeTime) {
+                if (email.snoozeTime) {
                     timeDisplay = `Snoozed until ${new Date(email.snoozeTime).toLocaleString()}`;
-                } else if (currentFolder === 'scheduled' && email.scheduleTime) {
+                } else if (email.scheduleTime) {
                     timeDisplay = `Scheduled for ${new Date(email.scheduleTime).toLocaleString()}`;
                 } else {
                     timeDisplay = email.time;
                 }
+                const displayName = email.isSent ? `To: ${email.toName}` : `From: ${email.from}`;
+                const avatarText = email.isSent ? email.toName[0].toUpperCase() : email.from[0].toUpperCase();
                 li.innerHTML = `
                     <input type="checkbox" class="email-checkbox">
-                    <i class="fas fa-star email-star ${email.starred ? 'starred' : ''}"></i>
+                    <i class="${email.starred ? 'fas' : 'far'} fa-star email-star"></i>
                     <div class="email-sender">
-                        <div class="sender-avatar">${email.from[0].toUpperCase()}</div>
-                        ${email.from}
+                        <div class="sender-avatar">${avatarText}</div>
+                        ${displayName}
                     </div>
                     <div class="email-content">
                         <span class="email-subject">${email.subject}</span>
@@ -1267,6 +1338,23 @@
             });
         }
 
+        function updateBadges() {
+            const folders = ['inbox', 'starred', 'sent', 'drafts', 'trash', 'archive', 'snoozed', 'scheduled', 'work', 'personal', 'finance', 'social'];
+            folders.forEach(folder => {
+                const emails = getEmailsForFolder(folder);
+                let count;
+                if (folder === 'inbox') {
+                    count = emails.filter(email => !email.read).length;
+                } else {
+                    count = emails.length;
+                }
+                const badge = document.getElementById(`${folder}Badge`);
+                if (badge) {
+                    badge.textContent = count > 0 ? count : '';
+                }
+            });
+        }
+
         function getEmailById(id) {
             const folders = ['inbox', 'sent', 'drafts', 'trash', 'archive', 'starred', 'work', 'personal', 'finance', 'social', 'snoozed', 'scheduled'];
             for (const folder of folders) {
@@ -1281,46 +1369,62 @@
             const result = getEmailById(id);
             if (!result) return;
             const { email, folder } = result;
-            selectedEmailId = id;
-            email.read = true;
-            const emails = getEmailsForFolder(folder);
-            const index = emails.findIndex(e => e.id === id);
-            if (index !== -1) {
-                emails[index].read = true;
-                saveEmailsForFolder(folder, emails);
-            }
-            if (email.starred) {
-                const starredEmails = getEmailsForFolder('starred');
-                const starredIndex = starredEmails.findIndex(e => e.id === id);
-                if (starredIndex !== -1) {
-                    starredEmails[starredIndex].read = true;
-                    saveEmailsForFolder('starred', starredEmails);
+            if (folder === 'drafts') {
+                openComposeWithDraft(email);
+            } else {
+                selectedEmailId = id;
+                email.read = true;
+                const emails = getEmailsForFolder(folder);
+                const index = emails.findIndex(e => e.id === id);
+                if (index !== -1) {
+                    emails[index].read = true;
+                    saveEmailsForFolder(folder, emails);
                 }
+                if (email.starred) {
+                    const starredEmails = getEmailsForFolder('starred');
+                    const starredIndex = starredEmails.findIndex(e => e.id === id);
+                    if (starredIndex !== -1) {
+                        starredEmails[starredIndex].read = true;
+                        saveEmailsForFolder('starred', starredEmails);
+                    }
+                }
+                document.getElementById('emailSubject').textContent = email.subject;
+                const currentUserEmail = localStorage.getItem('current_user') + '@tmail.com';
+                const fromDisplay = email.fromEmail === currentUserEmail ? 'Me' : email.from;
+                const toDisplay = email.to === currentUserEmail ? 'Me' : email.toName;
+                document.getElementById('fromName').textContent = fromDisplay;
+                document.getElementById('fromEmail').textContent = email.fromEmail;
+                document.getElementById('toName').textContent = toDisplay;
+                document.getElementById('toEmail').textContent = email.to;
+                document.getElementById('emailTime').textContent = email.time;
+                document.getElementById('emailBody').innerHTML = email.body;
+                const attachmentsDiv = document.getElementById('emailAttachments');
+                attachmentsDiv.innerHTML = '';
+                if (email.attachments && email.attachments.length > 0) {
+                    const attachmentHeader = document.createElement('h5');
+                    attachmentHeader.textContent = 'Attachments:';
+                    attachmentsDiv.appendChild(attachmentHeader);
+                    email.attachments.forEach(attachment => {
+                        const attachmentLink = document.createElement('a');
+                        attachmentLink.href = '#';
+                        attachmentLink.textContent = attachment;
+                        attachmentLink.className = 'attachment-link';
+                        attachmentsDiv.appendChild(attachmentLink);
+                    });
+                }
+                emailListView.style.display = 'none';
+                emailView.style.display = 'block';
+                profileView.style.display = 'none';
+                emailView.classList.add('fade-in');
+                updateBadges();
             }
-            document.getElementById('emailSubject').textContent = email.subject;
-            document.getElementById('senderName').textContent = email.from;
-            document.getElementById('senderEmail').textContent = email.email;
-            document.getElementById('emailTime').textContent = email.time;
-            document.getElementById('emailBody').innerHTML = email.body;
-            document.getElementById('senderAvatar').textContent = email.from[0].toUpperCase();
-            const attachmentsDiv = document.getElementById('emailAttachments');
-            attachmentsDiv.innerHTML = '';
-            if (email.attachments && email.attachments.length > 0) {
-                const attachmentHeader = document.createElement('h5');
-                attachmentHeader.textContent = 'Attachments:';
-                attachmentsDiv.appendChild(attachmentHeader);
-                email.attachments.forEach(attachment => {
-                    const attachmentLink = document.createElement('a');
-                    attachmentLink.href = '#';
-                    attachmentLink.textContent = attachment;
-                    attachmentLink.className = 'attachment-link';
-                    attachmentsDiv.appendChild(attachmentLink);
-                });
-            }
-            emailListView.style.display = 'none';
-            emailView.style.display = 'block';
-            profileView.style.display = 'none';
-            emailView.classList.add('fade-in');
+        }
+
+        function openComposeWithDraft(email) {
+            openCompose();
+            document.getElementById('composeTo').value = email.to || '';
+            document.getElementById('composeSubject').value = email.subject || '';
+            document.getElementById('composeBody').innerHTML = email.body || '';
         }
 
         function showEmailList() {
@@ -1402,25 +1506,42 @@
                 const currentUser = localStorage.getItem('current_user');
                 const users = JSON.parse(localStorage.getItem('tmail_users')) || [];
                 const user = users.find(u => u.username === currentUser);
-                const newEmail = {
-                    id: String(Date.now()),
-                    from: user ? `${user.firstName} ${user.lastName}` : 'Me',
-                    email: currentUser + '@tmail.com',
-                    to: to,
-                    subject: subject,
-                    preview: body.replace(/<[^>]+>/g, '').substring(0, 50) + '...',
-                    time: new Date().toLocaleTimeString(),
-                    read: true,
-                    starred: false,
-                    body: body,
-                    attachments: attachments.map(file => file.name)
-                };
-                const sentEmails = getEmailsForFolder('sent');
-                sentEmails.push(newEmail);
-                saveEmailsForFolder('sent', sentEmails);
-                closeComposeWindow();
-                if (currentFolder === 'sent') {
-                    showEmailListForFolder('sent');
+                const recipientUsername = to.split('@')[0];
+                const recipient = users.find(u => u.username === recipientUsername);
+                if (recipient) {
+                    const sentEmail = {
+                        id: String(Date.now()),
+                        from: user ? `${user.firstName} ${user.lastName}` : 'Me',
+                        fromEmail: currentUser + '@tmail.com',
+                        to: to,
+                        toName: `${recipient.firstName} ${recipient.lastName}`,
+                        subject: subject,
+                        preview: body.replace(/<[^>]+>/g, '').substring(0, 50) + '...',
+                        time: new Date().toLocaleTimeString(),
+                        read: true,
+                        starred: false,
+                        body: body,
+                        attachments: attachments.map(file => file.name),
+                        isSent: true
+                    };
+                    const receivedEmail = {
+                        ...sentEmail,
+                        read: false,
+                        isSent: false
+                    };
+                    const sentEmails = getEmailsForFolder('sent');
+                    sentEmails.push(sentEmail);
+                    saveEmailsForFolder('sent', sentEmails);
+                    const recipientInbox = getEmailsForFolder('inbox');
+                    recipientInbox.push(receivedEmail);
+                    saveEmailsForFolder('inbox', recipientInbox);
+                    closeComposeWindow();
+                    updateBadges();
+                    if (currentFolder === 'sent') {
+                        showEmailListForFolder('sent');
+                    }
+                } else {
+                    alert('Recipient does not exist.');
                 }
                 emailListLoading.style.display = 'none';
             }, 500);
@@ -1472,6 +1593,7 @@
                     }
                 });
                 showEmailListForFolder(currentFolder);
+                updateBadges();
                 emailListLoading.style.display = 'none';
             }, 500);
         }
@@ -1504,6 +1626,7 @@
                     }
                 });
                 showEmailListForFolder(currentFolder);
+                updateBadges();
                 emailListLoading.style.display = 'none';
             }, 500);
         }
@@ -1534,6 +1657,7 @@
                     }
                 });
                 showEmailListForFolder(currentFolder);
+                updateBadges();
                 emailListLoading.style.display = 'none';
             }, 500);
         }
@@ -1556,7 +1680,7 @@
                 if (result) {
                     const { email } = result;
                     openCompose();
-                    document.getElementById('composeTo').value = email.email;
+                    document.getElementById('composeTo').value = email.isSent ? email.to : email.fromEmail;
                     document.getElementById('composeSubject').value = `Re: ${email.subject}`;
                     document.getElementById('composeBody').innerHTML = `<br><br>---<br>${email.body}`;
                 }
@@ -1599,6 +1723,7 @@
                                 saveEmailsForFolder('starred', starredEmails);
                             }
                             showEmailList();
+                            updateBadges();
                         }
                     }
                 }
@@ -1676,38 +1801,6 @@
             }
         }
 
-        function sendVoiceEmail() {
-            const transcript = voiceText.textContent;
-            if (transcript && transcript !== 'Listening...') {
-                emailListLoading.style.display = 'block';
-                setTimeout(() => {
-                    const currentUser = localStorage.getItem('current_user');
-                    const users = JSON.parse(localStorage.getItem('tmail_users')) || [];
-                    const user = users.find(u => u.username === currentUser);
-                    const newEmail = {
-                        id: String(Date.now()),
-                        from: user ? `${user.firstName} ${user.lastName}` : 'Me',
-                        email: currentUser + '@tmail.com',
-                        subject: 'Voice Email',
-                        preview: transcript.substring(0, 50) + '...',
-                        time: new Date().toLocaleTimeString(),
-                        read: true,
-                        starred: false,
-                        body: transcript,
-                        attachments: []
-                    };
-                    const sentEmails = getEmailsForFolder('sent');
-                    sentEmails.push(newEmail);
-                    saveEmailsForFolder('sent', sentEmails);
-                    cancelVoiceRecognition();
-                    if (currentFolder === 'sent') {
-                        showEmailListForFolder('sent');
-                    }
-                    emailListLoading.style.display = 'none';
-                }, 500);
-            }
-        }
-
         function cancelVoiceRecognition() {
             if (isListening) {
                 recognition.stop();
@@ -1730,40 +1823,50 @@
             return age;
         }
 
-        function checkTimers() {
+        function checkScheduledEmails() {
             const now = new Date();
+            const scheduledEmails = getEmailsForFolder('scheduled');
+            scheduledEmails.forEach((email, index) => {
+                if (email.scheduleTime && new Date(email.scheduleTime) <= now) {
+                    const sentEmails = getEmailsForFolder('sent');
+                    delete email.scheduleTime;
+                    sentEmails.push(email);
+                    saveEmailsForFolder('sent', sentEmails);
+                    scheduledEmails.splice(index, 1);
+                    saveEmailsForFolder('scheduled', scheduledEmails);
+                    notifyUser(`Email sent to ${email.to}`);
+                    updateBadges();
+                }
+            });
             const snoozedEmails = getEmailsForFolder('snoozed');
-            snoozedEmails.forEach(email => {
+            snoozedEmails.forEach((email, index) => {
                 if (email.snoozeTime && new Date(email.snoozeTime) <= now) {
                     const inboxEmails = getEmailsForFolder('inbox');
                     delete email.snoozeTime;
                     inboxEmails.push(email);
                     saveEmailsForFolder('inbox', inboxEmails);
-                    const index = snoozedEmails.findIndex(e => e.id === email.id);
-                    if (index !== -1) {
-                        snoozedEmails.splice(index, 1);
-                        saveEmailsForFolder('snoozed', snoozedEmails);
-                    }
+                    snoozedEmails.splice(index, 1);
+                    saveEmailsForFolder('snoozed', snoozedEmails);
+                    updateBadges();
                 }
             });
-            const scheduledEmails = getEmailsForFolder('scheduled');
-            scheduledEmails.forEach(email => {
-                if (email.scheduleTime && new Date(email.scheduleTime) <= now) {
-                    delete email.scheduleTime;
-                    const sentEmails = getEmailsForFolder('sent');
-                    sentEmails.push(email);
-                    saveEmailsForFolder('sent', sentEmails);
-                    const index = scheduledEmails.findIndex(e => e.id === email.id);
-                    if (index !== -1) {
-                        scheduledEmails.splice(index, 1);
-                        saveEmailsForFolder('scheduled', scheduledEmails);
-                    }
-                    console.log(`Email sent to ${email.to}`);
+            const drafts = getEmailsForFolder('drafts');
+            drafts.forEach((draft, index) => {
+                if (draft.snoozeTime && new Date(draft.snoozeTime) <= now) {
+                    notifyUser(`It's time to continue composing your draft: ${draft.subject}`);
+                    delete draft.snoozeTime;
+                    drafts[index] = draft;
+                    saveEmailsForFolder('drafts', drafts);
+                    updateBadges();
                 }
             });
-            if (currentFolder === 'snoozed' || currentFolder === 'scheduled') {
+            if (currentFolder === 'scheduled' || currentFolder === 'snoozed' || currentFolder === 'drafts') {
                 showEmailListForFolder(currentFolder);
             }
+        }
+
+        function notifyUser(message) {
+            alert(message);
         }
 
         if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
@@ -1773,11 +1876,9 @@
             recognition.maxAlternatives = 1;
 
             recognition.onresult = function(event) {
-                const transcript = event.results[0][0].transcript.toLowerCase();
+                const transcript = event.results[0][0].transcript;
                 voiceText.textContent = transcript;
-                if (transcript.includes('summarize')) {
-                    summarizeEmail();
-                } else if (composeContainer.classList.contains('active')) {
+                if (composeContainer.classList.contains('active')) {
                     const composeBody = document.getElementById('composeBody');
                     composeBody.innerHTML += transcript + ' ';
                     composeBody.focus();
@@ -1918,7 +2019,6 @@
 
         document.getElementById('closeAccountPopup').addEventListener('click', function() {
             accountPopup.classList.remove('active');
-            profileActions.style.display = 'none';
         });
 
         document.getElementById('logoutFromPopup').addEventListener('click', function() {
@@ -1930,62 +2030,6 @@
             loginContainer.style.display = 'none';
             userAvatar.textContent = 'U';
             accountPopup.classList.remove('active');
-            profileActions.style.display = 'none';
-        });
-
-        const profilePictureContainer = document.querySelector('.profile-picture');
-        profilePictureContainer.addEventListener('click', function(e) {
-            e.stopPropagation();
-            profileActions.style.display = profileActions.style.display === 'block' ? 'none' : 'block';
-        });
-
-        changeProfile.addEventListener('click', function(e) {
-            e.stopPropagation();
-            profilePhotoInput.click();
-            profileActions.style.display = 'none';
-        });
-
-        deleteProfile.addEventListener('click', function(e) {
-            e.stopPropagation();
-            const currentUser = localStorage.getItem('current_user');
-            let users = JSON.parse(localStorage.getItem('tmail_users')) || [];
-            const userIndex = users.findIndex(u => u.username === currentUser);
-            if (userIndex !== -1) {
-                delete users[userIndex].photo;
-                localStorage.setItem('tmail_users', JSON.stringify(users));
-                userAvatar.textContent = users[userIndex].firstName.charAt(0).toUpperCase() + users[userIndex].lastName.charAt(0).toUpperCase();
-                document.getElementById('profilePicture').style.display = 'none';
-                document.getElementById('profileLetter').textContent = users[userIndex].firstName.charAt(0).toUpperCase() + users[userIndex].lastName.charAt(0).toUpperCase();
-                document.getElementById('profileLetter').style.display = 'flex';
-                profileActions.style.display = 'none';
-            }
-        });
-
-        profilePhotoInput.addEventListener('change', function(event) {
-            const file = event.target.files[0];
-            if (file) {
-                if (!file.type.startsWith('image/')) {
-                    alert('Please upload an image file.');
-                    return;
-                }
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const photoData = e.target.result;
-                    const currentUser = localStorage.getItem('current_user');
-                    let users = JSON.parse(localStorage.getItem('tmail_users')) || [];
-                    const userIndex = users.findIndex(u => u.username === currentUser);
-                    if (userIndex !== -1) {
-                        users[userIndex].photo = photoData;
-                        localStorage.setItem('tmail_users', JSON.stringify(users));
-                        userAvatar.innerHTML = `<img src="${photoData}" alt="Profile" style="width: 100%; height: 100%; border-radius: 50%; filter: grayscale(100%);">`;
-                        document.getElementById('profilePicture').src = photoData;
-                        document.getElementById('profilePicture').style.display = 'block';
-                        document.getElementById('profileLetter').style.display = 'none';
-                        profileActions.style.display = 'none';
-                    }
-                };
-                reader.readAsDataURL(file);
-            }
         });
 
         snoozeBtn.addEventListener('click', function() {
@@ -2027,6 +2071,7 @@
                         }
                         snoozePopup.classList.remove('active');
                         showEmailList();
+                        updateBadges();
                     }
                 } else {
                     alert('Please select a future time.');
@@ -2056,27 +2101,36 @@
                     const currentUser = localStorage.getItem('current_user');
                     const users = JSON.parse(localStorage.getItem('tmail_users')) || [];
                     const user = users.find(u => u.username === currentUser);
-                    const newEmail = {
-                        id: String(Date.now()),
-                        from: user ? `${user.firstName} ${user.lastName}` : 'Me',
-                        email: currentUser + '@tmail.com',
-                        to: to,
-                        subject: subject,
-                        preview: body.replace(/<[^>]+>/g, '').substring(0, 50) + '...',
-                        time: new Date().toLocaleTimeString(),
-                        read: true,
-                        starred: false,
-                        body: body,
-                        attachments: attachments.map(file => file.name),
-                        scheduleTime: scheduleDate.toISOString()
-                    };
-                    const scheduledEmails = getEmailsForFolder('scheduled');
-                    scheduledEmails.push(newEmail);
-                    saveEmailsForFolder('scheduled', scheduledEmails);
-                    closeComposeWindow();
-                    scheduleSendPopup.classList.remove('active');
-                    if (currentFolder === 'scheduled') {
-                        showEmailListForFolder('scheduled');
+                    const recipientUsername = to.split('@')[0];
+                    const recipient = users.find(u => u.username === recipientUsername);
+                    if (recipient) {
+                        const newEmail = {
+                            id: String(Date.now()),
+                            from: user ? `${user.firstName} ${user.lastName}` : 'Me',
+                            fromEmail: currentUser + '@tmail.com',
+                            to: to,
+                            toName: `${recipient.firstName} ${recipient.lastName}`,
+                            subject: subject,
+                            preview: body.replace(/<[^>]+>/g, '').substring(0, 50) + '...',
+                            time: new Date().toLocaleTimeString(),
+                            read: true,
+                            starred: false,
+                            body: body,
+                            attachments: attachments.map(file => file.name),
+                            scheduleTime: scheduleDate.toISOString(),
+                            isSent: true
+                        };
+                        const scheduledEmails = getEmailsForFolder('scheduled');
+                        scheduledEmails.push(newEmail);
+                        saveEmailsForFolder('scheduled', scheduledEmails);
+                        closeComposeWindow();
+                        scheduleSendPopup.classList.remove('active');
+                        updateBadges();
+                        if (currentFolder === 'scheduled') {
+                            showEmailListForFolder('scheduled');
+                        }
+                    } else {
+                        alert('Recipient does not exist.');
                     }
                 } else {
                     alert('Please select a future time.');
@@ -2086,8 +2140,64 @@
             }
         });
 
+        snoozeComposeBtn.addEventListener('click', function() {
+            snoozeComposePopup.classList.add('active');
+            snoozeComposePopup.classList.add('fade-in');
+        });
+
+        cancelSnoozeCompose.addEventListener('click', function() {
+            snoozeComposePopup.classList.remove('active');
+        });
+
+        applySnoozeCompose.addEventListener('click', function() {
+            const snoozeTime = document.getElementById('snoozeComposeTime').value;
+            if (snoozeTime) {
+                const snoozeDate = new Date(snoozeTime);
+                if (snoozeDate > new Date()) {
+                    const to = document.getElementById('composeTo').value;
+                    const subject = document.getElementById('composeSubject').value;
+                    const body = document.getElementById('composeBody').innerHTML;
+                    const currentUser = localStorage.getItem('current_user');
+                    const users = JSON.parse(localStorage.getItem('tmail_users')) || [];
+                    const user = users.find(u => u.username === currentUser);
+                    const newDraft = {
+                        id: String(Date.now()),
+                        from: user ? `${user.firstName} ${user.lastName}` : 'Me',
+                        fromEmail: currentUser + '@tmail.com',
+                        to: to,
+                        subject: subject,
+                        preview: body.replace(/<[^>]+>/g, '').substring(0, 50) + '...',
+                        time: new Date().toLocaleTimeString(),
+                        read: true,
+                        starred: false,
+                        body: body,
+                        attachments: attachments.map(file => file.name),
+                        snoozeTime: snoozeDate.toISOString()
+                    };
+                    const drafts = getEmailsForFolder('drafts');
+                    drafts.push(newDraft);
+                    saveEmailsForFolder('drafts', drafts);
+                    closeComposeWindow();
+                    snoozeComposePopup.classList.remove('active');
+                    updateBadges();
+                    if (currentFolder === 'drafts') {
+                        showEmailListForFolder('drafts');
+                    }
+                } else {
+                    alert('Please select a future time.');
+                }
+            } else {
+                alert('Please select a time.');
+            }
+        });
+
+        function generateInvitationLink() {
+            return "https://karthikkalki09.github.io/t-mail/?invite=true";
+        }
+
         inviteLink.addEventListener('click', async function(e) {
             e.preventDefault();
+            const link = generateInvitationLink();
             if ('contacts' in navigator && 'select' in navigator.contacts) {
                 try {
                     const contacts = await navigator.contacts.select(['name', 'tel'], { multiple: true });
@@ -2111,15 +2221,16 @@
                     alert('Failed to access contacts: ' + error.message);
                 }
             } else {
-                alert('Contacts API not supported in this browser.');
+                alert('Share this link: ' + link);
             }
         });
 
         sendInvite.addEventListener('click', function() {
             const checkedBoxes = document.querySelectorAll('#contactsList input[type="checkbox"]:checked');
+            const link = generateInvitationLink();
             checkedBoxes.forEach(checkbox => {
                 const phone = checkbox.dataset.phone;
-                const message = encodeURIComponent("Join me on TMail! Sign up at https://tmail.com/signup");
+                const message = encodeURIComponent(`Join me on TMail! Sign up at ${link}`);
                 window.open(`sms:${phone}?body=${message}`, '_blank');
             });
             invitePopup.classList.remove('active');
@@ -2131,50 +2242,116 @@
             document.getElementById('contactsList').innerHTML = '';
         });
 
-        function initializeEmailView() {
-            showEmailListForFolder('inbox');
-            document.querySelector('.sidebar-menu a[data-folder="inbox"]').classList.add('active');
-            setInterval(checkTimers, 60000);
-            checkTimers();
-        }
-
-        window.addEventListener('load', () => {
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme) {
-                currentTheme = savedTheme;
-                document.documentElement.setAttribute('data-theme', savedTheme);
-            }
-            const currentUser = localStorage.getItem('current_user');
-            if (currentUser) {
-                signupContainer.style.display = 'none';
-                dobContainer.style.display = 'none';
-                loginContainer.style.display = 'none';
-                header.style.display = 'flex';
-                mainContent.style.display = 'block';
-                sidebar.style.display = 'block';
-                const users = JSON.parse(localStorage.getItem('tmail_users')) || [];
-                const user = users.find(u => u.username === currentUser);
-                if (user) {
-                    userAvatar.textContent = user.firstName.charAt(0).toUpperCase() + user.lastName.charAt(0).toUpperCase();
-                    if (user.photo) {
-                        userAvatar.innerHTML = `<img src="${user.photo}" alt="Profile" style="width: 100%; height: 100%; border-radius: 50%; filter: grayscale(100%);">`;
-                    }
-                    initializeEmailView();
+        sendVoice.addEventListener('click', function() {
+            const transcript = voiceText.textContent;
+            if (transcript && transcript !== 'Listening...' && transcript !== 'Press the microphone button to start speaking.') {
+                const recipient = prompt('Enter the recipient\'s email address:');
+                if (recipient) {
+                    emailListLoading.style.display = 'block';
+                    setTimeout(() => {
+                        const currentUser = localStorage.getItem('current_user');
+                        const users = JSON.parse(localStorage.getItem('tmail_users')) || [];
+                        const user = users.find(u => u.username === currentUser);
+                        const recipientUsername = recipient.split('@')[0];
+                        const recipientUser = users.find(u => u.username === recipientUsername);
+                        if (recipientUser) {
+                            const sentEmail = {
+                                id: String(Date.now()),
+                                from: user ? `${user.firstName} ${user.lastName}` : 'Me',
+                                fromEmail: currentUser + '@tmail.com',
+                                to: recipient,
+                                toName: `${recipientUser.firstName} ${recipientUser.lastName}`,
+                                subject: 'Voice Email',
+                                preview: transcript.substring(0, 50) + '...',
+                                time: new Date().toLocaleTimeString(),
+                                read: true,
+                                starred: false,
+                                body: transcript,
+                                attachments: [],
+                                isSent: true
+                            };
+                            const receivedEmail = {
+                                ...sentEmail,
+                                read: false,
+                                isSent: false
+                            };
+                            const sentEmails = getEmailsForFolder('sent');
+                            sentEmails.push(sentEmail);
+                            saveEmailsForFolder('sent', sentEmails);
+                            const recipientInbox = getEmailsForFolder('inbox');
+                            recipientInbox.push(receivedEmail);
+                            saveEmailsForFolder('inbox', recipientInbox);
+                            cancelVoiceRecognition();
+                            updateBadges();
+                            if (currentFolder === 'sent') {
+                                showEmailListForFolder('sent');
+                            }
+                        } else {
+                            alert('Recipient does not exist.');
+                        }
+                        emailListLoading.style.display = 'none';
+                    }, 500);
                 }
             } else {
+                alert('No valid voice input to send.');
+            }
+        });
+
+        window.addEventListener('load', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const isInvite = urlParams.get('invite') === 'true';
+            if (isInvite) {
+                alert('Welcome! Please sign up or log in.');
                 signupContainer.style.display = 'block';
-                dobContainer.style.display = 'none';
                 loginContainer.style.display = 'none';
                 header.style.display = 'none';
                 mainContent.style.display = 'none';
                 sidebar.style.display = 'none';
+            } else {
+                const savedTheme = localStorage.getItem('theme');
+                if (savedTheme) {
+                    currentTheme = savedTheme;
+                    document.documentElement.setAttribute('data-theme', savedTheme);
+                }
+                const currentUser = localStorage.getItem('current_user');
+                if (currentUser) {
+                    signupContainer.style.display = 'none';
+                    dobContainer.style.display = 'none';
+                    loginContainer.style.display = 'none';
+                    header.style.display = 'flex';
+                    mainContent.style.display = 'block';
+                    sidebar.style.display = 'block';
+                    const users = JSON.parse(localStorage.getItem('tmail_users')) || [];
+                    const user = users.find(u => u.username === currentUser);
+                    if (user) {
+                        userAvatar.textContent = user.firstName.charAt(0).toUpperCase() + user.lastName.charAt(0).toUpperCase();
+                        if (user.photo) {
+                            userAvatar.innerHTML = `<img src="${user.photo}" alt="Profile" style="width: 100%; height: 100%; border-radius: 50%; filter: grayscale(100%);">`;
+                        }
+                        initializeEmailView();
+                    }
+                } else {
+                    signupContainer.style.display = 'block';
+                    dobContainer.style.display = 'none';
+                    loginContainer.style.display = 'none';
+                    header.style.display = 'none';
+                    mainContent.style.display = 'none';
+                    sidebar.style.display = 'none';
+                }
             }
         });
+
+        function initializeEmailView() {
+            showEmailListForFolder('inbox');
+            document.querySelector('.sidebar-menu a[data-folder="inbox"]').classList.add('active');
+            updateBadges();
+            setInterval(checkScheduledEmails, 60000);
+            checkScheduledEmails();
+        }
 
         document.addEventListener('click', function(e) {
             if (!accountPopup.contains(e.target) && !userAvatar.contains(e.target)) {
                 accountPopup.classList.remove('active');
-                profileActions.style.display = 'none';
             }
             if (!summarizePopup.contains(e.target) && !summarizeFeatureBtn.contains(e.target) && !summarizeBtn.contains(e.target)) {
                 summarizePopup.classList.remove('active');
@@ -2187,6 +2364,9 @@
             }
             if (!scheduleSendPopup.contains(e.target) && !scheduleSendBtn.contains(e.target)) {
                 scheduleSendPopup.classList.remove('active');
+            }
+            if (!snoozeComposePopup.contains(e.target) && !snoozeComposeBtn.contains(e.target)) {
+                snoozeComposePopup.classList.remove('active');
             }
             if (!invitePopup.contains(e.target) && !inviteLink.contains(e.target)) {
                 invitePopup.classList.remove('active');
@@ -2217,7 +2397,6 @@
         voiceFeatureBtn.addEventListener('click', toggleVoiceRecognition);
         voiceComposeBtn.addEventListener('click', startVoiceCompose);
         cancelVoice.addEventListener('click', cancelVoiceRecognition);
-        sendVoice.addEventListener('click', sendVoiceEmail);
         viewProfileBtn.addEventListener('click', function() {
             accountPopup.classList.remove('active');
             showProfile();
@@ -2293,6 +2472,7 @@
                 const emails = getEmailsForFolder(currentFolder);
                 const filteredEmails = emails.filter(email =>
                     email.from.toLowerCase().includes(searchTerm) ||
+                    (email.toName && email.toName.toLowerCase().includes(searchTerm)) ||
                     email.subject.toLowerCase().includes(searchTerm) ||
                     email.preview.toLowerCase().includes(searchTerm)
                 );
@@ -2309,7 +2489,13 @@
                 if (result) {
                     const { email, folder } = result;
                     email.starred = !email.starred;
-                    e.target.classList.toggle('starred');
+                    if (email.starred) {
+                        e.target.classList.remove('far');
+                        e.target.classList.add('fas');
+                    } else {
+                        e.target.classList.remove('fas');
+                        e.target.classList.add('far');
+                    }
                     const starredEmails = getEmailsForFolder('starred');
                     if (email.starred) {
                         if (!starredEmails.some(e => e.id === email.id)) {
@@ -2328,6 +2514,7 @@
                         originalEmails[index].starred = email.starred;
                         saveEmailsForFolder(folder, originalEmails);
                     }
+                    updateBadges();
                     if (currentFolder === 'starred') {
                         showEmailListForFolder('starred');
                     }
@@ -2336,4 +2523,4 @@
         });
     </script>
 </body>
-</html> 
+</html>
