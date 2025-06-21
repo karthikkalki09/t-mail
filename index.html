@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>T-Mail - Modern Email Client</title>
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <!-- Fonts and Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -165,11 +163,19 @@
             transition: transform 0.2s ease;
         }
 
+        .user-avatar img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            filter: grayscale(100%);
+            object-fit: cover;
+        }
+
         .user-avatar:hover {
             transform: scale(1.1);
         }
 
-        .signup-container, .login-container {
+        .signup-container, .login-container, .dob-container {
             max-width: 400px;
             margin: 100px auto;
             padding: 20px;
@@ -692,7 +698,20 @@
         }
 
         .profile-toolbar {
-            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            padding: 8px 16px;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            background-color: var(--background);
+            z-index: 10;
+        }
+
+        .profile-toolbar h2 {
+            margin-left: 8px;
+            font-size: 18px;
+            font-weight: 500;
         }
 
         .profile-content {
@@ -709,6 +728,16 @@
         .profile-details p {
             font-size: 16px;
             margin-bottom: 10px;
+        }
+
+        #contactsList div {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        #contactsList input[type="checkbox"] {
+            margin-right: 10px;
         }
 
         @keyframes spin {
@@ -735,7 +764,13 @@
                 max-height: 90vh;
             }
             .email-sender {
-                width: 120px;
+                width: 100px;
+            }
+            .email-time {
+                width: 60px;
+            }
+            .email-item {
+                padding: 8px 12px;
             }
             .voice-compose-btn {
                 width: 50px;
@@ -797,8 +832,12 @@
             <h2>Create Your T-Mail Account</h2>
             <form id="signupForm">
                 <div class="mb-3">
-                    <label for="fullName" class="form-label">Full Name</label>
-                    <input type="text" class="form-control" id="fullName" required>
+                    <label for="firstName" class="form-label">First Name</label>
+                    <input type="text" class="form-control" id="firstName" required>
+                </div>
+                <div class="mb-3">
+                    <label for="lastName" class="form-label">Last Name</label>
+                    <input type="text" class="form-control" id="lastName" required>
                 </div>
                 <div class="mb-3">
                     <label for="username" class="form-label">Username</label>
@@ -815,17 +854,24 @@
                     <label for="confirmPassword" class="form-label">Confirm Password</label>
                     <input type="password" class="form-control" id="confirmPassword" required>
                 </div>
-                <div class="mb-3">
-                    <label for="dob" class="form-label">Date of Birth</label>
-                    <input type="date" class="form-control" id="dob" required>
-                </div>
                 <div class="mb-3 form-check">
                     <input type="checkbox" class="form-check-input" id="terms" required>
                     <label class="form-check-label" for="terms">I agree to the terms and conditions</label>
                 </div>
-                <button type="submit" class="btn btn-primary w-100">Create Account</button>
+                <button type="submit" class="btn btn-primary w-100">Next</button>
             </form>
             <p class="mt-2">Already have an account? <a href="#" id="switchToLogin">Log in</a></p>
+        </div>
+
+        <div class="dob-container" id="dobContainer" style="display: none;">
+            <h2>Enter Your Date of Birth</h2>
+            <form id="dobForm">
+                <div class="mb-3">
+                    <label for="dob" class="form-label">Date of Birth</label>
+                    <input type="date" class="form-control" id="dob" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Create Account</button>
+            </form>
         </div>
 
         <div class="login-container" id="loginContainer" style="display: none;">
@@ -865,6 +911,8 @@
                 <li><a href="#" data-folder="drafts"><i class="fas fa-file sidebar-menu-icon"></i> Drafts</a></li>
                 <li><a href="#" data-folder="trash"><i class="fas fa-trash sidebar-menu-icon"></i> Trash</a></li>
                 <li><a href="#" data-folder="archive"><i class="fas fa-archive sidebar-menu-icon"></i> Archive</a></li>
+                <li><a href="#" data-folder="snoozed"><i class="fas fa-clock sidebar-menu-icon"></i> Snoozed</a></li>
+                <li><a href="#" data-folder="scheduled"><i class="fas fa-calendar-alt sidebar-menu-icon"></i> Scheduled</a></li>
             </ul>
             <div class="sidebar-label">Labels</div>
             <ul class="sidebar-menu">
@@ -872,6 +920,9 @@
                 <li><a href="#" data-folder="personal"><i class="fas fa-circle sidebar-menu-icon" style="color: #34a853; font-size: 10px;"></i> Personal</a></li>
                 <li><a href="#" data-folder="finance"><i class="fas fa-circle sidebar-menu-icon" style="color: #fbbc05; font-size: 10px;"></i> Finance</a></li>
                 <li><a href="#" data-folder="social"><i class="fas fa-circle sidebar-menu-icon" style="color: #ea4335; font-size: 10px;"></i> Social</a></li>
+            </ul>
+            <ul class="sidebar-menu">
+                <li><a href="#" id="inviteLink"><i class="fas fa-user-plus sidebar-menu-icon"></i> Invite Friends</a></li>
             </ul>
         </aside>
 
@@ -904,6 +955,7 @@
                     <button class="btn" id="replyBtn"><i class="fas fa-reply"></i></button>
                     <button class="btn" id="forwardBtn"><i class="fas fa-share"></i></button>
                     <button class="btn" id="deleteEmailBtn"><i class="fas fa-trash"></i></button>
+                    <button class="btn" id="snoozeBtn"><i class="fas fa-clock"></i></button>
                     <div style="flex: 1;"></div>
                     <button class="btn" id="summarizeBtn"><i class="fas fa-scroll"></i></button>
                 </div>
@@ -925,15 +977,18 @@
                     <button class="btn" id="backFromProfile"><i class="fas fa-arrow-left"></i></button>
                     <h2>Profile</h2>
                 </div>
-                <div class="profile-content">
-                    <div class="profile-avatar" style="width: 100px; height: 100px; margin: 0 auto;"></div>
-                    <div class="profile-details mt-3">
-                        <p><strong>Full Name:</strong> <span id="profileFullName"></span></p>
-                        <p><strong>Username:</strong> <span id="profileUsername"></span></p>
-                        <p><strong>Date of Birth:</strong> <span id="profileDob"></span></p>
-                        <p><strong>Emails Sent:</strong> <span id="profileEmailsSent"></span></p>
-                        <p><strong>Emails Received:</strong> <span id="profileEmailsReceived"></span></p>
+                <h1 class="email-view-subject">Your Profile</h1>
+                <div class="email-view-sender d-flex align-items-center">
+                    <div class="sender-avatar" id="profileAvatar"></div>
+                    <div class="sender-info">
+                        <div class="sender-name" id="profileFullName"></div>
+                        <div class="sender-email" id="profileUsername"></div>
                     </div>
+                </div>
+                <div class="email-view-body">
+                    <p><strong>Date of Birth:</strong> <span id="profileDob"></span></p>
+                    <p><strong>Emails Sent:</strong> <span id="profileEmailsSent"></span></p>
+                    <p><strong>Emails Received:</strong> <span id="profileEmailsReceived"></span></p>
                 </div>
             </div>
         </main>
@@ -967,6 +1022,7 @@
                         <button type="button" class="btn btn-success voice-compose-btn" id="voiceComposeBtn"><i class="fas fa-microphone"></i></button>
                     </div>
                     <button type="submit" class="btn btn-primary compose-send-btn" id="sendEmail">Send</button>
+                    <button type="button" class="btn" id="scheduleSendBtn"><i class="fas fa-clock"></i></button>
                 </div>
             </form>
             <input type="file" id="fileInput" multiple style="display: none;">
@@ -996,6 +1052,33 @@
             <div class="actions d-flex justify-content-end">
                 <button class="btn btn-secondary" id="cancelVoice">Cancel</button>
                 <button class="btn btn-primary ms-2" id="sendVoice">Send as Email</button>
+            </div>
+        </div>
+
+        <div class="smart-feature-popup" id="snoozePopup">
+            <h4>Snooze Until</h4>
+            <input type="datetime-local" id="snoozeTime" class="form-control mb-3">
+            <div class="actions d-flex justify-content-end">
+                <button class="btn btn-secondary" id="cancelSnooze">Cancel</button>
+                <button class="btn btn-primary ms-2" id="applySnooze">Snooze</button>
+            </div>
+        </div>
+
+        <div class="smart-feature-popup" id="scheduleSendPopup">
+            <h4>Schedule Send</h4>
+            <input type="datetime-local" id="scheduleTime" class="form-control mb-3">
+            <div class="actions d-flex justify-content-end">
+                <button class="btn btn-secondary" id="cancelSchedule">Cancel</button>
+                <button class="btn btn-primary ms-2" id="applySchedule">Schedule</button>
+            </div>
+        </div>
+
+        <div class="smart-feature-popup" id="invitePopup">
+            <h4>Invite Friends</h4>
+            <div id="contactsList"></div>
+            <div class="actions d-flex justify-content-end">
+                <button class="btn btn-secondary" id="cancelInvite">Cancel</button>
+                <button class="btn btn-primary ms-2" id="sendInvite">Send Invites</button>
             </div>
         </div>
 
@@ -1057,6 +1140,7 @@
         const emailListLoading = document.getElementById('emailListLoading');
         const searchInput = document.getElementById('searchInput');
         const signupContainer = document.getElementById('signupContainer');
+        const dobContainer = document.getElementById('dobContainer');
         const loginContainer = document.getElementById('loginContainer');
         const switchToLogin = document.getElementById('switchToLogin');
         const switchToSignup = document.getElementById('switchToSignup');
@@ -1073,6 +1157,18 @@
         const voiceComposeBtn = document.getElementById('voiceComposeBtn');
         const viewProfileBtn = document.getElementById('viewProfileBtn');
         const backFromProfile = document.getElementById('backFromProfile');
+        const snoozeBtn = document.getElementById('snoozeBtn');
+        const snoozePopup = document.getElementById('snoozePopup');
+        const cancelSnooze = document.getElementById('cancelSnooze');
+        const applySnooze = document.getElementById('applySnooze');
+        const scheduleSendBtn = document.getElementById('scheduleSendBtn');
+        const scheduleSendPopup = document.getElementById('scheduleSendPopup');
+        const cancelSchedule = document.getElementById('cancelSchedule');
+        const applySchedule = document.getElementById('applySchedule');
+        const inviteLink = document.getElementById('inviteLink');
+        const invitePopup = document.getElementById('invitePopup');
+        const cancelInvite = document.getElementById('cancelInvite');
+        const sendInvite = document.getElementById('sendInvite');
 
         let currentTheme = 'light';
         let currentFolder = 'inbox';
@@ -1082,6 +1178,7 @@
         let attachments = [];
         let insertMode = 'file';
         let listViewMode = 'detailed';
+        let tempUserData = {};
 
         function getEmailsForFolder(folder) {
             const emails = JSON.parse(localStorage.getItem(`tmail_${folder}`)) || [];
@@ -1139,6 +1236,14 @@
                 const li = document.createElement('li');
                 li.className = 'email-item' + (email.read ? '' : ' unread');
                 li.dataset.id = email.id;
+                let timeDisplay;
+                if (currentFolder === 'snoozed' && email.snoozeTime) {
+                    timeDisplay = `Snoozed until ${new Date(email.snoozeTime).toLocaleString()}`;
+                } else if (currentFolder === 'scheduled' && email.scheduleTime) {
+                    timeDisplay = `Scheduled for ${new Date(email.scheduleTime).toLocaleString()}`;
+                } else {
+                    timeDisplay = email.time;
+                }
                 li.innerHTML = `
                     <input type="checkbox" class="email-checkbox">
                     <i class="fas fa-star email-star ${email.starred ? 'starred' : ''}"></i>
@@ -1150,7 +1255,7 @@
                         <span class="email-subject">${email.subject}</span>
                         <span class="email-preview">${email.preview}</span>
                     </div>
-                    <div class="email-time">${email.time}</div>
+                    <div class="email-time">${timeDisplay}</div>
                     ${email.attachments && email.attachments.length > 0 ? '<i class="fas fa-paperclip ms-2"></i>' : ''}
                 `;
                 li.addEventListener('click', (e) => {
@@ -1163,7 +1268,7 @@
         }
 
         function getEmailById(id) {
-            const folders = ['inbox', 'sent', 'drafts', 'trash', 'archive', 'starred', 'work', 'personal', 'finance', 'social'];
+            const folders = ['inbox', 'sent', 'drafts', 'trash', 'archive', 'starred', 'work', 'personal', 'finance', 'social', 'snoozed', 'scheduled'];
             for (const folder of folders) {
                 const emails = getEmailsForFolder(folder);
                 const email = emails.find(e => e.id === id);
@@ -1222,6 +1327,7 @@
             emailView.style.display = 'none';
             profileView.style.display = 'none';
             emailListView.style.display = 'block';
+            showEmailListForFolder(currentFolder);
             selectedEmailId = null;
         }
 
@@ -1236,7 +1342,7 @@
                 const users = JSON.parse(localStorage.getItem('tmail_users')) || [];
                 const user = users.find(u => u.username === currentUser);
                 if (user) {
-                    document.getElementById('profileFullName').textContent = user.fullName;
+                    document.getElementById('profileFullName').textContent = `${user.firstName} ${user.lastName}`;
                     document.getElementById('profileUsername').textContent = user.username + '@tmail.com';
                     const dob = new Date(user.dob);
                     document.getElementById('profileDob').textContent = dob.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
@@ -1244,11 +1350,11 @@
                     const receivedEmails = getEmailsForFolder('inbox').length;
                     document.getElementById('profileEmailsSent').textContent = sentEmails;
                     document.getElementById('profileEmailsReceived').textContent = receivedEmails;
-                    const profileAvatar = document.querySelector('.profile-avatar');
+                    const profileAvatar = document.getElementById('profileAvatar');
                     if (user.photo) {
-                        profileAvatar.innerHTML = `<img src="${user.photo}" alt="Profile" style="width: 100%; height: 100%; border-radius: 50%;">`;
+                        profileAvatar.innerHTML = `<img src="${user.photo}" alt="Profile" style="width: 100%; height: 100%; border-radius: 50%; filter: grayscale(100%);">`;
                     } else {
-                        profileAvatar.innerHTML = `<div style="width: 100%; height: 100%; border-radius: 50%; background-color: var(--primary); color: white; display: flex; align-items: center; justify-content: center; font-size: 48px; font-weight: 500;">${user.username.charAt(0).toUpperCase()}</div>`;
+                        profileAvatar.textContent = `${user.firstName.charAt(0).toUpperCase()}${user.lastName.charAt(0).toUpperCase()}`;
                     }
                 }
             }
@@ -1298,8 +1404,9 @@
                 const user = users.find(u => u.username === currentUser);
                 const newEmail = {
                     id: String(Date.now()),
-                    from: user ? user.fullName : 'Me',
+                    from: user ? `${user.firstName} ${user.lastName}` : 'Me',
                     email: currentUser + '@tmail.com',
+                    to: to,
                     subject: subject,
                     preview: body.replace(/<[^>]+>/g, '').substring(0, 50) + '...',
                     time: new Date().toLocaleTimeString(),
@@ -1579,7 +1686,7 @@
                     const user = users.find(u => u.username === currentUser);
                     const newEmail = {
                         id: String(Date.now()),
-                        from: user ? user.fullName : 'Me',
+                        from: user ? `${user.firstName} ${user.lastName}` : 'Me',
                         email: currentUser + '@tmail.com',
                         subject: 'Voice Email',
                         preview: transcript.substring(0, 50) + '...',
@@ -1622,6 +1729,470 @@
             }
             return age;
         }
+
+        function checkTimers() {
+            const now = new Date();
+            const snoozedEmails = getEmailsForFolder('snoozed');
+            snoozedEmails.forEach(email => {
+                if (email.snoozeTime && new Date(email.snoozeTime) <= now) {
+                    const inboxEmails = getEmailsForFolder('inbox');
+                    delete email.snoozeTime;
+                    inboxEmails.push(email);
+                    saveEmailsForFolder('inbox', inboxEmails);
+                    const index = snoozedEmails.findIndex(e => e.id === email.id);
+                    if (index !== -1) {
+                        snoozedEmails.splice(index, 1);
+                        saveEmailsForFolder('snoozed', snoozedEmails);
+                    }
+                }
+            });
+            const scheduledEmails = getEmailsForFolder('scheduled');
+            scheduledEmails.forEach(email => {
+                if (email.scheduleTime && new Date(email.scheduleTime) <= now) {
+                    delete email.scheduleTime;
+                    const sentEmails = getEmailsForFolder('sent');
+                    sentEmails.push(email);
+                    saveEmailsForFolder('sent', sentEmails);
+                    const index = scheduledEmails.findIndex(e => e.id === email.id);
+                    if (index !== -1) {
+                        scheduledEmails.splice(index, 1);
+                        saveEmailsForFolder('scheduled', scheduledEmails);
+                    }
+                    console.log(`Email sent to ${email.to}`);
+                }
+            });
+            if (currentFolder === 'snoozed' || currentFolder === 'scheduled') {
+                showEmailListForFolder(currentFolder);
+            }
+        }
+
+        if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
+            recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+            recognition.lang = 'en-US';
+            recognition.interimResults = false;
+            recognition.maxAlternatives = 1;
+
+            recognition.onresult = function(event) {
+                const transcript = event.results[0][0].transcript.toLowerCase();
+                voiceText.textContent = transcript;
+                if (transcript.includes('summarize')) {
+                    summarizeEmail();
+                } else if (composeContainer.classList.contains('active')) {
+                    const composeBody = document.getElementById('composeBody');
+                    composeBody.innerHTML += transcript + ' ';
+                    composeBody.focus();
+                }
+            };
+
+            recognition.onerror = function(event) {
+                voiceText.textContent = 'Error: ' + event.error;
+                if (event.error === 'not-allowed') {
+                    alert('Microphone access denied. Please allow microphone permissions in your browser settings.');
+                }
+            };
+
+            recognition.onend = function() {
+                isListening = false;
+                voiceFeatureBtn.innerHTML = '<i class="fas fa-microphone"></i>';
+                voiceComposeBtn.innerHTML = '<i class="fas fa-microphone"></i>';
+            };
+        } else {
+            voiceFeatureBtn.disabled = true;
+            voiceFeatureBtn.title = 'Speech recognition not supported';
+            voiceComposeBtn.disabled = true;
+            voiceComposeBtn.title = 'Speech recognition not supported';
+        }
+
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const firstName = document.getElementById('firstName').value.trim();
+            const lastName = document.getElementById('lastName').value.trim();
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const terms = document.getElementById('terms').checked;
+
+            if (!firstName) return alert('First Name is required.');
+            if (!lastName) return alert('Last Name is required.');
+            if (!username) return alert('Username is required.');
+            if (!/^[a-zA-Z0-9_]+$/.test(username)) return alert('Username can only contain letters, numbers, and underscores.');
+            let users = JSON.parse(localStorage.getItem('tmail_users')) || [];
+            if (users.some(user => user.username === username)) return alert('Username already exists.');
+            if (password.length < 8) return alert('Password must be at least 8 characters long.');
+            if (password !== confirmPassword) return alert('Passwords do not match.');
+            if (!terms) return alert('You must agree to the terms.');
+
+            tempUserData = { firstName, lastName, username, password };
+            signupContainer.style.display = 'none';
+            dobContainer.style.display = 'block';
+        });
+
+        document.getElementById('dobForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const dob = document.getElementById('dob').value;
+            if (!dob) return alert('Date of Birth is required.');
+            const birthDate = new Date(dob);
+            const today = new Date();
+            if (birthDate >= today) return alert('Date of Birth must be in the past.');
+            const age = calculateAge(dob);
+            if (age < 13) return alert('You must be at least 13 years old.');
+
+            const newUser = { ...tempUserData, dob };
+            let users = JSON.parse(localStorage.getItem('tmail_users')) || [];
+            users.push(newUser);
+            localStorage.setItem('tmail_users', JSON.stringify(users));
+            localStorage.setItem('current_user', newUser.username);
+
+            dobContainer.style.display = 'none';
+            header.style.display = 'flex';
+            mainContent.style.display = 'block';
+            sidebar.style.display = 'block';
+            userAvatar.textContent = newUser.firstName.charAt(0).toUpperCase() + newUser.lastName.charAt(0).toUpperCase();
+            initializeEmailView();
+        });
+
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('loginUsername').value.trim();
+            const password = document.getElementById('loginPassword').value;
+            const users = JSON.parse(localStorage.getItem('tmail_users')) || [];
+            const user = users.find(user => user.username === username && user.password === password);
+            if (user) {
+                localStorage.setItem('current_user', username);
+                loginContainer.style.display = 'none';
+                header.style.display = 'flex';
+                mainContent.style.display = 'block';
+                sidebar.style.display = 'block';
+                const firstLetter = user.firstName.charAt(0).toUpperCase() + user.lastName.charAt(0).toUpperCase();
+                userAvatar.textContent = firstLetter;
+                if (user.photo) {
+                    userAvatar.innerHTML = `<img src="${user.photo}" alt="Profile" style="width: 100%; height: 100%; border-radius: 50%; filter: grayscale(100%);">`;
+                }
+                initializeEmailView();
+            } else {
+                alert('Invalid username or password.');
+            }
+        });
+
+        switchToLogin.addEventListener('click', function(e) {
+            e.preventDefault();
+            signupContainer.style.display = 'none';
+            dobContainer.style.display = 'none';
+            loginContainer.style.display = 'block';
+        });
+
+        switchToSignup.addEventListener('click', function(e) {
+            e.preventDefault();
+            loginContainer.style.display = 'none';
+            signupContainer.style.display = 'block';
+        });
+
+        userAvatar.addEventListener('click', function() {
+            const currentUser = localStorage.getItem('current_user');
+            if (currentUser) {
+                const users = JSON.parse(localStorage.getItem('tmail_users')) || [];
+                const user = users.find(u => u.username === currentUser);
+                if (user) {
+                    document.getElementById('accountFullName').textContent = `${user.firstName} ${user.lastName}`;
+                    document.getElementById('accountUsername').textContent = user.username + '@tmail.com';
+                    const dob = new Date(user.dob);
+                    document.getElementById('accountDob').textContent = dob.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+                    const sentEmails = getEmailsForFolder('sent').length;
+                    const receivedEmails = getEmailsForFolder('inbox').length;
+                    document.getElementById('emailsSent').textContent = sentEmails;
+                    document.getElementById('emailsReceived').textContent = receivedEmails;
+                    if (user.photo) {
+                        document.getElementById('profilePicture').src = user.photo;
+                        document.getElementById('profilePicture').style.display = 'block';
+                        document.getElementById('profileLetter').style.display = 'none';
+                    } else {
+                        document.getElementById('profileLetter').textContent = user.firstName.charAt(0).toUpperCase() + user.lastName.charAt(0).toUpperCase();
+                        document.getElementById('profileLetter').style.display = 'flex';
+                        document.getElementById('profilePicture').style.display = 'none';
+                    }
+                    accountPopup.classList.add('active');
+                    accountPopup.classList.add('fade-in');
+                }
+            }
+        });
+
+        document.getElementById('closeAccountPopup').addEventListener('click', function() {
+            accountPopup.classList.remove('active');
+            profileActions.style.display = 'none';
+        });
+
+        document.getElementById('logoutFromPopup').addEventListener('click', function() {
+            localStorage.removeItem('current_user');
+            mainContent.style.display = 'none';
+            sidebar.style.display = 'none';
+            header.style.display = 'none';
+            signupContainer.style.display = 'block';
+            loginContainer.style.display = 'none';
+            userAvatar.textContent = 'U';
+            accountPopup.classList.remove('active');
+            profileActions.style.display = 'none';
+        });
+
+        const profilePictureContainer = document.querySelector('.profile-picture');
+        profilePictureContainer.addEventListener('click', function(e) {
+            e.stopPropagation();
+            profileActions.style.display = profileActions.style.display === 'block' ? 'none' : 'block';
+        });
+
+        changeProfile.addEventListener('click', function(e) {
+            e.stopPropagation();
+            profilePhotoInput.click();
+            profileActions.style.display = 'none';
+        });
+
+        deleteProfile.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const currentUser = localStorage.getItem('current_user');
+            let users = JSON.parse(localStorage.getItem('tmail_users')) || [];
+            const userIndex = users.findIndex(u => u.username === currentUser);
+            if (userIndex !== -1) {
+                delete users[userIndex].photo;
+                localStorage.setItem('tmail_users', JSON.stringify(users));
+                userAvatar.textContent = users[userIndex].firstName.charAt(0).toUpperCase() + users[userIndex].lastName.charAt(0).toUpperCase();
+                document.getElementById('profilePicture').style.display = 'none';
+                document.getElementById('profileLetter').textContent = users[userIndex].firstName.charAt(0).toUpperCase() + users[userIndex].lastName.charAt(0).toUpperCase();
+                document.getElementById('profileLetter').style.display = 'flex';
+                profileActions.style.display = 'none';
+            }
+        });
+
+        profilePhotoInput.addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                if (!file.type.startsWith('image/')) {
+                    alert('Please upload an image file.');
+                    return;
+                }
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const photoData = e.target.result;
+                    const currentUser = localStorage.getItem('current_user');
+                    let users = JSON.parse(localStorage.getItem('tmail_users')) || [];
+                    const userIndex = users.findIndex(u => u.username === currentUser);
+                    if (userIndex !== -1) {
+                        users[userIndex].photo = photoData;
+                        localStorage.setItem('tmail_users', JSON.stringify(users));
+                        userAvatar.innerHTML = `<img src="${photoData}" alt="Profile" style="width: 100%; height: 100%; border-radius: 50%; filter: grayscale(100%);">`;
+                        document.getElementById('profilePicture').src = photoData;
+                        document.getElementById('profilePicture').style.display = 'block';
+                        document.getElementById('profileLetter').style.display = 'none';
+                        profileActions.style.display = 'none';
+                    }
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        snoozeBtn.addEventListener('click', function() {
+            if (selectedEmailId) {
+                snoozePopup.classList.add('active');
+                snoozePopup.classList.add('fade-in');
+            }
+        });
+
+        cancelSnooze.addEventListener('click', function() {
+            snoozePopup.classList.remove('active');
+        });
+
+        applySnooze.addEventListener('click', function() {
+            const snoozeTime = document.getElementById('snoozeTime').value;
+            if (snoozeTime) {
+                const snoozeDate = new Date(snoozeTime);
+                if (snoozeDate > new Date()) {
+                    const result = getEmailById(selectedEmailId);
+                    if (result) {
+                        const { email, folder } = result;
+                        email.snoozeTime = snoozeDate.toISOString();
+                        const snoozedEmails = getEmailsForFolder('snoozed');
+                        snoozedEmails.push(email);
+                        saveEmailsForFolder('snoozed', snoozedEmails);
+                        const originalEmails = getEmailsForFolder(folder);
+                        const index = originalEmails.findIndex(e => e.id === email.id);
+                        if (index !== -1) {
+                            originalEmails.splice(index, 1);
+                            saveEmailsForFolder(folder, originalEmails);
+                        }
+                        if (email.starred) {
+                            const starredEmails = getEmailsForFolder('starred');
+                            const starredIndex = starredEmails.findIndex(e => e.id === email.id);
+                            if (starredIndex !== -1) {
+                                starredEmails.splice(starredIndex, 1);
+                                saveEmailsForFolder('starred', starredEmails);
+                            }
+                        }
+                        snoozePopup.classList.remove('active');
+                        showEmailList();
+                    }
+                } else {
+                    alert('Please select a future time.');
+                }
+            } else {
+                alert('Please select a time.');
+            }
+        });
+
+        scheduleSendBtn.addEventListener('click', function() {
+            scheduleSendPopup.classList.add('active');
+            scheduleSendPopup.classList.add('fade-in');
+        });
+
+        cancelSchedule.addEventListener('click', function() {
+            scheduleSendPopup.classList.remove('active');
+        });
+
+        applySchedule.addEventListener('click', function() {
+            const scheduleTime = document.getElementById('scheduleTime').value;
+            if (scheduleTime) {
+                const scheduleDate = new Date(scheduleTime);
+                if (scheduleDate > new Date()) {
+                    const to = document.getElementById('composeTo').value;
+                    const subject = document.getElementById('composeSubject').value;
+                    const body = document.getElementById('composeBody').innerHTML;
+                    const currentUser = localStorage.getItem('current_user');
+                    const users = JSON.parse(localStorage.getItem('tmail_users')) || [];
+                    const user = users.find(u => u.username === currentUser);
+                    const newEmail = {
+                        id: String(Date.now()),
+                        from: user ? `${user.firstName} ${user.lastName}` : 'Me',
+                        email: currentUser + '@tmail.com',
+                        to: to,
+                        subject: subject,
+                        preview: body.replace(/<[^>]+>/g, '').substring(0, 50) + '...',
+                        time: new Date().toLocaleTimeString(),
+                        read: true,
+                        starred: false,
+                        body: body,
+                        attachments: attachments.map(file => file.name),
+                        scheduleTime: scheduleDate.toISOString()
+                    };
+                    const scheduledEmails = getEmailsForFolder('scheduled');
+                    scheduledEmails.push(newEmail);
+                    saveEmailsForFolder('scheduled', scheduledEmails);
+                    closeComposeWindow();
+                    scheduleSendPopup.classList.remove('active');
+                    if (currentFolder === 'scheduled') {
+                        showEmailListForFolder('scheduled');
+                    }
+                } else {
+                    alert('Please select a future time.');
+                }
+            } else {
+                alert('Please select a time.');
+            }
+        });
+
+        inviteLink.addEventListener('click', async function(e) {
+            e.preventDefault();
+            if ('contacts' in navigator && 'select' in navigator.contacts) {
+                try {
+                    const contacts = await navigator.contacts.select(['name', 'tel'], { multiple: true });
+                    if (contacts.length > 0) {
+                        const contactsList = document.getElementById('contactsList');
+                        contactsList.innerHTML = '';
+                        contacts.forEach(contact => {
+                            if (contact.tel && contact.tel.length > 0) {
+                                const div = document.createElement('div');
+                                div.innerHTML = `
+                                    <input type="checkbox" checked data-phone="${contact.tel[0]}">
+                                    ${contact.name[0]} - ${contact.tel[0]}
+                                `;
+                                contactsList.appendChild(div);
+                            }
+                        });
+                        invitePopup.classList.add('active');
+                        invitePopup.classList.add('fade-in');
+                    }
+                } catch (error) {
+                    alert('Failed to access contacts: ' + error.message);
+                }
+            } else {
+                alert('Contacts API not supported in this browser.');
+            }
+        });
+
+        sendInvite.addEventListener('click', function() {
+            const checkedBoxes = document.querySelectorAll('#contactsList input[type="checkbox"]:checked');
+            checkedBoxes.forEach(checkbox => {
+                const phone = checkbox.dataset.phone;
+                const message = encodeURIComponent("Join me on TMail! Sign up at https://tmail.com/signup");
+                window.open(`sms:${phone}?body=${message}`, '_blank');
+            });
+            invitePopup.classList.remove('active');
+            document.getElementById('contactsList').innerHTML = '';
+        });
+
+        cancelInvite.addEventListener('click', function() {
+            invitePopup.classList.remove('active');
+            document.getElementById('contactsList').innerHTML = '';
+        });
+
+        function initializeEmailView() {
+            showEmailListForFolder('inbox');
+            document.querySelector('.sidebar-menu a[data-folder="inbox"]').classList.add('active');
+            setInterval(checkTimers, 60000);
+            checkTimers();
+        }
+
+        window.addEventListener('load', () => {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                currentTheme = savedTheme;
+                document.documentElement.setAttribute('data-theme', savedTheme);
+            }
+            const currentUser = localStorage.getItem('current_user');
+            if (currentUser) {
+                signupContainer.style.display = 'none';
+                dobContainer.style.display = 'none';
+                loginContainer.style.display = 'none';
+                header.style.display = 'flex';
+                mainContent.style.display = 'block';
+                sidebar.style.display = 'block';
+                const users = JSON.parse(localStorage.getItem('tmail_users')) || [];
+                const user = users.find(u => u.username === currentUser);
+                if (user) {
+                    userAvatar.textContent = user.firstName.charAt(0).toUpperCase() + user.lastName.charAt(0).toUpperCase();
+                    if (user.photo) {
+                        userAvatar.innerHTML = `<img src="${user.photo}" alt="Profile" style="width: 100%; height: 100%; border-radius: 50%; filter: grayscale(100%);">`;
+                    }
+                    initializeEmailView();
+                }
+            } else {
+                signupContainer.style.display = 'block';
+                dobContainer.style.display = 'none';
+                loginContainer.style.display = 'none';
+                header.style.display = 'none';
+                mainContent.style.display = 'none';
+                sidebar.style.display = 'none';
+            }
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!accountPopup.contains(e.target) && !userAvatar.contains(e.target)) {
+                accountPopup.classList.remove('active');
+                profileActions.style.display = 'none';
+            }
+            if (!summarizePopup.contains(e.target) && !summarizeFeatureBtn.contains(e.target) && !summarizeBtn.contains(e.target)) {
+                summarizePopup.classList.remove('active');
+            }
+            if (!voicePopup.contains(e.target) && !voiceFeatureBtn.contains(e.target) && !voiceComposeBtn.contains(e.target)) {
+                voicePopup.classList.remove('active');
+            }
+            if (!snoozePopup.contains(e.target) && !snoozeBtn.contains(e.target)) {
+                snoozePopup.classList.remove('active');
+            }
+            if (!scheduleSendPopup.contains(e.target) && !scheduleSendBtn.contains(e.target)) {
+                scheduleSendPopup.classList.remove('active');
+            }
+            if (!invitePopup.contains(e.target) && !inviteLink.contains(e.target)) {
+                invitePopup.classList.remove('active');
+                document.getElementById('contactsList').innerHTML = '';
+            }
+        });
 
         menuToggle.addEventListener('click', toggleSidebar);
         themeToggle.addEventListener('click', toggleTheme);
@@ -1699,9 +2270,9 @@
 
         document.querySelectorAll('.sidebar-menu a').forEach(link => {
             link.addEventListener('click', function(e) {
-                e.preventDefault();
                 const folder = this.dataset.folder;
                 if (folder) {
+                    e.preventDefault();
                     showEmailListForFolder(folder);
                     document.querySelectorAll('.sidebar-menu a').forEach(a => a.classList.remove('active'));
                     this.classList.add('active');
@@ -1763,250 +2334,6 @@
                 }
             }
         });
-
-        if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
-            recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-            recognition.lang = 'en-US';
-            recognition.interimResults = false;
-            recognition.maxAlternatives = 1;
-
-            recognition.onresult = function(event) {
-                const transcript = event.results[0][0].transcript;
-                voiceText.textContent = transcript;
-                if (composeContainer.classList.contains('active')) {
-                    const composeBody = document.getElementById('composeBody');
-                    composeBody.innerHTML += transcript + ' ';
-                    composeBody.focus();
-                }
-            };
-
-            recognition.onerror = function(event) {
-                voiceText.textContent = 'Error: ' + event.error;
-                if (event.error === 'not-allowed') {
-                    alert('Microphone access denied. Please allow microphone permissions in your browser settings.');
-                }
-            };
-
-            recognition.onend = function() {
-                isListening = false;
-                voiceFeatureBtn.innerHTML = '<i class="fas fa-microphone"></i>';
-                voiceComposeBtn.innerHTML = '<i class="fas fa-microphone"></i>';
-            };
-        } else {
-            voiceFeatureBtn.disabled = true;
-            voiceFeatureBtn.title = 'Speech recognition not supported';
-            voiceComposeBtn.disabled = true;
-            voiceComposeBtn.title = 'Speech recognition not supported';
-        }
-
-        document.getElementById('signupForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const fullName = document.getElementById('fullName').value.trim();
-            const username = document.getElementById('username').value.trim();
-            const password = document.getElementById('password').value;
-            const confirmPassword = document.getElementById('confirmPassword').value;
-            const dob = document.getElementById('dob').value;
-            const terms = document.getElementById('terms').checked;
-
-            if (!fullName) return alert('Full Name is required.');
-            if (!username) return alert('Username is required.');
-            if (!/^[a-zA-Z0-9_]+$/.test(username)) return alert('Username can only contain letters, numbers, and underscores.');
-            let users = JSON.parse(localStorage.getItem('tmail_users')) || [];
-            if (users.some(user => user.username === username)) return alert('Username already exists.');
-            if (password.length < 8) return alert('Password must be at least 8 characters long.');
-            if (password !== confirmPassword) return alert('Passwords do not match.');
-            if (!dob) return alert('Date of Birth is required.');
-            const birthDate = new Date(dob);
-            const today = new Date();
-            if (birthDate >= today) return alert('Date of Birth must be in the past.');
-            const age = calculateAge(dob);
-            if (age < 13) return alert('You must be at least 13 years old.');
-            if (!terms) return alert('You must agree to the terms.');
-
-            const newUser = { username, password, fullName, dob };
-            users.push(newUser);
-            localStorage.setItem('tmail_users', JSON.stringify(users));
-            localStorage.setItem('current_user', username);
-
-            signupContainer.style.display = 'none';
-            header.style.display = 'flex';
-            mainContent.style.display = 'block';
-            sidebar.style.display = 'block';
-            userAvatar.textContent = username.charAt(0).toUpperCase();
-            initializeEmailView();
-        });
-
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const username = document.getElementById('loginUsername').value.trim();
-            const password = document.getElementById('loginPassword').value;
-            const users = JSON.parse(localStorage.getItem('tmail_users')) || [];
-            const user = users.find(user => user.username === username && user.password === password);
-            if (user) {
-                localStorage.setItem('current_user', username);
-                loginContainer.style.display = 'none';
-                header.style.display = 'flex';
-                mainContent.style.display = 'block';
-                sidebar.style.display = 'block';
-                const firstLetter = user.username.charAt(0).toUpperCase();
-                userAvatar.textContent = firstLetter;
-                if (user.photo) {
-                    userAvatar.innerHTML = `<img src="${user.photo}" alt="Profile" style="width: 100%; height: 100%; border-radius: 50%; filter: grayscale(100%);">`;
-                }
-                initializeEmailView();
-            } else {
-                alert('Invalid username or password.');
-            }
-        });
-
-        switchToLogin.addEventListener('click', function(e) {
-            e.preventDefault();
-            signupContainer.style.display = 'none';
-            loginContainer.style.display = 'block';
-        });
-
-        switchToSignup.addEventListener('click', function(e) {
-            e.preventDefault();
-            loginContainer.style.display = 'none';
-            signupContainer.style.display = 'block';
-        });
-
-        userAvatar.addEventListener('click', function() {
-            const currentUser = localStorage.getItem('current_user');
-            if (currentUser) {
-                const users = JSON.parse(localStorage.getItem('tmail_users')) || [];
-                const user = users.find(u => u.username === currentUser);
-                if (user) {
-                    document.getElementById('accountFullName').textContent = user.fullName;
-                    document.getElementById('accountUsername').textContent = user.username + '@tmail.com';
-                    const dob = new Date(user.dob);
-                    document.getElementById('accountDob').textContent = dob.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-                    const sentEmails = getEmailsForFolder('sent').length;
-                    const receivedEmails = getEmailsForFolder('inbox').length;
-                    document.getElementById('emailsSent').textContent = sentEmails;
-                    document.getElementById('emailsReceived').textContent = receivedEmails;
-                    if (user.photo) {
-                        document.getElementById('profilePicture').src = user.photo;
-                        document.getElementById('profilePicture').style.display = 'block';
-                        document.getElementById('profileLetter').style.display = 'none';
-                    } else {
-                        document.getElementById('profileLetter').textContent = user.username.charAt(0).toUpperCase();
-                        document.getElementById('profileLetter').style.display = 'flex';
-                        document.getElementById('profilePicture').style.display = 'none';
-                    }
-                    accountPopup.classList.add('active');
-                    accountPopup.classList.add('fade-in');
-                }
-            }
-        });
-
-        document.getElementById('closeAccountPopup').addEventListener('click', function() {
-            accountPopup.classList.remove('active');
-            profileActions.style.display = 'none';
-        });
-
-        document.getElementById('logoutFromPopup').addEventListener('click', function() {
-            localStorage.removeItem('current_user');
-            mainContent.style.display = 'none';
-            sidebar.style.display = 'none';
-            header.style.display = 'none';
-            signupContainer.style.display = 'block';
-            loginContainer.style.display = 'none';
-            userAvatar.textContent = 'U';
-            accountPopup.classList.remove('active');
-            profileActions.style.display = 'none';
-        });
-
-        const profilePictureContainer = document.querySelector('.profile-picture');
-        profilePictureContainer.addEventListener('click', function(e) {
-            e.stopPropagation();
-            profileActions.style.display = profileActions.style.display === 'block' ? 'none' : 'block';
-        });
-
-        changeProfile.addEventListener('click', function(e) {
-            e.stopPropagation();
-            profilePhotoInput.click();
-            profileActions.style.display = 'none';
-        });
-
-        deleteProfile.addEventListener('click', function(e) {
-            e.stopPropagation();
-            const currentUser = localStorage.getItem('current_user');
-            let users = JSON.parse(localStorage.getItem('tmail_users')) || [];
-            const userIndex = users.findIndex(u => u.username === currentUser);
-            if (userIndex !== -1) {
-                delete users[userIndex].photo;
-                localStorage.setItem('tmail_users', JSON.stringify(users));
-                userAvatar.textContent = currentUser.charAt(0).toUpperCase();
-                document.getElementById('profilePicture').style.display = 'none';
-                document.getElementById('profileLetter').textContent = currentUser.charAt(0).toUpperCase();
-                document.getElementById('profileLetter').style.display = 'flex';
-                profileActions.style.display = 'none';
-            }
-        });
-
-        profilePhotoInput.addEventListener('change', function(event) {
-            const file = event.target.files[0];
-            if (file) {
-                if (!file.type.startsWith('image/')) {
-                    alert('Please upload an image file.');
-                    return;
-                }
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const photoData = e.target.result;
-                    const currentUser = localStorage.getItem('current_user');
-                    let users = JSON.parse(localStorage.getItem('tmail_users')) || [];
-                    const userIndex = users.findIndex(u => u.username === currentUser);
-                    if (userIndex !== -1) {
-                        users[userIndex].photo = photoData;
-                        localStorage.setItem('tmail_users', JSON.stringify(users));
-                        userAvatar.innerHTML = `<img src="${photoData}" alt="Profile" style="width: 100%; height: 100%; border-radius: 50%; filter: grayscale(100%);">`;
-                        document.getElementById('profilePicture').src = photoData;
-                        document.getElementById('profilePicture').style.display = 'block';
-                        document.getElementById('profileLetter').style.display = 'none';
-                        profileActions.style.display = 'none';
-                    }
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-
-        function initializeEmailView() {
-            showEmailListForFolder('inbox');
-            document.querySelector('.sidebar-menu a[data-folder="inbox"]').classList.add('active');
-        }
-
-        window.addEventListener('load', () => {
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme) {
-                currentTheme = savedTheme;
-                document.documentElement.setAttribute('data-theme', savedTheme);
-            }
-            const currentUser = localStorage.getItem('current_user');
-            if (currentUser) {
-                signupContainer.style.display = 'none';
-                loginContainer.style.display = 'none';
-                header.style.display = 'flex';
-                mainContent.style.display = 'block';
-                sidebar.style.display = 'block';
-                const users = JSON.parse(localStorage.getItem('tmail_users')) || [];
-                const user = users.find(u => u.username === currentUser);
-                if (user) {
-                    userAvatar.textContent = user.username.charAt(0).toUpperCase();
-                    if (user.photo) {
-                        userAvatar.innerHTML = `<img src="${user.photo}" alt="Profile" style="width: 100%; height: 100%; border-radius: 50%; filter: grayscale(100%);">`;
-                    }
-                    initializeEmailView();
-                }
-            } else {
-                signupContainer.style.display = 'block';
-                loginContainer.style.display = 'none';
-                header.style.display = 'none';
-                mainContent.style.display = 'none';
-                sidebar.style.display = 'none';
-            }
-        });
     </script>
 </body>
-</html>
+</html> 
