@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=0.76">
-    <title>T-Mail - Modern Email Client</title>
+    <title>WLink - Modern Email Client</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -345,6 +345,10 @@
             color: var(--gray);
             cursor: pointer;
             transition: color 0.2s ease;
+        }
+
+        .email-star.fas {
+            color: #fbbc05;
         }
 
         .email-sender {
@@ -809,7 +813,7 @@
                 <i class="fas fa-bars"></i>
             </button>
             <div class="logo">
-                T<span>Mail</span>
+                W<span>Link</span>
             </div>
             <div class="search-bar">
                 <i class="fas fa-search search-icon"></i>
@@ -824,7 +828,7 @@
         </header>
 
         <div class="signup-container" id="signupContainer">
-            <h2>Create Your T-Mail Account</h2>
+            <h2>Create Your WLink Account</h2>
             <form id="signupForm">
                 <div class="mb-3">
                     <label for="firstName" class="form-label">First Name</label>
@@ -838,7 +842,7 @@
                     <label for="username" class="form-label">Username</label>
                     <div class="input-group">
                         <input type="text" class="form-control" id="username" required>
-                        <span class="input-group-text">@tmail.com</span>
+                        <span class="input-group-text">@wlink.com</span>
                     </div>
                 </div>
                 <div class="mb-3">
@@ -870,13 +874,13 @@
         </div>
 
         <div class="login-container" id="loginContainer" style="display: none;">
-            <h2>Log In to T-Mail</h2>
+            <h2>Log In to WLink</h2>
             <form id="loginForm">
                 <div class="mb-3">
                     <label for="loginUsername" class="form-label">Username</label>
                     <div class="input-group">
                         <input type="text" class="form-control" id="loginUsername" required>
-                        <span class="input-group-text">@tmail.com</span>
+                        <span class="input-group-text">@wlink.com</span>
                     </div>
                 </div>
                 <div class="mb-3">
@@ -989,7 +993,7 @@
 
         <main class="main-content" id="mainContent" style="display: none;">
             <div class="dashboard-container" id="dashboardView" style="display: none;">
-                <h2>Welcome to T-Mail</h2>
+                <h2>Welcome to WLink</h2>
                 <p>Select a folder from the sidebar to view your emails.</p>
             </div>
 
@@ -1249,12 +1253,12 @@
         let tempUserData = {};
 
         function getEmailsForFolder(folder) {
-            const emails = JSON.parse(localStorage.getItem(`tmail_${folder}`)) || [];
+            const emails = JSON.parse(localStorage.getItem(`wlink_${folder}`)) || [];
             return emails;
         }
 
         function saveEmailsForFolder(folder, emails) {
-            localStorage.setItem(`tmail_${folder}`, JSON.stringify(emails));
+            localStorage.setItem(`wlink_${folder}`, JSON.stringify(emails));
         }
 
         function toggleSidebar() {
@@ -1283,7 +1287,15 @@
             currentFolder = folder;
             emailListLoading.style.display = 'block';
             setTimeout(() => {
-                const emails = getEmailsForFolder(folder);
+                let emails = getEmailsForFolder(folder);
+                if (folder === 'starred') {
+                    emails = [];
+                    const allFolders = ['inbox', 'sent', 'drafts', 'trash', 'archive', 'work', 'personal', 'finance', 'social', 'snoozed', 'scheduled'];
+                    allFolders.forEach(f => {
+                        const folderEmails = getEmailsForFolder(f).filter(email => email.starred);
+                        emails = emails.concat(folderEmails);
+                    });
+                }
                 renderEmailList(emails);
                 folderTitle.textContent = folder.charAt(0).toUpperCase() + folder.slice(1);
                 dashboardView.style.display = 'none';
@@ -1315,9 +1327,10 @@
                 }
                 const displayName = email.isSent ? `To: ${email.toName}` : `From: ${email.from}`;
                 const avatarText = email.isSent ? email.toName[0].toUpperCase() : email.from[0].toUpperCase();
+                const starClass = email.starred ? 'fas' : 'far';
                 li.innerHTML = `
                     <input type="checkbox" class="email-checkbox">
-                    <i class="${email.starred ? 'fas' : 'far'} fa-star email-star"></i>
+                    <i class="${starClass} fa-star email-star"></i>
                     <div class="email-sender">
                         <div class="sender-avatar">${avatarText}</div>
                         ${displayName}
@@ -1341,12 +1354,17 @@
         function updateBadges() {
             const folders = ['inbox', 'starred', 'sent', 'drafts', 'trash', 'archive', 'snoozed', 'scheduled', 'work', 'personal', 'finance', 'social'];
             folders.forEach(folder => {
-                const emails = getEmailsForFolder(folder);
                 let count;
-                if (folder === 'inbox') {
-                    count = emails.filter(email => !email.read).length;
+                if (folder === 'starred') {
+                    count = 0;
+                    const allFolders = ['inbox', 'sent', 'drafts', 'trash', 'archive', 'work', 'personal', 'finance', 'social', 'snoozed', 'scheduled'];
+                    allFolders.forEach(f => {
+                        count += getEmailsForFolder(f).filter(email => email.starred).length;
+                    });
+                } else if (folder === 'inbox') {
+                    count = getEmailsForFolder(folder).filter(email => !email.read).length;
                 } else {
-                    count = emails.length;
+                    count = getEmailsForFolder(folder).length;
                 }
                 const badge = document.getElementById(`${folder}Badge`);
                 if (badge) {
@@ -1356,7 +1374,7 @@
         }
 
         function getEmailById(id) {
-            const folders = ['inbox', 'sent', 'drafts', 'trash', 'archive', 'starred', 'work', 'personal', 'finance', 'social', 'snoozed', 'scheduled'];
+            const folders = ['inbox', 'sent', 'drafts', 'trash', 'archive', 'work', 'personal', 'finance', 'social', 'snoozed', 'scheduled'];
             for (const folder of folders) {
                 const emails = getEmailsForFolder(folder);
                 const email = emails.find(e => e.id === id);
@@ -1380,16 +1398,8 @@
                     emails[index].read = true;
                     saveEmailsForFolder(folder, emails);
                 }
-                if (email.starred) {
-                    const starredEmails = getEmailsForFolder('starred');
-                    const starredIndex = starredEmails.findIndex(e => e.id === id);
-                    if (starredIndex !== -1) {
-                        starredEmails[starredIndex].read = true;
-                        saveEmailsForFolder('starred', starredEmails);
-                    }
-                }
                 document.getElementById('emailSubject').textContent = email.subject;
-                const currentUserEmail = localStorage.getItem('current_user') + '@tmail.com';
+                const currentUserEmail = localStorage.getItem('current_user') + '@wlink.com';
                 const fromDisplay = email.fromEmail === currentUserEmail ? 'Me' : email.from;
                 const toDisplay = email.to === currentUserEmail ? 'Me' : email.toName;
                 document.getElementById('fromName').textContent = fromDisplay;
@@ -1443,11 +1453,11 @@
             profileView.classList.add('fade-in');
             const currentUser = localStorage.getItem('current_user');
             if (currentUser) {
-                const users = JSON.parse(localStorage.getItem('tmail_users')) || [];
+                const users = JSON.parse(localStorage.getItem('wlink_users')) || [];
                 const user = users.find(u => u.username === currentUser);
                 if (user) {
                     document.getElementById('profileFullName').textContent = `${user.firstName} ${user.lastName}`;
-                    document.getElementById('profileUsername').textContent = user.username + '@tmail.com';
+                    document.getElementById('profileUsername').textContent = user.username + '@wlink.com';
                     const dob = new Date(user.dob);
                     document.getElementById('profileDob').textContent = dob.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
                     const sentEmails = getEmailsForFolder('sent').length;
@@ -1504,7 +1514,7 @@
                 const subject = document.getElementById('composeSubject').value;
                 const body = document.getElementById('composeBody').innerHTML;
                 const currentUser = localStorage.getItem('current_user');
-                const users = JSON.parse(localStorage.getItem('tmail_users')) || [];
+                const users = JSON.parse(localStorage.getItem('wlink_users')) || [];
                 const user = users.find(u => u.username === currentUser);
                 const recipientUsername = to.split('@')[0];
                 const recipient = users.find(u => u.username === recipientUsername);
@@ -1512,7 +1522,7 @@
                     const sentEmail = {
                         id: String(Date.now()),
                         from: user ? `${user.firstName} ${user.lastName}` : 'Me',
-                        fromEmail: currentUser + '@tmail.com',
+                        fromEmail: currentUser + '@wlink.com',
                         to: to,
                         toName: `${recipient.firstName} ${recipient.lastName}`,
                         subject: subject,
@@ -1583,12 +1593,6 @@
                             const archiveEmails = getEmailsForFolder('archive');
                             archiveEmails.push(email);
                             saveEmailsForFolder('archive', archiveEmails);
-                            const starredEmails = getEmailsForFolder('starred');
-                            const starredIndex = starredEmails.findIndex(e => e.id === id);
-                            if (starredIndex !== -1) {
-                                starredEmails.splice(starredIndex, 1);
-                                saveEmailsForFolder('starred', starredEmails);
-                            }
                         }
                     }
                 });
@@ -1616,12 +1620,6 @@
                             const trashEmails = getEmailsForFolder('trash');
                             trashEmails.push(email);
                             saveEmailsForFolder('trash', trashEmails);
-                            const starredEmails = getEmailsForFolder('starred');
-                            const starredIndex = starredEmails.findIndex(e => e.id === id);
-                            if (starredIndex !== -1) {
-                                starredEmails.splice(starredIndex, 1);
-                                saveEmailsForFolder('starred', starredEmails);
-                            }
                         }
                     }
                 });
@@ -1645,14 +1643,6 @@
                         if (index !== -1) {
                             originalEmails[index].read = true;
                             saveEmailsForFolder(folder, originalEmails);
-                        }
-                        if (email.starred) {
-                            const starredEmails = getEmailsForFolder('starred');
-                            const starredIndex = starredEmails.findIndex(e => e.id === id);
-                            if (starredIndex !== -1) {
-                                starredEmails[starredIndex].read = true;
-                                saveEmailsForFolder('starred', starredEmails);
-                            }
                         }
                     }
                 });
@@ -1716,12 +1706,6 @@
                             const trashEmails = getEmailsForFolder('trash');
                             trashEmails.push(email);
                             saveEmailsForFolder('trash', trashEmails);
-                            const starredEmails = getEmailsForFolder('starred');
-                            const starredIndex = starredEmails.findIndex(e => e.id === selectedEmailId);
-                            if (starredIndex !== -1) {
-                                starredEmails.splice(starredIndex, 1);
-                                saveEmailsForFolder('starred', starredEmails);
-                            }
                             showEmailList();
                             updateBadges();
                         }
@@ -1917,7 +1901,7 @@
             if (!lastName) return alert('Last Name is required.');
             if (!username) return alert('Username is required.');
             if (!/^[a-zA-Z0-9_]+$/.test(username)) return alert('Username can only contain letters, numbers, and underscores.');
-            let users = JSON.parse(localStorage.getItem('tmail_users')) || [];
+            let users = JSON.parse(localStorage.getItem('wlink_users')) || [];
             if (users.some(user => user.username === username)) return alert('Username already exists.');
             if (password.length < 8) return alert('Password must be at least 8 characters long.');
             if (password !== confirmPassword) return alert('Passwords do not match.');
@@ -1939,9 +1923,9 @@
             if (age < 13) return alert('You must be at least 13 years old.');
 
             const newUser = { ...tempUserData, dob };
-            let users = JSON.parse(localStorage.getItem('tmail_users')) || [];
+            let users = JSON.parse(localStorage.getItem('wlink_users')) || [];
             users.push(newUser);
-            localStorage.setItem('tmail_users', JSON.stringify(users));
+            localStorage.setItem('wlink_users', JSON.stringify(users));
             localStorage.setItem('current_user', newUser.username);
 
             dobContainer.style.display = 'none';
@@ -1956,7 +1940,7 @@
             e.preventDefault();
             const username = document.getElementById('loginUsername').value.trim();
             const password = document.getElementById('loginPassword').value;
-            const users = JSON.parse(localStorage.getItem('tmail_users')) || [];
+            const users = JSON.parse(localStorage.getItem('wlink_users')) || [];
             const user = users.find(user => user.username === username && user.password === password);
             if (user) {
                 localStorage.setItem('current_user', username);
@@ -1991,11 +1975,11 @@
         userAvatar.addEventListener('click', function() {
             const currentUser = localStorage.getItem('current_user');
             if (currentUser) {
-                const users = JSON.parse(localStorage.getItem('tmail_users')) || [];
+                const users = JSON.parse(localStorage.getItem('wlink_users')) || [];
                 const user = users.find(u => u.username === currentUser);
                 if (user) {
                     document.getElementById('accountFullName').textContent = `${user.firstName} ${user.lastName}`;
-                    document.getElementById('accountUsername').textContent = user.username + '@tmail.com';
+                    document.getElementById('accountUsername').textContent = user.username + '@wlink.com';
                     const dob = new Date(user.dob);
                     document.getElementById('accountDob').textContent = dob.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
                     const sentEmails = getEmailsForFolder('sent').length;
@@ -2061,14 +2045,6 @@
                             originalEmails.splice(index, 1);
                             saveEmailsForFolder(folder, originalEmails);
                         }
-                        if (email.starred) {
-                            const starredEmails = getEmailsForFolder('starred');
-                            const starredIndex = starredEmails.findIndex(e => e.id === email.id);
-                            if (starredIndex !== -1) {
-                                starredEmails.splice(starredIndex, 1);
-                                saveEmailsForFolder('starred', starredEmails);
-                            }
-                        }
                         snoozePopup.classList.remove('active');
                         showEmailList();
                         updateBadges();
@@ -2099,7 +2075,7 @@
                     const subject = document.getElementById('composeSubject').value;
                     const body = document.getElementById('composeBody').innerHTML;
                     const currentUser = localStorage.getItem('current_user');
-                    const users = JSON.parse(localStorage.getItem('tmail_users')) || [];
+                    const users = JSON.parse(localStorage.getItem('wlink_users')) || [];
                     const user = users.find(u => u.username === currentUser);
                     const recipientUsername = to.split('@')[0];
                     const recipient = users.find(u => u.username === recipientUsername);
@@ -2107,7 +2083,7 @@
                         const newEmail = {
                             id: String(Date.now()),
                             from: user ? `${user.firstName} ${user.lastName}` : 'Me',
-                            fromEmail: currentUser + '@tmail.com',
+                            fromEmail: currentUser + '@wlink.com',
                             to: to,
                             toName: `${recipient.firstName} ${recipient.lastName}`,
                             subject: subject,
@@ -2158,12 +2134,12 @@
                     const subject = document.getElementById('composeSubject').value;
                     const body = document.getElementById('composeBody').innerHTML;
                     const currentUser = localStorage.getItem('current_user');
-                    const users = JSON.parse(localStorage.getItem('tmail_users')) || [];
+                    const users = JSON.parse(localStorage.getItem('wlink_users')) || [];
                     const user = users.find(u => u.username === currentUser);
                     const newDraft = {
                         id: String(Date.now()),
                         from: user ? `${user.firstName} ${user.lastName}` : 'Me',
-                        fromEmail: currentUser + '@tmail.com',
+                        fromEmail: currentUser + '@wlink.com',
                         to: to,
                         subject: subject,
                         preview: body.replace(/<[^>]+>/g, '').substring(0, 50) + '...',
@@ -2192,7 +2168,7 @@
         });
 
         function generateInvitationLink() {
-            return "https://karthikkalki09.github.io/t-mail/?invite=true";
+            return "https://karthikkalki09.github.io/wlink/?invite=true";
         }
 
         inviteLink.addEventListener('click', async function(e) {
@@ -2230,7 +2206,7 @@
             const link = generateInvitationLink();
             checkedBoxes.forEach(checkbox => {
                 const phone = checkbox.dataset.phone;
-                const message = encodeURIComponent(`Join me on TMail! Sign up at ${link}`);
+                const message = encodeURIComponent(`Join me on WLink! Sign up at ${link}`);
                 window.open(`sms:${phone}?body=${message}`, '_blank');
             });
             invitePopup.classList.remove('active');
@@ -2250,7 +2226,7 @@
                     emailListLoading.style.display = 'block';
                     setTimeout(() => {
                         const currentUser = localStorage.getItem('current_user');
-                        const users = JSON.parse(localStorage.getItem('tmail_users')) || [];
+                        const users = JSON.parse(localStorage.getItem('wlink_users')) || [];
                         const user = users.find(u => u.username === currentUser);
                         const recipientUsername = recipient.split('@')[0];
                         const recipientUser = users.find(u => u.username === recipientUsername);
@@ -2258,7 +2234,7 @@
                             const sentEmail = {
                                 id: String(Date.now()),
                                 from: user ? `${user.firstName} ${user.lastName}` : 'Me',
-                                fromEmail: currentUser + '@tmail.com',
+                                fromEmail: currentUser + '@wlink.com',
                                 to: recipient,
                                 toName: `${recipientUser.firstName} ${recipientUser.lastName}`,
                                 subject: 'Voice Email',
@@ -2321,7 +2297,7 @@
                     header.style.display = 'flex';
                     mainContent.style.display = 'block';
                     sidebar.style.display = 'block';
-                    const users = JSON.parse(localStorage.getItem('tmail_users')) || [];
+                    const users = JSON.parse(localStorage.getItem('wlink_users')) || [];
                     const user = users.find(u => u.username === currentUser);
                     if (user) {
                         userAvatar.textContent = user.firstName.charAt(0).toUpperCase() + user.lastName.charAt(0).toUpperCase();
@@ -2496,18 +2472,6 @@
                         e.target.classList.remove('fas');
                         e.target.classList.add('far');
                     }
-                    const starredEmails = getEmailsForFolder('starred');
-                    if (email.starred) {
-                        if (!starredEmails.some(e => e.id === email.id)) {
-                            starredEmails.push(email);
-                        }
-                    } else {
-                        const index = starredEmails.findIndex(e => e.id === email.id);
-                        if (index !== -1) {
-                            starredEmails.splice(index, 1);
-                        }
-                    }
-                    saveEmailsForFolder('starred', starredEmails);
                     const originalEmails = getEmailsForFolder(folder);
                     const index = originalEmails.findIndex(e => e.id === email.id);
                     if (index !== -1) {
