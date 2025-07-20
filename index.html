@@ -2763,7 +2763,7 @@ const products = [
     description: "Comfortable and stylish men's t-shirt.",
     category: "T-Shirts",
     price: 399.99,
-    discount: 10, // 10% discount set by owner
+    discount: 28, // 10% discount set by owner
     size: "L",
     color: "Black",
     clothType: "100% Cotton",
@@ -2821,7 +2821,7 @@ const products = [
     description: "Comfortable and stylish T-shirt.",
     category: "T-Shirts",
     price: 349,
-    discount: 20, // 20% discount set by owner
+    discount: 36, // 20% discount set by owner
     size: "L",
     color: " Black",
     clothType: "Cotton",
@@ -2878,7 +2878,7 @@ const products = [
     description: "Weather proof.",
     category: "sweat T-Shirts",
     price: 449.99,
-    discount: 12, // 12% discount set by owner
+    discount: 19, // 12% discount set by owner
     size: " XL, XXL",
     color: "Black ",
     clothType: "100% Cotton ",
@@ -3527,6 +3527,8 @@ function generateRecommendedProducts(recommendations) {
   recommendations.forEach(product => {
     const discount = product.discount || 0;
     const originalPrice = discount > 0 ? (product.price / (1 - discount / 100)).toFixed(2) : product.price.toFixed(2);
+    const discountedPrice = product.price.toFixed(2);
+
     html += `
       <div class="col-6 col-md-3">
         <div class="card recommendation-card" onclick="showProductDetails(${product.id})">
@@ -3536,7 +3538,8 @@ function generateRecommendedProducts(recommendations) {
           <div class="card-body">
             <h5 class="card-title">${product.name}</h5>
             <p class="card-text">
-              ${discount > 0 ? ` ₹${originalPrice}  ` : ''}₹${product.price.toFixed(2)}
+              <span class="fw-bold">₹${discountedPrice}</span>
+              ${discount > 0 ? `<small class="text-decoration-line-through text-muted ms-1">₹${originalPrice}</small>` : ''}
             </p>
           </div>
         </div>
@@ -3551,7 +3554,6 @@ function generateRecommendedProducts(recommendations) {
 
   return html;
 }
-
 // Show product details with fixed discount
 function showProductDetails(productId) {
   const product = products.find(p => p.id === productId);
@@ -3804,7 +3806,7 @@ document.addEventListener('DOMContentLoaded', function() {
         message_type: "new_order"
       })
         .then(function () {
-          showNotification("✅ Order placed successfully! You will receive a confirmation email.", "success");
+          showNotification("✅ Order placed successfully!", "success");
           buyFormModal.reset();
           const modal = bootstrap.Modal.getInstance(document.getElementById("buyModal"));
           if (modal) modal.hide();
@@ -4470,7 +4472,7 @@ function confirmCancelOrder() {
     message_type: "cancellation_request"
   })
     .then(function () {
-      showNotification("✅ Cancellation request sent successfully! You will receive a confirmation email.", "success");
+      showNotification("✅ Cancellation request sent successfully!", "success");
       
       // Update order status
       orders[currentOrderIndex].cancelled = true;
@@ -5327,20 +5329,16 @@ function filterShopByCategory(category) {
   // Scroll to the top of the shop section
   document.getElementById('shopSection').scrollIntoView({ behavior: 'smooth' });
 }
-// Update the generateProducts function to handle featured products
-function generateProducts(containerId, productList) {
+function generateProducts(containerId, productList, showDiscount = true) {
   const container = document.getElementById(containerId);
   
   if (!container) return;
-  
-  // For featured products, we'll show all without count
+
+  // Update results count for non-featured containers
   if (containerId !== "featuredProductsContainer") {
     const countElement = document.getElementById(`${containerId.replace("Container", "")}ResultsCount`);
     if (countElement) {
-      const query = document.getElementById("searchInput")?.value.trim();
-      countElement.textContent = query ? 
-        `${productList.length} products found` : 
-        "All products";
+      countElement.textContent = `${productList.length} products`;
     }
   }
 
@@ -5358,12 +5356,11 @@ function generateProducts(containerId, productList) {
   container.innerHTML = "";
   
   productList.forEach(product => {
-    const originalPrice = (product.price * 1.2).toFixed(2);
-    const discount = ((originalPrice - product.price) / originalPrice * 100).toFixed(0);
+    const discount = product.discount || 0;
+    const originalPrice = discount > 0 ? (product.price / (1 - discount / 100)).toFixed(2) : product.price.toFixed(2);
     const ratingInfo = getProductRating(product.id);
     const isInWishlist = wishlist.some(p => p.id === product.id);
     
-    // For featured products, use a slightly different layout
     if (containerId === "featuredProductsContainer") {
       const card = `
         <div class="col-6 col-md-4 col-lg-3 mb-4">
@@ -5371,7 +5368,7 @@ function generateProducts(containerId, productList) {
             <div style="position: relative;">
               <img src="${product.images && product.images.length ? product.images[0] : 'https://via.placeholder.com/400x300?text=' + encodeURIComponent(product.name)}" 
                    class="card-img-top" alt="${product.name}" style="height: 200px; object-fit: cover;">
-            
+              ${showDiscount && discount > 0 ? `<span class="badge bg-danger position-absolute top-0 start-0 m-2">${discount}% OFF</span>` : ''}
               <button class="wishlist-btn position-absolute top-0 end-0 m-2" 
                       onclick="event.stopPropagation(); addToWishlist(${product.id})">
                 <i class="bi bi-heart-fill" style="color: ${isInWishlist ? 'red' : '#ccc'};"></i>
@@ -5379,11 +5376,10 @@ function generateProducts(containerId, productList) {
             </div>
             <div class="card-body">
               <h5 class="card-title">${product.name}</h5>
-              <p class="card-text text-muted" style="font-size: 0.9rem;">${product.description}</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div>
                   <span class="fw-bold">₹${product.price.toFixed(2)}</span>
-                  ${discount > 0 ? `<small class="text-decoration-line-through text-muted ms-1">₹${originalPrice}</small>` : ''}
+                  ${showDiscount && discount > 0 ? `<small class="text-decoration-line-through text-muted ms-1">₹${originalPrice}</small>` : ''}
                 </div>
                 ${ratingInfo ? `
                   <div class="d-flex align-items-center">
@@ -5398,12 +5394,12 @@ function generateProducts(containerId, productList) {
       `;
       container.innerHTML += card;
     } else {
-      // Default layout for other containers
       const card = `
         <div class="col-6 mb-4">
           <div class="card shadow-sm product-card" style="position: relative;" onclick="showProductDetails(${product.id})">
             <img src="${product.images && product.images.length ? product.images[0] : 'https://via.placeholder.com/400x300?text=' + encodeURIComponent(product.name)}" 
                  class="card-img-top" alt="${product.name}">
+            ${showDiscount && discount > 0 ? `<span class="badge bg-danger position-absolute top-0 start-0 m-2">${discount}% OFF</span>` : ''}
             <button class="wishlist-btn position-absolute top-0 end-0 m-2" 
                     onclick="event.stopPropagation(); addToWishlist(${product.id})" 
                     aria-label="Add ${product.name} to Wishlist">
@@ -5413,8 +5409,8 @@ function generateProducts(containerId, productList) {
               <h5 class="card-title">${product.name}</h5>
               <p class="card-text">${product.description}</p>
               <p class="card-text">
-                 ₹${originalPrice} ₹${product.price.toFixed(2)} 
-                <span class="badge bg-success">${discount}% off</span>
+                <span class="fw-bold">₹${product.price.toFixed(2)}</span>
+                ${showDiscount && discount > 0 ? `<small class="text-decoration-line-through text-muted ms-1">₹${originalPrice}</small>` : ''}
               </p>
               ${ratingInfo ? `
                 <p class="card-text">
@@ -5430,7 +5426,6 @@ function generateProducts(containerId, productList) {
     }
   });
 }
-
       </script>
          <!-- Bootstrap JS Bundle -->
          <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
