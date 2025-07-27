@@ -476,26 +476,6 @@
         padding: 8px 15px;
       }
     }
-    
-    /* Wishlist Button Styling */
-    .wishlist-btn { 
-      background: rgba(255, 255, 255, 0.8); 
-      border-radius: 50%; 
-      border: none; 
-      padding: 8px;
-      width: 36px;
-      height: 36px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.3s ease;
-    }
-    
-    .wishlist-btn:hover {
-      background: rgba(255, 255, 255, 1);
-      transform: scale(1.1);
-    }
-    
     /* Enhanced Button Hover Effects */
     .btn:hover { 
       transform: translateY(-2px) scale(1.05); 
@@ -1728,18 +1708,6 @@
       <p>For assistance, please call <strong>+91 7661838006</strong> or email us at <strong>tedpole.in@gmail.com</strong>.</p>
     </div>
   </div>
-
-  <!-- Wishlist Section -->
-  <div id="wishlistSection" class="section fade-in">
-    <header class="py-3 border-bottom bg-light">
-      <div class="container d-flex justify-content-between align-items-center">
-        <button class="btn" onclick="showSection('homeSection')" aria-label="Back to Home"><i class="bi bi-arrow-left"></i> Home</button>
-        <h1 class="h5 mb-0">Wishlist</h1>
-        <div></div>
-      </div>
-    </header>
-    <div class="container my-4" id="wishlistContainer"></div>
-  </div>
     <!-- Updated Search Section -->
   <div id="searchSection" class="section fade-in" style="position: relative;">
     <header class="py-3 border-bottom bg-light">
@@ -2466,11 +2434,6 @@ document.getElementById('trackOrderButton')?.addEventListener('click', async () 
           </a>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link" data-section="wishlistSection" onclick="showSection('wishlistSection'); return false;" aria-label="Wishlist">
-            <i class="bi bi-heart"></i>
-          </a>
-        </li>
-        <li class="nav-item">
           <a href="#" class="nav-link" data-section="cartSection" onclick="showSection('cartSection'); return false;" aria-label="Your Bag">
             <i class="bi bi-bag"></i>
             <span class="badge" id="footerBagBadge">0</span>
@@ -2662,7 +2625,6 @@ let cart = [];
 let orders = [];
 let notifications = [];
 let ownerNotifications = [];
-let wishlist = [];
 let currentUser = null;
 let currentProductForPurchase = null;
 let currentOrderIndex = null;
@@ -2697,7 +2659,6 @@ function saveData() {
   localStorage.setItem("orders", JSON.stringify(orders));
   localStorage.setItem("notifications", JSON.stringify(notifications));
   localStorage.setItem("ownerNotifications", JSON.stringify(ownerNotifications));
-  localStorage.setItem("wishlist", JSON.stringify(wishlist));
   localStorage.setItem("currentUser", JSON.stringify(currentUser));
   localStorage.setItem("validCoupons", JSON.stringify(validCoupons));
 }
@@ -2709,7 +2670,6 @@ function loadData() {
   orders = JSON.parse(localStorage.getItem("orders")) || [];
   notifications = JSON.parse(localStorage.getItem("notifications")) || [];
   ownerNotifications = JSON.parse(localStorage.getItem("ownerNotifications")) || [];
-  wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
   currentUser = JSON.parse(localStorage.getItem("currentUser"));
   validCoupons = JSON.parse(localStorage.getItem("validCoupons")) || [];
   if (currentUser && currentUser.isLoggedIn) {
@@ -2785,36 +2745,36 @@ const products = [
       "Neck": "Round Neck"
     }
   },
-  {
-    id: 2,
-    name: "Oversized T-Shirt",
-    description: "Comfortable and stylish men's T-shirt.",
-    category: "T-Shirts",
-    price: 349,
-    discount: 26, 
-    size: " L",
-    color: "Black",
-    clothType: "100% Cotton",
-    deliveryTime: "3-5 days",
-    returnPolicy: "5 days return policy",
-    additionalDetails: "Machine washabele and weather proof .",
-    images: [
-      "https://i.pinimg.com/736x/78/3e/39/783e39cca642ba73cd5455ce8be39608.jpg",
-"https://i.pinimg.com/736x/a8/03/b7/a803b71b74c0b3c7f70938556d480111.jpg",
-"https://i.pinimg.com/736x/26/94/be/2694be21bc82399c67208bf6d65068a4.jpg",
-"https://i.pinimg.com/736x/37/a7/e2/37a7e22ccccb2fd9e158db92d9fe094d.jpg",
-"https://i.pinimg.com/736x/ae/36/14/ae36149467f17d37a86ab84051b321f7.jpg"
-    ],
-    colorImages: {
-      "Black": "https://i.pinimg.com/736x/78/3e/39/783e39cca642ba73cd5455ce8be39608.jpg"
-    },
-    specifications: {
-      "Material": "100% Cotton",
-      "Fit": "Oversized",
-      "Sleeve": "Short",
-      "Neck": "Round Neck"
-    }
+{
+  id: 2,
+  name: "Oversized T-Shirt",
+  description: "Comfortable and stylish men's T-shirt.",
+  category: "T-Shirts",
+  price: 349,
+  discount: 26,
+  size: "L",
+  color: "Black",
+  clothType: "100% Cotton",
+  deliveryTime: "3-5 days",
+  returnPolicy: "5 days return policy",
+  additionalDetails: "Machine washable and weather proof.",
+  images: [
+    "https://i.pinimg.com/736x/78/3e/39/783e39cca642ba73cd5455ce8be39608.jpg",
+    "https://i.pinimg.com/736x/a8/03/b7/a803b71b74c0b3c7f70938556d480111.jpg",
+    "https://i.pinimg.com/736x/26/94/be/2694be21bc82399c67208bf6d65068a4.jpg",
+    "https://i.pinimg.com/736x/37/a7/e2/37a7e22ccccb2fd9e158db92d9fe094d.jpg",
+    "https://i.pinimg.com/736x/ae/36/14/ae36149467f17d37a86ab84051b321f7.jpg"
+  ],
+  colorImages: {
+    "Black": "https://i.pinimg.com/736x/78/3e/39/783e39cca642ba73cd5455ce8be39608.jpg"
   },
+  specifications: {
+    "Material": "100% Cotton",
+    "Fit": "Oversized",
+    "Sleeve": "Short",
+    "Neck": "Round Neck"
+  }
+},
   {
     id: 3,
     name: "Oversized T-Shirt",
@@ -2827,7 +2787,7 @@ const products = [
     clothType: "Cotton",
     deliveryTime: "3-5 days",
     returnPolicy: "5 days return policy",
-    additionalDetails: "weather proof.",
+  additionalDetails: "Machine washable and weather proof. This product is sold out.", // Updated
     images: [
       "https://i.pinimg.com/736x/22/3e/6e/223e6ec6ab0a025177a6502a10d4cceb.jpg",
       "https://i.pinimg.com/736x/1f/f9/3e/1ff93ece8aa88d219e7f653815af9968.jpg",
@@ -2909,7 +2869,6 @@ function saveData() {
   localStorage.setItem("orders", JSON.stringify(orders));
   localStorage.setItem("notifications", JSON.stringify(notifications));
   localStorage.setItem("ownerNotifications", JSON.stringify(ownerNotifications));
-  localStorage.setItem("wishlist", JSON.stringify(wishlist));
   localStorage.setItem("currentUser", JSON.stringify(currentUser));
 }
 
@@ -2920,7 +2879,6 @@ function loadData() {
   orders = JSON.parse(localStorage.getItem("orders")) || [];
   notifications = JSON.parse(localStorage.getItem("notifications")) || [];
   ownerNotifications = JSON.parse(localStorage.getItem("ownerNotifications")) || [];
-  wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
   currentUser = JSON.parse(localStorage.getItem("currentUser"));
   if (currentUser && currentUser.isLoggedIn) {
     const user = users.find(u => u.email === currentUser.email);
@@ -2988,60 +2946,6 @@ function showPopupMessage(message) {
   const popupModal = new bootstrap.Modal(document.getElementById("popupMessageModal"));
   popupModal.show();
 }
-
-// Add to wishlist
-function addToWishlist(productId) {
-  const product = products.find(p => p.id === productId);
-  if (!product) return;
-  if (wishlist.some(p => p.id === productId)) {
-    showNotification(`${product.name} is already in your wishlist.`, "info");
-  } else {
-    wishlist.push(product);
-    showNotification(`${product.name} added to your wishlist.`, "success");
-    saveData();
-    updateWishlistSection();
-  }
-}
-
-// Update wishlist section
-function updateWishlistSection() {
-  const wishlistContainer = document.getElementById("wishlistContainer");
-  if (wishlist.length === 0) {
-    wishlistContainer.innerHTML = "<p>Your wishlist is empty.</p>";
-    return;
-  }
-  let html = "";
-  wishlist.forEach((item, index) => {
-    html += `
-      <div class="card mb-3 shadow-sm product-card" onclick="showProductDetails(${item.id})" style="cursor: pointer;">
-        <div class="row g-0">
-          <div class="col-4">
-            <img src="${item.images && item.images.length ? item.images[0] : 'https://via.placeholder.com/400x300?text=' + encodeURIComponent(item.name)}" class="img-fluid rounded-start" alt="${item.name}">
-          </div>
-          <div class="col-8">
-            <div class="card-body">
-              <h5 class="card-title">${item.name}</h5>
-              <p class="card-text">${item.description}</p>
-              <button class="btn btn-sm btn-danger" onclick="event.stopPropagation(); removeFromWishlist(${index})" aria-label="Remove ${item.name} from Wishlist"><i class="bi bi-trash me-1"></i> Remove</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    `;
-  });
-  wishlistContainer.innerHTML = html;
-}
-
-// Remove from wishlist
-function removeFromWishlist(index) {
-  if (confirm("Are you sure you want to remove this item from your wishlist?")) {
-    wishlist.splice(index, 1);
-    updateWishlistSection();
-    showNotification("Item removed from wishlist.", "info");
-    saveData();
-  }
-}
-
 // Update user activity
 function updateUserActivity() {
   if (currentUser) {
@@ -3051,7 +2955,6 @@ function updateUserActivity() {
     saveData();
   }
 }
-
 // Get active users (last 5 minutes)
 function getActiveUsers() {
   const now = new Date();
@@ -3232,26 +3135,28 @@ function performSearch() {
 function displaySearchResults(results) {
   const container = document.getElementById("searchResultsContainer");
   const countElement = document.getElementById("searchResultsCount");
-
+  
   countElement.textContent = `${results.length} products found`;
-
+  
   if (results.length === 0) {
     container.innerHTML = "<p>No products found.</p>";
     return;
   }
-
+  
   container.innerHTML = "";
   results.forEach(product => {
     const discount = product.discount || 0;
     const originalPrice = discount > 0 ? (product.price / (1 - discount / 100)).toFixed(2) : product.price.toFixed(2);
+    const isSoldOut = product.additionalDetails.toLowerCase().includes("sold out"); // Check for sold out
+    
     const card = `
       <div class="col-6 mb-4">
         <div class="card shadow-sm product-card" style="position: relative;" onclick="showProductDetails(${product.id})">
-          <img src="${product.images && product.images.length ? product.images[0] : 'https://via.placeholder.com/400x300?text=' + encodeURIComponent(product.name)}" class="card-img-top" alt="${product.name}">
-          
-          <button class="wishlist-btn position-absolute top-0 end-0 m-2" onclick="event.stopPropagation(); addToWishlist(${product.id})" aria-label="Add ${product.name} to Wishlist">
-            <i class="bi bi-heart-fill" style="color: ${wishlist.some(p => p.id === product.id) ? 'red' : '#ccc'};"></i>
-          </button>
+          <img src="${product.images && product.images.length ? product.images[0] : 'https://via.placeholder.com/400x300?text=' + encodeURIComponent(product.name)}" 
+               class="card-img-top" alt="${product.name}">
+          ${discount > 0 ? `<span class="badge bg-danger position-absolute top-0 start-0 m-2">${discount}% OFF</span>` : ''}
+          ${isSoldOut ? `<span class="badge bg-dark position-absolute top-0 end-0 m-2">Sold Out</span>` : `
+          `}
           <div class="card-body">
             <h5 class="card-title">${product.name}</h5>
             <p class="card-text">${product.description}</p>
@@ -3424,9 +3329,7 @@ function generateProducts(containerId, productList, showDiscount = true) {
   productList.forEach(product => {
     const discount = product.discount || 0;
     const originalPrice = discount > 0 ? (product.price / (1 - discount / 100)).toFixed(2) : product.price.toFixed(2);
-    const ratingInfo = getProductRating(product.id);
-    const isInWishlist = wishlist.some(p => p.id === product.id);
-    
+    const ratingInfo = getProductRating(product.id);    
     if (containerId === "featuredProductsContainer") {
       const card = `
         <div class="col-6 col-md-4 col-lg-3 mb-4">
@@ -3435,9 +3338,6 @@ function generateProducts(containerId, productList, showDiscount = true) {
               <img src="${product.images && product.images.length ? product.images[0] : 'https://via.placeholder.com/400x300?text=' + encodeURIComponent(product.name)}" 
                    class="card-img-top" alt="${product.name}" style="height: 200px; object-fit: cover;">
               ${showDiscount && discount > 0 ? `<span class="badge bg-danger position-absolute top-0 start-0 m-2">${discount}% OFF</span>` : ''}
-              <button class="wishlist-btn position-absolute top-0 end-0 m-2" 
-                      onclick="event.stopPropagation(); addToWishlist(${product.id})">
-                <i class="bi bi-heart-fill" style="color: ${isInWishlist ? 'red' : '#ccc'};"></i>
               </button>
             </div>
             <div class="card-body">
@@ -3467,11 +3367,6 @@ function generateProducts(containerId, productList, showDiscount = true) {
             <img src="${product.images && product.images.length ? product.images[0] : 'https://via.placeholder.com/400x300?text=' + encodeURIComponent(product.name)}" 
                  class="card-img-top" alt="${product.name}">
             ${showDiscount && discount > 0 ? `<span class="badge bg-danger position-absolute top-0 start-0 m-2">${discount}% OFF</span>` : ''}
-            <button class="wishlist-btn position-absolute top-0 end-0 m-2" 
-                    onclick="event.stopPropagation(); addToWishlist(${product.id})" 
-                    aria-label="Add ${product.name} to Wishlist">
-              <i class="bi bi-heart-fill" style="color: ${isInWishlist ? 'red' : '#ccc'};"></i>
-            </button>
             <div class="card-body">
               <h5 class="card-title">${product.name}</h5>
               <p class="card-text">${product.description}</p>
@@ -4665,8 +4560,6 @@ function showSection(sectionId) {
     applyMenswearFilters();
   } else if (sectionId === "accessoriesSection") {
     applyAccessoriesFilters();
-  } else if (sectionId === "wishlistSection") {
-    updateWishlistSection();
   } else if (sectionId === "accountSection") {
     updateAccountSection();
   } else if (sectionId === "cartSection") {
@@ -4886,9 +4779,6 @@ document.getElementById("feedbackForm")?.addEventListener("submit", function(e) 
                    <div style="position: relative;">
                      <img src="${product.images[0]}" class="card-img-top" alt="${product.name}" style="height: 200px; object-fit: cover;">
             ${discount > 0 ? `<span class="badge bg-danger position-absolute top-0 start-0 m-2">${discount}% OFF</span>` : ''}
-                     <button class="wishlist-btn position-absolute top-0 end-0 m-2" 
-                             onclick="event.stopPropagation(); addToWishlist(${product.id})">
-                       <i class="bi bi-heart-fill" style="color: ${wishlist.some(p => p.id === product.id) ? 'red' : '#ccc'};"></i>
                      </button>
                    </div>
                    <div class="card-body">
@@ -5359,8 +5249,7 @@ function generateProducts(containerId, productList, showDiscount = true) {
     const discount = product.discount || 0;
     const originalPrice = discount > 0 ? (product.price / (1 - discount / 100)).toFixed(2) : product.price.toFixed(2);
     const ratingInfo = getProductRating(product.id);
-    const isInWishlist = wishlist.some(p => p.id === product.id);
-    
+    const isSoldOut = product.additionalDetails.toLowerCase().includes("sold out"); // Check for sold out
     if (containerId === "featuredProductsContainer") {
       const card = `
         <div class="col-6 col-md-4 col-lg-3 mb-4">
@@ -5369,10 +5258,8 @@ function generateProducts(containerId, productList, showDiscount = true) {
               <img src="${product.images && product.images.length ? product.images[0] : 'https://via.placeholder.com/400x300?text=' + encodeURIComponent(product.name)}" 
                    class="card-img-top" alt="${product.name}" style="height: 200px; object-fit: cover;">
               ${showDiscount && discount > 0 ? `<span class="badge bg-danger position-absolute top-0 start-0 m-2">${discount}% OFF</span>` : ''}
-              <button class="wishlist-btn position-absolute top-0 end-0 m-2" 
-                      onclick="event.stopPropagation(); addToWishlist(${product.id})">
-                <i class="bi bi-heart-fill" style="color: ${isInWishlist ? 'red' : '#ccc'};"></i>
-              </button>
+              ${isSoldOut ? `<span class="badge bg-dark position-absolute top-0 end-0 m-2">Sold Out</span>` : `
+              `}
             </div>
             <div class="card-body">
               <h5 class="card-title">${product.name}</h5>
@@ -5400,11 +5287,8 @@ function generateProducts(containerId, productList, showDiscount = true) {
             <img src="${product.images && product.images.length ? product.images[0] : 'https://via.placeholder.com/400x300?text=' + encodeURIComponent(product.name)}" 
                  class="card-img-top" alt="${product.name}">
             ${showDiscount && discount > 0 ? `<span class="badge bg-danger position-absolute top-0 start-0 m-2">${discount}% OFF</span>` : ''}
-            <button class="wishlist-btn position-absolute top-0 end-0 m-2" 
-                    onclick="event.stopPropagation(); addToWishlist(${product.id})" 
-                    aria-label="Add ${product.name} to Wishlist">
-              <i class="bi bi-heart-fill" style="color: ${isInWishlist ? 'red' : '#ccc'};"></i>
-            </button>
+            ${isSoldOut ? `<span class="badge bg-dark position-absolute top-0 end-0 m-2">Sold Out</span>` : `
+            `}
             <div class="card-body">
               <h5 class="card-title">${product.name}</h5>
               <p class="card-text">${product.description}</p>
