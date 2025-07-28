@@ -1537,6 +1537,10 @@
           <img src="https://i.pinimg.com/736x/94/2a/e4/942ae43485ba186ee70c0087bd4ade89.jpg" alt="sweat T-Shirts">
           <p>sweat T-Shirts</p>
         </div>
+          <div class="story" onclick="filterShopByCategory('Half sleeve Shirts')">
+  <img src="https://i.pinimg.com/736x/ca/d0/dd/cad0dd3c7f3880dee714da8bdecdf723.jpg" alt="Half sleeve Shirts">
+  <p>Half sleeve Shirts</p>
+</div>
   </section>
   <section class="category-products">
     <div class="container">
@@ -1572,7 +1576,7 @@
       <h5>Stylish Accessories</h5>
       <p>Complete your look.</p>
     </div>
-  </div>
+  </div> 
 </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#productHighlightCarousel" data-bs-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -2860,7 +2864,34 @@ const products = [
       "Sleeve": "Long Sleeve",
       "Neck": "Collarless"
     }
+  },
+ {
+  id: 6,
+  name: "Half sleeve Shirt",
+  description: "RELAXED FIT EMBROIDERED SHIRT",
+  category: "Half sleeve Shirts",
+  price: 349.99,
+  discount: 20,
+  size: "L",
+  color: "Blue",
+  clothType: "Cotton Viscose",
+  deliveryTime: "3-5 days",
+  returnPolicy: "5 days return policy",
+  additionalDetails: "Stylish and comfortable, perfect for casual outings.",
+  images: [
+    "https://i.pinimg.com/736x/ca/d0/dd/cad0dd3c7f3880dee714da8bdecdf723.jpg",
+    "https://i.pinimg.com/736x/13/1d/aa/131daac4414ce7338ccdd6941ad7d130.jpg"
+  ],
+  colorImages: {
+    "Blue": "https://i.pinimg.com/736x/ca/d0/dd/cad0dd3c7f3880dee714da8bdecdf723.jpg"
+  },
+  specifications: {
+    "Material": "Cotton Viscose",
+    "Fit": "Relaxed Fit",
+    "Sleeve": "Half Sleeves",
+    "Neck": "Cuban Collar"
   }
+}
 ];
 // Save data to localStorage
 function saveData() {
