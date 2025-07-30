@@ -347,11 +347,10 @@
       cursor: zoom-in;
       transition: all 0.3s ease;
     }
-    
     .product-detail-img:hover {
-      transform: scale(1.02);
-    }
-    
+  transform: scale(1.1);
+  transition: transform 0.3s ease;
+}
     /* Updated Footer Styles */
     .footer-nav {
       background: white;
@@ -3546,15 +3545,38 @@ function showProductDetails(productId) {
   const sizes = product.size.split(",").map(s => s.trim());
   const colors = product.color.split(",").map(c => c.trim());
   const defaultColor = colors[0];
-  const initialImage = product.colorImages[defaultColor] || (product.images && product.images.length ? product.images[0] : 'https://via.placeholder.com/400x300?text=' + encodeURIComponent(product.name));
+  const discount = product.discount || 0;
+  const originalPrice = discount > 0 ? (product.price / (1 - discount / 100)).toFixed(2) : product.price.toFixed(2);
+  const ratingInfo = getProductRating(productId);
 
-  let sizeButtons = sizes.map(size => `
-    <button type="button" class="btn btn-outline-secondary size-btn ${size === sizes[0] ? 'active' : ''}" 
-            data-size="${size}" onclick="selectSize('${size}')">${size}</button>
-  `).join("");
+  // Generate carousel HTML for scrollable images
+  let carouselHtml = `
+    <div id="productCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+      <div class="carousel-inner">
+  `;
+  product.images.forEach((img, index) => {
+    carouselHtml += `
+      <div class="carousel-item ${index === 0 ? 'active' : ''}">
+        <img src="${img}" class="d-block w-100 product-detail-img" alt="${product.name}">
+      </div>
+    `;
+  });
+  carouselHtml += `
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  `;
 
+  // Generate color thumbnails
   let colorThumbnails = colors.map(color => {
-    const imageUrl = product.colorImages[color] || initialImage;
+    const imageUrl = product.colorImages[color] || product.images[0];
     return `
       <div class="color-thumbnail ${color === defaultColor ? 'selected' : ''}" 
            data-color="${color}" onclick="selectColor('${color}')">
@@ -3563,10 +3585,13 @@ function showProductDetails(productId) {
     `;
   }).join("");
 
-  const discount = product.discount || 0;
-  const originalPrice = discount > 0 ? (product.price / (1 - discount / 100)).toFixed(2) : product.price.toFixed(2);
-  const ratingInfo = getProductRating(productId);
+  // Generate size buttons
+  let sizeButtons = sizes.map(size => `
+    <button type="button" class="btn btn-outline-secondary size-btn ${size === sizes[0] ? 'active' : ''}" 
+            data-size="${size}" onclick="selectSize('${size}')">${size}</button>
+  `).join("");
 
+  // Specifications table
   const specifications = product.specifications || {
     "Material": product.clothType,
     "Fit": "Regular",
@@ -3577,17 +3602,16 @@ function showProductDetails(productId) {
     <tr><td>${key}</td><td>${value}</td></tr>
   `).join("");
 
+  // Recommended products
   const recommendations = getRecommendedProducts(productId);
   const recommendationsHTML = generateRecommendedProducts(recommendations);
 
+  // Full product detail content
   const detailContent = `
     <div class="container">
       <div class="row">
         <div class="col-md-6">
-          <img id="mainProductImage" src="${initialImage}" 
-               class="product-detail-img" alt="${product.name}" 
-               style="width: 100%; height: auto; cursor: pointer;" 
-               onclick="showProductImagesModal(${product.id})">
+          ${carouselHtml}
           <div class="color-selection mt-3 d-flex flex-wrap gap-2">
             ${colorThumbnails}
           </div>
@@ -3617,12 +3641,6 @@ function showProductDetails(productId) {
             <label class="form-label"><strong>Size:</strong></label><br>
             <div class="d-flex flex-wrap gap-2">
               ${sizeButtons}
-            </div>
-          </div>
-          <div class="mb-4">
-            <label class="form-label"><strong>Color:</strong></label><br>
-            <div class="d-flex flex-wrap gap-2">
-              ${colorThumbnails}
             </div>
           </div>
           <div class="actions mb-4 d-flex gap-2">
@@ -3663,8 +3681,10 @@ function showProductDetails(productId) {
   document.getElementById("productDetailSection").dataset.selectedColor = defaultColor;
   document.getElementById("productDetailSection").dataset.selectedSize = sizes[0];
   showSection("productDetailSection");
-}
 
+  // Push state to history for navigation
+  history.pushState({ section: 'productDetailSection', productId: productId }, '', `#productDetailSection-${productId}`);
+}
 // Select size
 function selectSize(size) {
   document.querySelectorAll(".size-btn").forEach(btn => btn.classList.remove("active"));
@@ -5406,4 +5426,4 @@ function generateProducts(containerId, productList, showDiscount = true) {
          <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
          <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
          </body>
-         <html>
+         <html> 
