@@ -1,4 +1,4 @@
-     <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -14,9 +14,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <!-- html2canvas Library for Download Functionality -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-   <!-- EmailJS -->
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script> 
- <style>
+  <!-- EmailJS -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script> 
+  <style>
     /* Base theme */
     :root {
       --primary-color: #2a5298;
@@ -51,7 +51,7 @@
       left: 0;
       right: 0;
       z-index: 1000;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* More pronounced shadow from additional CSS */
       transition: all 0.3s ease;
     }
     
@@ -68,7 +68,7 @@
       border-color: var(--primary-color); 
     }
     .btn-primary:hover {
-      background-color: #1a3a6b;
+      background-color: #1a3a6b; /* Darker shade from additional CSS */
       border-color: #1a3a6b;
     }
     
@@ -254,10 +254,16 @@
       font-weight: bold;
       text-align: right;
     }
+    
     /* Section Visibility */
     .section { 
       display: none; 
       min-height: calc(100vh - 120px);
+      background: var(--light-color); /* From additional CSS */
+      padding: 20px; /* From additional CSS */
+      border-radius: 10px; /* From additional CSS */
+      margin-bottom: 20px; /* From additional CSS */
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); /* Subtle shadow from additional CSS */
     }
     
     .active-section { 
@@ -348,12 +354,13 @@
       transition: all 0.3s ease;
     }
     .product-detail-img:hover {
-  transform: scale(1.1);
-  transition: transform 0.3s ease;
-}
+      transform: scale(1.1);
+      transition: transform 0.3s ease;
+    }
+    
     /* Updated Footer Styles */
     .footer-nav {
-      background: white;
+      background: white; /* From additional CSS */
       border-top: 2px solid #e9ecef;
       position: fixed;
       bottom: 0;
@@ -361,7 +368,7 @@
       right: 0;
       z-index: 1200;
       padding: 5px 0;
-      box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1); /* Top shadow from additional CSS */
       height: 70px;
     }
     
@@ -423,7 +430,7 @@
     
     .footer-nav .nav-link:hover .nav-text,
     .footer-nav .nav-link.active .nav-text {
-      color: var(--secondary-color);
+      color: var(--secondary-color); /* Hover color from additional CSS */
     }
     
     .footer-nav .nav-link.active::after {
@@ -436,6 +443,11 @@
       height: 3px;
       background-color: var(--secondary-color);
       border-radius: 3px 3px 0 0;
+    }
+    
+    .footer-nav .nav-link.active {
+      color: var(--primary-color); /* Active state from additional CSS */
+      font-weight: bold; /* From additional CSS */
     }
     
     .footer-nav .badge {
@@ -475,6 +487,7 @@
         padding: 8px 15px;
       }
     }
+    
     /* Enhanced Button Hover Effects */
     .btn:hover { 
       transform: translateY(-2px) scale(1.05); 
@@ -532,13 +545,17 @@
       height: 30px;
       line-height: 30px;
       border-radius: 50%;
-      background-color: #ccc;
+      background-color: #ccc; /* Inactive step color from additional CSS */
       color: #fff;
       margin: 0 auto 5px;
     }
     
-    .track-step.active span { background-color: var(--success-color); }
-    .track-step.cancelled span { background-color: var(--danger-color); }
+    .track-step.active span { 
+      background-color: var(--success-color); /* Active step color from additional CSS */
+    }
+    .track-step.cancelled span { 
+      background-color: var(--danger-color); 
+    }
     
     :read-only:focus {
       outline: none;
@@ -605,7 +622,7 @@
     
     /* Product Card Styling */
     .product-card {
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transition: all 0.3s ease; /* From additional CSS */
       height: 100%;
       display: flex;
       flex-direction: column;
@@ -613,8 +630,8 @@
     }
     
     .product-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+      transform: translateY(-5px); /* Slight lift from additional CSS */
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Stronger shadow from additional CSS */
     }
     
     .product-card .card-body {
@@ -630,6 +647,14 @@
     
     .product-card .card-text {
       font-size: 0.9rem;
+    }
+    
+    .product-card img {
+      transition: transform 0.3s ease; /* From additional CSS */
+    }
+    
+    .product-card:hover img {
+      transform: scale(1.05); /* Subtle zoom effect from additional CSS */
     }
     
     /* Recommendations Section */
@@ -702,6 +727,10 @@
       font-size: 0.9rem;
     }
     
+    .search-container input:focus {
+      box-shadow: 0 0 0 2px var(--primary-color); /* Focus ring from additional CSS */
+    }
+    
     /* Voice Search Button Active State */
     .search-container .btn-outline-secondary.active {
       background-color: var(--danger-color);
@@ -722,7 +751,7 @@
       max-height: 300px;
       overflow-y: auto;
       display: none;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      box-shadow: 0 5px 15px rgba(，令0,0,0,0.1);
     }
     
     .search-suggestion-item {
@@ -808,23 +837,23 @@
     }
     
     .order-status-confirmed {
-      background-color: var(--primary-color);
-      color: white;
+      background-color: var(--info-color); /* From additional CSS */
+      color: white; /* From additional CSS */
     }
     
     .order-status-shipped {
-      background-color: var(--info-color);
-      color: white;
+      background-color: var(--primary-color); /* From additional CSS */
+      color: white; /* From additional CSS */
     }
     
     .order-status-delivered {
-      background-color: var(--success-color);
-      color: white;
+      background-color: var(--success-color); /* From additional CSS */
+      color: white; /* From additional CSS */
     }
     
     .order-status-cancelled {
-      background-color: var(--danger-color);
-      color: white;
+      background-color: var(--danger-color); /* From additional CSS */
+      color: white; /* From additional CSS */
     }
     
     .order-actions {
@@ -903,18 +932,19 @@
     .rating-stars > span:hover ~ span:before {
       content: "★";
       position: absolute;
-      color: gold;
+      color: gold; /* Interactive gold stars from additional CSS */
     }
     
     /* Filter Chips */
     .filter-chip {
       display: inline-block;
-      padding: 5px 10px;
+      padding: 5px 10px; /* From additional CSS */
       margin-right: 8px;
       margin-bottom: 8px;
-      background: #e9ecef;
-      border-radius: 20px;
-      font-size: 0.9rem;
+      background: var(--primary-color); /* Primary color badge from additional CSS */
+      border-radius: 20px; /* From additional CSS */
+      font-size: 0.8rem; /* From additional CSS */
+      color: white; /* From additional CSS */
     }
     
     .filter-chip .remove-filter {
@@ -1035,6 +1065,11 @@
       }
       .print-selected, .print-selected * {
         visibility: visible;
+        position: static; /* From additional CSS */
+        width: auto; /* From additional CSS */
+        height: auto; /* From additional CSS */
+        margin: 0; /* From additional CSS */
+        box-shadow: none; /* Clean print output from additional CSS */
       }
       .print-selected {
         position: absolute;
@@ -1109,26 +1144,24 @@
       body {
         padding-bottom: 60px;
       }
-
       .hero h2 {
         font-size: 1.5rem;
       }
-
       header h1 {
         font-size: 1rem;
         max-width: 120px;
       }
     }
-
+    
     /* Custom Scrollbar */
     ::-webkit-scrollbar {
       width: 6px;
     }
-
+    
     ::-webkit-scrollbar-track {
       background: var(--bg-color);
     }
-
+    
     ::-webkit-scrollbar-thumb {
       background: var(--primary-color);
       border-radius: 3px;
@@ -1143,7 +1176,7 @@
       min-width: 300px;
       max-width: 400px;
     }
-
+    
     .toast {
       margin-bottom: 0.5rem;
       border-radius: 8px;
@@ -1152,12 +1185,12 @@
       transform: translateY(-20px);
       transition: opacity 0.3s ease, transform 0.3s ease;
     }
-
+    
     .toast.show {
       opacity: 1;
       transform: translateY(0);
     }
-
+    
     .toast-header {
       display: flex;
       align-items: center;
@@ -1165,29 +1198,29 @@
       padding: 0.5rem 1rem;
       border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     }
-
+    
     .toast-header .toast-title {
       margin: 0;
       font-size: 1rem;
       font-weight: 600;
     }
-
+    
     .toast-body {
       padding: 1rem;
       font-size: 0.95rem;
     }
-
+    
     .toast .notification-icon {
       margin-right: 0.5rem;
       font-size: 1.2rem;
     }
-
+    
     /* Type-specific colors */
     .bg-success { background-color: var(--success-color) !important; }
     .bg-danger { background-color: var(--danger-color) !important; }
     .bg-warning { background-color: var(--warning-color) !important; }
     .bg-info { background-color: var(--info-color) !important; }
-
+    
     /* Custom styles for Shop Now button in carousel */
     .carousel-caption {
       position: absolute;
@@ -1199,7 +1232,7 @@
       color: white;
       text-align: center;
     }
-
+    
     .carousel-caption .btn {
       position: absolute;
       bottom: 10px;
@@ -1207,7 +1240,7 @@
       transform: translateX(-50%);
       width: 150px;
     }
-
+    
     /* Enhanced Search Bar Styling for Shop Section */
     .search-bar {
       position: relative;
@@ -1231,37 +1264,37 @@
       border-color: var(--primary-color);
       box-shadow: 0 0 0 0.2rem rgba(42, 82, 152, 0.25);
     }
-
+    
     /* Website Branding in Order Cards */
     .website-branding {
       display: flex;
       align-items: center;
     }
-
+    
     .website-branding img {
       width: 30px;
       height: 30px;
       margin-right: 10px;
     }
-
+    
     .website-branding span {
       font-weight: bold;
       font-size: 1.2rem;
       color: var(--primary-color);
     }
-
+    
     /* Make carousel items clickable */
     .carousel-item {
       cursor: pointer;
     }
-
+    
     /* Full-screen carousel styles */
     .full-screen-wrapper {
       position: relative;
       height: 60vh; /* Decreased height */
       width: 100%;
     }
-
+    
     .full-screen-carousel {
       position: absolute;
       top: 0;
@@ -1269,17 +1302,18 @@
       width: 100%;
       height: 100%;
     }
-
+    
     .full-screen-carousel .carousel-inner,
     .full-screen-carousel .carousel-item {
       height: 100%;
     }
-
+    
     .full-screen-carousel .carousel-item img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
+    
     .footer-main {
       background-color: #f8f9fa;
       padding: 30px 0 0;
@@ -1375,73 +1409,77 @@
         margin-bottom: 20px;
       }
     }
-     /* Add this to your existing styles */
-  .footer-main {
-    background-color: #f8f9fa;
-    padding: 30px 0 0;
-    border-top: 1px solid #e9ecef;
-    margin-top: auto; /* Push footer to bottom */
-  }
-  
-  /* Only fix footer when home section is active */
-  body.home-section-active {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-  }
-  
-  #homeSection {
-    flex: 1;
-  }
-  
-  /* Hide footer when other sections are active */
-  .section.active-section:not(#homeSection) ~ .footer-main {
-    display: none;
-  }
-  
-  /* Category Stories Styling */
-  .category-stories {
-    padding: 20px 0;
-    margin-top: 40px; /* Increased space from header */
-    overflow-x: auto;
-    white-space: nowrap;
-  }
-
-  .story-container {
-    display: flex;
-    gap: 20px;
-    justify-content: flex-start; /* Align categories to the left */
-  }
-
-  .story {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    cursor: pointer;
-  }
-
-  .story img {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid var(--primary-color);
-  }
-
-  .story p {
-    margin-top: 10px;
-    font-size: 0.9rem;
-    color: var(--dark-color);
-  }
-
-  /* Category Products Styling */
-  .category-products {
-    padding: 20px 0;
-  }
+    
+    /* Add this to your existing styles */
+    .footer-main {
+      background-color: #f8f9fa;
+      padding: 30px 0 0;
+      border-top: 1px solid #e9ecef;
+      margin-top: auto; /* Push footer to bottom */
+    }
+    
+    /* Only fix footer when home section is active */
+    body.home-section-active {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    
+    #homeSection {
+      flex: 1;
+    }
+    
+    /* Hide footer when other sections are active */
+    .section.active-section:not(#homeSection) ~ .footer-main {
+      display: none;
+    }
+    
+    /* Category Stories Styling */
+    .category-stories {
+      padding: 20px 0;
+      margin-top: 40px; /* Increased space from header */
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+    
+    .story-container {
+      display: flex;
+      gap: 20px;
+      justify-content: flex-start; /* Align categories to the left */
+    }
+    
+    .story {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+    }
+    
+    .story img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--primary-color);
+    }
+    
+    .story p {
+      background-color: var(--primary-color); /* Colored background from additional CSS */
+      color: white; /* From additional CSS */
+      padding: 5px 10px; /* From additional CSS */
+      border-radius: 5px; /* From additional CSS */
+      margin-top: 10px; /* From additional CSS */
+      font-size: 0.9rem; /* From additional CSS */
+    }
+    
+    /* Category Products Styling */
+    .category-products {
+      padding: 20px 0;
+    }
   </style>
 </head>
 <body>
-   <!-- Toast Container -->
+  <!-- Toast Container -->
   <div id="toastContainer"></div>
   <!-- Dark Mode Toggle -->
   <div class="dark-mode-toggle" onclick="toggleDarkMode()">
@@ -1475,127 +1513,130 @@
     <div class="container my-4" id="notificationsContent"></div>
   </div>
 
- <!-- Offcanvas Menu -->
-<div class="offcanvas offcanvas-start" tabindex="-1" id="menuCanvas" aria-labelledby="menuCanvasLabel">
-  <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="menuCanvasLabel">Menu</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-  </div>
-  <div id="menuAccountDetails">
-    <i class="bi bi-person-circle me-2"></i><span id="menuAccountText">Welcome Guest</span>
-  </div>
-  <ul class="list-unstyled">
-    <li class="custom-menu-item" onclick="hideMenu(); showSection('ordersSection');"><i class="bi bi-receipt me-2"></i> My Orders</li>
-    <li id="sellerDashboardMenuItem" class="custom-menu-item" onclick="hideMenu(); showSection('sellerDashboard');" style="display: none;"><i class="bi bi-speedometer me-2"></i> Seller Dashboard</li>
-    <li id="ownerDashboardMenuItem" class="custom-menu-item" onclick="hideMenu(); showSection('ownerDashboard');" style="display: none;"><i class="bi bi-graph-up me-2"></i> Owner Dashboard</li>
-    <li class="custom-menu-item" onclick="hideMenu(); showSection('aboutSection');"><i class="bi bi-info-circle me-2"></i> About Us</li>
-    <li class="custom-menu-item" onclick="hideMenu(); showSection('contactSection');"><i class="bi bi-envelope me-2"></i> Contact Us</li>
-    <li class="custom-menu-item" onclick="hideMenu(); showSection('couponsSection');"><i class="bi bi-tag me-2"></i> Coupons</li>
-    <li class="custom-menu-item" onclick="hideMenu(); showSection('offerZoneSection');"><i class="bi bi-star me-2"></i> Offer Zone</li>
-    <li class="custom-menu-item" onclick="hideMenu(); showSection('helpSection');"><i class="bi bi-question-circle me-2"></i> Help Line</li>
-    <li class="custom-menu-item" onclick="hideMenu(); showSection('requestProductSection');"><i class="bi bi-box-seam me-2"></i> Request Product</li>
-    <li class="custom-menu-item" onclick="hideMenu(); showSection('feedbackSection');"><i class="bi bi-chat-square-text me-2"></i> Feedback</li>
-  </ul>
-  <div id="menuSocialSection" class="mt-3 text-center">
-    <a href="https://www.instagram.com/nxew.in" target="_blank" class="mx-2"><i class="bi bi-instagram" style="color:#E1306C;"></i></a>
-    <a href="https://x.com/TedpoleIn" target="_blank" class="mx-2"><i class="bi bi-twitter" style="color:#1DA1F2;"></i></a>
-    <a href="https://www.linkedin.com/in/yourprofile" target="_blank" class="mx-2"><i class="bi bi-linkedin" style="color:#0077B5;"></i></a>
-  </div>
-</div>
-   <!-- Updated Home Section with Category Stories and Products -->
-<div id="homeSection" class="section active-section fade-in">
-  <header class="py-3 border-bottom">
-    <div class="container d-flex justify-content-between align-items-center">
-      <div class="d-flex align-items-center">
-        <button class="btn text-dark" data-bs-toggle="offcanvas" data-bs-target="#menuCanvas" aria-controls="menuCanvas" aria-label="Toggle Menu">
-          <i class="bi bi-list"></i>
-        </button>
-        <img src="https://i.pinimg.com/736x/d5/e5/4e/d5e54e8444e36458688888e4c84b5419.jpg" alt="NXew Logo" width="120" height="50" style="vertical-align: middle;">
-      </div>
-      <h1 class="h5 mb-0 text-dark">
-        <span id="headerProfile" class="profile-name"></span>
-      </h1>
-      <nav class="header-nav">
-        <button class="btn text-dark" id="notificationButton" aria-label="Notifications">
-          <i class="bi bi-bell"></i>
-        </button>
-        <button class="btn text-dark" id="accountButton" aria-label="Account">
-          <i class="bi bi-person"></i>
-        </button>
-      </nav>
+  <!-- Offcanvas Menu -->
+  <div class="offcanvas offcanvas-start" tabindex="-1" id="menuCanvas" aria-labelledby="menuCanvasLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="menuCanvasLabel">Menu</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
-  </header>
-  <section class="category-stories">
-    <div class="container">
-      <div class="story-container">
-        <div class="story" onclick="filterShopByCategory('T-Shirts')">
-          <img src="https://i.pinimg.com/736x/99/df/c6/99dfc6172b5df9a97c22d2af93aac789.jpg" alt="T-Shirts">
-          <p>T-Shirts</p>
+    <div id="menuAccountDetails">
+      <i class="bi bi-person-circle me-2"></i><span id="menuAccountText">Welcome Guest</span>
     </div>
-        <div class="story" onclick="filterShopByCategory('sweat T-Shirts')">
-          <img src="https://i.pinimg.com/736x/94/2a/e4/942ae43485ba186ee70c0087bd4ade89.jpg" alt="sweat T-Shirts">
-          <p>sweat T-Shirts</p>
+    <ul class="list-unstyled">
+      <li class="custom-menu-item" onclick="hideMenu(); showSection('ordersSection');"><i class="bi bi-receipt me-2"></i> My Orders</li>
+      <li id="sellerDashboardMenuItem" class="custom-menu-item" onclick="hideMenu(); showSection('sellerDashboard');" style="display: none;"><i class="bi bi-speedometer me-2"></i> Seller Dashboard</li>
+      <li id="ownerDashboardMenuItem" class="custom-menu-item" onclick="hideMenu(); showSection('ownerDashboard');" style="display: none;"><i class="bi bi-graph-up me-2"></i> Owner Dashboard</li>
+      <li class="custom-menu-item" onclick="hideMenu(); showSection('aboutSection');"><i class="bi bi-info-circle me-2"></i> About Us</li>
+      <li class="custom-menu-item" onclick="hideMenu(); showSection('contactSection');"><i class="bi bi-envelope me-2"></i> Contact Us</li>
+      <li class="custom-menu-item" onclick="hideMenu(); showSection('couponsSection');"><i class="bi bi-tag me-2"></i> Coupons</li>
+      <li class="custom-menu-item" onclick="hideMenu(); showSection('offerZoneSection');"><i class="bi bi-star me-2"></i> Offer Zone</li>
+      <li class="custom-menu-item" onclick="hideMenu(); showSection('helpSection');"><i class="bi bi-question-circle me-2"></i> Help Line</li>
+      <li class="custom-menu-item" onclick="hideMenu(); showSection('requestProductSection');"><i class="bi bi-box-seam me-2"></i> Request Product</li>
+      <li class="custom-menu-item" onclick="hideMenu(); showSection('feedbackSection');"><i class="bi bi-chat-square-text me-2"></i> Feedback</li>
+    </ul>
+    <div id="menuSocialSection" class="mt-3 text-center">
+      <a href="https://www.instagram.com/nxew.in" target="_blank" class="mx-2"><i class="bi bi-instagram" style="color:#E1306C;"></i></a>
+      <a href="https://x.com/TedpoleIn" target="_blank" class="mx-2"><i class="bi bi-twitter" style="color:#1DA1F2;"></i></a>
+      <a href="https://www.linkedin.com/in/yourprofile" target="_blank" class="mx-2"><i class="bi bi-linkedin" style="color:#0077B5;"></i></a>
+    </div>
+  </div>
+  
+  <!-- Updated Home Section with Category Stories and Products -->
+  <div id="homeSection" class="section active-section fade-in">
+    <header class="py-3 border-bottom">
+      <div class="container d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-center">
+          <button class="btn text-dark" data-bs-toggle="offcanvas" data-bs-target="#menuCanvas" aria-controls="menuCanvas" aria-label="Toggle Menu">
+            <i class="bi bi-list"></i>
+          </button>
+          <img src="https://i.pinimg.com/736x/d5/e5/4e/d5e54e8444e36458688888e4c84b5419.jpg" alt="NXew Logo" width="120" height="50" style="vertical-align: middle;">
         </div>
+        <h1 class="h5 mb-0 text-dark">
+          <span id="headerProfile" class="profile-name"></span>
+        </h1>
+        <nav class="header-nav">
+          <button class="btn text-dark" id="notificationButton" aria-label="Notifications">
+            <i class="bi bi-bell"></i>
+          </button>
+          <button class="btn text-dark" id="accountButton" aria-label="Account">
+            <i class="bi bi-person"></i>
+          </button>
+        </nav>
+      </div>
+    </header>
+    <section class="category-stories">
+      <div class="container">
+        <div class="story-container">
+          <div class="story" onclick="filterShopByCategory('T-Shirts')">
+            <img src="https://i.pinimg.com/736x/99/df/c6/99dfc6172b5df9a97c22d2af93aac789.jpg" alt="T-Shirts">
+            <p>T-Shirts</p>
+          </div>
+          <div class="story" onclick="filterShopByCategory('sweat T-Shirts')">
+            <img src="https://i.pinimg.com/736x/94/2a/e4/942ae43485ba186ee70c0087bd4ade89.jpg" alt="sweat T-Shirts">
+            <p>sweat T-Shirts</p>
+          </div>
           <div class="story" onclick="filterShopByCategory('Half sleeve Shirts')">
-  <img src="https://i.pinimg.com/736x/ca/d0/dd/cad0dd3c7f3880dee714da8bdecdf723.jpg" alt="Half sleeve Shirts">
-  <p>Half sleeve Shirts</p>
-</div>
-  </section>
-  <section class="category-products">
-    <div class="container">
-      <div class="row" id="categoryProductsContainer"></div>
-    </div>
-  </section>
-  <section class="product-highlight">
-    <div class="full-screen-wrapper">
-      <div id="productHighlightCarousel" class="carousel slide full-screen-carousel carousel-fade" data-bs-ride="carousel" data-bs-interval="3000">
-        <div class="carousel-indicators">
-          <button type="button" data-bs-target="#productHighlightCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-          <button type="button" data-bs-target="#productHighlightCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-          <button type="button" data-bs-target="#productHighlightCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            <img src="https://i.pinimg.com/736x/ca/d0/dd/cad0dd3c7f3880dee714da8bdecdf723.jpg" alt="Half sleeve Shirts">
+            <p>Half sleeve Shirts</p>
+          </div>
         </div>
-    <div class="carousel-inner">
-          <div class="carousel-item active" onclick="showSection('shopSection')">
-            <img src="https://i.pinimg.com/736x/b4/2d/60/b42d607bf8fd050db2875505389c87cd.jpg" class="d-block w-100" alt="Product Highlight 1">
-            <div class="carousel-caption d-none d-md-block">
-              <h5>Luxury in Every Stitch</h5>
-              <p>Clothing is a form of self-expression.</p>
-            </div>
-  </div>
-  <div class="carousel-item" onclick="filterShopByCategory('sweat T-Shirts')">
-    <img src="https://i.pinimg.com/736x/94/2a/e4/942ae43485ba186ee70c0087bd4ade89.jpg" class="d-block w-100" alt="Product Highlight 2">
-    <div class="carousel-caption d-none d-md-block">
-      <h5>Trendy Men's Wear</h5>
-      <p>Explore our latest collection.</p>
-    </div>
-  </div>
-  <div class="carousel-item" onclick="filterShopByCategory('T-Shirts')">
-    <img src="https://i.pinimg.com/736x/37/a7/e2/37a7e22ccccb2fd9e158db92d9fe094d.jpg" class="d-block w-100" alt="Product Highlight 3">
-    <div class="carousel-caption d-none d-md-block">
-      <h5>Stylish Accessories</h5>
-      <p>Complete your look.</p>
-    </div>
-  </div> 
-</div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#productHighlightCarousel" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#productHighlightCarousel" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
       </div>
-    </div>
-  </section>
-  <!-- New Featured Products Section -->
-  <section class="featured-products py-5">
-    <div class="container">
-      <h2 class="text-center mb-4">Featured Products</h2>
-      <div class="row" id="featuredProductsContainer"></div>
-    </div>
-  </section>
-</div>
+    </section>
+    <section class="category-products">
+      <div class="container">
+        <div class="row" id="categoryProductsContainer"></div>
+      </div>
+    </section>
+    <section class="product-highlight">
+      <div class="full-screen-wrapper">
+        <div id="productHighlightCarousel" class="carousel slide full-screen-carousel carousel-fade" data-bs-ride="carousel" data-bs-interval="3000">
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#productHighlightCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#productHighlightCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#productHighlightCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+          </div>
+          <div class="carousel-inner">
+            <div class="carousel-item active" onclick="showSection('shopSection')">
+              <img src="https://i.pinimg.com/736x/b4/2d/60/b42d607bf8fd050db2875505389c87cd.jpg" class="d-block w-100" alt="Product Highlight 1">
+              <div class="carousel-caption d-none d-md-block">
+                <h5>Luxury in Every Stitch</h5>
+                <p>Clothing is a form of self-expression.</p>
+              </div>
+            </div>
+            <div class="carousel-item" onclick="filterShopByCategory('sweat T-Shirts')">
+              <img src="https://i.pinimg.com/736x/94/2a/e4/942ae43485ba186ee70c0087bd4ade89.jpg" class="d-block w-100" alt="Product Highlight 2">
+              <div class="carousel-caption d-none d-md-block">
+                <h5>Trendy Men's Wear</h5>
+                <p>Explore our latest collection.</p>
+              </div>
+            </div>
+            <div class="carousel-item" onclick="filterShopByCategory('T-Shirts')">
+              <img src="https://i.pinimg.com/736x/99/df/c6/99dfc6172b5df9a97c22d2af93aac789.jpg" class="d-block w-100" alt="Product Highlight 3">
+              <div class="carousel-caption d-none d-md-block">
+                <h5>Stylish Accessories</h5>
+                <p>Complete your look.</p>
+              </div>
+            </div> 
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#productHighlightCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#productHighlightCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+    </section>
+    <!-- New Featured Products Section -->
+    <section class="featured-products py-5">
+      <div class="container">
+        <h2 class="text-center mb-4">Featured Products</h2>
+        <div class="row" id="featuredProductsContainer"></div>
+      </div>
+    </section>
+  </div>
 
   <!-- About Us Section -->
   <div id="aboutSection" class="section fade-in">
@@ -1657,7 +1698,7 @@
               <h5 class="card-title"><i class="bi bi-tag-fill me-2"></i>SUMMER20</h5>
               <p class="card-text">20% off on total purchase</p>
               <p class="card-text"><small class="text-muted">Valid until 30th September 2025</small></p>
-              </div>
+            </div>
           </div>
         </div>
         <div class="col-md-6 mb-4">
@@ -1665,8 +1706,7 @@
             <div class="card-body">
               <h5 class="card-title"><i class="bi bi-tag-fill me-2"></i>WELCOME10</h5>
               <p class="card-text">10% off for new customers</p>
-          <p class="card-text"><small class="text-muted">Valid until 31st october 2025</small></p>
-              
+              <p class="card-text"><small class="text-muted">Valid until 31st October 2025</small></p>
             </div>
           </div>
         </div>
@@ -1711,7 +1751,8 @@
       <p>For assistance, please call <strong>+91 7661838006</strong> or email us at <strong>tedpole.in@gmail.com</strong>.</p>
     </div>
   </div>
-    <!-- Updated Search Section -->
+  
+  <!-- Updated Search Section -->
   <div id="searchSection" class="section fade-in" style="position: relative;">
     <header class="py-3 border-bottom bg-light">
       <div class="container d-flex justify-content-between align-items-center">
@@ -1749,7 +1790,8 @@
       </button>
     </div>
   </div>
-   <!-- Search Filter Modal -->
+  
+  <!-- Search Filter Modal -->
   <div class="modal fade" id="searchFilterModal" tabindex="-1" aria-labelledby="searchFilterModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
@@ -1826,14 +1868,15 @@
             </div>
           </div>
         </div>
-       <div class="modal-footer">
-  <button type="button" class="btn btn-outline-secondary" onclick="clearSearchFilters()" data-bs-dismiss="modal">Clear Filters</button>
-  <button type="button" class="btn btn-primary" onclick="performSearch()" data-bs-dismiss="modal">Apply Filters</button>
-</div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" onclick="clearSearchFilters()" data-bs-dismiss="modal">Clear Filters</button>
+          <button type="button" class="btn btn-primary" onclick="performSearch()" data-bs-dismiss="modal">Apply Filters</button>
+        </div>
       </div>
     </div>
   </div>
-<!-- Login Section -->
+  
+  <!-- Login Section -->
   <div id="loginSection" class="section fade-in">
     <header class="bg-light py-3 border-bottom">
       <div class="container d-flex justify-content-between align-items-center">
@@ -1866,7 +1909,7 @@
     </div>
   </div>
 
-  <!--signup  section -->
+  <!-- Signup Section -->
   <div id="signupSection" class="section fade-in">
     <header class="bg-light py-3 border-bottom">
       <div class="container d-flex justify-content-between align-items-center">
@@ -1913,7 +1956,7 @@
               </form>
               <!-- Added "Signup with W-Link" button with NXew logo -->
               <div class="mt-3 text-center">
-                <button class="btn btn-outline-primary" onclick="signupWithTMail()" aria-label="Signup with W--Link">
+                <button class="btn btn-outline-primary" onclick="signupWithTMail()" aria-label="Signup with W-Link">
                   <img src="https://i.pinimg.com/736x/d5/e5/4e/d5e54e8444e36458688888e4c84b5419.jpg" alt="W-Link Logo" style="width: 80px; height: 50px; margin-right: 8px;">
                   Signup with W-Mail
                 </button>
@@ -1925,6 +1968,7 @@
       </div>
     </div>
   </div>
+  
   <!-- Account Section -->
   <div id="accountSection" class="section fade-in">
     <header class="py-3 border-bottom bg-light">
@@ -1949,24 +1993,25 @@
     <div class="container my-4" id="cartContent"></div>
   </div>
 
- <!-- Shop Section -->
-<div id="shopSection" class="section fade-in">
-  <header class="py-3 border-bottom bg-light">
-    <div class="container d-flex justify-content-between align-items-center">
-      <button class="btn" onclick="showSection('homeSection')" aria-label="Back to Home"><i class="bi bi-arrow-left"></i> Home</button>
-      <h1 class="h5 mb-0">All Products</h1>
-      <div></div>
-    </div>
-  </header>
-  <div class="container my-4">
-    <div class="row">
-      <div class="col-12">
-        <h5 id="shopResultsCount">All products</h5>
+  <!-- Shop Section -->
+  <div id="shopSection" class="section fade-in">
+    <header class="py-3 border-bottom bg-light">
+      <div class="container d-flex justify-content-between align-items-center">
+        <button class="btn" onclick="showSection('homeSection')" aria-label="Back to Home"><i class="bi bi-arrow-left"></i> Home</button>
+        <h1 class="h5 mb-0">All Products</h1>
+        <div></div>
       </div>
+    </header>
+    <div class="container my-4">
+      <div class="row">
+        <div class="col-12">
+          <h5 id="shopResultsCount">All products</h5>
+        </div>
+      </div>
+      <div class="row" id="shopProductContainer"></div>
     </div>
-    <div class="row" id="shopProductContainer"></div>
   </div>
-</div>
+  
   <!-- Enhanced Orders Section -->
   <div id="ordersSection" class="section fade-in">
     <header class="py-3 border-bottom bg-light">
@@ -2726,7 +2771,7 @@ const products = [
     description: "Comfortable and stylish men's t-shirt.",
     category: "T-Shirts",
     price: 429.99,
-    discount: 28, // 10% discount set by owner
+    discount: 38, // 10% discount set by owner
     size: "L",
     color: "Black",
     clothType: "100% Cotton",
@@ -2784,7 +2829,7 @@ const products = [
     description: "Comfortable and stylish T-shirt.",
     category: "T-Shirts",
     price: 349,
-    discount: 36, // 20% discount set by owner
+    discount: 26, // 20% discount set by owner
     size: "L",
     color: " Black",
     clothType: "Cotton",
@@ -5425,4 +5470,4 @@ function generateProducts(containerId, productList, showDiscount = true) {
          <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
          </body>
          <html> 
-
+       
