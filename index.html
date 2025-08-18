@@ -19,7 +19,8 @@
   <!-- Custom CSS -->
   <link rel="stylesheet" href="00.css">
 <body>
-  <!-- Toast Container -->
+  
+     <!-- Toast Container -->
   <div id="toastContainer"></div>
   <!-- Dark Mode Toggle -->
   <div class="dark-mode-toggle" onclick="toggleDarkMode()">
@@ -601,8 +602,11 @@
    <div id="productDetailSection" class="section fade-in">
     <header class="py-3 border-bottom bg-light">
       <div class="container d-flex justify-content-between align-items-center">
-        <button class="btn" onclick="showSection('searchSection')" aria-label="Back"><i class="bi bi-arrow-left"></i> Back</button><h1 class="h5 mb-0">Search Details</h1>
-        <div></div>
+        <button class="btn" onclick="showSection('searchSection')" aria-label="Back"><i class="bi bi-arrow-left"></i> Back</button>
+        <h1 class="h5 mb-0">Product Details</h1>
+        <button class="btn btn-outline-secondary" onclick="shareProduct(parseInt(document.getElementById('productDetailSection').dataset.productId))">
+          <i class="bi bi-share"></i> 
+        </button>
       </div>
     </header>
     <div class="container my-4" id="productDetailPage"></div>
@@ -909,7 +913,8 @@ document.getElementById('trackOrderButton')?.addEventListener('click', async () 
             <li><a onclick="showSection('helpSection')">Help & FAQ</a></li>
             <li><a onclick="showSection('ordersSection')">Track Order</a></li>
           </ul>
-        </div>   
+        </div>
+        
         <div class="col-md-4 footer-links">
           <h5>Connect With Us</h5>
           <p>Follow NXew on social media for updates and offers</p>
@@ -1153,7 +1158,6 @@ document.getElementById('trackOrderButton')?.addEventListener('click', async () 
       </div>
     </div>
   </div>
-
   <!-- View Review Modal -->
   <div class="modal fade" id="viewReviewModal" tabindex="-1" aria-labelledby="viewReviewModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -1178,11 +1182,9 @@ document.getElementById('trackOrderButton')?.addEventListener('click', async () 
       </div>
     </div>
   </div>
-
          <!-- Bootstrap JS Bundle -->
          <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
          <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
          <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
          <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-
        <script src="00.js"></script>
