@@ -2862,3 +2862,99 @@ function generateProducts(containerId, productList, showDiscount = true) {
     }
   });
 }
+// Share product function
+function shareProduct(productId) {
+  const product = products.find(p => p.id === productId);
+  if (!product) return;
+
+  const shareUrl = `https://nxew.netlify.app/?product=${productId}`;
+  const shareText = `Check out this ${product.name} from NXew: ${product.description}`;
+
+  if (navigator.share) {
+    navigator.share({
+      title: product.name,
+      text: shareText,
+      url: shareUrl
+    }).catch(err => {
+      console.log('Error sharing:', err);
+      fallbackShare(shareUrl, shareText);
+    });
+  } else {
+    fallbackShare(shareUrl, shareText);
+  }
+}
+
+// Fallback share function for browsers without Web Share API
+function fallbackShare(url, text) {
+  const shareModalContent = `
+    <div class="modal fade" id="shareModal" tabindex="-1" aria-labelledby="shareModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="shareModalLabel">Share Product</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="shareLink" class="form-label">Share this link:</label>
+              <div class="input-group">
+                <input type="text" class="form-control" id="shareLink" value="${url}" readonly>
+                <button class="btn btn-outline-secondary" onclick="copyShareLink()">
+                  <i class="bi bi-clipboard"></i>
+                </button>
+              </div>
+            </div>
+            <div class="social-share-buttons d-flex justify-content-around mt-3">
+              <a href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}" 
+                 target="_blank" class="btn btn-primary">
+                <i class="bi bi-facebook"></i> Facebook
+              </a>
+              <a href="https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}" 
+                 target="_blank" class="btn btn-info text-white">
+                <i class="bi bi-twitter"></i> Twitter
+              </a>
+              <a href="https://wa.me/?text=${encodeURIComponent(text + ' ' + url)}" 
+                 target="_blank" class="btn btn-success">
+                <i class="bi bi-whatsapp"></i> WhatsApp
+              </a>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  if (!document.getElementById('shareModal')) {
+    document.body.insertAdjacentHTML('beforeend', shareModalContent);
+  }
+
+  const shareModal = new bootstrap.Modal(document.getElementById('shareModal'));
+  shareModal.show();
+}
+
+// Copy share link to clipboard
+function copyShareLink() {
+  const shareLink = document.getElementById('shareLink');
+  shareLink.select();
+  shareLink.setSelectionRange(0, 99999);
+  document.execCommand('copy');
+  showNotification('Link copied to clipboard!', 'success');
+}
+
+// Handle URL parameters on page load for product redirection
+window.addEventListener('load', function() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const productId = urlParams.get('product');
+  if (productId) {
+    const id = parseInt(productId);
+    if (!isNaN(id) && products.find(p => p.id === id)) {
+      showProductDetails(id);
+    } else {
+      showNotification('Invalid product link.', 'warning');
+      showSection('homeSection');
+    }
+  }
+});
