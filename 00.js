@@ -124,7 +124,6 @@ async function loadProducts() {
     } else {
       currentUser = null;
     }
-    updateHeaderProfile();
     updateMenuAccountDetails();
     updateCartCountBadge();
     // Fetch products and update UI
@@ -421,7 +420,6 @@ function loadData() {
   } else {
     currentUser = null;
   }
-  updateHeaderProfile();
   updateMenuAccountDetails();
   updateCartCountBadge();
   generateProducts("shopProductContainer", products);
@@ -499,17 +497,6 @@ function getLiveUsers() {
   const oneMinuteAgo = new Date(now - 1 * 60 * 1000);
   return users.filter(user => new Date(user.lastActivity) > oneMinuteAgo).length;
 }
-
-// Update header profile
-function updateHeaderProfile() {
-  const headerProfile = document.getElementById('headerProfile');
-  if (currentUser) {
-    headerProfile.innerHTML = `<i class="bi bi-person-circle"></i> ${currentUser.firstName} ${currentUser.lastName}`;
-  } else {
-    headerProfile.innerHTML = `<i class="bi bi-person-circle"></i> Guest`;
-  }
-}
-
 // Hide menu
 function hideMenu() {
   const menuCanvas = bootstrap.Offcanvas.getInstance(document.getElementById("menuCanvas"));
@@ -2162,14 +2149,9 @@ function generateProductImageHTML(product) {
                currentUser = null;
                showNotification("You have been logged out.", "info");
                saveData();
-               updateHeaderProfile();
                updateMenuAccountDetails();
                showSection("homeSection");
              }
-         
-             // Header button actions
-             document.getElementById("accountButton").addEventListener("click", () => currentUser ? showSection("accountSection") : showSection("loginSection"));
-             document.getElementById("notificationButton").addEventListener("click", () => showSection("notificationsSection"));
          // Feedback form submission
 document.getElementById("feedbackForm")?.addEventListener("submit", function(e) {
   e.preventDefault();
@@ -2409,7 +2391,6 @@ document.getElementById("feedbackForm")?.addEventListener("submit", function(e) 
                
                    // Persist data and update the UI accordingly
                    saveData();
-                   updateHeaderProfile();
                    updateMenuAccountDetails();
                    showSection("homeSection");
                  } else {
@@ -2465,7 +2446,6 @@ document.getElementById("feedbackForm")?.addEventListener("submit", function(e) 
        
          // Persist data and update the UI
          saveData();
-         updateHeaderProfile();
          updateMenuAccountDetails();
          showSection("homeSection");
        });
@@ -2535,97 +2515,9 @@ document.getElementById("feedbackForm")?.addEventListener("submit", function(e) 
                function notifyOwner(message) {
                  ownerNotifications.push({ message, date: new Date().toLocaleString() });
                  saveData();
-               }
-         
-                // Update notifications
-                function updateNotifications() {
-                 const notificationsContent = document.getElementById("notificationsContent");
-                 if (notifications.length === 0) {
-                   notificationsContent.innerHTML = `
-                     <div class="col-12 text-center py-5">
-                       <i class="bi bi-bell" style="font-size: 3rem; color: #ddd;"></i>
-                       <h5 class="mt-3">No Notifications</h5>
-                       <p>You're all caught up!</p>
-                     </div>
-                   `;
-                 } else {
-                   notificationsContent.innerHTML = "";
-                   notifications.slice().reverse().forEach((notif, index) => {
-                     const card = `
-                       <div class="col-md-6 col-lg-4">
-                         <div class="card notification-card ${notif.type}">
-                           <div class="card-header">
-                             <i class="bi bi-bell-fill notification-icon"></i>
-                             ${notif.date}
-                           </div>
-                           <div class="card-body">
-                             <p class="notification-message">${notif.message}</p>
-                            
-                           </div>
-                         </div>
-                       </div>
-                     `;
-                     notificationsContent.innerHTML += card;
-                   });
-                 }
-               }
-                  // Clear all notifications
-                  function clearNotifications() {
-                   if (notifications.length === 0) {
-                     showNotification("No notifications to clear.", "info");
-                     return;
-                   }
-                   if (confirm("Are you sure you want to clear all notifications?")) {
-                     notifications = [];
-                     saveData();
-                     updateNotifications();
-                     showNotification("All notifications cleared.", "success");
-                   }
-                 }       
-             // Function to print order card with QR code
-             function printOrder(index) {
-               const orderCards = document.querySelectorAll('.order-card');
-               if (index < 0 || index >= orderCards.length) return;
-               const orderCard = orderCards[index];
-               
-               document.body.classList.add('print-mode');
-               orderCard.classList.add('print-selected');
-               
-               window.print();
-               
-               window.addEventListener('afterprint', function() {
-                 document.body.classList.remove('print-mode');
-                 orderCard.classList.remove('print-selected');
-               }, { once: true });
-             }
-           
-             // Function to download order card as PNG with QR code
-             function downloadOrder(index) {
-               const orderCards = document.querySelectorAll('.order-card');
-               if (index < 0 || index >= orderCards.length) return;
-               const orderCard = orderCards[index];
-               
-               html2canvas(orderCard).then(canvas => {
-                 const link = document.createElement('a');
-                 link.href = canvas.toDataURL('image/png');
-                 link.download = `order_${index + 1}.png`;
-                 link.click();
-               }).catch(error => {
-                 console.error('Error generating image:', error);
-                 showNotification('Failed to generate image for download.', 'danger');
-               });
-             }
+               }  
            // Initialize
            loadData();
-           // Update header profile function 
-         function updateHeaderProfile() {
-          const headerProfile = document.getElementById('headerProfile');
-          if (currentUser) {
-            headerProfile.innerHTML = `<i class="bi bi-person-circle"></i> ${currentUser.firstName} ${currentUser.lastName}`;
-          } else {
-            headerProfile.innerHTML = `<i class="bi bi-person-circle"></i> Guest`;
-          }
-         }
          document.getElementById("sendMessageModal").addEventListener("hidden.bs.modal", function () {
            document.getElementById("messageText").value = "";
          });
