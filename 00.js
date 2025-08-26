@@ -93,7 +93,6 @@ async function loadProducts() {
     }
     return code;
   }
-  
   // Save data to localStorage
   function saveData() {
     localStorage.setItem('users', JSON.stringify(users));
@@ -104,7 +103,6 @@ async function loadProducts() {
     localStorage.setItem('currentUser', JSON.stringify(currentUser));
     localStorage.setItem('validCoupons', JSON.stringify(validCoupons));
   }
-  
   // Load data from localStorage
   async function loadData() {
     users = JSON.parse(localStorage.getItem('users')) || [];
@@ -133,11 +131,9 @@ async function loadProducts() {
     generateProducts('accessoriesContainer', products.filter(p => p.category === 'Accessories'));
     generateProducts('featuredProductsContainer', products.slice(0, 20));
   }
-  
   function setCurrentOrderIndex(index) {
     currentOrderIndexForMessage = index;
   }
-  
 function confirmSendMessage() {
   const message = document.getElementById("messageText").value.trim();
   if (!message) {
@@ -401,7 +397,6 @@ function saveData() {
   localStorage.setItem("ownerNotifications", JSON.stringify(ownerNotifications));
   localStorage.setItem("currentUser", JSON.stringify(currentUser));
 }
-
 // Load data from localStorage
 function loadData() {
   users = JSON.parse(localStorage.getItem("users")) || [];
@@ -427,7 +422,6 @@ function loadData() {
   generateProducts("accessoriesContainer", products.filter(p => p.category === "Accessories"));
   generateProducts("featuredProductsContainer", products.slice(0, 20));
 }
-
 // Show notification function
 function showNotification(message, type = "success", options = {}) {
   const { title = type.charAt(0).toUpperCase() + type.slice(1), duration = 3000, persist = false } = options;
@@ -437,7 +431,6 @@ function showNotification(message, type = "success", options = {}) {
   toastEl.setAttribute("aria-live", "polite");
   toastEl.setAttribute("aria-atomic", "true");
   toastEl.setAttribute("aria-label", `${title} notification`);
-
   const icons = {
     success: "bi-check-circle-fill",
     danger: "bi-exclamation-triangle-fill",
