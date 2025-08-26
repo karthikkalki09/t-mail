@@ -17,7 +17,8 @@
   <!-- EmailJS -->
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script> 
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="00.css">
+  <link rel="stylesheet" href="11.css">
+</head>
 <body>
   
      <!-- Toast Container -->
@@ -81,26 +82,23 @@
       <a href="https://www.linkedin.com/in/yourprofile" target="_blank" class="mx-2"><i class="bi bi-linkedin" style="color:#0077B5;"></i></a>
     </div>
   </div>
-  
-  <!-- Updated Home Section with Category Stories and Products -->
+   <!-- Updated Home Section with Category Stories and Products -->
   <div id="homeSection" class="section active-section fade-in">
     <header class="py-3 border-bottom">
-      <div class="container d-flex justify-content-between align-items-center">
-        <div class="d-flex align-items-center">
-          <button class="btn text-dark" data-bs-toggle="offcanvas" data-bs-target="#menuCanvas" aria-controls="menuCanvas" aria-label="Toggle Menu">
-            <i class="bi bi-list"></i>
-          </button>
-          <img src="https://i.pinimg.com/736x/d5/e5/4e/d5e54e8444e36458688888e4c84b5419.jpg" alt="NXew Logo" width="120" height="50" style="vertical-align: middle;">
+      <div class="container d-flex align-items-center">
+        <button class="btn text-dark" data-bs-toggle="offcanvas" data-bs-target="#menuCanvas" aria-controls="menuCanvas" aria-label="Toggle Menu">
+          
+        </button>
+        <div class="flex-grow-1 d-flex justify-content-center">
+          <div class="logo-container">
+            <div class="logo-overlay">Unique of </div>
+            <img src="https://i.pinimg.com/736x/74/84/ed/7484ed22716ae1b4fe2eae6dbc420141.jpg" alt="NXew Logo" width="200" height="100" style="vertical-align: middle;">
+          </div>
         </div>
-        <h1 class="h5 mb-0 text-dark">
-          <span id="headerProfile" class="profile-name"></span>
-        </h1>
         <nav class="header-nav">
           <button class="btn text-dark" id="notificationButton" aria-label="Notifications">
-            <i class="bi bi-bell"></i>
           </button>
           <button class="btn text-dark" id="accountButton" aria-label="Account">
-            <i class="bi bi-person"></i>
           </button>
         </nav>
       </div>
@@ -1009,7 +1007,6 @@ document.getElementById('trackOrderButton')?.addEventListener('click', async () 
       </div>
     </div>
   </div>
-
   <!-- Fixed Footer Navigation -->
   <footer class="footer-nav fixed-bottom">
     <div class="container">
@@ -1025,6 +1022,15 @@ document.getElementById('trackOrderButton')?.addEventListener('click', async () 
           </a>
         </li>
         <li class="nav-item">
+          <button class="btn text-dark" data-bs-toggle="offcanvas" data-bs-target="#menuCanvas" aria-controls="menuCanvas" aria-label="Toggle Menu">
+            <span>MENU</span>
+        </li>
+         <li class="nav-item">
+          <a href="#" class="nav-link" data-section="accountSection" onclick="showSection('accountSection'); return false;" aria-label="Account">
+            <i class="bi bi-person"></i>
+          </a>
+        </li>
+         <li class="nav-item">
           <a href="#" class="nav-link" data-section="cartSection" onclick="showSection('cartSection'); return false;" aria-label="Your Bag">
             <i class="bi bi-bag"></i>
             <span class="badge" id="footerBagBadge">0</span>
@@ -1187,4 +1193,6 @@ document.getElementById('trackOrderButton')?.addEventListener('click', async () 
          <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
          <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
          <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-       <script src="00.js"></script>
+       <script src="11.js"></script>  
+</body>
+</html>
