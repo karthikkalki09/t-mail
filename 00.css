@@ -19,7 +19,7 @@
       background: linear-gradient(135deg, #f6f9fc, #e9f0f8), url('https://www.toptal.com/designers/subtlepatterns/uploads/double-bubble-outline.png');
       background-size: cover;
       padding-bottom: 70px;
-      padding-top: 60px;
+      padding-top: 70px;
     }
     
     /* Header Styles */
@@ -1448,3 +1448,4 @@ color: var(--secondary-color);
     .category-products {
       padding: 20px 0;
     }
+
