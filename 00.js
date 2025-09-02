@@ -2545,7 +2545,7 @@ document.getElementById('applyCouponButton').addEventListener('click', function 
   document.getElementById('finalPrice').value = totalAmount.toFixed(2);
 });
 
-          // Request Product form submission
+     // Request Product form submission
           document.getElementById("requestProductForm")?.addEventListener("submit", function(e) {
            e.preventDefault();
        
@@ -2656,6 +2656,7 @@ function filterShopByCategory(category) {
   // Scroll to the top of the shop section
   document.getElementById('shopSection').scrollIntoView({ behavior: 'smooth' });
 }
+// Updated generateProducts function with compact layout
 function generateProducts(containerId, productList, showDiscount = true) {
   const container = document.getElementById(containerId);
   
@@ -2685,66 +2686,43 @@ function generateProducts(containerId, productList, showDiscount = true) {
   productList.forEach(product => {
     const discount = product.discount || 0;
     const originalPrice = discount > 0 ? (product.price / (1 - discount / 100)).toFixed(2) : product.price.toFixed(2);
-    const ratingInfo = getProductRating(product.id);
-    const isSoldOut = product.additionalDetails.toLowerCase().includes("sold out"); // Check for sold out
-    if (containerId === "featuredProductsContainer") {
-      const card = `
-        <div class="col-6 col-md-4 col-lg-3 mb-4">
-          <div class="card shadow-sm product-card" onclick="showProductDetails(${product.id})">
-            <div style="position: relative;">
-              <img src="${product.images && product.images.length ? product.images[0] : 'https://via.placeholder.com/400x300?text=' + encodeURIComponent(product.name)}" 
-                   class="card-img-top" alt="${product.name}" style="height: 200px; object-fit: cover;">
-              ${showDiscount && discount > 0 ? `<span class="badge bg-danger position-absolute top-0 start-0 m-2">${discount}% OFF</span>` : ''}
-              ${isSoldOut ? `<span class="badge bg-dark position-absolute top-0 end-0 m-2">Sold Out</span>` : `
-              `}
-            </div>
-            <div class="card-body">
-              <h5 class="card-title">${product.name}</h5>
-              <div class="d-flex justify-content-between align-items-center">
-                <div>
-                  <span class="fw-bold">₹${product.price.toFixed(2)}</span>
-                  ${showDiscount && discount > 0 ? `<small class="text-decoration-line-through text-muted ms-1">₹${originalPrice}</small>` : ''}
-                </div>
-                ${ratingInfo ? `
-                  <div class="d-flex align-items-center">
-                    <i class="bi bi-star-fill text-warning me-1"></i>
-                    <small>${ratingInfo.average}</small>
-                  </div>
+    const isSoldOut = product.additionalDetails.toLowerCase().includes("sold out");
+    
+    // Compact product card similar to second screenshot
+    const card = `
+      <div class="col-6 col-md-4 col-lg-3 mb-3">
+        <div class="card border-0" onclick="showProductDetails(${product.id})" style="cursor: pointer;">
+          <div style="position: relative; overflow: hidden; aspect-ratio: 3/4;">
+            <img src="${product.images && product.images.length ? product.images[0] : 'https://via.placeholder.com/400x300?text=' + encodeURIComponent(product.name)}" 
+                 class="card-img-top w-100 h-100 object-fit-cover" alt="${product.name}">
+            ${showDiscount && discount > 0 ? `
+              <span class="badge bg-danger position-absolute top-0 start-0 m-1" style="font-size: 0.7rem;">
+                ${discount}% OFF
+              </span>
+            ` : ''}
+            ${isSoldOut ? `
+              <span class="badge bg-dark position-absolute top-0 end-0 m-1" style="font-size: 0.7rem;">
+                Sold Out
+              </span>
+            ` : ''}
+          </div>
+          <div class="card-body p-2">
+            <h6 class="card-title mb-1" style="font-size: 0.9rem; line-height: 1.2;">${product.name}</h6>
+            <div class="d-flex justify-content-between align-items-center mt-1">
+              <div>
+                <span class="fw-bold" style="font-size: 0.95rem;">₹${product.price.toFixed(2)}</span>
+                ${showDiscount && discount > 0 ? `
+                  <small class="text-decoration-line-through text-muted ms-1" style="font-size: 0.8rem;">
+                    ₹${originalPrice}
+                  </small>
                 ` : ''}
               </div>
             </div>
           </div>
         </div>
-      `;
-      container.innerHTML += card;
-    } else {
-      const card = `
-        <div class="col-6 mb-4">
-          <div class="card shadow-sm product-card" style="position: relative;" onclick="showProductDetails(${product.id})">
-            <img src="${product.images && product.images.length ? product.images[0] : 'https://via.placeholder.com/400x300?text=' + encodeURIComponent(product.name)}" 
-                 class="card-img-top" alt="${product.name}">
-            ${showDiscount && discount > 0 ? `<span class="badge bg-danger position-absolute top-0 start-0 m-2">${discount}% OFF</span>` : ''}
-            ${isSoldOut ? `<span class="badge bg-dark position-absolute top-0 end-0 m-2">Sold Out</span>` : `
-            `}
-            <div class="card-body">
-              <h5 class="card-title">${product.name}</h5>
-              <p class="card-text">${product.description}</p>
-              <p class="card-text">
-                <span class="fw-bold">₹${product.price.toFixed(2)}</span>
-                ${showDiscount && discount > 0 ? `<small class="text-decoration-line-through text-muted ms-1">₹${originalPrice}</small>` : ''}
-              </p>
-              ${ratingInfo ? `
-                <p class="card-text">
-                  <i class="bi bi-star-fill text-warning"></i> 
-                  ${ratingInfo.average} (${ratingInfo.count} reviews)
-                </p>
-              ` : ''}
-            </div>
-          </div>
-        </div>
-      `;
-      container.innerHTML += card;
-    }
+      </div>
+    `;
+    container.innerHTML += card;
   });
 }
 // Share product function
