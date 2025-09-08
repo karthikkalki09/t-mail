@@ -160,8 +160,152 @@ function confirmSendMessage() {
   }
 }
 const products = [
+{
+  id:1,
+  name:" light Pink Stripes slim fit Shirt",
+  description:"A refined pink and white vertical stripe pattern",
+  category:"Shirts",
+  price:599.99,
+  discount:20, // 10% discount set by owner
+  size:"M,L,XL,XXL",
+  color:"Light pink with white stripes",
+  clothType:"100% Cotton",
+  deliveryTime:"3-5 days",
+  returnPolicy:"5 days return policy",
+  additionalDetails:"Machine washable",
+      images: [
+      "https://i.pinimg.com/736x/a7/5c/12/a75c12ce007b5d890e1e035cbf45525b.jpg" ,
+      "https://i.pinimg.com/736x/10/4e/f9/104ef92ebe37ab5493d9bf98635d5a75.jpg",
+      "https://i.pinimg.com/736x/97/a3/e7/97a3e7ed74a1bbfe355998c0113d22ac.jpg",
+    ],
+    colorImages: {
+      "Light pink with white stripes": "https://i.pinimg.com/736x/df/1b/05/df1b05cdece12bd1a69567f29a24744f.jpg"
+    },
+    specifications: {
+        "Material": "100% Cotton",
+      "Fit": "Slim Fit",
+      "Sleeve": "Full Sleeve",
+      "Wear": "Casual, Formal",
+      "collar": " Spread Collar with vertical stripes",
+    }
+},
+{
+    id: 2,
+    name: "Men - White/Black checked Shirt",
+    description: "A regular fit and features a classic checked pattern in white and black ",  
+    category: "Shirts",
+    price: 499.99,
+    discount: 25, // 10% discount set by owner
+    size: "M,L,XL",
+    color: "White/Black",
+    clothType: "100% Cotton",
+    deliveryTime: "3-5 days",
+    returnPolicy: "5 days return policy",
+  additionalDetails: "Machine washable and weather proof.",
+      images: [
+              "https://i.pinimg.com/736x/a7/fd/52/a7fd529d75dbf1c8e06c42387cae88ee.jpg",
+        "https://i.pinimg.com/736x/6d/fb/3d/6dfb3d7ac8a5b14f0530f943fc7a9e17.jpg",
+            "https://i.pinimg.com/736x/c9/94/57/c994578d6cf1ace1e172c2abc216a009.jpg",
+            "https://i.pinimg.com/736x/01/2b/bd/012bbd2df7f2141e7cf4e32a294229a7.jpg",
+    ],
+    colorImages: {
+      "White/Black": "https://i.pinimg.com/736x/01/2b/bd/012bbd2df7f2141e7cf4e32a294229a7.jpg"
+    },
+    specifications: {
+        "Material": "100% Cotton",
+      "Fit": "Regular Fit",
+      "Sleeve": "Full Sleeve",
+      "Wear": "Casual, Formal",
+      "collar": " Spread Collar with checked pattern",
+    },
+},
+   {
+    id: 3,
+    name: "Men - Brown slim fit Shirt",
+    description: "Designed in a slim fit,A look that bridges dressy and casual",
+    category: "Shirts",
+    price: 549.99,
+    discount: 38, // 10% discount set by owner
+    size: "M,L,XL",
+    color: "Brown",
+    clothType: "Cotton Blend",
+    deliveryTime: "3-5 days",
+    returnPolicy: "5 days return policy",
+  additionalDetails: "Machine washable and weather proof.",
+      images: [
+      "https://i.pinimg.com/736x/fc/4c/b0/fc4cb0f29932d0a056ca0392153c8074.jpg",
+      "https://i.pinimg.com/736x/e7/a7/08/e7a708c131c18d9b3d3dd1ca357d8eb5.jpg",
+      "https://i.pinimg.com/736x/be/d9/1f/bed91fca532a37c9b8eed9d180ac4b1a.jpg",
+    ],
+    colorImages: {
+      "Brown": "https://i.pinimg.com/736x/ab/b1/76/abb176e794b870037bbe70ef065fd844.jpg"
+    },
+    specifications: {
+       "Material": "Cotton Blend",
+      "Fit": "Slim Fit",
+      "Sleeve": "Full Sleeve",
+      "Wear": "Casual, Formal",
+      "collar": " Spread Collar",
+    }
+  },
+  { 
+    id: 4,
+    name: "White and Blue Checked Shirt",
+    description: "A classic checked pattern in white-biue",
+    category: "Shirts",
+    price: 549.99,
+    discount: 25, // 10% discount set by owner
+    size: "M,L,XL",
+    color: "White/Blue",
+    clothType: "100% Cotton",
+    deliveryTime: "3-5 days",
+    returnPolicy: "5 days return policy",
+  additionalDetails: "Machine washable and weather proof.",
+      images: [
+        "https://i.pinimg.com/736x/e3/ba/35/e3ba35f6b0632ea2c2477e2844e8871b.jpg",
+    ],
+    colorImages: {
+      "White/Blue": "https://i.pinimg.com/736x/77/09/87/770987a47fb2617b07b2d6606d2f5ba4.jpg"
+    },
+    specifications: {
+        "Material": "100% Cotton",
+      "Fit": "Regular Fit",
+      "Sleeve": "Full Sleeve",
+      "Wear": "Casual, Formal",
+      "collar": " Spread Collar with checked pattern",
+    }
+  },
   {
-    id: 1,
+    id: 5,
+    name: "NXew men's Ash Blended lenin pant",
+    description: "Providing comfort,breathable and perfect for casual wear.",
+    price: 649.99,
+    discount: 38, // 10% discount set by owner
+    size: "30,34",
+    color: "Ash",
+    clothType: "Linen Blend",
+    deliveryTime: "3-5 days",
+    returnPolicy: "5 days return policy",
+  additionalDetails: "Machine washable and weather proof.",
+images: [
+      "https://i.pinimg.com/736x/f9/7a/22/f97a2217d20880807715bf4d94f38854.jpg",
+      "https://i.pinimg.com/736x/4b/7b/af/4b7baf4bbf7364e2e7507581f4e8fe39.jpg",
+"https://i.pinimg.com/736x/80/de/d2/80ded20fbda981210585ea3f4f98471e.jpg"
+    ],
+    colorImages: {
+      "Ash": "https://i.pinimg.com/736x/f9/7a/22/f97a2217d20880807715bf4d94f38854.jpg"
+    },
+    specifications: {
+        "Material": "Linen Blend",
+      "Fit": "Relaxed Fit",
+      "Pockets": "Side and Back Pockets",
+      "Waist": "Elastic Waistband with Drawstring",
+      "Length": "Full Length",
+      "Care instructions": "Machine Washable, Machine wash at 40, Medium iron,Can be dry cleaned,Wash with similar colours",
+    }
+},
+  {
+    id: 6,
     name: "Men-Black/Jordan Oversized T-Shirt",
     description: "Comfortable and stylish men's t-shirt.",
     category: "T-Shirts",
@@ -173,7 +317,7 @@ const products = [
     deliveryTime: "3-5 days",
     returnPolicy: "5 days return policy",
   additionalDetails: "Machine washable and weather proof. This product is sold out.", // Updated
-    images: [
+      images: [
       "https://i.pinimg.com/736x/99/df/c6/99dfc6172b5df9a97c22d2af93aac789.jpg",
        "https://i.pinimg.com/736x/71/ed/b3/71edb347dbbcc9f5708fb2e141b4e6c9.jpg",
       "https://i.pinimg.com/736x/5e/06/2f/5e062fb9641aeb3558304ee1bb93a1d5.jpg",
@@ -189,7 +333,7 @@ const products = [
     }
   },
 {
-  id: 2,
+  id: 7,
   name: "Nxew's Men Oversized T-Shirt",
   description: "Comfortable and stylish men's T-shirt.",
   category: "T-Shirts",
@@ -219,7 +363,7 @@ const products = [
   }
 },
   {
-    id: 3,
+    id: 8,
     name: "Alien Men-Oversized T-Shirt",
     description: "Comfortable and stylish T-shirt.",
     category: "T-Shirts",
@@ -248,7 +392,7 @@ const products = [
     }
   },
   {
-    id: 4,
+    id: 9,
     name: "Nxew's white-Sweat T-Shirt",
     description: "Stylish and comfortable to wear.",
     category: "sweat T-Shirts",
@@ -276,7 +420,7 @@ const products = [
     }
   },
   {
-    id: 5,
+    id: 10,
     name: "Nxew's Black  Sweat T-Shirt",
     description: "Weather proof.",
     category: "sweat T-Shirts",
@@ -303,7 +447,7 @@ const products = [
     }
   },
  {
-  id: 6,
+  id: 11,
   name: "Nxew's Half sleeve Shirt",
   description: "RELAXED FIT EMBROIDERED SHIRT",
   category: "Half sleeve Shirts",
@@ -330,7 +474,7 @@ const products = [
   }
 },
   {
-    id: 7,
+    id: 12,
     name: "Half sleeve Acid wash T-Shirt",
     description: "RELAXED FIT EMBROIDERED T-SHIRT",
     category: "T-Shirts",
@@ -359,7 +503,7 @@ const products = [
     }
   },
   {
-    id: 8,
+    id: 13,
     name: "Formal Shirt",
     description: "",
     category: "Shirts",
@@ -670,7 +814,6 @@ function displaySearchResults(results) {
           `}
           <div class="card-body">
             <h5 class="card-title">${product.name}</h5>
-            <p class="card-text">${product.description}</p>
             <p class="card-text">
               <span class="fw-bold">₹${product.price.toFixed(2)}</span>
               ${discount > 0 ? `<small class="text-decoration-line-through text-muted ms-1">₹${originalPrice}</small>` : ''}
@@ -1365,7 +1508,6 @@ function updateCartSection() {
           <div class="col-8">
             <div class="card-body">
               <h5 class="card-title">${item.name}</h5>
-              <p class="card-text">${item.description}</p>
               <p class="card-text">Size: ${item.selectedSize}, Color: ${item.selectedColor}</p>
               <p class="card-text"><small class="text-muted">${item.category} |  ₹${(item.price * 1.2).toFixed(2)}₹${item.price.toFixed(2)}</small></p>
               <button class="btn btn-sm btn-danger" onclick="event.stopPropagation(); removeFromCart(${index})"><i class="bi bi-trash me-1"></i> Remove</button>
