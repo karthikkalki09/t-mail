@@ -174,9 +174,10 @@ const products = [
   returnPolicy:"5 days return policy",
   additionalDetails:"Machine washable",
       images: [
-              "https://i.pinimg.com/736x/c5/19/85/c51985de81fe32068a0c67196eaf620b.jpg",
-      "https://i.pinimg.com/736x/9e/3e/bd/9e3ebdaed5dcf5309a4384063351e358.jpg" ,
-"https://i.pinimg.com/736x/98/3a/06/983a06f6f4af8b0f3b032fbec872e6dd.jpg"    ],
+           "https://i.pinimg.com/736x/a7/5c/12/a75c12ce007b5d890e1e035cbf45525b.jpg" ,
+      "https://i.pinimg.com/736x/10/4e/f9/104ef92ebe37ab5493d9bf98635d5a75.jpg",
+      "https://i.pinimg.com/736x/97/a3/e7/97a3e7ed74a1bbfe355998c0113d22ac.jpg",
+   ],
     colorImages: {
       "Light pink with white stripes": "https://i.pinimg.com/736x/df/1b/05/df1b05cdece12bd1a69567f29a24744f.jpg"
     },
