@@ -174,10 +174,9 @@ const products = [
   returnPolicy:"5 days return policy",
   additionalDetails:"Machine washable",
       images: [
-      "https://i.pinimg.com/736x/a7/5c/12/a75c12ce007b5d890e1e035cbf45525b.jpg" ,
-      "https://i.pinimg.com/736x/10/4e/f9/104ef92ebe37ab5493d9bf98635d5a75.jpg",
-      "https://i.pinimg.com/736x/97/a3/e7/97a3e7ed74a1bbfe355998c0113d22ac.jpg",
-    ],
+              "https://i.pinimg.com/736x/c5/19/85/c51985de81fe32068a0c67196eaf620b.jpg",
+      "https://i.pinimg.com/736x/9e/3e/bd/9e3ebdaed5dcf5309a4384063351e358.jpg" ,
+"https://i.pinimg.com/736x/98/3a/06/983a06f6f4af8b0f3b032fbec872e6dd.jpg"    ],
     colorImages: {
       "Light pink with white stripes": "https://i.pinimg.com/736x/df/1b/05/df1b05cdece12bd1a69567f29a24744f.jpg"
     },
@@ -262,10 +261,14 @@ const products = [
     returnPolicy: "5 days return policy",
   additionalDetails: "Machine washable and weather proof.",
       images: [
-        "https://i.pinimg.com/736x/e3/ba/35/e3ba35f6b0632ea2c2477e2844e8871b.jpg",
+        "https://i.pinimg.com/736x/21/18/fd/2118fdf81834bed89278637cc28a4b6b.jpg",
+        "https://i.pinimg.com/736x/a9/6a/4d/a96a4d91674df0aa24b501cfd3ed0a7f.jpg",
+        "https://i.pinimg.com/736x/de/50/26/de50269b67041f424977c20648f7f695.jpg",
+        "https://i.pinimg.com/736x/ca/fb/cd/cafbcd9c7bff346dfc123b50a8c78949.jpg"
+
     ],
     colorImages: {
-      "White/Blue": "https://i.pinimg.com/736x/77/09/87/770987a47fb2617b07b2d6606d2f5ba4.jpg"
+      "White/Blue": "https://i.pinimg.com/736x/21/18/fd/2118fdf81834bed89278637cc28a4b6b.jpg"
     },
     specifications: {
         "Material": "100% Cotton",
