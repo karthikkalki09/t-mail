@@ -280,35 +280,6 @@ const products = [
     }
   },
   {
-    id: 5,
-    name: "NXew men's Ash Blended lenin pant",
-    description: "Providing comfort,breathable and perfect for casual wear.",
-    price: 649.99,
-    discount: 38, // 10% discount set by owner
-    size: "30,34",
-    color: "Ash",
-    clothType: "Linen Blend",
-    deliveryTime: "3-5 days",
-    returnPolicy: "5 days return policy",
-  additionalDetails: "Machine washable and weather proof.",
-images: [
-      "https://i.pinimg.com/736x/f9/7a/22/f97a2217d20880807715bf4d94f38854.jpg",
-      "https://i.pinimg.com/736x/4b/7b/af/4b7baf4bbf7364e2e7507581f4e8fe39.jpg",
-"https://i.pinimg.com/736x/80/de/d2/80ded20fbda981210585ea3f4f98471e.jpg"
-    ],
-    colorImages: {
-      "Ash": "https://i.pinimg.com/736x/f9/7a/22/f97a2217d20880807715bf4d94f38854.jpg"
-    },
-    specifications: {
-        "Material": "Linen Blend",
-      "Fit": "Relaxed Fit",
-      "Pockets": "Side and Back Pockets",
-      "Waist": "Elastic Waistband with Drawstring",
-      "Length": "Full Length",
-      "Care instructions": "Machine Washable, Machine wash at 40, Medium iron,Can be dry cleaned,Wash with similar colours",
-    }
-},
-  {
     id: 6,
     name: "Men-Black/Jordan Oversized T-Shirt",
     description: "Comfortable and stylish men's t-shirt.",
