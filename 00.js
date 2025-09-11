@@ -280,7 +280,7 @@ const products = [
     }
   },
   {
-    id: 6,
+    id: 5,
     name: "Men-Black/Jordan Oversized T-Shirt",
     description: "Comfortable and stylish men's t-shirt.",
     category: "T-Shirts",
@@ -308,7 +308,7 @@ const products = [
     }
   },
 {
-  id: 7,
+  id: 6,
   name: "Nxew's Men Oversized T-Shirt",
   description: "Comfortable and stylish men's T-shirt.",
   category: "T-Shirts",
@@ -319,7 +319,7 @@ const products = [
   clothType: "100% Cotton",
   deliveryTime: "3-5 days",
   returnPolicy: "5 days return policy",
-  additionalDetails: "Machine washable and weather proof.",
+  additionalDetails: "Machine washable and weather proof.This Product is sold out ",
   images: [
     "https://i.pinimg.com/736x/78/3e/39/783e39cca642ba73cd5455ce8be39608.jpg",
     "https://i.pinimg.com/736x/a8/03/b7/a803b71b74c0b3c7f70938556d480111.jpg",
@@ -338,7 +338,7 @@ const products = [
   }
 },
   {
-    id: 8,
+    id: 7,
     name: "Alien Men-Oversized T-Shirt",
     description: "Comfortable and stylish T-shirt.",
     category: "T-Shirts",
@@ -367,7 +367,7 @@ const products = [
     }
   },
   {
-    id: 9,
+    id: 8,
     name: "Nxew's white-Sweat T-Shirt",
     description: "Stylish and comfortable to wear.",
     category: "sweat T-Shirts",
@@ -395,7 +395,7 @@ const products = [
     }
   },
   {
-    id: 10,
+    id: 9,
     name: "Nxew's Black  Sweat T-Shirt",
     description: "Weather proof.",
     category: "sweat T-Shirts",
@@ -422,7 +422,7 @@ const products = [
     }
   },
  {
-  id: 11,
+  id: 10,
   name: "Nxew's Half sleeve Shirt",
   description: "RELAXED FIT EMBROIDERED SHIRT",
   category: "Half sleeve Shirts",
@@ -449,7 +449,7 @@ const products = [
   }
 },
   {
-    id: 12,
+    id: 11,
     name: "Half sleeve Acid wash T-Shirt",
     description: "RELAXED FIT EMBROIDERED T-SHIRT",
     category: "T-Shirts",
@@ -478,7 +478,7 @@ const products = [
     }
   },
   {
-    id: 13,
+    id: 12,
     name: "Formal Shirt",
     description: "",
     category: "Shirts",
