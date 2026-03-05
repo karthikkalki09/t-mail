@@ -1,3 +1,4 @@
+
  /* Base theme */
     :root {
       --primary-color: #2a5298;     
@@ -60,7 +61,7 @@
       left: 50%;
       transform: translateX(-50%);
       background: white;
-      padding: 18px 8px;
+      padding: 1px 1px;
       border-radius: 4px;
       font-weight: bold;
       font-size: 0.8rem;
@@ -1406,46 +1407,75 @@ color: var(--secondary-color);
       display: none;
     }
     
-    /* Category Stories Styling */
-    .category-stories {
-      padding: 20px 0;
-      margin-top: 40px; /* Increased space from header */
-      overflow-x: auto;
-      white-space: nowrap;
-    }
-    
-    .story-container {
-      display: flex;
-      gap: 20px;
-      justify-content: flex-start; /* Align categories to the left */
-    }
-    
-    .story {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      cursor: pointer;
-    }
-    
-    .story img {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid var(--primary-color);
-    }
-    
-    .story p {
-      background-color: var(--primary-color); /* Colored background from additional CSS */
-      color: white; /* From additional CSS */
-      padding: 5px 10px; /* From additional CSS */
-      border-radius: 5px; /* From additional CSS */
-      margin-top: 10px; /* From additional CSS */
-      font-size: 0.9rem; /* From additional CSS */
-    }
-    
-    /* Category Products Styling */
-    .category-products {
-      padding: 20px 0;
-    }
+/* ===================== STORY SECTION – NAME BESIDE IMAGE (Compact) ===================== */
+.category-stories {
+  padding: 18px 12px;
+  margin-top: 35px;
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
 
+.category-stories::-webkit-scrollbar {
+  display: none;
+}
+
+.story-container {
+  display: flex;
+  gap: 3px;                    /* ← Decreased from 5px to 3px (very tight & clean) */
+  padding: 0 6px;
+}
+
+.story {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1px;                   /* slightly reduced internal gap */
+  cursor: pointer;
+  min-width: 155px;            /* slightly smaller card for tighter look */
+  padding: 4px 8px;
+  border-radius: 50px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+  transition: all 0.3s ease;
+}
+
+.story img {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid white;
+  transition: transform 0.3s ease;
+}
+
+.story:hover img {
+  transform: scale(1.08);
+}
+
+.story {
+  background: #fff;
+  padding: 6px 12px;
+  border-radius: 50px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+}
+
+.story:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+}
+
+.story p {
+  margin: 0;
+  font-weight: 700;
+  color: #1f1f1f;
+  font-size: 0.96rem;
+  letter-spacing: -0.25px;
+  text-transform: capitalize;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 78px;
+}
