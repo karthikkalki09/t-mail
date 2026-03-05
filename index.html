@@ -42,19 +42,6 @@
       </div>
     </div>
   </div>
-
-  <!-- Notifications Section -->
-  <div id="notificationsSection" class="section">
-    <header class="bg-light py-3 border-bottom">
-      <div class="container d-flex justify-content-between align-items-center">
-        <button class="btn" onclick="showSection('homeSection')"><i class="far fa-arrow-left"></i> Home</button>
-        <h1 class="h5 mb-0">Notifications</h1>
-        <button class="btn btn-sm btn-danger" onclick="clearNotifications()">Clear All</button>
-      </div>
-    </header>
-    <div class="container my-4" id="notificationsContent"></div>
-  </div>
-
   <!-- Offcanvas Menu -->
   <div class="offcanvas offcanvas-start" tabindex="-1" id="menuCanvas" aria-labelledby="menuCanvasLabel">
     <div class="offcanvas-header">
@@ -91,36 +78,41 @@
         </button>
         <div class="flex-grow-1 d-flex justify-content-center">
           <div class="logo-container">
-            <div class="logo-overlay">Unique of </div>
             <img src="https://i.pinimg.com/736x/74/84/ed/7484ed22716ae1b4fe2eae6dbc420141.jpg" alt="NXew Logo" width="200" height="100" style="vertical-align: middle;">
           </div>
         </div>
-        <nav class="header-nav">
-          <button class="btn text-dark" id="notificationButton" aria-label="Notifications">
-          </button>
-          <button class="btn text-dark" id="accountButton" aria-label="Account">
-          </button>
-        </nav>
       </div>
     </header>
-    <section class="category-stories">
-      <div class="container">
-        <div class="story-container">
-          <div class="story" onclick="filterShopByCategory('T-Shirts')">
-            <img src="https://i.pinimg.com/736x/99/df/c6/99dfc6172b5df9a97c22d2af93aac789.jpg" alt="T-Shirts">
-            <p>T-Shirts</p>
-          </div>
-          <div class="story" onclick="filterShopByCategory('sweat T-Shirts')">
-            <img src="https://i.pinimg.com/736x/94/2a/e4/942ae43485ba186ee70c0087bd4ade89.jpg" alt="sweat T-Shirts">
-            <p>sweat T-Shirts</p>
-          </div>
-          <div class="story" onclick="filterShopByCategory('Shirts')">
-            <img src="https://i.pinimg.com/736x/ca/d0/dd/cad0dd3c7f3880dee714da8bdecdf723.jpg" alt="Shirts">
-            <p>Shirts</p>
-          </div>
-        </div>
-      </div>
-    </section>
+   <section class="category-stories">
+  <div class="story-container">
+
+    <div class="story" onclick="filterShopByCategory('All')">
+      <img src="https://cdn-icons-png.flaticon.com/512/1828/1828919.png" alt="All">
+      <p>All</p>
+    </div>
+
+    <div class="story" onclick="filterShopByCategory('New Arrivals')">
+      <span style="font-size: 26px;">✨</span>
+      <p>New Arrivals</p>
+    </div>
+
+    <div class="story" onclick="filterShopByCategory('T-Shirts')">
+      <img src="https://i.pinimg.com/736x/99/df/c6/99dfc6172b5df9a97c22d2af93aac789.jpg" alt="T-Shirts">
+      <p>T-Shirts</p>
+    </div>
+
+    <div class="story" onclick="filterShopByCategory('Sweat T-Shirts')">
+      <img src="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=200" alt="Sweat T-Shirts">
+      <p>Sweat T-Shirts</p>
+    </div>
+
+    <div class="story" onclick="filterShopByCategory('Shirts')">
+      <img src="https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=200" alt="Shirts">
+      <p>Shirts</p>
+    </div>
+
+  </div>
+</section>
     <section class="category-products">
       <div class="container">
         <div class="row" id="categoryProductsContainer"></div>
@@ -143,14 +135,15 @@
               </div>
             </div>
             <div class="carousel-item" onclick="filterShopByCategory('sweat T-Shirts')">
-              <img src="https://i.pinimg.com/736x/80/a7/78/80a77816959d3d0179bf96b142a1be2f.jpg" class="d-block w-100" alt="Product Highlight 2">
+              <img src="https://i.pinimg.com/736x/76/23/66/7623668b878ad4d50906b5460c08c65c.jpg" class="d-block w-100" alt="Product Highlight 2">
               <div class="carousel-caption d-none d-md-block">
                 <h5>Trendy Men's Wear</h5>
                 <p>Explore our latest collection.</p>
               </div>
             </div>
             <div class="carousel-item" onclick="filterShopByCategory('T-Shirts')">
-              <img src="https://i.pinimg.com/736x/fc/4c/b0/fc4cb0f29932d0a056ca0392153c8074.jpg" class="d-block w-100" alt="Product Highlight 3">
+              <img src=  "https://i.pinimg.com/736x/69/8f/ea/698feaff5065bda0f3853221050356a7.jpg"
+ class="d-block w-100" alt="Product Highlight 3">
               <div class="carousel-caption d-none d-md-block">
                 <h5>Stylish Accessories</h5>
                 <p>Complete your look.</p>
@@ -1025,17 +1018,17 @@ document.getElementById('trackOrderButton')?.addEventListener('click', async () 
           <button class="btn text-dark" data-bs-toggle="offcanvas" data-bs-target="#menuCanvas" aria-controls="menuCanvas" aria-label="Toggle Menu">
             <span>MENU</span>
         </li>
-         <li class="nav-item">
-          <a href="#" class="nav-link" data-section="accountSection" onclick="showSection('accountSection'); return false;" aria-label="Account">
-            <i class="bi bi-person"></i>
-          </a>
-        </li>
+         </li>
          <li class="nav-item">
           <a href="#" class="nav-link" data-section="cartSection" onclick="showSection('cartSection'); return false;" aria-label="Your Bag">
             <i class="bi bi-bag"></i>
             <span class="badge" id="footerBagBadge">0</span>
           </a>
         </li>
+         <li class="nav-item">
+          <a href="#" class="nav-link" data-section="accountSection" onclick="showSection('accountSection'); return false;" aria-label="Account">
+            <i class="bi bi-person"></i>
+          </a>
       </ul>
     </div>
   </footer>
@@ -1196,4 +1189,3 @@ document.getElementById('trackOrderButton')?.addEventListener('click', async () 
        <script src="00.js"></script>  
 </body>
 </html>
-
