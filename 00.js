@@ -129,7 +129,7 @@ async function loadProducts() {
     generateProducts('shopProductContainer', products);
     generateProducts('menswearContainer', products.filter(p => p.category === 'Men\'s Wear'));
     generateProducts('accessoriesContainer', products.filter(p => p.category === 'Accessories'));
-    generateProducts('featuredProductsContainer', products.slice(0, 20));
+    generateProducts('featuredProductsContainer', products.slice(0, 100));
   }
   function setCurrentOrderIndex(index) {
     currentOrderIndexForMessage = index;
@@ -160,196 +160,461 @@ function confirmSendMessage() {
   }
 }
 const products = [
-{
-  id:1,
-  name:" light Pink Stripes slim fit Shirt",
-  description:"A refined pink and white vertical stripe pattern",
-  category:"Shirts",
-  price:599.99,
-  discount:20, // 10% discount set by owner
-  size:"M,L,XL,XXL",
-  color:"Light pink with white stripes",
-  clothType:"100% Cotton",
-  deliveryTime:"3-5 days",
-  returnPolicy:"5 days return policy",
-  additionalDetails:"Machine washable",
-      images: [
-           "https://i.pinimg.com/736x/a7/5c/12/a75c12ce007b5d890e1e035cbf45525b.jpg" ,
+  {
+    id: 1,
+    name: "Light Pink Stripes Slim Fit Shirt",
+    description: "A refined pink and white vertical stripe pattern",
+    category: "Shirts",
+    price: 599.99,
+    discount: 20,
+    size: "M, L, XL, XXL",
+    color: "Light Pink with White Stripes",
+    clothType: "100% Cotton",
+    deliveryTime: "3-5 days",
+    returnPolicy: "5 days return policy",
+    additionalDetails: "Machine washable.This product is NewArrival",
+    
+    images: [
+      "https://i.pinimg.com/736x/a7/5c/12/a75c12ce007b5d890e1e035cbf45525b.jpg",
       "https://i.pinimg.com/736x/10/4e/f9/104ef92ebe37ab5493d9bf98635d5a75.jpg",
-      "https://i.pinimg.com/736x/97/a3/e7/97a3e7ed74a1bbfe355998c0113d22ac.jpg",
-   ],
+      "https://i.pinimg.com/736x/97/a3/e7/97a3e7ed74a1bbfe355998c0113d22ac.jpg"
+    ],
     colorImages: {
-      "Light pink with white stripes": "https://i.pinimg.com/736x/df/1b/05/df1b05cdece12bd1a69567f29a24744f.jpg"
+      "Light Pink with White Stripes": "https://i.pinimg.com/736x/df/1b/05/df1b05cdece12bd1a69567f29a24744f.jpg"
     },
     specifications: {
-        "Material": "100% Cotton",
-      "Fit": "Slim Fit",
-      "Sleeve": "Full Sleeve",
-      "Wear": "Casual, Formal",
-      "collar": " Spread Collar with vertical stripes",
+      Material: "100% Cotton",
+      Fit: "Slim Fit",
+      Sleeve: "Full Sleeve",
+      Wear: "Casual, Formal",
+      Collar: "Spread Collar with vertical stripes"
     }
-},
-{
+  },
+  {
     id: 2,
-    name: "Men - White/Black checked Shirt",
-    description: "A regular fit and features a classic checked pattern in white and black ",  
+    name: "Men's White/Black Checked Shirt",
+    description: "A regular fit shirt featuring a classic checked pattern in white and black",
     category: "Shirts",
     price: 499.99,
-    discount: 25, // 10% discount set by owner
-    size: "M,L,XL",
+    discount: 25,
+    size: "M, L, XL",
     color: "White/Black",
     clothType: "100% Cotton",
     deliveryTime: "3-5 days",
     returnPolicy: "5 days return policy",
-  additionalDetails: "Machine washable and weather proof.",
-      images: [
-              "https://i.pinimg.com/736x/a7/fd/52/a7fd529d75dbf1c8e06c42387cae88ee.jpg",
-        "https://i.pinimg.com/736x/6d/fb/3d/6dfb3d7ac8a5b14f0530f943fc7a9e17.jpg",
-            "https://i.pinimg.com/736x/c9/94/57/c994578d6cf1ace1e172c2abc216a009.jpg",
-            "https://i.pinimg.com/736x/01/2b/bd/012bbd2df7f2141e7cf4e32a294229a7.jpg",
+    additionalDetails: "Machine washable and weatherproof",
+    isNewArrival: false,
+    isSoldOut: false,
+    images: [
+      "https://i.pinimg.com/736x/a7/fd/52/a7fd529d75dbf1c8e06c42387cae88ee.jpg",
+      "https://i.pinimg.com/736x/6d/fb/3d/6dfb3d7ac8a5b14f0530f943fc7a9e17.jpg",
+      "https://i.pinimg.com/736x/c9/94/57/c994578d6cf1ace1e172c2abc216a009.jpg",
+      "https://i.pinimg.com/736x/01/2b/bd/012bbd2df7f2141e7cf4e32a294229a7.jpg"
     ],
     colorImages: {
       "White/Black": "https://i.pinimg.com/736x/01/2b/bd/012bbd2df7f2141e7cf4e32a294229a7.jpg"
     },
     specifications: {
-        "Material": "100% Cotton",
-      "Fit": "Regular Fit",
-      "Sleeve": "Full Sleeve",
-      "Wear": "Casual, Formal",
-      "collar": " Spread Collar with checked pattern",
-    },
+      Material: "100% Cotton",
+      Fit: "Regular Fit",
+      Sleeve: "Full Sleeve",
+      Wear: "Casual, Formal",
+      Collar: "Spread Collar with checked pattern"
+    }
+  },
+ // UPDATED PRODUCT (ID 3) - SET TO NEW ARRIVAL
+{
+  id: 3,
+  name: "Men's Green-White Checked Shirt",
+  description: "A stylish green checked shirt perfect for casual wear",
+  category: "Shirts",
+  price: 599.99,
+  discount: 29,
+  size: "XL",
+  color: "Green",
+  clothType: "Cotton Polyester Blend",
+  deliveryTime: "3-5 days",
+  returnPolicy: "5 days return policy",
+  additionalDetails: "Men's Green Checked shirt.Fresh new arrival with premium fabric",
+  newArrivalPosition: 1,  
+  images: [
+    "https://i.pinimg.com/736x/fa/5f/d3/fa5fd3f04ee332ff229cee9f11a7b2ec.jpg",
+    "https://i.pinimg.com/736x/58/36/88/5836881dacd5cc5cc0de3dca2b1f538d.jpg",
+    "https://i.pinimg.com/736x/7a/91/65/7a9165ab1ac18c86adbd41b639bedb71.jpg"
+  ],
+  colorImages: {
+    "Green": "https://i.pinimg.com/736x/7a/91/65/7a9165ab1ac18c86adbd41b639bedb71.jpg"
+  },
+  specifications: {
+    Material: "Cotton Polyester Blend",
+    Sleeve: "Full Sleeves",
+    Collar: "Spread Collar",
+    Occasion: "Formal",
+    Pattern: "Checked"
+  }
 },
-   {
-    id: 3,
-    name: "Men - Brown slim fit Shirt",
-    description: "Designed in a slim fit,A look that bridges dressy and casual",
+// UPDATED PRODUCT (ID 4) - SET TO NEW ARRIVAL
+ {
+  id: 4,
+  name: "Men's Rust & Charcoal Plaid Shirt",
+  description: "The warm rust tones are layered with charcoal and black intersecting lines, accented by stark white buttons for a clean contrast, it offers a soft, lived-in feel perfect for casual or smart-casual wear.",
+  category: "Shirts",
+  price: 549.99,
+  discount: 25,
+  size: "XL",
+  color: "Rust Brown", // Updated to match the actual image
+  clothType: "Cotton",
+  deliveryTime: "3-5 days",
+  returnPolicy: "5 days return policy",
+  additionalDetails: "Men's Textured Check Shirt with White Contrast Buttons.Fresh new arrival with premium fabric",
+   newArrivalPosition: 2,  
+   images: [
+
+      "https://i.pinimg.com/736x/76/23/66/7623668b878ad4d50906b5460c08c65c.jpg",
+
+      "https://i.pinimg.com/736x/33/e9/c3/33e9c330a52d8e8908a3bf4712c487f5.jpg",
+
+      "https://i.pinimg.com/736x/91/67/05/916705852ad7ebda61fd341e4ebf7609.jpg"
+
+    ],
+
+    colorImages: {
+
+      "Gray": "https://i.pinimg.com/736x/91/67/05/916705852ad7ebda61fd341e4ebf7609.jpg"
+
+    },
+  specifications: {
+    Material: "Cotton",
+    Sleeve: "Full Sleeves",
+    Collar: "Pointed Collar", // Changed from Spread to Pointed based on the image
+    Occasion: "Casual / Workwear", // Changed from Formal to match the style
+    Pattern: "Plaid Checked"
+  }
+},
+  {
+    id: 5,
+    name: "Men's Yellow with Brown strips  Shirt",
+description: "A fresh, vibrant button-down featuring a multi-colored grid plaid pattern. Set against a creamy off-white base, the shirt is detailed with bold salmon-coral and light sky-blue intersecting lines. Designed with a tailored slim fit and a button-down collar, it offers a crisp, modern aesthetic perfect for warm-weather outings or semi-casual events.",
+    category: "Shirts",
+    price: 499.99,
+    discount: 25,
+    size: "L",
+    color: "Charcoal",
+    clothType: "Cotton Polyester Blend",
+    deliveryTime: "3-5 days",
+    returnPolicy: "5 days return policy",
+additionalDetails: "Slim-fit checkered shirt with button-down collar and brand hem tag. Fresh new arrival with premium fabric",
+    images: [
+      "https://i.pinimg.com/736x/67/df/99/67df99875c3debdefee272c3ad64042c.jpg",
+      "https://i.pinimg.com/736x/02/3c/a2/023ca2dd5d7af58f835dd36b0590fdbc.jpg",
+      "https://i.pinimg.com/736x/23/bb/84/23bb84e81082402215441740243ab34b.jpg"
+    ],
+    colorImages: {
+      "Charcoal": "https://i.pinimg.com/736x/23/bb/84/23bb84e81082402215441740243ab34b.jpg"
+    },
+    specifications: {
+    Material: "Cotton Blend",
+    Sleeve: "Full Sleeves (Roll-up style)",
+    Collar: "Button-Down Collar",
+    Occasion: "Casual / Semi-Casual",
+    Pattern: "Multi-Color Grid Plaid"
+    }
+  },
+  {
+    id: 6,
+    name: "Men's Green-White plaid Shirt",
+    description: "A fresh, vibrant button-down featuring a multi-colored grid plaid pattern,the shirt is detailed with light Green and white intersecting lines.",
+    category: "Shirts",
+    price: 449.99,
+    discount: 25,
+    size: "L",
+    color: "Green & White",
+    clothType: "Cotton  Blend",
+    deliveryTime: "3-5 days",
+    returnPolicy: "5 days return policy",
+    additionalDetails: "Hustle formal shirt.Fresh new arrival with premium fabric",
+      newArrivalPosition: 3,  
+
+    images: [
+      "https://i.pinimg.com/736x/21/79/5e/21795e6580d954357021b8c38ccac250.jpg",
+      "https://i.pinimg.com/736x/26/62/89/266289a61c2a7fe60e2a09bf27d4db4d.jpg",
+      "https://i.pinimg.com/736x/8c/d4/f5/8cd4f52cdb4ea04c0dfae20574c5f042.jpg"
+    ],
+    colorImages: {
+      "Slate Gray": "https://i.pinimg.com/736x/26/62/89/266289a61c2a7fe60e2a09bf27d4db4d.jpg"
+    },
+    specifications: {
+     Material: "Cotton Blend",
+    Sleeve: "Full Sleeves (Roll-up style)",
+    Collar: "Button-Down Collar",
+    Occasion: "Casual / Semi-Casual",
+    Pattern: "Multi-Color Grid Plaid"
+    }
+  },
+  {
+    id: 7,
+    name: "Men's Brown & White  Shirt",
+    description: "A stylish brown and white checked shirt perfect for casual wear, both formal and casual occasions, featuring a classic checked pattern in brown and white, designed with a comfortable fit and made from a cotton blend fabric for all-day wear.",
     category: "Shirts",
     price: 549.99,
-    discount: 38, // 10% discount set by owner
+    discount: 25,
     size: "M,L,XL",
+    color: "Brown & White",
+    clothType: "Cotton Blend",
+    deliveryTime: "3-5 days",
+    returnPolicy: "5 days return policy",
+    additionalDetails: "Hustle formal shirt.Fresh new arrival with premium fabric",
+    newArrivalPosition: 4,  
+
+    images: [
+      "https://i.pinimg.com/736x/e4/0c/82/e40c82f8bee5cedd571c4b4390286d98.jpg",
+      "https://i.pinimg.com/736x/8f/c4/82/8fc4821a9115df0ca5fa0f0a91f6cfee.jpg",
+      "https://i.pinimg.com/736x/b6/2d/e9/b62de9364fd3a5b945cd67ed4f747c08.jpg"
+    ],
+    colorImages: {
+      "Steel Gray": "https://i.pinimg.com/736x/e4/0c/82/e40c82f8bee5cedd571c4b4390286d98.jpg"
+    },
+    specifications: {
+      Material: "Cotton  Blend",
+      Sleeve: "Full Sleeves",
+      Collar: "Spread Collar",
+      Occasion: "Formal",
+      Pattern: "Solid"
+    }
+  },
+  {
+    id: 8,
+    name: "Men's Brown and Charcoal Black Shirt",
+    description: "This is a large-scale plaid with a brushed or distressed texture, giving it a soft, slightly rugged appearance rather than sharp, clean lines",
+    category: "Shirts",
+    price: 599.99,
+    discount: 25,
+    size: "XL",
+    color: "Brown & Charcoal Black",
+    clothType: "Cotton",
+    deliveryTime: "3-5 days",
+    returnPolicy: "5 days return policy",
+    additionalDetails: "Hustle formal shirt.Fresh new arrival with premium fabric",
+      newArrivalPosition: 8,
+    images: [
+      "https://i.pinimg.com/736x/69/8f/ea/698feaff5065bda0f3853221050356a7.jpg",
+      "https://i.pinimg.com/736x/f9/22/c6/f922c67972f4c2191a428733a5ba7ee4.jpg",
+      "https://i.pinimg.com/736x/99/02/f4/9902f4fbd482ac5cbd9f457693b39097.jpg"
+    ],
+    colorImages: {
+      "Ash Gray": "https://i.pinimg.com/736x/69/8f/ea/698feaff5065bda0f3853221050356a7.jpg"
+    },
+    specifications: {
+      Material: "Cotton",
+      Sleeve: "Full Sleeves",
+      Collar: "Spread Collar",
+      Pattern: "Solid",
+        Closure: "Button Down",
+      Occasion: "Casual / Smart Casual",
+      FabricCare: "Machine Wash",
+      Pocket: "Single Chest Pocket"
+    }
+  },
+  {
+    id: 9,
+    name: "Men's Sky blue & Black strips Shirt",
+    description: "Elegent Sky blue shirt with Black strips, can pull for both formal and informal occasions.",
+    category: "Shirts",
+    price: 449.99,
+    discount: 25,
+    size: "L",
+    color: "Sky blue & Black Strips",
+    clothType: "Cotton Polyester Blend",
+    deliveryTime: "3-5 days",
+    returnPolicy: "5 days return policy",
+    additionalDetails: "Hustle formal shirt.Fresh new arrival with premium fabric",
+    newArrivalPosition: 5,
+    images: [
+      "https://i.pinimg.com/736x/bf/07/81/bf0781122c31dc94ac811c65d4a28eda.jpg",
+      "https://i.pinimg.com/736x/80/25/6e/80256e52b4c047bbdf942e11c68787d1.jpg",
+      "https://i.pinimg.com/736x/f9/27/87/f92787ece53598d5347e4f3c21c795af.jpg"
+    ],
+    colorImages: {
+      "Silver Gray": "https://i.pinimg.com/736x/79/b9/30/79b9303c53a85ef2d2d6928836823672.jpg"
+    },
+    specifications: {
+      Material: "Cotton Polyester Blend",
+      Sleeve: "Full Sleeves",
+      Collar: "Spread Collar",
+      Occasion: "Formal and informal",
+      Pattern: "Solid"
+    }
+  },
+  {
+    id: 10,
+    name: "Men's Yellow & Black Checks Shirt",
+    description: "Premium Yellow  and Black  checked casual shirt designed for a modern smart look. Soft fabric with a comfortable slim fit, perfect for daily wear and casual outings.",
+    category: "Shirts",
+    price: 499.99,
+    discount: 25,
+    size: "M,L,XL",
+    color: "Yellow & Black Checks",
+    clothType: "Cotton Blend",
+    deliveryTime: "3-5 Business Days",
+    returnPolicy: "5 Days Easy Return & Exchange",
+    additionalDetails: "Breathable fabric, lightweight feel, and durable stitching. Perfect for college, office casual, and weekend styling.Fresh new arrival with premium fabric",
+      newArrivalPosition: 12,
+    images: [
+      "https://i.pinimg.com/736x/8d/96/88/8d9688320c8d4171c6098390aab0187c.jpg",
+      "https://i.pinimg.com/736x/7f/63/35/7f6335b0ec09381921054e81a343838f.jpg",
+            "https://i.pinimg.com/736x/1a/0b/15/1a0b15b89fa339f46315f142276ebca0.jpg"
+
+    ],
+    colorImages: {
+      "Green & White": "https://i.pinimg.com/736x/7f/63/35/7f6335b0ec09381921054e81a343838f.jpg"
+    },
+    specifications: {
+      Material: "Cotton Blend",
+      Sleeve: "Full Sleeves",
+      Collar: "Spread Collar",
+      Fit: "Slim Fit",
+      Pattern: "Checked",
+      Closure: "Button Down",
+      Occasion: "Casual / Smart Casual",
+      FabricCare: "Machine Wash",
+      Pocket: "Single Chest Pocket"
+    }
+  },
+  {
+    id: 11,
+    name: "Men's Brown Slim Fit Shirt",
+    description: "Designed in a slim fit, a look that bridges dressy and casual",
+    category: "Shirts",
+    price: 449.99,
+    discount: 38,
+    size: "M, L, XL",
     color: "Brown",
     clothType: "Cotton Blend",
     deliveryTime: "3-5 days",
     returnPolicy: "5 days return policy",
-  additionalDetails: "Machine washable and weather proof.",
-      images: [
+    additionalDetails: "Machine washable and weatherproof",
+  
+    images: [
       "https://i.pinimg.com/736x/fc/4c/b0/fc4cb0f29932d0a056ca0392153c8074.jpg",
       "https://i.pinimg.com/736x/e7/a7/08/e7a708c131c18d9b3d3dd1ca357d8eb5.jpg",
-      "https://i.pinimg.com/736x/be/d9/1f/bed91fca532a37c9b8eed9d180ac4b1a.jpg",
+      "https://i.pinimg.com/736x/be/d9/1f/bed91fca532a37c9b8eed9d180ac4b1a.jpg"
     ],
     colorImages: {
       "Brown": "https://i.pinimg.com/736x/ab/b1/76/abb176e794b870037bbe70ef065fd844.jpg"
     },
     specifications: {
-       "Material": "Cotton Blend",
-      "Fit": "Slim Fit",
-      "Sleeve": "Full Sleeve",
-      "Wear": "Casual, Formal",
-      "collar": " Spread Collar",
-    }
-  },
-  { 
-    id: 4,
-    name: "White and Blue Checked Shirt",
-    description: "A classic checked pattern in white-biue",
-    category: "Shirts",
-    price: 549.99,
-    discount: 25, // 10% discount set by owner
-    size: "M,L,XL",
-    color: "White/Blue",
-    clothType: "100% Cotton",
-    deliveryTime: "3-5 days",
-    returnPolicy: "5 days return policy",
-  additionalDetails: "Machine washable and weather proof.",
-      images: [
-        "https://i.pinimg.com/736x/21/18/fd/2118fdf81834bed89278637cc28a4b6b.jpg",
-        "https://i.pinimg.com/736x/a9/6a/4d/a96a4d91674df0aa24b501cfd3ed0a7f.jpg",
-        "https://i.pinimg.com/736x/de/50/26/de50269b67041f424977c20648f7f695.jpg",
-        "https://i.pinimg.com/736x/ca/fb/cd/cafbcd9c7bff346dfc123b50a8c78949.jpg"
-
-    ],
-    colorImages: {
-      "White/Blue": "https://i.pinimg.com/736x/21/18/fd/2118fdf81834bed89278637cc28a4b6b.jpg"
-    },
-    specifications: {
-        "Material": "100% Cotton",
-      "Fit": "Regular Fit",
-      "Sleeve": "Full Sleeve",
-      "Wear": "Casual, Formal",
-      "collar": " Spread Collar with checked pattern",
+      Material: "Cotton Blend",
+      Fit: "Slim Fit",
+      Sleeve: "Full Sleeve",
+      Wear: "Casual, Formal",
+      Collar: "Spread Collar"
     }
   },
   {
-    id: 5,
-    name: "Men-Black/Jordan Oversized T-Shirt",
-    description: "Comfortable and stylish men's t-shirt.",
+    id: 12,
+    name: "Men's Dark Green & white strips  Shirt",
+    description: "Classic Green & white striped shirt for versatile casual wear and formal wear. A fresh and vibrant button-down featuring a multi-colored grid plaid pattern. Set against a creamy off-white base, the shirt is detailed with bold green and white intersecting lines.",
+    category: "Shirts",
+    price: 449.99,
+    discount: 25,
+    size: "L",
+    color: "Dark Green & White Strips",
+    clothType: "Cotton Polyester Blend",
+    deliveryTime: "3-5 days",
+    returnPolicy: "5 days return policy",
+    additionalDetails: "Hustle formal shirt.Fresh new arrival with premium fabric",
+    
+    images: [
+      "https://i.pinimg.com/736x/29/67/5f/29675f791555d34422782a0c61601ecc.jpg",
+      "https://i.pinimg.com/736x/42/79/69/42796999793e451c9c0bc30467128520.jpg"
+    ],
+    colorImages: {
+      "Navy": "https://i.pinimg.com/736x/29/67/5f/29675f791555d34422782a0c61601ecc.jpg"
+    },
+    specifications: {
+      Material: "Cotton Polyester Blend",
+      Sleeve: "Full Sleeves",
+      Collar: "Spread Collar",
+      Occasion: "Formal",
+      Pattern: "Solid",
+      FabricCare: "Machine Wash",
+      Pocket: "Single Chest Pocket"
+    }
+  },
+  {
+    id: 13,
+    name: "Men's Black Jordan Oversized T-Shirt",
+    description: "Comfortable and stylish men's oversized t-shirt",
     category: "T-Shirts",
     price: 439.99,
-    discount: 38, // 10% discount set by owner
+    discount: 38,
     size: "L",
     color: "Black",
     clothType: "100% Cotton",
     deliveryTime: "3-5 days",
     returnPolicy: "5 days return policy",
-  additionalDetails: "Machine washable and weather proof. This product is sold out.", // Updated
-      images: [
+    additionalDetails: "Machine washable and weatherproof.this product is sold out",
+   
+    images: [
       "https://i.pinimg.com/736x/99/df/c6/99dfc6172b5df9a97c22d2af93aac789.jpg",
-       "https://i.pinimg.com/736x/71/ed/b3/71edb347dbbcc9f5708fb2e141b4e6c9.jpg",
-      "https://i.pinimg.com/736x/5e/06/2f/5e062fb9641aeb3558304ee1bb93a1d5.jpg",
+      "https://i.pinimg.com/736x/71/ed/b3/71edb347dbbcc9f5708fb2e141b4e6c9.jpg",
+      "https://i.pinimg.com/736x/5e/06/2f/5e062fb9641aeb3558304ee1bb93a1d5.jpg"
     ],
     colorImages: {
       "Black": "https://i.pinimg.com/736x/99/df/c6/99dfc6172b5df9a97c22d2af93aac789.jpg"
     },
     specifications: {
-       "Material": "100% Cotton",
-      "Fit": "Oversized",
-      "Sleeve": "Short",
-      "Neck": "Round Neck"
+      Material: "100% Cotton",
+      Fit: "Oversized",
+      Sleeve: "Short",
+      Neck: "Round Neck"
     }
   },
-{
-  id: 6,
-  name: "Nxew's Men Oversized T-Shirt",
-  description: "Comfortable and stylish men's T-shirt.",
-  category: "T-Shirts",
-  price: 399,
-  discount: 42,
-  size: "L",
-  color: "Black",
-  clothType: "100% Cotton",
-  deliveryTime: "3-5 days",
-  returnPolicy: "5 days return policy",
-  additionalDetails: "Machine washable and weather proof.This Product is sold out ",
-  images: [
-    "https://i.pinimg.com/736x/78/3e/39/783e39cca642ba73cd5455ce8be39608.jpg",
-    "https://i.pinimg.com/736x/a8/03/b7/a803b71b74c0b3c7f70938556d480111.jpg",
-    "https://i.pinimg.com/736x/26/94/be/2694be21bc82399c67208bf6d65068a4.jpg",
-    "https://i.pinimg.com/736x/37/a7/e2/37a7e22ccccb2fd9e158db92d9fe094d.jpg",
-    "https://i.pinimg.com/736x/ae/36/14/ae36149467f17d37a86ab84051b321f7.jpg"
-  ],
-  colorImages: {
-    "Black": "https://i.pinimg.com/736x/78/3e/39/783e39cca642ba73cd5455ce8be39608.jpg"
-  },
-  specifications: {
-    "Material": "100% Cotton",
-    "Fit": "Oversized",
-    "Sleeve": "Short",
-    "Neck": "Round Neck"
-  }
-},
   {
-    id: 7,
-    name: "Alien Men-Oversized T-Shirt",
-    description: "Comfortable and stylish T-shirt.",
+    id: 14,
+    name: "Nxew's Men's Oversized T-Shirt",
+    description: "Comfortable and stylish men's oversized t-shirt",
     category: "T-Shirts",
-    price: 349,
-    discount: 26, // 20% discount set by owner
+    price: 399,
+    discount: 42,
     size: "L",
-    color: " Black",
-    clothType: "Cotton",
+    color: "Black",
+    clothType: "100% Cotton",
     deliveryTime: "3-5 days",
     returnPolicy: "5 days return policy",
-  additionalDetails: "Machine washable and weather proof. This product is sold out.", // Updated
+    additionalDetails: "Machine washable and weatherproof.this product is sold out",
+  
+    images: [
+      "https://i.pinimg.com/736x/78/3e/39/783e39cca642ba73cd5455ce8be39608.jpg",
+      "https://i.pinimg.com/736x/a8/03/b7/a803b71b74c0b3c7f70938556d480111.jpg",
+      "https://i.pinimg.com/736x/26/94/be/2694be21bc82399c67208bf6d65068a4.jpg",
+      "https://i.pinimg.com/736x/37/a7/e2/37a7e22ccccb2fd9e158db92d9fe094d.jpg",
+      "https://i.pinimg.com/736x/ae/36/14/ae36149467f17d37a86ab84051b321f7.jpg"
+    ],
+    colorImages: {
+      "Black": "https://i.pinimg.com/736x/78/3e/39/783e39cca642ba73cd5455ce8be39608.jpg"
+    },
+    specifications: {
+      Material: "100% Cotton",
+      Fit: "Oversized",
+      Sleeve: "Short",
+      Neck: "Round Neck"
+    }
+  },
+  {
+    id: 15,
+    name: "Alien Men's Oversized T-Shirt",
+    description: "Comfortable and stylish oversized t-shirt with alien graphic",
+    category: "T-Shirts",
+    price: 349,
+    discount: 26,
+    size: "L",
+    color: "Black",
+    clothType: "100% Cotton",
+    deliveryTime: "3-5 days",
+    returnPolicy: "5 days return policy",
+    additionalDetails: "Machine washable and weatherproof.this product is sold out",
+  
     images: [
       "https://i.pinimg.com/736x/22/3e/6e/223e6ec6ab0a025177a6502a10d4cceb.jpg",
       "https://i.pinimg.com/736x/1f/f9/3e/1ff93ece8aa88d219e7f653815af9968.jpg",
@@ -360,107 +625,110 @@ const products = [
       "Black": "https://i.pinimg.com/736x/22/3e/6e/223e6ec6ab0a025177a6502a10d4cceb.jpg"
     },
     specifications: {
-      "Material": "100% Cotton",
-      "Fit": "Oversized",
-      "Sleeve": "Short",
-      "Neck": "Round Neck"
+      Material: "100% Cotton",
+      Fit: "Oversized",
+      Sleeve: "Short",
+      Neck: "Round Neck"
     }
   },
   {
-    id: 8,
-    name: "Nxew's white-Sweat T-Shirt",
-    description: "Stylish and comfortable to wear.",
-    category: "sweat T-Shirts",
+    id: 16,
+    name: "Nxew's White Sweat T-Shirt",
+    description: "Stylish and comfortable sweat t-shirt for cooler days",
+    category: "Sweat T-Shirts",
     price: 449.99,
-    discount: 32, // 15% discount set by owner
-    size: " XL, XXL",
-    color: "white",
-    clothType: "100% cotton",
+    discount: 32,
+    size: "XL, XXL",
+    color: "White",
+    clothType: "100% Cotton",
     deliveryTime: "3-5 days",
     returnPolicy: "5 days return policy",
-    additionalDetails: "High-quality cotton , perfect for winter.",
+    additionalDetails: "High-quality cotton, perfect for winter",
+  
     images: [
       "https://i.pinimg.com/736x/f1/4f/81/f14f81d82a4cc1f45abc6f0a9f5deffe.jpg",
-      "https://i.pinimg.com/736x/67/45/86/674586f94e1db394448a9ab0257cc729.jpg",
+      "https://i.pinimg.com/736x/67/45/86/674586f94e1db394448a9ab0257cc729.jpg"
     ],
     colorImages: {
-      "white": "https://i.pinimg.com/736x/f1/4f/81/f14f81d82a4cc1f45abc6f0a9f5deffe.jpg",
-
+      "White": "https://i.pinimg.com/736x/f1/4f/81/f14f81d82a4cc1f45abc6f0a9f5deffe.jpg"
     },
     specifications: {
-      "Material": "100% cotton",
-      "Fit": "Slim Fit",
-      "Sleeve": "Long Sleeve",
-      "Neck": "Collareless"
+      Material: "100% Cotton",
+      Fit: "Slim Fit",
+      Sleeve: "Long Sleeve",
+      Neck: "Collarless"
     }
   },
   {
-    id: 9,
-    name: "Nxew's Black  Sweat T-Shirt",
-    description: "Weather proof.",
-    category: "sweat T-Shirts",
+    id: 17,
+    name: "Nxew's Black Sweat T-Shirt",
+    description: "Weatherproof black sweat t-shirt for versatile wear",
+    category: "Sweat T-Shirts",
     price: 499.99,
-    discount: 37, // 12% discount set by owner
-    size: " XXL",
-    color: "Black ",
-    clothType: "100% Cotton ",
+    discount: 37,
+    size: "XXL",
+    color: "Black",
+    clothType: "100% Cotton",
     deliveryTime: "3-5 days",
     returnPolicy: "5 days return policy",
-    additionalDetails: "Breathable fabric,Comfortable to wear.",
+    additionalDetails: "Breathable fabric, comfortable to wear",
+   
     images: [
-          "https://i.pinimg.com/736x/a8/28/16/a82816b8a65b325163dd0271d08780c4.jpg",
-      "https://i.pinimg.com/736x/a7/00/04/a70004de24160bca35a5ce2a16012957.jpg",
+      "https://i.pinimg.com/736x/a8/28/16/a82816b8a65b325163dd0271d08780c4.jpg",
+      "https://i.pinimg.com/736x/a7/00/04/a70004de24160bca35a5ce2a16012957.jpg"
     ],
     colorImages: {
-      "Black": "https://i.pinimg.com/736x/68/41/79/684179f8e602a855fc3a87695ed47d76.jpg",
+      "Black": "https://i.pinimg.com/736x/68/41/79/684179f8e602a855fc3a87695ed47d76.jpg"
     },
     specifications: {
-      "Material": "100% cotton",
-      "Fit": "Regular Fit",
-      "Sleeve": "Long Sleeve",
-      "Neck": "Collarless"
+      Material: "100% Cotton",
+      Fit: "Regular Fit",
+      Sleeve: "Long Sleeve",
+      Neck: "Collarless"
     }
   },
- {
-  id: 10,
-  name: "Nxew's Half sleeve Shirt",
-  description: "RELAXED FIT EMBROIDERED SHIRT",
-  category: "Half sleeve Shirts",
-  price: 349.99,
-  discount: 20,
-  size: "L",
-  color: "Blue",
-  clothType: "Cotton Viscose",
-  deliveryTime: "3-5 days",
-  returnPolicy: "5 days return policy",
-  additionalDetails: "Stylish and comfortable, perfect for casual outings. This product is sold out.",
-  images: [
-    "https://i.pinimg.com/736x/ca/d0/dd/cad0dd3c7f3880dee714da8bdecdf723.jpg",
-    "https://i.pinimg.com/736x/13/1d/aa/131daac4414ce7338ccdd6941ad7d130.jpg"
-  ],
-  colorImages: {
-    "Blue": "https://i.pinimg.com/736x/ca/d0/dd/cad0dd3c7f3880dee714da8bdecdf723.jpg"
-  },
-  specifications: {
-    "Material": "Cotton Viscose",
-    "Fit": "Relaxed Fit",
-    "Sleeve": "Half Sleeves",
-    "Neck": "Cuban Collar"
-  }
-},
   {
-    id: 11,
-    name: "Half sleeve Acid wash T-Shirt",
-    description: "RELAXED FIT EMBROIDERED T-SHIRT",
+    id: 18,
+    name: "Nxew's Half Sleeve Embroidered Shirt",
+    description: "Relaxed fit embroidered half-sleeve shirt",
+    category: "Half Sleeve Shirts",
+    price: 349.99,
+    discount: 20,
+    size: "L",
+    color: "Blue",
+    clothType: "Cotton Viscose",
+    deliveryTime: "3-5 days",
+    returnPolicy: "5 days return policy",
+    additionalDetails: "Stylish and comfortable, perfect for casual outings.this product is sold out",
+
+    images: [
+      "https://i.pinimg.com/736x/ca/d0/dd/cad0dd3c7f3880dee714da8bdecdf723.jpg",
+      "https://i.pinimg.com/736x/13/1d/aa/131daac4414ce7338ccdd6941ad7d130.jpg"
+    ],
+    colorImages: {
+      "Blue": "https://i.pinimg.com/736x/ca/d0/dd/cad0dd3c7f3880dee714da8bdecdf723.jpg"
+    },
+    specifications: {
+      Material: "Cotton Viscose",
+      Fit: "Relaxed Fit",
+      Sleeve: "Half Sleeves",
+      Neck: "Cuban Collar"
+    }
+  },
+  {
+    id: 19,
+    name: "Half Sleeve Acid Wash T-Shirt",
+    description: "Relaxed fit embroidered acid wash t-shirt",
     category: "T-Shirts",
     price: 249.99,
-    discount: 24, // 15% discount set by owner
+    discount: 24,
     size: "L",
-    color: "BLue",
-    clothType: "Cotton",
+    color: "Blue",
+    clothType: "100% Cotton",
     deliveryTime: "3-5 days",
     returnPolicy: "5 days return policy",
     additionalDetails: "Men's Blue Hustle Typography Oversized Acid Wash T-shirt",
+  
     images: [
       "https://i.pinimg.com/736x/8b/0b/21/8b0b21072e783ba7534c8975519f2d85.jpg",
       "https://i.pinimg.com/736x/81/91/62/81916265cf66a6079ff353528add0773.jpg",
@@ -470,42 +738,139 @@ const products = [
       "Blue": "https://i.pinimg.com/736x/8b/0b/21/8b0b21072e783ba7534c8975519f2d85.jpg"
     },
     specifications: {
-      "Material": "Cotton",
-      "Fit": "Relaxed Fit",
-      "Sleeve": "Half Sleeves",
-      "Neck": "Round Neck",
-      "Cloth Type": "100% Cotton"
+      Material: "100% Cotton",
+      Fit: "Relaxed Fit",
+      Sleeve: "Half Sleeves",
+      Neck: "Round Neck"
     }
   },
-  {
-    id: 12,
-    name: "Formal Shirt",
-    description: "",
+    {
+    id: 20,
+    name: "Men's Light Green & white strips  Shirt",
+    description: "Classic Green & white striped shirt for versatile casual wear and formal wear. A fresh and vibrant button-down featuring a multi-colored grid plaid pattern. Set against a creamy off-white base, the shirt is detailed with bold light green and white intersecting lines.",
     category: "Shirts",
-    price: 449.99,
-    discount: 25, // 15% discount set by owner
+    price: 499.99,
+    discount: 25,
     size: "L",
-    color: "Gray",
-    clothType: "Cotton cum Polyester",
+    color: "Light Green & White Strips",
+    clothType: "Cotton Polyester Blend",
     deliveryTime: "3-5 days",
     returnPolicy: "5 days return policy",
-    additionalDetails: "Men's Gray Hustle Formal shirt.This product is sold out.",
+    additionalDetails: "Hustle formal shirt.Fresh new arrival with premium fabric",
+    
     images: [
-      "https://i.pinimg.com/736x/79/b9/30/79b9303c53a85ef2d2d6928836823672.jpg",
-      "https://i.pinimg.com/736x/8e/7c/0e/8e7c0ef2dbf1c52b6f9bae8a9dcfbae4.jpg",
-      "https://i.pinimg.com/736x/ee/a9/62/eea96278d28fdfa1157f6347fc08a466.jpg"
+      "https://i.pinimg.com/736x/21/d0/7c/21d07c2a51a4b092f59c613fd344bdfa.jpg",
+      "https://i.pinimg.com/736x/44/6b/85/446b852960757c1a001a98beccd9aa1e.jpg",
+      "https://i.pinimg.com/736x/54/44/81/544481d45c8cf8a4c0aa65af9f29ecce.jpg"
     ],
     colorImages: {
-      "Gray": "https://i.pinimg.com/736x/79/b9/30/79b9303c53a85ef2d2d6928836823672.jpg"
+      "Navy": "https://i.pinimg.com/736x/21/d0/7c/21d07c2a51a4b092f59c613fd344bdfa.jpg"
     },
     specifications: {
-      "Material": "Cotton cum Polyester",
-      "Sleeve": "full Sleeves",
-      "collar": " Spread Collar",
-      "Occasion:": "Formal",
-      "Pattern": "Solid",
+      Material: "Cotton Polyester Blend",
+      Sleeve: "Full Sleeves",
+      Collar: "Spread Collar",
+      Occasion: "Formal",
+      Pattern: "Solid",
+      FabricCare: "Machine Wash",
+      Pocket: "Single Chest Pocket"
     }
   },
+   {
+    id: 21,
+    name: "White and Blue Checked Shirt",
+    description: "A classic checked pattern in white and blue",
+    category: "Shirts",
+    price: 449.99,
+    discount: 25,
+    size: "M, L, XL",
+    color: "White/Blue",
+    clothType: "100% Cotton",
+    deliveryTime: "3-5 days",
+    returnPolicy: "5 days return policy",
+    additionalDetails: "Machine washable and weatherproof",
+  
+    images: [
+      "https://i.pinimg.com/736x/21/18/fd/2118fdf81834bed89278637cc28a4b6b.jpg",
+      "https://i.pinimg.com/736x/a9/6a/4d/a96a4d91674df0aa24b501cfd3ed0a7f.jpg",
+      "https://i.pinimg.com/736x/de/50/26/de50269b67041f424977c20648f7f695.jpg",
+      "https://i.pinimg.com/736x/ca/fb/cd/cafbcd9c7bff346dfc123b50a8c78949.jpg"
+    ],
+    colorImages: {
+      "White/Blue": "https://i.pinimg.com/736x/21/18/fd/2118fdf81834bed89278637cc28a4b6b.jpg"
+    },
+    specifications: {
+      Material: "100% Cotton",
+      Fit: "Regular Fit",
+      Sleeve: "Full Sleeve",
+      Wear: "Casual, Formal",
+      Collar: "Spread Collar with checked pattern"
+    }
+  },
+   {
+    id: 22,
+    name: "Men's White & Black Checks Shirt",
+    description: "Classic white and black checked shirt for versatile casual wear and formal wear. The shirt features a timeless design with bold black stripes on a crisp white background, making it a stylish choice for both casual and formal occasions.",
+    category: "Shirts",
+    price: 449.99,
+    discount: 25,
+    size: "L",
+    color: "White & Black Checks",
+    clothType: "Cotton Polyester Blend",
+    deliveryTime: "3-5 days",
+    returnPolicy: "5 days return policy",
+    additionalDetails: "Hustle formal shirt.Fresh new arrival with premium fabric",
+    newArrivalPosition: 10,
+    images: [
+      "https://i.pinimg.com/736x/56/65/96/5665964a2f61fa155940e9633408025b.jpg",
+      "https://i.pinimg.com/736x/0b/5b/66/0b5b66ca6dda06b0a0cc9bed66ba0864.jpg",
+      "https://i.pinimg.com/736x/74/85/ba/7485ba794dc1c115748388dd5edcd2ca.jpg"
+    ],
+    colorImages: {
+      "Navy": "https://i.pinimg.com/736x/56/65/96/5665964a2f61fa155940e9633408025b.jpg"
+    },
+    specifications: {
+      Material: "Cotton Polyester Blend",
+      Sleeve: "Full Sleeves",
+      Collar: "Spread Collar",
+      Occasion: "Formal ",
+      Pattern: "Solid",
+      FabricCare: "Machine Wash",
+      Pocket: "Single Chest Pocket"
+    }
+  },
+   {
+    id: 23,
+    name: "Men's White & Red Strips Shirt",
+    description: "Classic white and red striped shirt for versatile casual wear and formal wear. The shirt features a timeless design with bold red stripes on a crisp white background, making it a stylish choice for both casual and formal occasions.",
+    category: "Shirts",
+    price: 499.99,
+    discount: 25,
+    size: "L",
+    color: "White & Red Strips",
+    clothType: "Cotton Polyester Blend",
+    deliveryTime: "3-5 days",
+    returnPolicy: "5 days return policy",
+    additionalDetails: "Hustle formal shirt.Fresh new arrival with premium fabric",
+   newArrivalPosition: 7,
+    images: [
+      "https://i.pinimg.com/736x/cb/76/57/cb76576fc4651e2d63fe8272d2882f27.jpg",
+      "https://i.pinimg.com/736x/4f/a6/0e/4fa60e6a03321dabef959f40adcace31.jpg",
+      "https://i.pinimg.com/736x/6d/19/e8/6d19e8d0462ac6126338c8b4f9a6a639.jpg"
+    ],
+    colorImages: {
+      "Navy": "https://i.pinimg.com/736x/cb/76/57/cb76576fc4651e2d63fe8272d2882f27.jpg"
+    },
+    specifications: {
+      Material: "Cotton Polyester Blend",
+      Sleeve: "Full Sleeves",
+      Collar: "Spread Collar",
+      Occasion: "Formal and informal",
+      Pattern: "Solid",
+      FabricCare: "Machine Wash",
+      Pocket: "Single Chest Pocket"
+    }
+  }
 ];
 // Save data to localStorage
 function saveData() {
@@ -539,7 +904,7 @@ function loadData() {
   generateProducts("shopProductContainer", products);
   generateProducts("menswearContainer", products.filter(p => p.category === "Men's Wear"));
   generateProducts("accessoriesContainer", products.filter(p => p.category === "Accessories"));
-  generateProducts("featuredProductsContainer", products.slice(0, 20));
+  generateProducts("featuredProductsContainer", products.slice(0, 100));
 }
 // Show notification function
 function showNotification(message, type = "success", options = {}) {
@@ -660,7 +1025,7 @@ function showSearchSuggestions() {
     product.name.toLowerCase().includes(input) ||
     product.description.toLowerCase().includes(input) ||
     product.category.toLowerCase().includes(input)
-  ).slice(0, 5);
+  ).slice(0, 50);
 
   if (suggestions.length === 0) {
     suggestionsContainer.style.display = "none";
@@ -1032,10 +1397,10 @@ function getRecommendedProducts(currentProductId) {
       p.category !== currentProduct.category &&
       p.id !== currentProductId
     );
-    recommendations = [...recommendations, ...otherProducts.slice(0, 20 - recommendations.length)];
+    recommendations = [...recommendations, ...otherProducts.slice(0, 100 - recommendations.length)];
   }
 
-  return recommendations.slice(0, 20);
+  return recommendations.slice(0, 100);
 }
 
 // Generate recommended products with fixed discount
@@ -1265,8 +1630,6 @@ function addToCartWithSelection(productId) {
     saveData();
   }
 }
-
-// Buy product with selection
 // Buy product with selection
 function buyProductWithSelection(productId) {
   if (!currentUser) {
@@ -2294,7 +2657,7 @@ document.getElementById("feedbackForm")?.addEventListener("submit", function(e) 
              product.name.toLowerCase().includes(input) || 
              product.description.toLowerCase().includes(input) ||
              product.category.toLowerCase().includes(input)
-           ).slice(0, 5);
+           ).slice(0, 50);
            
            if (suggestions.length === 0) {
              suggestionsContainer.style.display = "none";
@@ -2938,3 +3301,138 @@ window.addEventListener('load', function() {
     }
   }
 });
+// ====================== COMPLETE UPDATED CODE ======================
+
+// Function to fetch products from the backend (kept as-is)
+async function loadProducts() {
+    try {
+      const response = await fetch('/api/products');
+      if (!response.ok) throw new Error('Failed to fetch products');
+      const products = await response.json();
+      return products;
+    } catch (error) {
+      console.error('Error fetching products:', error);
+      showNotification('Failed to load products. Please try again later.', 'danger');
+      return [];
+    }
+}
+
+// ==================== UPDATED FILTER FUNCTION (THIS IS THE KEY CHANGE) ====================
+function filterShopByCategory(category) {
+  const searchBarContainer = document.getElementById("searchBarContainer");
+
+  let filteredProducts = [...products];
+  let countText = `${products.length} products`;
+
+  if (category && category !== 'All') {
+    // Specific category → hide search bar (original behavior)
+    searchBarContainer.style.display = "none";
+    filteredProducts = products.filter(p => p.category === category);
+    countText = `${filteredProducts.length} ${category} products`;
+  } else {
+    // "All" clicked → SHOW search bar + filters
+    searchBarContainer.style.display = "flex";
+    activeFilters = {};                    // reset any previous filters
+    countText = `${products.length} products`;
+  }
+
+  // Update count
+  const countEl = document.getElementById('shopResultsCount');
+  if (countEl) countEl.textContent = countText;
+
+  // Generate products
+  generateProducts("shopProductContainer", filteredProducts, true);
+
+  // Show shop section (this also calls applyFilters() for full filter support)
+  showSection('shopSection');
+
+  // Scroll to top
+  document.getElementById('shopSection').scrollIntoView({ behavior: 'smooth' });
+}
+
+// ==================== REST OF YOUR CODE (cleaned & deduplicated) ====================
+
+// Show section
+function showSection(sectionId) {
+  const sections = document.querySelectorAll('.section');
+  sections.forEach(section => {
+    section.classList.remove('fade-in');
+    section.style.display = 'none';
+  });
+  const activeSection = document.getElementById(sectionId);
+  if (activeSection) {
+    activeSection.style.display = 'block';
+    setTimeout(() => activeSection.classList.add('fade-in'), 10);
+  }
+
+  updateUserActivity();
+
+  if (sectionId === 'shopSection') {
+    applyFilters();
+  } else if (sectionId === 'menswearSection') {
+    applyMenswearFilters();
+  } else if (sectionId === 'accessoriesSection') {
+    applyAccessoriesFilters();
+  } else if (sectionId === 'accountSection') {
+    updateAccountSection();
+  } else if (sectionId === 'cartSection') {
+    updateCartSection();
+  } else if (sectionId === 'notificationsSection') {
+    updateNotifications();
+  } else if (sectionId === 'ordersSection') {
+    updateOrdersList();
+  } else if (sectionId === 'sellerDashboard' || sectionId === 'ownerDashboard') {
+    if (currentUser && currentUser.email === 'tedpole.in@gmail.com') {
+      sectionId === 'sellerDashboard' ? updateSellerDashboard() : updateOwnerDashboard();
+    } else {
+      showNotification('Access denied. Only the owner can view this dashboard.', 'danger');
+      showSection('homeSection');
+    }
+  }
+}
+
+// ==================== UPDATED FILTER FUNCTION (CUSTOM PLACEMENT SUPPORT) ====================
+function filterShopByCategory(category) {
+  const searchBarContainer = document.getElementById("searchBarContainer");
+  let filteredProducts = [...products];
+  let countText = `${products.length} products`;
+  
+  if (category === 'New Arrivals') {
+    // Special case: Show only products marked as "New Arrival" in additionalDetails
+    // Hide search bar for focused view
+    searchBarContainer.style.display = "none";
+    filteredProducts = products.filter(p => 
+      p.additionalDetails && 
+      p.additionalDetails.toLowerCase().includes('new arrival')
+    ).sort((a, b) => {
+      // ✅ CUSTOM SORT: Use newArrivalPosition (low to high) or fallback to ID descending
+      const posA = a.newArrivalPosition || a.id;
+      const posB = b.newArrivalPosition || b.id;
+      return posA - posB;  // Ascending: Lower position first (or higher ID if no position)
+    });
+    countText = `${filteredProducts.length} New Arrivals`;
+  } else if (category && category !== 'All') {
+    // Existing category behavior
+    searchBarContainer.style.display = "none";
+    filteredProducts = products.filter(p => p.category === category);
+    countText = `${filteredProducts.length} ${category} products`;
+  } else {
+    // "All" clicked → SHOW search bar + filters
+    searchBarContainer.style.display = "flex";
+    activeFilters = {}; // reset any previous filters
+    countText = `${products.length} products`;
+  }
+  
+  // Update count
+  const countEl = document.getElementById('shopResultsCount');
+  if (countEl) countEl.textContent = countText;
+  
+  // Generate products
+  generateProducts("shopProductContainer", filteredProducts, true);
+  
+  // Show shop section (this also calls applyFilters() for full filter support)
+  showSection('shopSection');
+  
+  // Scroll to top
+  document.getElementById('shopSection').scrollIntoView({ behavior: 'smooth' });
+}
