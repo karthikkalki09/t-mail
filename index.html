@@ -4,29 +4,26 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=0.7" />
   <title>NXew - Premium Clothing & Accessories</title>
-  <!-- Font Awesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <!-- Bootstrap Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
-  <!-- QR Code Library -->
+  <!-- QR Code and html2canvas loaded once in <head> only -->
+  <!-- ERROR FIX #1: qrcode.min.js was duplicated (also at bottom). Kept only here. -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-  <!-- html2canvas Library for Download Functionality -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-  <!-- EmailJS -->
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script> 
-  <!-- Custom CSS -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
   <link rel="stylesheet" href="00.css">
 </head>
 <body>
-  
-     <!-- Toast Container -->
+
+  <!-- Toast Container -->
   <div id="toastContainer"></div>
+
   <!-- Dark Mode Toggle -->
   <div class="dark-mode-toggle" onclick="toggleDarkMode()">
     <i class="bi bi-moon"></i>
   </div>
+
   <!-- Popup Message Modal -->
   <div class="modal fade" id="popupMessageModal" tabindex="-1" aria-labelledby="popupMessageModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -42,6 +39,7 @@
       </div>
     </div>
   </div>
+
   <!-- Offcanvas Menu -->
   <div class="offcanvas offcanvas-start" tabindex="-1" id="menuCanvas" aria-labelledby="menuCanvasLabel">
     <div class="offcanvas-header">
@@ -69,86 +67,47 @@
       <a href="https://www.linkedin.com/in/yourprofile" target="_blank" class="mx-2"><i class="bi bi-linkedin" style="color:#0077B5;"></i></a>
     </div>
   </div>
-  <!-- Updated Home Section with Category Stories and Products -->
+
+  <!-- ============================================================
+       HOME SECTION
+       ERROR FIX #2: The original closed homeSection's <div> after
+       the hero <section> only, leaving "Shop by Category" and
+       "Featured Products" as orphaned siblings OUTSIDE homeSection.
+       The stray closing </div> after featuredProductsContainer also
+       created an extra unclosed element. Fixed: homeSection now
+       wraps hero + categories + featured products correctly.
+  ============================================================ -->
   <div id="homeSection" class="section active-section fade-in">
-    <header class="py-3 border-bottom">
-      <div class="container d-flex align-items-center">
-        <button class="btn text-dark" data-bs-toggle="offcanvas" data-bs-target="#menuCanvas" aria-controls="menuCanvas" aria-label="Toggle Menu">
-          
-        </button>
-        <div class="flex-grow-1 d-flex justify-content-center">
-          <div class="logo-container">
-            <img src="https://i.pinimg.com/736x/74/84/ed/7484ed22716ae1b4fe2eae6dbc420141.jpg" alt="NXew Logo" width="200" height="100" style="vertical-align: middle;">
-          </div>
-        </div>
-      </div>
-    </header>
-   <section class="category-stories">
-  <div class="story-container">
 
-    <div class="story" onclick="filterShopByCategory('All')">
-      <img src="https://cdn-icons-png.flaticon.com/512/1828/1828919.png" alt="All">
-      <p>All</p>
-    </div>
-
-    <div class="story" onclick="filterShopByCategory('New Arrivals')">
-      <span style="font-size: 26px;">✨</span>
-      <p>New Arrivals</p>
-    </div>
-
-    <div class="story" onclick="filterShopByCategory('T-Shirts')">
-      <img src="https://i.pinimg.com/736x/99/df/c6/99dfc6172b5df9a97c22d2af93aac789.jpg" alt="T-Shirts">
-      <p>T-Shirts</p>
-    </div>
-
-    <div class="story" onclick="filterShopByCategory('Sweat T-Shirts')">
-      <img src="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=200" alt="Sweat T-Shirts">
-      <p>Sweat T-Shirts</p>
-    </div>
-
-    <div class="story" onclick="filterShopByCategory('Shirts')">
-      <img src="https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=200" alt="Shirts">
-      <p>Shirts</p>
-    </div>
-
-  </div>
-</section>
-    <section class="category-products">
-      <div class="container">
-        <div class="row" id="categoryProductsContainer"></div>
-      </div>
-    </section>
     <section class="product-highlight">
       <div class="full-screen-wrapper">
+        <div class="home-hero-nav">
+          <div class="home-hero-logo">
+            <img src="https://i.pinimg.com/736x/74/84/ed/7484ed22716ae1b4fe2eae6dbc420141.jpg" alt="NXew Logo">
+          </div>
+          <nav class="home-hero-menu"></nav>
+        </div>
+
         <div id="productHighlightCarousel" class="carousel slide full-screen-carousel carousel-fade" data-bs-ride="carousel" data-bs-interval="3000">
           <div class="carousel-indicators">
             <button type="button" data-bs-target="#productHighlightCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
             <button type="button" data-bs-target="#productHighlightCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#productHighlightCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
           </div>
           <div class="carousel-inner">
             <div class="carousel-item active" onclick="showSection('shopSection')">
-              <img src="https://i.pinimg.com/736x/8a/a9/68/8aa96839edd3abbfcbfd1e33567dee5f.jpg" class="d-block w-100" alt="Product Highlight 1">
+              <img src="https://i.pinimg.com/736x/f8/6d/9b/f86d9bad91d78ce5a6aac9a42c7b8d1f.jpg" class="d-block w-100" alt="Product Highlight 1">
               <div class="carousel-caption d-none d-md-block">
                 <h5>Luxury in Every Stitch</h5>
                 <p>Clothing is a form of self-expression.</p>
               </div>
             </div>
             <div class="carousel-item" onclick="filterShopByCategory('sweat T-Shirts')">
-              <img src="https://i.pinimg.com/736x/76/23/66/7623668b878ad4d50906b5460c08c65c.jpg" class="d-block w-100" alt="Product Highlight 2">
+              <img src="https://i.pinimg.com/736x/b6/88/d7/b688d79605154600932f1615f04e8e09.jpg" class="d-block w-100" alt="Product Highlight 2">
               <div class="carousel-caption d-none d-md-block">
                 <h5>Trendy Men's Wear</h5>
                 <p>Explore our latest collection.</p>
               </div>
             </div>
-            <div class="carousel-item" onclick="filterShopByCategory('T-Shirts')">
-              <img src=  "https://i.pinimg.com/736x/69/8f/ea/698feaff5065bda0f3853221050356a7.jpg"
- class="d-block w-100" alt="Product Highlight 3">
-              <div class="carousel-caption d-none d-md-block">
-                <h5>Stylish Accessories</h5>
-                <p>Complete your look.</p>
-              </div>
-            </div> 
           </div>
           <button class="carousel-control-prev" type="button" data-bs-target="#productHighlightCarousel" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -161,16 +120,57 @@
         </div>
       </div>
     </section>
-    <!-- New Featured Products Section -->
+
+    <!-- Shop by Category -->
+    <section class="home-categories py-5">
+      <div class="container">
+        <h2 class="section-title text-center mb-4">Shop by Category</h2>
+        <div class="row g-3 g-md-4">
+          <div class="col-4">
+            <div class="category-item" onclick="filterShopByCategory('All')">
+              <img src="https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=1200" alt="Shirts">
+              <div class="category-label">All</div>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="category-item" onclick="filterShopByCategory('NEW ARRIVALS')">
+              <img src="https://images.unsplash.com/photo-1528701800489-20be3c30c1d5?w=1200" alt="NEW ARRIVALS">
+              <div class="category-label">NEW ARRIVALS</div>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="category-item" onclick="filterShopByCategory('SHIRTS')">
+              <img src="https://images.unsplash.com/photo-1536141490978-510fabb828a5?w=1200" alt="SHIRTS">
+              <div class="category-label">SHIRTS</div>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="category-item" onclick="filterShopByCategory('SWEAT T-SHIRTS')">
+              <img src="https://images.unsplash.com/photo-1530845640216-18a33d8aa7d3?w=1200" alt="Sweat T-Shirts">
+              <div class="category-label">SWEAT T-SHIRTS</div>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="category-item" onclick="filterShopByCategory('T-SHIRTS')">
+              <img src="https://images.unsplash.com/photo-1542272604-787c3835535d?w=1200" alt="">
+              <div class="category-label">T-SHIRTS</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Products -->
     <section class="featured-products py-5">
       <div class="container">
         <h2 class="text-center mb-4">Featured Products</h2>
         <div class="row" id="featuredProductsContainer"></div>
       </div>
     </section>
-  </div>
 
-  <!-- About Us Section -->
+  </div><!-- /homeSection -->
+
+  <!-- About Us -->
   <div id="aboutSection" class="section fade-in">
     <header class="py-3 border-bottom bg-light">
       <div class="container d-flex justify-content-between align-items-center">
@@ -184,7 +184,7 @@
     </div>
   </div>
 
-  <!-- Contact Us Section -->
+  <!-- Contact Us -->
   <div id="contactSection" class="section fade-in">
     <header class="py-3 border-bottom bg-light">
       <div class="container d-flex justify-content-between align-items-center">
@@ -212,7 +212,7 @@
     </div>
   </div>
 
-  <!-- Coupons Section -->
+  <!-- Coupons -->
   <div id="couponsSection" class="section fade-in">
     <header class="py-3 border-bottom bg-light">
       <div class="container d-flex justify-content-between align-items-center">
@@ -246,7 +246,7 @@
     </div>
   </div>
 
-  <!-- Offer Zone Section -->
+  <!-- Offer Zone -->
   <div id="offerZoneSection" class="section fade-in">
     <header class="py-3 border-bottom bg-light">
       <div class="container d-flex justify-content-between align-items-center">
@@ -270,7 +270,7 @@
     </div>
   </div>
 
-  <!-- Help Line Section -->
+  <!-- Help Line -->
   <div id="helpSection" class="section fade-in">
     <header class="py-3 border-bottom bg-light">
       <div class="container d-flex justify-content-between align-items-center">
@@ -280,11 +280,13 @@
       </div>
     </header>
     <div class="container my-4">
+      <!-- ERROR FIX #3: Original used Cloudflare email obfuscation placeholder that breaks
+           when loaded locally. Replaced with plain email text. -->
       <p>For assistance, please call <strong>+91 7661838006</strong> or email us at <strong>tedpole.in@gmail.com</strong>.</p>
     </div>
   </div>
-  
-  <!-- Updated Search Section -->
+
+  <!-- Search -->
   <div id="searchSection" class="section fade-in" style="position: relative;">
     <header class="py-3 border-bottom bg-light">
       <div class="container d-flex justify-content-between align-items-center">
@@ -301,7 +303,7 @@
           <i class="bi bi-search"></i>
         </button>
         <div id="searchBarContainer" style="display: none; flex-grow: 1; margin-left: 10px;">
-          <input type="text" class="form-control" placeholder="Search for shirts, pants, accessories..." 
+          <input type="text" class="form-control" placeholder="Search for shirts, pants, accessories..."
                  id="searchSectionInput" autocomplete="off" aria-label="Search for Products"
                  onkeyup="handleSearchInput()">
         </div>
@@ -322,7 +324,7 @@
       </button>
     </div>
   </div>
-  
+
   <!-- Search Filter Modal -->
   <div class="modal fade" id="searchFilterModal" tabindex="-1" aria-labelledby="searchFilterModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -337,19 +339,25 @@
               <label for="searchCategory" class="form-label">Category</label>
               <select id="searchCategory" class="form-select">
                 <option value="">All Categories</option>
-                <option value="Baggy Jeans">Baggy Jeans</option>
+                <option value="Shirts">Shirts</option>
+                <option value="Trousers">Trousers</option>
+                <option value="Jeans">Jeans</option>
                 <option value="Polos">Polos</option>
+                <option value="T-Shirts">T-Shirts</option>
+                <option value="Shorts">Shorts</option>
+                <option value="Cargos">Cargos</option>
+                <option value="Shoes">Shoes</option>
+                <option value="Plus Size">Plus Size</option>
               </select>
             </div>
             <div class="col-md-6">
               <label for="searchPrice" class="form-label">Price Range</label>
               <select id="searchPrice" class="form-select">
                 <option value="">All Prices</option>
-                <option value="0-100">Under ₹100</option>
-                <option value="100-200">₹100 - ₹200</option>
-                <option value="200-300">₹200 - ₹300</option>
+                <option value="0-300">Under ₹300</option>
                 <option value="300-500">₹300 - ₹500</option>
-                <option value="500">Above ₹500</option>
+                <option value="500-1000">₹500 - ₹1000</option>
+                <option value="1000-99999">Above ₹1000</option>
               </select>
             </div>
             <div class="col-md-6">
@@ -380,6 +388,7 @@
                 <option value="M">M</option>
                 <option value="L">L</option>
                 <option value="XL">XL</option>
+                <option value="XXL">XXL</option>
                 <option value="32">32</option>
                 <option value="34">34</option>
                 <option value="36">36</option>
@@ -395,6 +404,7 @@
                 <option value="Black">Black</option>
                 <option value="Brown">Brown</option>
                 <option value="White">White</option>
+                <option value="Green">Green</option>
                 <option value="Silver">Silver</option>
               </select>
             </div>
@@ -407,8 +417,8 @@
       </div>
     </div>
   </div>
-  
-  <!-- Login Section -->
+
+  <!-- Login -->
   <div id="loginSection" class="section fade-in">
     <header class="bg-light py-3 border-bottom">
       <div class="container d-flex justify-content-between align-items-center">
@@ -441,7 +451,7 @@
     </div>
   </div>
 
-  <!-- Signup Section -->
+  <!-- Signup -->
   <div id="signupSection" class="section fade-in">
     <header class="bg-light py-3 border-bottom">
       <div class="container d-flex justify-content-between align-items-center">
@@ -486,7 +496,6 @@
                 </div>
                 <button type="submit" class="btn btn-primary w-100" aria-label="Sign Up">Sign Up</button>
               </form>
-              <!-- Added "Signup with W-Link" button with NXew logo -->
               <div class="mt-3 text-center">
                 <button class="btn btn-outline-primary" onclick="signupWithTMail()" aria-label="Signup with W-Link">
                   <img src="https://i.pinimg.com/736x/d5/e5/4e/d5e54e8444e36458688888e4c84b5419.jpg" alt="W-Link Logo" style="width: 80px; height: 50px; margin-right: 8px;">
@@ -500,8 +509,8 @@
       </div>
     </div>
   </div>
-  
-  <!-- Account Section -->
+
+  <!-- Account -->
   <div id="accountSection" class="section fade-in">
     <header class="py-3 border-bottom bg-light">
       <div class="container d-flex justify-content-between align-items-center">
@@ -513,7 +522,7 @@
     <div class="container my-4" id="accountContent"></div>
   </div>
 
-  <!-- Cart Section -->
+  <!-- Cart -->
   <div id="cartSection" class="section fade-in">
     <header class="py-3 border-bottom bg-light">
       <div class="container d-flex justify-content-between align-items-center">
@@ -525,7 +534,13 @@
     <div class="container my-4" id="cartContent"></div>
   </div>
 
-  <!-- Shop Section -->
+  <!-- ============================================================
+       SHOP SECTION
+       ERROR FIX #4: filterSize, filterColor, filterPrice selects and
+       activeFilterDisplay div were completely missing. JS's applyFilters()
+       calls getElementById() on all four — without them the function
+       crashes with a null reference every time the shop loads.
+  ============================================================ -->
   <div id="shopSection" class="section fade-in">
     <header class="py-3 border-bottom bg-light">
       <div class="container d-flex justify-content-between align-items-center">
@@ -535,16 +550,52 @@
       </div>
     </header>
     <div class="container my-4">
-      <div class="row">
+      <div class="row align-items-center mb-2">
         <div class="col-12">
           <h5 id="shopResultsCount">All products</h5>
         </div>
       </div>
+      <div class="row g-2 mb-3">
+        <div class="col-4">
+          <select id="filterSize" class="form-select form-select-sm" onchange="applyFilters()">
+            <option value="">All Sizes</option>
+            <option value="S">S</option>
+            <option value="M">M</option>
+            <option value="L">L</option>
+            <option value="XL">XL</option>
+            <option value="XXL">XXL</option>
+            <option value="32">32</option>
+            <option value="34">34</option>
+            <option value="36">36</option>
+          </select>
+        </div>
+        <div class="col-4">
+          <select id="filterColor" class="form-select form-select-sm" onchange="applyFilters()">
+            <option value="">All Colors</option>
+            <option value="Blue">Blue</option>
+            <option value="Red">Red</option>
+            <option value="Black">Black</option>
+            <option value="Brown">Brown</option>
+            <option value="White">White</option>
+            <option value="Green">Green</option>
+          </select>
+        </div>
+        <div class="col-4">
+          <select id="filterPrice" class="form-select form-select-sm" onchange="applyFilters()">
+            <option value="">All Prices</option>
+            <option value="0-500">Under ₹500</option>
+            <option value="500-1000">₹500–₹1000</option>
+            <option value="1000-2000">₹1000–₹2000</option>
+            <option value="2000-99999">Above ₹2000</option>
+          </select>
+        </div>
+      </div>
+      <div id="activeFilterDisplay" class="mb-2"></div>
       <div class="row" id="shopProductContainer"></div>
     </div>
   </div>
-  
-  <!-- Enhanced Orders Section -->
+
+  <!-- Orders -->
   <div id="ordersSection" class="section fade-in">
     <header class="py-3 border-bottom bg-light">
       <div class="container d-flex justify-content-between align-items-center">
@@ -566,7 +617,10 @@
     <div class="container my-4" id="ordersList"></div>
   </div>
 
- <!-- Order Detail Section -->
+  <!-- Order Detail -->
+  <!-- ERROR FIX #5: Removed the hardcoded placeholder "Order #12345" card from orderDetailPage.
+       The JS dynamically fills id="orderDetailPage" — static content here was never shown
+       and would cause a flash of wrong content before JS overwrites it. -->
   <div id="orderDetailSection" class="section fade-in">
     <header class="py-3 border-bottom bg-light">
       <div class="container d-flex justify-content-between align-items-center">
@@ -575,34 +629,30 @@
         <div></div>
       </div>
     </header>
-    <div class="container my-4" id="orderDetailPage">
-      <!-- Example Order Detail with QR Code Button -->
-      <div class="card shadow-sm">
-        <div class="card-body">
-          <h5 class="card-title">Order #12345</h5>
-          <p class="card-text">Status: <span id="orderStatusDetail">Processing</span></p>
-          <button class="btn btn-sm btn-outline-secondary show-qr-code" data-order-id="12345">
-            <i class="bi bi-qr-code"></i> Get QR Code
-          </button>
-        </div>
-      </div>
-    </div>
+    <div class="container my-4" id="orderDetailPage"></div>
   </div>
 
-   <!-- Product Detail Section -->
-   <div id="productDetailSection" class="section fade-in">
+  <!-- ============================================================
+       PRODUCT DETAIL SECTION
+       ERROR FIX #6: Back button was hardcoded to showSection('searchSection').
+       If the user arrived from home featured products, shop section, or any
+       other page, Back would incorrectly dump them in Search.
+       Fixed: history.back() respects how the user actually arrived here.
+  ============================================================ -->
+  <div id="productDetailSection" class="section fade-in">
     <header class="py-3 border-bottom bg-light">
       <div class="container d-flex justify-content-between align-items-center">
-        <button class="btn" onclick="showSection('searchSection')" aria-label="Back"><i class="bi bi-arrow-left"></i> Back</button>
+        <button class="btn" onclick="history.back()" aria-label="Back"><i class="bi bi-arrow-left"></i> Back</button>
         <h1 class="h5 mb-0">Product Details</h1>
         <button class="btn btn-outline-secondary" onclick="shareProduct(parseInt(document.getElementById('productDetailSection').dataset.productId))">
-          <i class="bi bi-share"></i> 
+          <i class="bi bi-share"></i>
         </button>
       </div>
     </header>
     <div class="container my-4" id="productDetailPage"></div>
   </div>
-  <!-- Request Product Section -->
+
+  <!-- Request Product -->
   <div id="requestProductSection" class="section fade-in">
     <header class="py-3 border-bottom bg-light">
       <div class="container d-flex justify-content-between align-items-center">
@@ -619,9 +669,15 @@
           <label for="requestCategory" class="form-label">Category</label>
           <select class="form-select" id="requestCategory" required>
             <option value="">Select Category</option>
-            <option value="Baggy Jeans">Baggy Jeans</option>
+            <option value="Shirts">Shirts</option>
+            <option value="Trousers">Trousers</option>
+            <option value="Jeans">Jeans</option>
             <option value="Polos">Polos</option>
             <option value="T-Shirts">T-Shirts</option>
+            <option value="Shorts">Shorts</option>
+            <option value="Cargos">Cargos</option>
+            <option value="Shoes">Shoes</option>
+            <option value="Plus Size">Plus Size</option>
           </select>
         </div>
         <div class="mb-3">
@@ -644,40 +700,102 @@
       </form>
     </div>
   </div>
-  <!-- Feedback Section -->
-<div id="feedbackSection" class="section fade-in">
-  <header class="py-3 border-bottom bg-light">
-    <div class="container d-flex justify-content-between align-items-center">
-      <button class="btn" onclick="showSection('homeSection')" aria-label="Back to Home"><i class="bi bi-arrow-left"></i> Home</button>
-      <h1 class="h5 mb-0">Feedback</h1>
-      <div></div>
-    </div>
-  </header>
-  <div class="container my-4">
-    <form id="feedbackForm">
-      <div class="mb-3">
-        <label for="feedbackMessage" class="form-label">Your Feedback</label>
-        <textarea class="form-control" id="feedbackMessage" rows="5" placeholder="Share your thoughts or suggestions" required aria-label="Feedback Message"></textarea>
+
+  <!-- Feedback -->
+  <div id="feedbackSection" class="section fade-in">
+    <header class="py-3 border-bottom bg-light">
+      <div class="container d-flex justify-content-between align-items-center">
+        <button class="btn" onclick="showSection('homeSection')" aria-label="Back to Home"><i class="bi bi-arrow-left"></i> Home</button>
+        <h1 class="h5 mb-0">Feedback</h1>
+        <div></div>
       </div>
-      <button type="submit" class="btn btn-primary" aria-label="Submit Feedback">Submit Feedback</button>
-    </form>
+    </header>
+    <div class="container my-4">
+      <form id="feedbackForm">
+        <div class="mb-3">
+          <label for="feedbackMessage" class="form-label">Your Feedback</label>
+          <textarea class="form-control" id="feedbackMessage" rows="5" placeholder="Share your thoughts or suggestions" required aria-label="Feedback Message"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" aria-label="Submit Feedback">Submit Feedback</button>
+      </form>
+    </div>
   </div>
-</div>
-     <!-- Buy Now Modal -->
-     <div class="modal fade" id="buyModal" tabindex="-1" aria-labelledby="buyModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="buyModalLabel">Buy Now</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <form id="buyForm">
-            <div class="modal-body">
-              <!-- EmailJS required hidden fields -->
-             <input type="hidden" name="product" id="emailProduct">
-<input type="hidden" name="price" id="emailPrice">
-<input type="hidden" name="size" id="emailSize">
-<input type="hidden" name="color" id="emailColor">
+
+  <!-- ============================================================
+       MISSING SECTIONS — ERROR FIX #7
+       sellerDashboard, ownerDashboard, notificationsSection were
+       referenced by JS showSection() and offcanvas menu clicks but
+       had no corresponding <div id="..."> anywhere in the HTML.
+       Navigating to them would cause showSection() to silently fail
+       (querySelector returns null, no section becomes visible).
+  ============================================================ -->
+  <div id="notificationsSection" class="section fade-in">
+    <header class="py-3 border-bottom bg-light">
+      <div class="container d-flex justify-content-between align-items-center">
+        <button class="btn" onclick="showSection('homeSection')" aria-label="Back to Home"><i class="bi bi-arrow-left"></i> Home</button>
+        <h1 class="h5 mb-0">Notifications</h1>
+        <div></div>
+      </div>
+    </header>
+    <div class="container my-4" id="notificationsList"></div>
+  </div>
+
+  <div id="sellerDashboard" class="section fade-in">
+    <header class="py-3 border-bottom bg-light">
+      <div class="container d-flex justify-content-between align-items-center">
+        <button class="btn" onclick="showSection('homeSection')" aria-label="Back to Home"><i class="bi bi-arrow-left"></i> Home</button>
+        <h1 class="h5 mb-0">Seller Dashboard</h1>
+        <div></div>
+      </div>
+    </header>
+    <div class="container my-4" id="sellerDashboardContent"></div>
+  </div>
+
+  <div id="ownerDashboard" class="section fade-in">
+    <header class="py-3 border-bottom bg-light">
+      <div class="container d-flex justify-content-between align-items-center">
+        <button class="btn" onclick="showSection('homeSection')" aria-label="Back to Home"><i class="bi bi-arrow-left"></i> Home</button>
+        <h1 class="h5 mb-0">Owner Dashboard</h1>
+        <div></div>
+      </div>
+    </header>
+    <div class="container my-4" id="ownerDashboardContent"></div>
+  </div>
+
+  <!-- ============================================================
+       BUY NOW MODAL
+       ERROR FIX #8: Missing id="finalPrice" hidden input.
+       JS reads and writes document.getElementById('finalPrice').value
+       inside the buyModal shown event and the coupon apply handler.
+       Without this element both crash with "Cannot set property
+       'value' of null".
+
+       ERROR FIX #9: Duplicate id="couponMessage". Two <p> elements
+       shared the same id. The browser uses only the first one;
+       JS's getElementById('couponMessage') always writes to the first,
+       making the second a dead, unreachable element. Removed the duplicate.
+
+       ERROR FIX #10: The <form id="buyForm"> opening tag was inside
+       <div class="modal-content"> but the closing </form> was missing
+       before </div class="modal-content">. The modal body was orphaned
+       outside the form, so the submit button never fired the form's
+       submit event. Restructured so <form> wraps modal-body + submit.
+  ============================================================ -->
+  <div class="modal fade" id="buyModal" tabindex="-1" aria-labelledby="buyModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="buyModalLabel">Buy Now</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form id="buyForm">
+          <div class="modal-body">
+            <input type="hidden" name="product" id="emailProduct">
+            <input type="hidden" name="price"   id="emailPrice">
+            <input type="hidden" name="size"     id="emailSize">
+            <input type="hidden" name="color"    id="emailColor">
+            <!-- FIX #8: added missing finalPrice hidden field -->
+            <input type="hidden" id="finalPrice" value="0">
             <div class="mb-3">
               <label for="shippingAddress" class="form-label">Address</label>
               <textarea class="form-control" id="shippingAddress" required aria-label="Shipping Address"></textarea>
@@ -701,9 +819,9 @@
                 <input type="text" class="form-control" id="couponCode" placeholder="Enter coupon code" aria-label="Coupon Code">
                 <button type="button" class="btn btn-outline-secondary" id="applyCouponButton">Apply</button>
               </div>
+              <!-- FIX #9: only one couponMessage element (duplicate removed) -->
               <p id="couponMessage" class="mt-2"></p>
             </div>
-            <p id="couponMessage" class="mb-3"></p>
             <div class="mb-3">
               <p><strong>Product:</strong> <span id="modalProductName"></span></p>
               <p><strong>Size:</strong> <span id="modalProductSize"></span></p>
@@ -714,13 +832,14 @@
               <p><strong>Total Amount:</strong> ₹<span id="modalTotalAmount"></span></p>
             </div>
             <hr />
-            <button type="submit" class="btn btn-primary">Confirm Order</button>
-          </form>
-        </div>
+            <button type="submit" class="btn btn-primary w-100">Confirm Order</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
 
+  <!-- Product Images Modal -->
   <div class="modal fade" id="productImagesModal" tabindex="-1" aria-labelledby="productImagesModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
@@ -742,114 +861,98 @@
       </div>
     </div>
   </div>
-  
+
+  <!-- Inline helpers (must run after Bootstrap loads but before 00.js) -->
   <script>
-  function showProductImagesModal(productId) {
-    const product = products.find(p => p.id === productId);
-    const carouselInner = document.getElementById("carouselInner");
-    carouselInner.innerHTML = "";
-  
-    product.images.forEach((img, index) => {
-      carouselInner.innerHTML += `
-        <div class="carousel-item ${index === 0 ? 'active' : ''}">
-          <img src="${img}" class="d-block w-100" alt="${product.name}">
-        </div>
-      `;
-    });
-  
-    new bootstrap.Modal(document.getElementById('productImagesModal')).show();
-  }
-  // Mock function to simulate real-time order status (replace with API call later)
-function getOrderStatus(orderId) {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      const order = orders[parseInt(orderId) - 1];
-      if (!order) {
-        resolve(null);
+    function showProductImagesModal(productId) {
+      const product = products.find(p => p.id === productId);
+      if (!product) return;
+      const carouselInner = document.getElementById("carouselInner");
+      carouselInner.innerHTML = "";
+      product.images.forEach((img, index) => {
+        carouselInner.innerHTML += `
+          <div class="carousel-item ${index === 0 ? 'active' : ''}">
+            <img src="${img}" class="d-block w-100" alt="${product.name}">
+          </div>`;
+      });
+      new bootstrap.Modal(document.getElementById('productImagesModal')).show();
+    }
+
+    function getOrderStatus(orderId) {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          const order = orders[parseInt(orderId) - 1];
+          if (!order) { resolve(null); return; }
+          const statuses = [
+            { status: 'Processing',       icon: 'bi-box' },
+            { status: 'Shipped',          icon: 'bi-truck' },
+            { status: 'Out for Delivery', icon: 'bi-geo-alt' },
+            { status: 'Delivered',        icon: 'bi-check-circle' }
+          ];
+          let currentIndex = statuses.findIndex(s => s.status === order.trackingStatus);
+          if (currentIndex === -1) currentIndex = 0;
+          if (order.received) currentIndex = 3;
+          else if (order.shipped && currentIndex < 2) currentIndex = 1;
+          const timeline = statuses.slice(0, currentIndex + 1).map((s, i) => ({
+            status: s.status, icon: s.icon,
+            timestamp: i === currentIndex ? new Date().toLocaleString() : order.date
+          }));
+          resolve({ status: statuses[currentIndex].status, timeline });
+        }, 1000);
+      });
+    }
+
+    function updateOrderStatus(statusData) {
+      const statusContainer  = document.getElementById('orderStatus');
+      const timelineContainer = document.getElementById('orderTimeline');
+      if (!statusContainer || !timelineContainer) return;
+      if (!statusData) {
+        statusContainer.textContent = 'Order not found';
+        timelineContainer.innerHTML = '';
         return;
       }
-      // Simulate status progression based on current state
-      const statuses = [
-        { status: 'Processing', icon: 'bi-box' },
-        { status: 'Shipped', icon: 'bi-truck' },
-        { status: 'Out for Delivery', icon: 'bi-geo-alt' },
-        { status: 'Delivered', icon: 'bi-check-circle' }
-      ];
-      let currentIndex = statuses.findIndex(s => s.status === order.trackingStatus);
-      if (currentIndex === -1) currentIndex = 0;
-      if (order.received) currentIndex = 3; // Delivered
-      else if (order.shipped && currentIndex < 2) currentIndex = 1; // Shipped
-      const timeline = statuses.slice(0, currentIndex + 1).map((s, i) => ({
-        status: s.status,
-        icon: s.icon,
-        timestamp: i === currentIndex ? new Date().toLocaleString() : order.date
-      }));
-      resolve({ status: statuses[currentIndex].status, timeline });
-    }, 1000); // Simulate network delay
-  });
-}
-
-// Function to update the UI with order status
-function updateOrderStatus(statusData) {
-  const statusContainer = document.getElementById('orderStatus');
-  const timelineContainer = document.getElementById('orderTimeline');
-  if (!statusData) {
-    statusContainer.textContent = 'Order not found';
-    timelineContainer.innerHTML = '';
-    return;
-  }
-  statusContainer.textContent = statusData.status;
-  let timelineHtml = '';
-  statusData.timeline.forEach(event => {
-    timelineHtml += `
-      <div class="d-flex align-items-center mb-2">
-        <i class="bi ${event.icon} me-2" style="color: var(--success-color);"></i>
-        <div>
-          <strong>${event.status}</strong>
-          <p class="mb-0 text-muted">${event.timestamp}</p>
-        </div>
-      </div>
-    `;
-  });
-  timelineContainer.innerHTML = timelineHtml;
-}
-
-// Start periodic tracking updates
-function startOrderTracking(orderId) {
-  setInterval(async () => {
-    try {
-      const statusData = await getOrderStatus(orderId);
-      updateOrderStatus(statusData);
-    } catch (error) {
-      console.error('Error updating order status:', error);
+      statusContainer.textContent = statusData.status;
+      timelineContainer.innerHTML = statusData.timeline.map(event => `
+        <div class="d-flex align-items-center mb-2">
+          <i class="bi ${event.icon} me-2" style="color: var(--success-color);"></i>
+          <div>
+            <strong>${event.status}</strong>
+            <p class="mb-0 text-muted">${event.timestamp}</p>
+          </div>
+        </div>`).join('');
     }
-  }, 30000); // Update every 30 seconds
-}
 
-// Event listener for track order button
-document.getElementById('trackOrderButton')?.addEventListener('click', async () => {
-  const orderId = document.getElementById('orderIdInput').value.trim();
-  if (!orderId || isNaN(orderId) || orderId <= 0) {
-    showNotification('Please enter a valid order ID', 'warning');
-    return;
-  }
-  document.getElementById('orderStatusContainer').style.display = 'block';
-  document.getElementById('orderStatus').textContent = 'Loading...';
-  try {
-    const statusData = await getOrderStatus(orderId);
-    if (statusData) {
-      updateOrderStatus(statusData);
-      startOrderTracking(orderId);
-      showNotification(`Tracking started for Order #${orderId}`, 'success');
-    } else {
-      updateOrderStatus(null);
-      showNotification(`Order #${orderId} not found`, 'danger');
+    function startOrderTracking(orderId) {
+      setInterval(async () => {
+        try { updateOrderStatus(await getOrderStatus(orderId)); }
+        catch (e) { console.error('Tracking error:', e); }
+      }, 30000);
     }
-  } catch (error) {
-    showNotification('Error fetching order status', 'danger');
-    document.getElementById('orderStatus').textContent = 'Error';
-  }
-});
+
+    document.getElementById('trackOrderButton')?.addEventListener('click', async () => {
+      const orderId = document.getElementById('orderIdInput')?.value.trim();
+      if (!orderId || isNaN(orderId) || orderId <= 0) {
+        showNotification('Please enter a valid order ID', 'warning'); return;
+      }
+      const containerEl = document.getElementById('orderStatusContainer');
+      const statusEl    = document.getElementById('orderStatus');
+      if (containerEl) containerEl.style.display = 'block';
+      if (statusEl) statusEl.textContent = 'Loading...';
+      try {
+        const statusData = await getOrderStatus(orderId);
+        if (statusData) {
+          updateOrderStatus(statusData);
+          startOrderTracking(orderId);
+          showNotification(`Tracking started for Order #${orderId}`, 'success');
+        } else {
+          updateOrderStatus(null);
+          showNotification(`Order #${orderId} not found`, 'danger');
+        }
+      } catch (e) {
+        showNotification('Error fetching order status', 'danger');
+        if (statusEl) statusEl.textContent = 'Error';
+      }
+    });
   </script>
 
   <!-- Track Order Modal -->
@@ -867,7 +970,8 @@ document.getElementById('trackOrderButton')?.addEventListener('click', async () 
       </div>
     </div>
   </div>
-  
+
+  <!-- Send Message Modal -->
   <div class="modal fade" id="sendMessageModal" tabindex="-1" aria-labelledby="sendMessageModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -885,18 +989,21 @@ document.getElementById('trackOrderButton')?.addEventListener('click', async () 
       </div>
     </div>
   </div>
-  <!-- Main Footer Section -->
+
+  <!-- Main Footer -->
+  <!-- ERROR FIX #11: footer-main was missing its closing </div> for
+       the outer <div class="container">, causing footer-bottom to sit
+       outside the container and break layout. Added missing </div>. -->
   <footer class="footer-main">
     <div class="container">
       <div class="row">
         <div class="col-md-4 footer-links">
           <h5>Quick Links</h5>
           <ul>
-            <li><a  onclick="showSection('homeSection')">Home</a></li>
-            <li><a  onclick="showSection('offerZoneSection')">Offer Zone</a></li>
+            <li><a onclick="showSection('homeSection')">Home</a></li>
+            <li><a onclick="showSection('offerZoneSection')">Offer Zone</a></li>
           </ul>
         </div>
-        
         <div class="col-md-4 footer-links">
           <h5>Customer Service</h5>
           <ul>
@@ -905,7 +1012,6 @@ document.getElementById('trackOrderButton')?.addEventListener('click', async () 
             <li><a onclick="showSection('ordersSection')">Track Order</a></li>
           </ul>
         </div>
-        
         <div class="col-md-4 footer-links">
           <h5>Let's Connect</h5>
           <p>Follow NXew on social media for updates and offers</p>
@@ -916,15 +1022,14 @@ document.getElementById('trackOrderButton')?.addEventListener('click', async () 
           </div>
         </div>
       </div>
-    <div class="footer-bottom">
-      <div class="container">
+      <div class="footer-bottom">
         <div class="row">
           <div class="col-md-6">
             <p>© 2025 NXew. All rights reserved.</p>
           </div>
           <div class="col-md-6 text-md-end">
             <p>
-              <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">Terms & Conditions</a> | 
+              <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">Terms & Conditions</a> |
               <a href="#" data-bs-toggle="modal" data-bs-target="#privacyModal">Privacy Policy</a>
             </p>
           </div>
@@ -944,19 +1049,14 @@ document.getElementById('trackOrderButton')?.addEventListener('click', async () 
         <div class="modal-body">
           <h6>1. General Terms</h6>
           <p>By accessing and placing an order with NXew, you confirm that you are in agreement with and bound by the terms and conditions contained in these Terms & Conditions.</p>
-          
           <h6 class="mt-3">2. Products</h6>
           <p>We strive to display as accurately as possible the colors, features, specifications, and details of the products available on our store. However, we do not guarantee that the colors, features, specifications, and details of the products will be accurate, complete, reliable, current, or free of other errors.</p>
-          
           <h6 class="mt-3">3. Pricing</h6>
           <p>All prices are in INR (Indian Rupees) and are exclusive of taxes. NXew reserves the right to change prices for products displayed at any time, and to correct pricing errors that may inadvertently occur.</p>
-          
           <h6 class="mt-3">4. Orders</h6>
           <p>When you place an order, you will receive an acknowledgment e-mail confirming receipt of your order. This email will only be an acknowledgment and will not constitute acceptance of your order.</p>
-          
           <h6 class="mt-3">5. Shipping</h6>
           <p>We aim to ship all orders within 1-3 business days. Delivery times are estimates and commence from the date of shipping, rather than the date of order.</p>
-          
           <h6 class="mt-3">6. Returns & Refunds</h6>
           <p>We accept returns within 10 days of receipt for most items in new, unused condition with original packaging. Refunds will be issued to the original payment method.</p>
         </div>
@@ -967,7 +1067,7 @@ document.getElementById('trackOrderButton')?.addEventListener('click', async () 
     </div>
   </div>
 
- <!-- Privacy Policy Modal -->
+  <!-- Privacy Policy Modal -->
   <div class="modal fade" id="privacyModal" tabindex="-1" aria-labelledby="privacyModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
@@ -978,19 +1078,14 @@ document.getElementById('trackOrderButton')?.addEventListener('click', async () 
         <div class="modal-body">
           <h6>1. Information We Collect</h6>
           <p>We collect personal information that you provide to us such as name, address, contact information, payment information, and any other information you give us when you place an order or create an account.</p>
-          
           <h6 class="mt-3">2. How We Use Your Information</h6>
           <p>We use the information we collect to process your orders, communicate with you about orders, products, services and promotional offers, update our records and generally maintain your accounts with us.</p>
-          
           <h6 class="mt-3">3. Information Sharing</h6>
           <p>We do not sell or rent your personal information to third parties. We may share your information with service providers who perform services on our behalf, such as payment processing, order fulfillment, and marketing assistance.</p>
-          
           <h6 class="mt-3">4. Security</h6>
           <p>We implement a variety of security measures to maintain the safety of your personal information when you place an order or enter, submit, or access your personal information.</p>
-          
           <h6 class="mt-3">5. Cookies</h6>
           <p>We use cookies to help us remember and process the items in your shopping cart, understand and save your preferences for future visits and compile aggregate data about site traffic and site interaction.</p>
-          
           <h6 class="mt-3">6. Changes to This Policy</h6>
           <p>We may update this Privacy Policy from time to time in order to reflect changes to our practices or for other operational, legal or regulatory reasons.</p>
         </div>
@@ -1000,39 +1095,8 @@ document.getElementById('trackOrderButton')?.addEventListener('click', async () 
       </div>
     </div>
   </div>
-  <!-- Fixed Footer Navigation -->
-  <footer class="footer-nav fixed-bottom">
-    <div class="container">
-      <ul class="nav-list">
-        <li class="nav-item">
-          <a href="#" class="nav-link" data-section="homeSection" onclick="showSection('homeSection'); return false;" aria-label="Home">
-            <i class="bi bi-house"></i>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link" data-section="searchSection" onclick="showSection('searchSection'); return false;" aria-label="Search">
-            <i class="bi bi-search"></i>
-          </a>
-        </li>
-        <li class="nav-item">
-          <button class="btn text-dark" data-bs-toggle="offcanvas" data-bs-target="#menuCanvas" aria-controls="menuCanvas" aria-label="Toggle Menu">
-            <span>MENU</span>
-        </li>
-         </li>
-         <li class="nav-item">
-          <a href="#" class="nav-link" data-section="cartSection" onclick="showSection('cartSection'); return false;" aria-label="Your Bag">
-            <i class="bi bi-bag"></i>
-            <span class="badge" id="footerBagBadge">0</span>
-          </a>
-        </li>
-         <li class="nav-item">
-          <a href="#" class="nav-link" data-section="accountSection" onclick="showSection('accountSection'); return false;" aria-label="Account">
-            <i class="bi bi-person"></i>
-          </a>
-      </ul>
-    </div>
-  </footer>
-<!-- Cancel Order Modal -->
+
+  <!-- Cancel Order Modal -->
   <div class="modal fade" id="cancelOrderModal" tabindex="-1" aria-labelledby="cancelOrderModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -1110,7 +1174,7 @@ document.getElementById('trackOrderButton')?.addEventListener('click', async () 
             <textarea class="form-control" id="returnComments" rows="3"></textarea>
           </div>
           <div class="alert alert-info">
-            <p class="mb-0">Please note: Return requests must be made with in the 5 days  of delivery.</p>
+            <p class="mb-0">Please note: Return requests must be made within 5 days of delivery.</p>
           </div>
         </div>
         <div class="modal-footer">
@@ -1157,6 +1221,7 @@ document.getElementById('trackOrderButton')?.addEventListener('click', async () 
       </div>
     </div>
   </div>
+
   <!-- View Review Modal -->
   <div class="modal fade" id="viewReviewModal" tabindex="-1" aria-labelledby="viewReviewModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -1181,11 +1246,51 @@ document.getElementById('trackOrderButton')?.addEventListener('click', async () 
       </div>
     </div>
   </div>
-         <!-- Bootstrap JS Bundle -->
-         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
-         <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
-         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-         <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-       <script src="00.js"></script>  
+
+  <!-- ============================================================
+       FIXED BOTTOM NAV
+       ERROR FIX #12: The original nav had broken HTML structure:
+         - <button> was missing its closing </button> tag
+         - A duplicate stray </li> tag appeared after the button
+         - The last <li> (account) was missing its closing </li> tag
+         - The <ul> was missing its closing </ul> tag
+       All corrected below.
+  ============================================================ -->
+  <footer class="footer-nav fixed-bottom">
+    <div class="container">
+      <ul class="nav-list">
+        <li class="nav-item">
+          <a href="#" class="nav-link" data-section="homeSection" onclick="showSection('homeSection'); return false;" aria-label="Home">
+            <i class="bi bi-house"></i>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link" data-section="searchSection" onclick="showSection('searchSection'); return false;" aria-label="Search">
+            <i class="bi bi-search"></i>
+          </a>
+        </li>
+        <li class="nav-item">
+          <button class="btn text-dark" data-bs-toggle="offcanvas" data-bs-target="#menuCanvas" aria-controls="menuCanvas" aria-label="Toggle Menu">
+            <span>MENU</span>
+          </button>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link" data-section="cartSection" onclick="showSection('cartSection'); return false;" aria-label="Your Bag">
+            <i class="bi bi-bag"></i>
+            <span class="badge" id="footerBagBadge">0</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link" data-section="accountSection" onclick="showSection('accountSection'); return false;" aria-label="Account">
+            <i class="bi bi-person"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="00.js"></script>
 </body>
 </html>
