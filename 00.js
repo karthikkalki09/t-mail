@@ -238,12 +238,12 @@ const products = [
   additionalDetails: "Men's Green Checked shirt.Fresh new arrival with premium fabric",
   newArrivalPosition: 1,  
   images: [
-    "https://i.pinimg.com/736x/fa/5f/d3/fa5fd3f04ee332ff229cee9f11a7b2ec.jpg",
-    "https://i.pinimg.com/736x/58/36/88/5836881dacd5cc5cc0de3dca2b1f538d.jpg",
-    "https://i.pinimg.com/736x/7a/91/65/7a9165ab1ac18c86adbd41b639bedb71.jpg"
+"https://i.pinimg.com/736x/a6/e6/b2/a6e6b20d7a02165ce7161b4baf2b8f95.jpg",
+    "https://i.pinimg.com/736x/17/84/ae/1784ae9e700a2510f8352f48e50b3329.jpg",
+      "https://i.pinimg.com/736x/54/8f/de/548fde66ecbb64c0ac2de4d872ddd063.jpg"
   ],
   colorImages: {
-    "Green": "https://i.pinimg.com/736x/7a/91/65/7a9165ab1ac18c86adbd41b639bedb71.jpg"
+    "Green":   "https://i.pinimg.com/736x/54/90/95/549095f6f3a913d6557cedb1ba01db21.jpg"
   },
   specifications: {
     Material: "Cotton Polyester Blend",
@@ -305,12 +305,13 @@ description: "A fresh, vibrant button-down featuring a multi-colored grid plaid 
     returnPolicy: "5 days return policy",
 additionalDetails: "Slim-fit checkered shirt with button-down collar and brand hem tag. Fresh new arrival with premium fabric",
     images: [
-      "https://i.pinimg.com/736x/67/df/99/67df99875c3debdefee272c3ad64042c.jpg",
+      "https://i.pinimg.com/736x/32/8b/00/328b00486a04dcb79bffd5c4513bfba2.jpg",
       "https://i.pinimg.com/736x/02/3c/a2/023ca2dd5d7af58f835dd36b0590fdbc.jpg",
-      "https://i.pinimg.com/736x/23/bb/84/23bb84e81082402215441740243ab34b.jpg"
+      "https://i.pinimg.com/736x/9c/f7/98/9cf798afba247c114ed5279a4be88e19.jpg",
+        "https://i.pinimg.com/736x/e2/cc/e6/e2cce66bef9b13a7e8736a4b9ae350ee.jpg"
     ],
     colorImages: {
-      "Charcoal": "https://i.pinimg.com/736x/23/bb/84/23bb84e81082402215441740243ab34b.jpg"
+      "Charcoal": "https://i.pinimg.com/736x/e2/cc/e6/e2cce66bef9b13a7e8736a4b9ae350ee.jpg"
     },
     specifications: {
     Material: "Cotton Blend",
@@ -328,7 +329,6 @@ additionalDetails: "Slim-fit checkered shirt with button-down collar and brand h
     price: 449.99,
     discount: 25,
     size: "L",
-    color: "Green & White",
     clothType: "Cotton  Blend",
     deliveryTime: "3-5 days",
     returnPolicy: "5 days return policy",
@@ -336,12 +336,19 @@ additionalDetails: "Slim-fit checkered shirt with button-down collar and brand h
       newArrivalPosition: 3,  
 
     images: [
-      "https://i.pinimg.com/736x/21/79/5e/21795e6580d954357021b8c38ccac250.jpg",
-      "https://i.pinimg.com/736x/26/62/89/266289a61c2a7fe60e2a09bf27d4db4d.jpg",
-      "https://i.pinimg.com/736x/8c/d4/f5/8cd4f52cdb4ea04c0dfae20574c5f042.jpg"
+      "https://i.pinimg.com/736x/a9/62/30/a96230d5db7689e7ec686ea3907654f9.jpg",
+      "https://i.pinimg.com/736x/a0/d8/6c/a0d86c82dfb3c6cbc3aab1af7f7821e1.jpg",
+      "https://i.pinimg.com/736x/41/5a/a7/415aa70bcdf7ce63abeefb5d0105436d.jpg",
+"https://i.pinimg.com/736x/b3/32/c6/b332c6e7fbe2a4b8e3562de5bdb51368.jpg" 
     ],
     colorImages: {
-      "Slate Gray": "https://i.pinimg.com/736x/26/62/89/266289a61c2a7fe60e2a09bf27d4db4d.jpg"
+      "Light Green & White Strips Plaid": "https://i.pinimg.com/736x/26/62/89/266289a61c2a7fe60e2a09bf27d4db4d.jpg",
+      "Sky blue & Black Strips": "https://i.pinimg.com/736x/b3/32/c6/b332c6e7fbe2a4b8e3562de5bdb51368.jpg",
+      
+     "Black & White Strips Plaid":"https://i.pinimg.com/736x/a9/62/30/a96230d5db7689e7ec686ea3907654f9.jpg",
+      
+      "Dark Green & White Strips Plaid": "https://i.pinimg.com/736x/a0/d8/6c/a0d86c82dfb3c6cbc3aab1af7f7821e1.jpg"
+
     },
     specifications: {
      Material: "Cotton Blend",
@@ -367,12 +374,12 @@ additionalDetails: "Slim-fit checkered shirt with button-down collar and brand h
     newArrivalPosition: 4,  
 
     images: [
-      "https://i.pinimg.com/736x/e4/0c/82/e40c82f8bee5cedd571c4b4390286d98.jpg",
-      "https://i.pinimg.com/736x/8f/c4/82/8fc4821a9115df0ca5fa0f0a91f6cfee.jpg",
-      "https://i.pinimg.com/736x/b6/2d/e9/b62de9364fd3a5b945cd67ed4f747c08.jpg"
+      "https://i.pinimg.com/736x/f5/d8/76/f5d8764b8fd14a270130395f5cd37034.jpg",
+      "https://i.pinimg.com/736x/f8/66/95/f866952853f70e54e9ec5a7e6795cf9b.jpg",
+      "https://i.pinimg.com/736x/0e/79/18/0e7918d4d24c0031b8dbcc6dd04aef94.jpg",
     ],
     colorImages: {
-      "Steel Gray": "https://i.pinimg.com/736x/e4/0c/82/e40c82f8bee5cedd571c4b4390286d98.jpg"
+      "Brown & White": "https://i.pinimg.com/736x/f5/d8/76/f5d8764b8fd14a270130395f5cd37034.jpg"
     },
     specifications: {
       Material: "Cotton  Blend",
@@ -398,8 +405,8 @@ additionalDetails: "Slim-fit checkered shirt with button-down collar and brand h
       newArrivalPosition: 8,
     images: [
       "https://i.pinimg.com/736x/69/8f/ea/698feaff5065bda0f3853221050356a7.jpg",
-      "https://i.pinimg.com/736x/f9/22/c6/f922c67972f4c2191a428733a5ba7ee4.jpg",
-      "https://i.pinimg.com/736x/99/02/f4/9902f4fbd482ac5cbd9f457693b39097.jpg"
+      "https://i.pinimg.com/736x/47/6c/2b/476c2b42e980dd580c8ddb11bd9ac4d7.jpg",
+      "https://i.pinimg.com/736x/26/f4/8b/26f48b3d8d405e8cc37c4d19426634d8.jpg"
     ],
     colorImages: {
       "Ash Gray": "https://i.pinimg.com/736x/69/8f/ea/698feaff5065bda0f3853221050356a7.jpg"
@@ -415,38 +422,9 @@ additionalDetails: "Slim-fit checkered shirt with button-down collar and brand h
       Pocket: "Single Chest Pocket"
     }
   },
+ 
   {
     id: 9,
-    name: "Men's Sky blue & Black strips Shirt",
-    description: "Elegent Sky blue shirt with Black strips, can pull for both formal and informal occasions.",
-    category: "Shirts",
-    price: 449.99,
-    discount: 25,
-    size: "L",
-    color: "Sky blue & Black Strips",
-    clothType: "Cotton Polyester Blend",
-    deliveryTime: "3-5 days",
-    returnPolicy: "5 days return policy",
-    additionalDetails: "Hustle formal shirt.Fresh new arrival with premium fabric",
-    newArrivalPosition: 5,
-    images: [
-      "https://i.pinimg.com/736x/bf/07/81/bf0781122c31dc94ac811c65d4a28eda.jpg",
-      "https://i.pinimg.com/736x/80/25/6e/80256e52b4c047bbdf942e11c68787d1.jpg",
-      "https://i.pinimg.com/736x/f9/27/87/f92787ece53598d5347e4f3c21c795af.jpg"
-    ],
-    colorImages: {
-      "Silver Gray": "https://i.pinimg.com/736x/79/b9/30/79b9303c53a85ef2d2d6928836823672.jpg"
-    },
-    specifications: {
-      Material: "Cotton Polyester Blend",
-      Sleeve: "Full Sleeves",
-      Collar: "Spread Collar",
-      Occasion: "Formal and informal",
-      Pattern: "Solid"
-    }
-  },
-  {
-    id: 10,
     name: "Men's Yellow & Black Checks Shirt",
     description: "Premium Yellow  and Black  checked casual shirt designed for a modern smart look. Soft fabric with a comfortable slim fit, perfect for daily wear and casual outings.",
     category: "Shirts",
@@ -460,13 +438,13 @@ additionalDetails: "Slim-fit checkered shirt with button-down collar and brand h
     additionalDetails: "Breathable fabric, lightweight feel, and durable stitching. Perfect for college, office casual, and weekend styling.Fresh new arrival with premium fabric",
       newArrivalPosition: 12,
     images: [
-      "https://i.pinimg.com/736x/8d/96/88/8d9688320c8d4171c6098390aab0187c.jpg",
-      "https://i.pinimg.com/736x/7f/63/35/7f6335b0ec09381921054e81a343838f.jpg",
-            "https://i.pinimg.com/736x/1a/0b/15/1a0b15b89fa339f46315f142276ebca0.jpg"
+      "https://i.pinimg.com/736x/c4/fe/49/c4fe495ac68d5eef0a30e9b8d61d9221.jpg",
+      "https://i.pinimg.com/736x/86/79/cd/8679cd592544387cb30045b6ee323cbe.jpg",
+            "https://i.pinimg.com/736x/90/3b/17/903b17482f9eb37e10f6fb788281a64d.jpg"
 
     ],
     colorImages: {
-      "Green & White": "https://i.pinimg.com/736x/7f/63/35/7f6335b0ec09381921054e81a343838f.jpg"
+      "Yellow & Black Checks": "https://i.pinimg.com/736x/c4/fe/49/c4fe495ac68d5eef0a30e9b8d61d9221.jpg"
     },
     specifications: {
       Material: "Cotton Blend",
@@ -481,7 +459,7 @@ additionalDetails: "Slim-fit checkered shirt with button-down collar and brand h
     }
   },
   {
-    id: 11,
+    id: 10,
     name: "Men's Brown Slim Fit Shirt",
     description: "Designed in a slim fit, a look that bridges dressy and casual",
     category: "Shirts",
@@ -510,39 +488,9 @@ additionalDetails: "Slim-fit checkered shirt with button-down collar and brand h
       Collar: "Spread Collar"
     }
   },
+
   {
-    id: 12,
-    name: "Men's Dark Green & white strips  Shirt",
-    description: "Classic Green & white striped shirt for versatile casual wear and formal wear. A fresh and vibrant button-down featuring a multi-colored grid plaid pattern. Set against a creamy off-white base, the shirt is detailed with bold green and white intersecting lines.",
-    category: "Shirts",
-    price: 449.99,
-    discount: 25,
-    size: "L",
-    color: "Dark Green & White Strips",
-    clothType: "Cotton Polyester Blend",
-    deliveryTime: "3-5 days",
-    returnPolicy: "5 days return policy",
-    additionalDetails: "Hustle formal shirt.Fresh new arrival with premium fabric",
-    
-    images: [
-      "https://i.pinimg.com/736x/29/67/5f/29675f791555d34422782a0c61601ecc.jpg",
-      "https://i.pinimg.com/736x/42/79/69/42796999793e451c9c0bc30467128520.jpg"
-    ],
-    colorImages: {
-      "Navy": "https://i.pinimg.com/736x/29/67/5f/29675f791555d34422782a0c61601ecc.jpg"
-    },
-    specifications: {
-      Material: "Cotton Polyester Blend",
-      Sleeve: "Full Sleeves",
-      Collar: "Spread Collar",
-      Occasion: "Formal",
-      Pattern: "Solid",
-      FabricCare: "Machine Wash",
-      Pocket: "Single Chest Pocket"
-    }
-  },
-  {
-    id: 13,
+    id: 11,
     name: "Men's Black Jordan Oversized T-Shirt",
     description: "Comfortable and stylish men's oversized t-shirt",
     category: "T-Shirts",
@@ -571,7 +519,7 @@ additionalDetails: "Slim-fit checkered shirt with button-down collar and brand h
     }
   },
   {
-    id: 14,
+    id: 12,
     name: "Nxew's Men's Oversized T-Shirt",
     description: "Comfortable and stylish men's oversized t-shirt",
     category: "T-Shirts",
@@ -602,7 +550,7 @@ additionalDetails: "Slim-fit checkered shirt with button-down collar and brand h
     }
   },
   {
-    id: 15,
+    id: 13,
     name: "Alien Men's Oversized T-Shirt",
     description: "Comfortable and stylish oversized t-shirt with alien graphic",
     category: "T-Shirts",
@@ -632,7 +580,7 @@ additionalDetails: "Slim-fit checkered shirt with button-down collar and brand h
     }
   },
   {
-    id: 16,
+    id: 14,
     name: "Nxew's White Sweat T-Shirt",
     description: "Stylish and comfortable sweat t-shirt for cooler days",
     category: "Sweat T-Shirts",
@@ -660,7 +608,7 @@ additionalDetails: "Slim-fit checkered shirt with button-down collar and brand h
     }
   },
   {
-    id: 17,
+    id: 15,
     name: "Nxew's Black Sweat T-Shirt",
     description: "Weatherproof black sweat t-shirt for versatile wear",
     category: "Sweat T-Shirts",
@@ -688,7 +636,7 @@ additionalDetails: "Slim-fit checkered shirt with button-down collar and brand h
     }
   },
   {
-    id: 18,
+    id: 16,
     name: "Nxew's Half Sleeve Embroidered Shirt",
     description: "Relaxed fit embroidered half-sleeve shirt",
     category: "Half Sleeve Shirts",
@@ -716,7 +664,7 @@ additionalDetails: "Slim-fit checkered shirt with button-down collar and brand h
     }
   },
   {
-    id: 19,
+    id: 17,
     name: "Half Sleeve Acid Wash T-Shirt",
     description: "Relaxed fit embroidered acid wash t-shirt",
     category: "T-Shirts",
@@ -744,40 +692,9 @@ additionalDetails: "Slim-fit checkered shirt with button-down collar and brand h
       Neck: "Round Neck"
     }
   },
-    {
-    id: 20,
-    name: "Men's Light Green & white strips  Shirt",
-    description: "Classic Green & white striped shirt for versatile casual wear and formal wear. A fresh and vibrant button-down featuring a multi-colored grid plaid pattern. Set against a creamy off-white base, the shirt is detailed with bold light green and white intersecting lines.",
-    category: "Shirts",
-    price: 499.99,
-    discount: 25,
-    size: "L",
-    color: "Light Green & White Strips",
-    clothType: "Cotton Polyester Blend",
-    deliveryTime: "3-5 days",
-    returnPolicy: "5 days return policy",
-    additionalDetails: "Hustle formal shirt.Fresh new arrival with premium fabric",
-    
-    images: [
-      "https://i.pinimg.com/736x/21/d0/7c/21d07c2a51a4b092f59c613fd344bdfa.jpg",
-      "https://i.pinimg.com/736x/44/6b/85/446b852960757c1a001a98beccd9aa1e.jpg",
-      "https://i.pinimg.com/736x/54/44/81/544481d45c8cf8a4c0aa65af9f29ecce.jpg"
-    ],
-    colorImages: {
-      "Navy": "https://i.pinimg.com/736x/21/d0/7c/21d07c2a51a4b092f59c613fd344bdfa.jpg"
-    },
-    specifications: {
-      Material: "Cotton Polyester Blend",
-      Sleeve: "Full Sleeves",
-      Collar: "Spread Collar",
-      Occasion: "Formal",
-      Pattern: "Solid",
-      FabricCare: "Machine Wash",
-      Pocket: "Single Chest Pocket"
-    }
-  },
+   
    {
-    id: 21,
+    id: 18,
     name: "White and Blue Checked Shirt",
     description: "A classic checked pattern in white and blue",
     category: "Shirts",
@@ -807,70 +724,42 @@ additionalDetails: "Slim-fit checkered shirt with button-down collar and brand h
       Collar: "Spread Collar with checked pattern"
     }
   },
-   {
-    id: 22,
-    name: "Men's White & Black Checks Shirt",
-    description: "Classic white and black checked shirt for versatile casual wear and formal wear. The shirt features a timeless design with bold black stripes on a crisp white background, making it a stylish choice for both casual and formal occasions.",
-    category: "Shirts",
-    price: 449.99,
-    discount: 25,
-    size: "L",
-    color: "White & Black Checks",
-    clothType: "Cotton Polyester Blend",
-    deliveryTime: "3-5 days",
-    returnPolicy: "5 days return policy",
-    additionalDetails: "Hustle formal shirt.Fresh new arrival with premium fabric",
-    newArrivalPosition: 10,
-    images: [
-      "https://i.pinimg.com/736x/56/65/96/5665964a2f61fa155940e9633408025b.jpg",
-      "https://i.pinimg.com/736x/0b/5b/66/0b5b66ca6dda06b0a0cc9bed66ba0864.jpg",
-      "https://i.pinimg.com/736x/74/85/ba/7485ba794dc1c115748388dd5edcd2ca.jpg"
+  
+{
+    "id": 19,
+    "name": "Men's White & Red Strips Shirt",
+    "description": "Classic white and red striped shirt for versatile casual wear and formal wear. The shirt features a timeless design with bold red stripes on a crisp white background, making it a stylish choice for both casual and formal occasions.",
+    "category": "Shirts",
+    "price": 499.99,
+    "discount": 25,
+    "size": "L",
+    "color": "White & Red Strips",
+    "clothType": "Cotton Polyester Blend",
+    "deliveryTime": "3-5 days",
+    "returnPolicy": "5 days return policy",
+    "additionalDetails": "Hustle formal shirt.Fresh new arrival with premium fabric",
+    "newArrivalPosition": 7,
+    "images": [
+        "https://i.pinimg.com/736x/34/09/94/340994bc43fd681c0072fdeec6d1d193.jpg",
+        "https://i.pinimg.com/736x/7a/70/33/7a7033f40afb242e07b98aa1f71d205e.jpg",
+        "https://i.pinimg.com/736x/89/93/2f/89932f5a6eb4a7d3a4d232667886dcc2.jpg",
+        "https://i.pinimg.com/736x/44/6b/85/446b852960757c1a001a98beccd9aa1e.jpg",
+        "https://i.pinimg.com/736x/2f/ce/4c/2fce4c851a0679d57798395f7068ee67.jpg",
     ],
-    colorImages: {
-      "Navy": "https://i.pinimg.com/736x/56/65/96/5665964a2f61fa155940e9633408025b.jpg"
+    "colorImages": {
+        "White & Red Strips": "https://i.pinimg.com/736x/34/09/94/340994bc43fd681c0072fdeec6d1d193.jpg",
+        "Blue & Red Strips": "https://i.pinimg.com/736x/44/6b/85/446b852960757c1a001a98beccd9aa1e.jpg",
     },
-    specifications: {
-      Material: "Cotton Polyester Blend",
-      Sleeve: "Full Sleeves",
-      Collar: "Spread Collar",
-      Occasion: "Formal ",
-      Pattern: "Solid",
-      FabricCare: "Machine Wash",
-      Pocket: "Single Chest Pocket"
+    "specifications": {
+        "Material": "Cotton Polyester Blend",
+        "Sleeve": "Full Sleeves",
+        "Collar": "Spread Collar",
+        "Occasion": "Formal and informal",
+        "Pattern": "Striped",
+        "FabricCare": "Machine Wash",
+        "Pocket": "Single Chest Pocket"
     }
-  },
-   {
-    id: 23,
-    name: "Men's White & Red Strips Shirt",
-    description: "Classic white and red striped shirt for versatile casual wear and formal wear. The shirt features a timeless design with bold red stripes on a crisp white background, making it a stylish choice for both casual and formal occasions.",
-    category: "Shirts",
-    price: 499.99,
-    discount: 25,
-    size: "L",
-    color: "White & Red Strips",
-    clothType: "Cotton Polyester Blend",
-    deliveryTime: "3-5 days",
-    returnPolicy: "5 days return policy",
-    additionalDetails: "Hustle formal shirt.Fresh new arrival with premium fabric",
-   newArrivalPosition: 7,
-    images: [
-      "https://i.pinimg.com/736x/cb/76/57/cb76576fc4651e2d63fe8272d2882f27.jpg",
-      "https://i.pinimg.com/736x/4f/a6/0e/4fa60e6a03321dabef959f40adcace31.jpg",
-      "https://i.pinimg.com/736x/6d/19/e8/6d19e8d0462ac6126338c8b4f9a6a639.jpg"
-    ],
-    colorImages: {
-      "Navy": "https://i.pinimg.com/736x/cb/76/57/cb76576fc4651e2d63fe8272d2882f27.jpg"
-    },
-    specifications: {
-      Material: "Cotton Polyester Blend",
-      Sleeve: "Full Sleeves",
-      Collar: "Spread Collar",
-      Occasion: "Formal and informal",
-      Pattern: "Solid",
-      FabricCare: "Machine Wash",
-      Pocket: "Single Chest Pocket"
-    }
-  }
+}
 ];
 // Save data to localStorage
 function saveData() {
@@ -1045,15 +934,25 @@ function showSearchSuggestions() {
   suggestionsContainer.style.display = "block";
 }
 
+function showAllProductsInSearch() {
+  const input = document.getElementById("searchSectionInput");
+  if (input) input.value = "";
+  const suggestionsContainer = document.getElementById("searchSuggestions");
+  if (suggestionsContainer) suggestionsContainer.style.display = "none";
+  if (typeof displaySearchResults === "function") {
+    displaySearchResults(products);
+  }
+}
+
 // Perform search with all filters activated
 function performSearch() {
   const query = document.getElementById("searchSectionInput").value.toLowerCase();
-  const category = document.getElementById("searchCategory").value;
-  const priceRange = document.getElementById("searchPrice").value;
-  const minRating = document.getElementById("searchRating").value;
-  const sortBy = document.getElementById("searchSort").value;
-  const size = document.getElementById("searchSize").value;
-  const color = document.getElementById("searchColor").value;
+  const category = document.getElementById("searchCategory")?.value || "";
+  const priceRange = document.getElementById("searchPrice")?.value || "";
+  const minRating = document.getElementById("searchRating")?.value || "";
+  const sortBy = document.getElementById("searchSort")?.value || "relevance";
+  const size = document.getElementById("searchSize")?.value || "";
+  const color = document.getElementById("searchColor")?.value || "";
 
   let filteredProducts = [...products];
 
@@ -1421,9 +1320,11 @@ function generateRecommendedProducts(recommendations) {
     html += `
       <div class="col-6 col-md-3">
         <div class="card recommendation-card" onclick="showProductDetails(${product.id})">
-          <img src="${product.images && product.images.length ? product.images[0] : 'https://via.placeholder.com/400x300?text=' + encodeURIComponent(product.name)}"
-               class="card-img-top recommendation-img" alt="${product.name}">
-          ${discount > 0 ? `<span class="recommendation-badge">${discount}% OFF</span>` : ''}
+          <div class="recommendation-media">
+            <img src="${product.images && product.images.length ? product.images[0] : 'https://via.placeholder.com/400x300?text=' + encodeURIComponent(product.name)}"
+                 class="recommendation-img" alt="${product.name}">
+            ${discount > 0 ? `<span class="recommendation-badge">${discount}% OFF</span>` : ''}
+          </div>
           <div class="card-body">
             <h5 class="card-title">${product.name}</h5>
             <p class="card-text">
@@ -1449,8 +1350,10 @@ function showProductDetails(productId) {
   if (!product) return;
 
   const sizes = product.size.split(",").map(s => s.trim());
-  const colors = product.color.split(",").map(c => c.trim());
-  const defaultColor = colors[0];
+  const colorsFromField = (product.color || '').split(",").map(c => c.trim()).filter(Boolean);
+  const colorsFromImages = Object.keys(product.colorImages || {});
+  const colors = [...new Set([...colorsFromField, ...colorsFromImages].map(c => c.trim()).filter(Boolean))];
+  const defaultColor = colors[0] || product.color || 'Default';
   const discount = product.discount || 0;
   const originalPrice = discount > 0 ? (product.price / (1 - discount / 100)).toFixed(2) : product.price.toFixed(2);
   const ratingInfo = getProductRating(productId);
@@ -1463,7 +1366,7 @@ function showProductDetails(productId) {
   product.images.forEach((img, index) => {
     carouselHtml += `
       <div class="carousel-item ${index === 0 ? 'active' : ''}">
-        <img src="${img}" class="d-block w-100 product-detail-img" alt="${product.name}">
+        <img ${index === 0 ? 'id="mainProductImage"' : ''} src="${img}" class="d-block w-100 product-detail-img" alt="${product.name}">
       </div>
     `;
   });
@@ -1480,14 +1383,20 @@ function showProductDetails(productId) {
     </div>
   `;
 
-  // Generate color thumbnails
-  let colorThumbnails = colors.map(color => {
-    const imageUrl = product.colorImages[color] || product.images[0];
+  // Generate color image thumbnails (like the screenshot)
+  const colorThumbnails = (colors.length ? colors : [defaultColor]).map(color => {
+    const imageUrl =
+      product.colorImages?.[color] ||
+      (product.images && product.images.length ? product.images[0] : 'https://via.placeholder.com/200x200?text=' + encodeURIComponent(product.name));
     return `
-      <div class="color-thumbnail ${color === defaultColor ? 'selected' : ''}" 
-           data-color="${color}" onclick="selectColor('${color}')">
-        <img src="${imageUrl}" alt="${color}" style="width: 50px; height: 50px;" />
-      </div>
+      <button type="button"
+              class="color-thumb ${color === defaultColor ? 'selected' : ''}"
+              data-color="${color}"
+              onclick="selectColor('${color.replace(/'/g, "\\'")}')"
+              title="${color}"
+              aria-label="Select color ${color}">
+        <img src="${imageUrl}" alt="${color}">
+      </button>
     `;
   }).join("");
 
@@ -1518,8 +1427,12 @@ function showProductDetails(productId) {
       <div class="row">
         <div class="col-md-6">
           ${carouselHtml}
-          <div class="color-selection mt-3 d-flex flex-wrap gap-2">
-            ${colorThumbnails}
+          <div class="color-selection mt-3">
+            <div class="colors-title">COLORS</div>
+            <div class="colors-row" role="list" aria-label="Available colors">
+              ${colorThumbnails}
+            </div>
+            <div class="selected-meta text-center mt-2">Selected: <span id="selectedColorText">${defaultColor}</span></div>
           </div>
         </div>
         <div class="col-md-6">
@@ -1605,12 +1518,15 @@ function selectColor(color) {
   const product = products.find(p => p.id === productId);
   if (!product) return;
 
-  document.querySelectorAll(".color-thumbnail").forEach(thumb => thumb.classList.remove("selected"));
-  const thumbnail = document.querySelector(`.color-thumbnail[data-color="${color}"]`);
+  document.querySelectorAll(".color-thumb").forEach(el => el.classList.remove("selected"));
+  const thumbnail = document.querySelector(`.color-thumb[data-color="${CSS.escape(color)}"]`);
   if (thumbnail) thumbnail.classList.add("selected");
 
-  const imageUrl = product.colorImages[color] || (product.images && product.images.length ? product.images[0] : 'https://via.placeholder.com/400x300?text=' + encodeURIComponent(product.name));
-  document.getElementById("mainProductImage").src = imageUrl;
+  const imageUrl = product.colorImages?.[color] || (product.images && product.images.length ? product.images[0] : 'https://via.placeholder.com/400x300?text=' + encodeURIComponent(product.name));
+  const mainImg = document.getElementById("mainProductImage");
+  if (mainImg) mainImg.src = imageUrl;
+  const selectedText = document.getElementById("selectedColorText");
+  if (selectedText) selectedText.textContent = color;
   document.getElementById("productDetailSection").dataset.selectedColor = color;
 }
 // Add to cart with selection
@@ -2789,8 +2705,7 @@ document.getElementById("feedbackForm")?.addEventListener("submit", function(e) 
                      </button>
                    </div>
                    <div class="card-body">
-                     <h5 class="card-title">${product.name}</h5>
-                     <p class="card-text text-muted" style="font-size: 0.9rem;">${product.description}</p>
+                    <h5 class="card-title">${product.name}</h5>
                      <div class="d-flex justify-content-between align-items-center">
                        <div>
                          <span class="fw-bold">₹${product.price.toFixed(2)}</span>
@@ -3436,3 +3351,382 @@ function filterShopByCategory(category) {
   // Scroll to top
   document.getElementById('shopSection').scrollIntoView({ behavior: 'smooth' });
 }
+/* =====================================================
+   NXew - Professional Animations & Enhancements JS
+   ===================================================== */
+
+   (function () {
+    'use strict';
+  
+    // =====================================================
+    // RIPPLE EFFECT on all buttons
+    // =====================================================
+    function createRipple(e) {
+      const btn = e.currentTarget;
+      const circle = document.createElement('span');
+      const diameter = Math.max(btn.clientWidth, btn.clientHeight);
+      const radius = diameter / 2;
+      const rect = btn.getBoundingClientRect();
+  
+      circle.style.width = circle.style.height = `${diameter}px`;
+      circle.style.left = `${e.clientX - rect.left - radius}px`;
+      circle.style.top = `${e.clientY - rect.top - radius}px`;
+      circle.classList.add('ripple-wave');
+  
+      const existing = btn.querySelector('.ripple-wave');
+      if (existing) existing.remove();
+  
+      btn.appendChild(circle);
+      circle.addEventListener('animationend', () => circle.remove());
+    }
+  
+    function attachRippleToAll() {
+      const selectors = 'button, .btn, .custom-menu-item, .nav-link, .category-item, [role="button"]';
+      document.querySelectorAll(selectors).forEach(el => {
+        if (!el.dataset.ripple) {
+          el.addEventListener('click', createRipple);
+          el.dataset.ripple = 'true';
+        }
+      });
+    }
+  
+    // Also observe DOM changes to attach ripple to dynamically created buttons
+    const rippleObserver = new MutationObserver(() => attachRippleToAll());
+    rippleObserver.observe(document.body, { childList: true, subtree: true });
+  
+    // =====================================================
+    // FLY TO CART ANIMATION
+    // =====================================================
+    function flyToCart(imgSrc, startEl) {
+      const cartIcon = document.getElementById('footerBagBadge');
+      if (!cartIcon) return;
+  
+      const cartRect = cartIcon.getBoundingClientRect();
+      const startRect = startEl.getBoundingClientRect();
+  
+      // Create flying element
+      const flyer = document.createElement('div');
+      flyer.classList.add('fly-to-cart');
+      flyer.innerHTML = imgSrc
+        ? `<img src="${imgSrc}" alt="cart">`
+        : `<i class="bi bi-bag-plus fly-to-cart-icon"></i>`;
+  
+      document.body.appendChild(flyer);
+  
+      // Start position = button center
+      const startX = startRect.left + startRect.width / 2 - 25;
+      const startY = startRect.top + startRect.height / 2 - 25;
+  
+      flyer.style.left = startX + 'px';
+      flyer.style.top = startY + 'px';
+  
+      // Force reflow
+      flyer.getBoundingClientRect();
+  
+      // Target position = cart icon
+      const endX = cartRect.left + cartRect.width / 2 - 25;
+      const endY = cartRect.top + cartRect.height / 2 - 25;
+  
+      // Animate using Web Animations API
+      const keyframes = [
+        {
+          left: startX + 'px',
+          top: startY + 'px',
+          transform: 'scale(1)',
+          opacity: 1,
+          borderRadius: '50%'
+        },
+        {
+          left: (startX + endX) / 2 - 40 + 'px',
+          top: Math.min(startY, endY) - 80 + 'px',
+          transform: 'scale(0.9)',
+          opacity: 0.9
+        },
+        {
+          left: endX + 'px',
+          top: endY + 'px',
+          transform: 'scale(0.2)',
+          opacity: 0
+        }
+      ];
+  
+      const timing = { duration: 700, easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)', fill: 'forwards' };
+      const anim = flyer.animate(keyframes, timing);
+  
+      anim.onfinish = () => {
+        flyer.remove();
+        // Pop the badge
+        const badge = document.getElementById('footerBagBadge');
+        if (badge) {
+          badge.classList.remove('badge-pop');
+          void badge.offsetWidth; // reflow
+          badge.classList.add('badge-pop');
+          badge.addEventListener('animationend', () => badge.classList.remove('badge-pop'), { once: true });
+        }
+        // Shake the bag icon
+        const bagIcon = document.querySelector('.footer-nav [aria-label="Your Bag"] i');
+        if (bagIcon) {
+          bagIcon.classList.add('cart-shake');
+          bagIcon.addEventListener('animationend', () => bagIcon.classList.remove('cart-shake'), { once: true });
+        }
+      };
+    }
+  
+    // Expose flyToCart globally for use by nxewQuickAdd in 00.js
+    window.nxewFlyToCart = flyToCart;
+  
+    // =====================================================
+    // INTERCEPT addToCartWithSelection to trigger animation
+    // (deferred so 00.js is fully evaluated first)
+    // =====================================================
+    function patchFunctions() {
+  
+    const _origAddToCartWithSelection = window.addToCartWithSelection;
+    window.addToCartWithSelection = function (productId, buttonEl) {
+      // Get the product image for animation
+      if (typeof products !== 'undefined') {
+        const prod = products.find(p => p.id === productId);
+        const imgSrc = prod && prod.images && prod.images[0] ? prod.images[0] : null;
+  
+        // Find the button that was clicked
+        const btn = buttonEl || document.querySelector(`[onclick*="addToCartWithSelection(${productId})"]`);
+        if (btn) {
+          // Add loading state to button
+          const originalHTML = btn.innerHTML;
+          btn.innerHTML = '<i class="bi bi-hourglass-split me-1"></i> Adding...';
+          btn.classList.add('adding');
+          btn.style.pointerEvents = 'none';
+  
+          setTimeout(() => {
+            btn.innerHTML = '<i class="bi bi-check-lg me-1"></i> Added!';
+            btn.style.background = 'linear-gradient(135deg, #11998e, #38ef7d)';
+          }, 300);
+  
+          setTimeout(() => {
+            btn.innerHTML = originalHTML;
+            btn.style.background = '';
+            btn.style.pointerEvents = '';
+            btn.classList.remove('adding');
+          }, 1400);
+  
+          flyToCart(imgSrc, btn);
+        }
+      }
+  
+      // Call original
+      if (typeof _origAddToCartWithSelection === 'function') {
+        _origAddToCartWithSelection(productId);
+      }
+    };
+  
+    // =====================================================
+    // INTERCEPT addToCart (if used on cards)
+    // =====================================================
+    const _origAddToCart = window.addToCart;
+    if (typeof _origAddToCart === 'function') {
+      window.addToCart = function (productId, event) {
+        if (event) {
+          event.stopPropagation();
+          const btn = event.currentTarget || event.target;
+          const prod = (typeof products !== 'undefined') ? products.find(p => p.id === productId) : null;
+          const imgSrc = prod && prod.images && prod.images[0] ? prod.images[0] : null;
+          flyToCart(imgSrc, btn);
+        }
+        _origAddToCart(productId, event);
+      };
+    }
+  
+    // =====================================================
+    // BUY NOW BUTTON ANIMATION
+    // =====================================================
+    const _origBuyProductWithSelection = window.buyProductWithSelection;
+    window.buyProductWithSelection = function (productId) {
+      const btn = document.querySelector(`[onclick*="buyProductWithSelection(${productId})"]`);
+      if (btn) {
+        btn.style.transform = 'scale(0.96)';
+        setTimeout(() => { btn.style.transform = ''; }, 200);
+      }
+      if (typeof _origBuyProductWithSelection === 'function') {
+        _origBuyProductWithSelection(productId);
+      }
+    };
+  
+    // =====================================================
+    // SCROLL PROGRESS BAR
+    // =====================================================
+    const scrollBar = document.createElement('div');
+    scrollBar.className = 'scroll-progress';
+    document.body.prepend(scrollBar);
+  
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      scrollBar.style.width = pct + '%';
+    }, { passive: true });
+  
+    // =====================================================
+    // STAGGERED PRODUCT CARD ENTRANCE
+    // =====================================================
+    function applyProductStagger(container) {
+      const cards = container.querySelectorAll('.col-6, .col-md-4, .col-md-3, .col-lg-3');
+      cards.forEach((card, i) => {
+        card.style.animationDelay = `${i * 0.05}s`;
+        card.classList.add('product-stagger');
+      });
+    }
+  
+    // Observe product containers for new content
+    const productContainers = ['shopProductContainer', 'featuredProductsContainer', 'menswearContainer', 'accessoriesContainer', 'searchResultsContainer'];
+    productContainers.forEach(id => {
+      const container = document.getElementById(id);
+      if (container) {
+        const obs = new MutationObserver(() => applyProductStagger(container));
+        obs.observe(container, { childList: true });
+      }
+    });
+  
+    // =====================================================
+    // SECTION TRANSITION - smooth scroll to top
+    // =====================================================
+    const _origShowSection = window.showSection;
+    window.showSection = function (sectionId) {
+      // Animate active nav item
+      document.querySelectorAll('.footer-nav .nav-link').forEach(link => {
+        link.classList.remove('active');
+        if (link.dataset.section === sectionId) {
+          link.classList.add('active');
+          const icon = link.querySelector('i');
+          if (icon) {
+            icon.style.transform = 'scale(0.8)';
+            setTimeout(() => { icon.style.transform = ''; }, 200);
+          }
+        }
+      });
+  
+      // Home section special handling
+      if (sectionId === 'homeSection') {
+        document.body.classList.add('home-section-active');
+      } else {
+        document.body.classList.remove('home-section-active');
+      }
+  
+      if (typeof _origShowSection === 'function') {
+        _origShowSection(sectionId);
+      }
+  
+      // Scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+  
+    // =====================================================
+    // ENHANCED DARK MODE TOGGLE
+    // =====================================================
+    const _origToggleDarkMode = window.toggleDarkMode;
+    window.toggleDarkMode = function () {
+      document.body.classList.toggle('dark-mode');
+      const toggle = document.querySelector('.dark-mode-toggle');
+      if (toggle) {
+        const isDark = document.body.classList.contains('dark-mode');
+        toggle.innerHTML = isDark ? '<i class="bi bi-sun"></i>' : '<i class="bi bi-moon"></i>';
+        toggle.style.transform = 'scale(1.3) rotate(20deg)';
+        setTimeout(() => { toggle.style.transform = ''; }, 300);
+      }
+      if (typeof _origToggleDarkMode === 'function') {
+        _origToggleDarkMode();
+      }
+    };
+  
+    // =====================================================
+    // ACTIVE NAV HIGHLIGHT
+    // =====================================================
+    document.querySelectorAll('.footer-nav .nav-link').forEach(link => {
+      link.addEventListener('click', function () {
+        document.querySelectorAll('.footer-nav .nav-link').forEach(l => l.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+  
+    // =====================================================
+    // PRODUCT CARD - hover quick-add (for featured grid)
+    // =====================================================
+    function enhanceProductCards(container) {
+      container.querySelectorAll('[onclick*="showProductDetails"]').forEach(card => {
+        if (card.dataset.enhanced) return;
+        card.dataset.enhanced = 'true';
+        const wrapper = card.closest('.col-6, .col-md-4, .col-md-3, .col-lg-3');
+        if (!wrapper) return;
+        wrapper.style.position = 'relative';
+      });
+    }
+  
+    // Apply to existing containers
+    productContainers.forEach(id => {
+      const container = document.getElementById(id);
+      if (container) enhanceProductCards(container);
+    });
+  
+    // Also enhance dynamically added cards
+    const cardObserver = new MutationObserver((mutations) => {
+      mutations.forEach(m => {
+        m.addedNodes.forEach(node => {
+          if (node.nodeType === 1) {
+            enhanceProductCards(node);
+            attachRippleToAll();
+          }
+        });
+      });
+    });
+    cardObserver.observe(document.body, { childList: true, subtree: true });
+  
+    // =====================================================
+    // REMOVE FROM CART ANIMATION
+    // =====================================================
+    const _origRemoveFromCart = window.removeFromCart;
+    window.removeFromCart = function (index) {
+      const cartItems = document.querySelectorAll('#cartContent .card');
+      if (cartItems[index]) {
+        cartItems[index].style.transition = 'all 0.35s ease';
+        cartItems[index].style.transform = 'translateX(100%) scale(0.8)';
+        cartItems[index].style.opacity = '0';
+        setTimeout(() => {
+          if (typeof _origRemoveFromCart === 'function') {
+            _origRemoveFromCart(index);
+          }
+        }, 350);
+      } else {
+        if (typeof _origRemoveFromCart === 'function') {
+          _origRemoveFromCart(index);
+        }
+      }
+    };
+  
+    } // end patchFunctions
+  
+    // =====================================================
+    // INIT
+    // =====================================================
+    document.addEventListener('DOMContentLoaded', function () {
+      // Patch functions after 00.js is loaded
+      patchFunctions();
+  
+      attachRippleToAll();
+  
+      // Set home as active nav
+      const homeLink = document.querySelector('[data-section="homeSection"]');
+      if (homeLink) homeLink.classList.add('active');
+  
+      // Entrance animation for initial section
+      const activeSection = document.querySelector('.active-section');
+      if (activeSection) {
+        activeSection.style.animation = 'none';
+        setTimeout(() => {
+          activeSection.style.animation = '';
+        }, 10);
+      }
+  
+      console.log('%cNXew Enhanced ✦', 'color: #e94560; font-size: 18px; font-weight: bold; font-family: serif;');
+    });
+  
+  })();
+  
