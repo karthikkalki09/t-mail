@@ -15,7 +15,6 @@
   <link rel="stylesheet" href="00.css">
 </head>
 <body>
-
   <!-- Toast Container -->
   <div id="toastContainer"></div>
 
@@ -81,47 +80,26 @@
 
     <section class="product-highlight">
       <div class="full-screen-wrapper">
-        <div class="home-hero-nav">
-          <div class="home-hero-logo">
-            <img src="https://i.pinimg.com/736x/74/84/ed/7484ed22716ae1b4fe2eae6dbc420141.jpg" alt="NXew Logo">
-          </div>
-          <nav class="home-hero-menu"></nav>
-        </div>
-
         <div id="productHighlightCarousel" class="carousel slide full-screen-carousel carousel-fade" data-bs-ride="carousel" data-bs-interval="3000">
           <div class="carousel-indicators">
             <button type="button" data-bs-target="#productHighlightCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#productHighlightCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
           </div>
           <div class="carousel-inner">
             <div class="carousel-item active" onclick="showSection('shopSection')">
-              <img src="https://i.pinimg.com/736x/f8/6d/9b/f86d9bad91d78ce5a6aac9a42c7b8d1f.jpg" class="d-block w-100" alt="Product Highlight 1">
+              <img src="https://i.pinimg.com/736x/d5/5e/bc/d55ebc351a5425c3ea8c3ec62b317325.jpg" class="d-block w-100" alt="Product Highlight 1">
               <div class="carousel-caption d-none d-md-block">
                 <h5>Luxury in Every Stitch</h5>
                 <p>Clothing is a form of self-expression.</p>
               </div>
             </div>
-            <div class="carousel-item" onclick="filterShopByCategory('sweat T-Shirts')">
-              <img src="https://i.pinimg.com/736x/b6/88/d7/b688d79605154600932f1615f04e8e09.jpg" class="d-block w-100" alt="Product Highlight 2">
-              <div class="carousel-caption d-none d-md-block">
-                <h5>Trendy Men's Wear</h5>
-                <p>Explore our latest collection.</p>
-              </div>
-            </div>
+           
           </div>
-          <button class="carousel-control-prev" type="button" data-bs-target="#productHighlightCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#productHighlightCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
+         
         </div>
       </div>
     </section>
 
-    <!-- Shop by Category -->
+  <!-- Shop by Category -->
     <section class="home-categories py-5">
       <div class="container">
         <h2 class="section-title text-center mb-4">Shop by Category</h2>
@@ -299,17 +277,17 @@
     </header>
     <div class="container mt-5 my-4">
       <div class="search-container mb-4">
-        <button class="btn btn-dark" type="button" id="searchSectionButton" aria-label="Search" onclick="toggleSearchBar()">
-          <i class="bi bi-search"></i>
-        </button>
-        <div id="searchBarContainer" style="display: none; flex-grow: 1; margin-left: 10px;">
-          <input type="text" class="form-control" placeholder="Search for shirts, pants, accessories..."
+        <div class="search-input-wrap">
+          <button type="button" class="search-leading-btn" aria-label="Show all products" onclick="showAllProductsInSearch()">
+            <i class="bi bi-search search-leading-icon" aria-hidden="true"></i>
+          </button>
+          <input type="text" class="form-control search-input" placeholder="Search for shirts, pants, accessories..."
                  id="searchSectionInput" autocomplete="off" aria-label="Search for Products"
                  onkeyup="handleSearchInput()">
+          <button class="btn btn-outline-secondary search-voice-btn" type="button" id="voiceSearchButton" aria-label="Search by Voice" onclick="startVoiceSearch()">
+            <i class="bi bi-mic"></i>
+          </button>
         </div>
-        <button class="btn btn-outline-secondary" type="button" id="voiceSearchButton" aria-label="Search by Voice" onclick="startVoiceSearch()">
-          <i class="bi bi-mic"></i>
-        </button>
         <div id="searchSuggestions" class="search-suggestions"></div>
       </div>
       <div class="search-results-container">
@@ -318,102 +296,6 @@
           <div id="searchActiveFilters"></div>
         </div>
         <div class="row" id="searchResultsContainer"></div>
-      </div>
-      <button class="draggable-filter" data-bs-toggle="modal" data-bs-target="#searchFilterModal" aria-label="Filter Search">
-        <i class="bi bi-funnel"></i>
-      </button>
-    </div>
-  </div>
-
-  <!-- Search Filter Modal -->
-  <div class="modal fade" id="searchFilterModal" tabindex="-1" aria-labelledby="searchFilterModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="searchFilterModalLabel">Filter Products</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <div class="row g-3">
-            <div class="col-md-6">
-              <label for="searchCategory" class="form-label">Category</label>
-              <select id="searchCategory" class="form-select">
-                <option value="">All Categories</option>
-                <option value="Shirts">Shirts</option>
-                <option value="Trousers">Trousers</option>
-                <option value="Jeans">Jeans</option>
-                <option value="Polos">Polos</option>
-                <option value="T-Shirts">T-Shirts</option>
-                <option value="Shorts">Shorts</option>
-                <option value="Cargos">Cargos</option>
-                <option value="Shoes">Shoes</option>
-                <option value="Plus Size">Plus Size</option>
-              </select>
-            </div>
-            <div class="col-md-6">
-              <label for="searchPrice" class="form-label">Price Range</label>
-              <select id="searchPrice" class="form-select">
-                <option value="">All Prices</option>
-                <option value="0-300">Under ₹300</option>
-                <option value="300-500">₹300 - ₹500</option>
-                <option value="500-1000">₹500 - ₹1000</option>
-                <option value="1000-99999">Above ₹1000</option>
-              </select>
-            </div>
-            <div class="col-md-6">
-              <label for="searchRating" class="form-label">Minimum Rating</label>
-              <select id="searchRating" class="form-select">
-                <option value="">Any Rating</option>
-                <option value="4">4+ Stars</option>
-                <option value="3">3+ Stars</option>
-                <option value="2">2+ Stars</option>
-                <option value="1">1+ Star</option>
-              </select>
-            </div>
-            <div class="col-md-6">
-              <label for="searchSort" class="form-label">Sort By</label>
-              <select id="searchSort" class="form-select">
-                <option value="relevance">Relevance</option>
-                <option value="price-low">Price: Low to High</option>
-                <option value="price-high">Price: High to Low</option>
-                <option value="rating">Highest Rated</option>
-                <option value="newest">Newest Arrivals</option>
-              </select>
-            </div>
-            <div class="col-md-6">
-              <label for="searchSize" class="form-label">Size</label>
-              <select id="searchSize" class="form-select">
-                <option value="">All Sizes</option>
-                <option value="S">S</option>
-                <option value="M">M</option>
-                <option value="L">L</option>
-                <option value="XL">XL</option>
-                <option value="XXL">XXL</option>
-                <option value="32">32</option>
-                <option value="34">34</option>
-                <option value="36">36</option>
-                <option value="One Size">One Size</option>
-              </select>
-            </div>
-            <div class="col-md-6">
-              <label for="searchColor" class="form-label">Color</label>
-              <select id="searchColor" class="form-select">
-                <option value="">All Colors</option>
-                <option value="Blue">Blue</option>
-                <option value="Red">Red</option>
-                <option value="Black">Black</option>
-                <option value="Brown">Brown</option>
-                <option value="White">White</option>
-                <option value="Green">Green</option>
-                <option value="Silver">Silver</option>
-              </select>
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-outline-secondary" onclick="clearSearchFilters()" data-bs-dismiss="modal">Clear Filters</button>
-          <button type="button" class="btn btn-primary" onclick="performSearch()" data-bs-dismiss="modal">Apply Filters</button>
-        </div>
       </div>
     </div>
   </div>
@@ -1293,4 +1175,4 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="00.js"></script>
 </body>
-</html>
+</html>`
