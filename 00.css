@@ -1586,17 +1586,37 @@ object-fit: cover;
   height: 44px;
   border-radius: 999px;
   background-color: rgba(0,0,0,0.22);
-  opacity: 0.9;
+  opacity: 1;
   top: 50%;
   transform: translateY(-50%);
+  z-index: 50;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.25);
+  pointer-events: auto;
+}
+
+#productDetailSection #productCarousel .carousel-control-prev-icon,
+#productDetailSection #productCarousel .carousel-control-next-icon {
+  filter: invert(1);
+}
+
+/* Keep the zoomed image behind the prev/next controls */
+#productDetailSection #productCarousel .carousel-item img {
+  position: relative;
+  z-index: 1;
 }
 
 #productDetailSection #productCarousel .carousel-control-prev {
-  left: 10px;
+  left: 6px;
 }
 
 #productDetailSection #productCarousel .carousel-control-next {
-  right: 10px;
+  right: 6px;
+}
+
+/* Ensure carousel controls stay clickable above zoomed images */
+#productDetailSection #productCarousel .carousel-control-prev,
+#productDetailSection #productCarousel .carousel-control-next {
+  position: absolute;
 }
 
 /* Home hero overlay navigation (logo + menu) */
@@ -2740,3 +2760,130 @@ body.dark-mode .card-title {
 .nxew-card-img {
   transition: transform 0.5s ease !important;
 }
+
+/* =====================================================
+   Cart Empty State (NXew)
+   ===================================================== */
+.nxew-cart-empty {
+  background: linear-gradient(135deg, rgba(233,69,96,0.10), rgba(17,153,142,0.10)) !important;
+  border: 1px dashed rgba(233,69,96,0.25) !important;
+}
+
+.nxew-cart-empty-icon {
+  width: 74px;
+  height: 74px;
+  border-radius: 50%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(26,26,46,0.06);
+  border: 1px solid rgba(0,0,0,0.08);
+  box-shadow: 0 10px 30px rgba(26,26,46,0.08);
+}
+
+.nxew-cart-empty-icon i {
+  font-size: 2rem;
+  color: var(--accent-color);
+}
+
+/* =====================================================
+   NXew Admin Dashboard Styling
+   ===================================================== */
+.admin-hero {
+  background: linear-gradient(135deg, rgba(233,69,96,0.14), rgba(17,153,142,0.14)) !important;
+  border: 1px solid rgba(0,0,0,0.06) !important;
+  border-radius: 18px !important;
+}
+
+.admin-hero-brand {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.admin-hero-brand i {
+  color: var(--accent-color);
+  font-size: 1.7rem;
+}
+
+.admin-hero-brand span {
+  font-size: 1.2rem;
+}
+
+.admin-metric-card {
+  background: rgba(255,255,255,0.75) !important;
+  border: 1px solid rgba(0,0,0,0.06) !important;
+  border-radius: 18px !important;
+}
+
+.admin-metric-label {
+  font-size: 0.85rem;
+  color: rgba(0,0,0,0.55);
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.admin-metric-value {
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: var(--text-primary);
+}
+
+.admin-metric-sub {
+  margin-top: 6px;
+  font-size: 0.9rem;
+  color: rgba(0,0,0,0.55);
+}
+
+.admin-panel-card {
+  background: rgba(255,255,255,0.78) !important;
+  border: 1px solid rgba(0,0,0,0.06) !important;
+  border-radius: 18px !important;
+}
+
+.admin-panel-card-header {
+  background: linear-gradient(135deg, rgba(26,26,46,0.08), rgba(233,69,96,0.08)) !important;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.admin-list {
+  min-height: 80px;
+}
+
+.admin-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  height: 140px;
+}
+
+.admin-bar-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.admin-bar {
+  width: 100%;
+  border-radius: 12px 12px 6px 6px;
+  background: linear-gradient(135deg, var(--accent-color), #38ef7d);
+  box-shadow: 0 10px 24px rgba(233,69,96,0.20);
+}
+
+.admin-bar-label {
+  font-size: 0.78rem;
+  color: rgba(0,0,0,0.55);
+  font-weight: 700;
+}
+
+
