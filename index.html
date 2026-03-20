@@ -333,6 +333,170 @@
     </div>
   </div>
 
+  <!-- Account Prompt Modal -->
+  <div class="modal fade" id="accountPromptModal" tabindex="-1" aria-labelledby="accountPromptModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content shadow-sm">
+        <div class="modal-header">
+          <h5 class="modal-title" id="accountPromptModalLabel">Join NXew for a Better Shopping Lifestyle</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p class="mb-2 text-muted">Create your account to place orders faster, track your bag, and get updates on offers.</p>
+        </div>
+        <div class="modal-footer" style="justify-content: center;">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" onclick="showSection('loginSection')">Log In</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="showSection('signupSection')">Create Account</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Admin Dashboard -->
+  <div id="adminDashboardSection" class="section fade-in">
+    <header class="py-3 border-bottom bg-light">
+      <div class="container d-flex justify-content-between align-items-center">
+        <button class="btn" onclick="showSection('homeSection')" aria-label="Back to Home">
+          <i class="bi bi-arrow-left"></i> Home
+        </button>
+        <h1 class="h5 mb-0">NXew Admin Panel</h1>
+        <div class="d-flex align-items-center gap-2">
+          <button class="btn btn-outline-secondary btn-sm" onclick="adminLogout()" aria-label="Admin Logout">
+            Logout
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div class="container my-4">
+      <div class="admin-hero p-4 mb-4 text-center">
+        <div class="admin-hero-brand">
+          <i class="bi bi-speedometer2"></i>
+          <span>NXew</span>
+        </div>
+        <p class="mb-0 mt-2 text-muted">Website analytics and user activity (local dashboard)</p>
+      </div>
+
+      <div class="row g-3 mb-4">
+        <div class="col-12 col-md-4">
+          <div class="card admin-metric-card h-100">
+            <div class="card-body">
+              <div class="admin-metric-label">Total Visits (This Device)</div>
+              <div class="admin-metric-value" id="adminTotalVisits">0</div>
+              <div class="admin-metric-sub" id="adminTodayVisitsSub">Today: 0</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-4">
+          <div class="card admin-metric-card h-100">
+            <div class="card-body">
+              <div class="admin-metric-label">Active Visitors (5 min)</div>
+              <div class="admin-metric-value" id="adminActiveUsers">0</div>
+              <div class="admin-metric-sub">Based on recent login activity</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-4">
+          <div class="card admin-metric-card h-100">
+            <div class="card-body">
+              <div class="admin-metric-label">Live Visitors (1 min)</div>
+              <div class="admin-metric-value" id="adminLiveUsers">0</div>
+              <div class="admin-metric-sub">Currently active</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-4">
+          <div class="card admin-metric-card h-100">
+            <div class="card-body">
+              <div class="admin-metric-label">Total Orders</div>
+              <div class="admin-metric-value" id="adminTotalOrders">0</div>
+              <div class="admin-metric-sub">All time</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-4">
+          <div class="card admin-metric-card h-100">
+            <div class="card-body">
+              <div class="admin-metric-label">Total Revenue</div>
+              <div class="admin-metric-value" id="adminTotalRevenue">₹0</div>
+              <div class="admin-metric-sub">Based on Cash on Delivery</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-4">
+          <div class="card admin-metric-card h-100">
+            <div class="card-body">
+              <div class="admin-metric-label">Conversion Rate</div>
+              <div class="admin-metric-value" id="adminConversionRate">0%</div>
+              <div class="admin-metric-sub">Orders ÷ Visits</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row g-3 mb-4">
+        <div class="col-12 col-lg-6">
+          <div class="card admin-panel-card h-100">
+            <div class="card-header admin-panel-card-header">
+              Recent Users
+            </div>
+            <div class="card-body">
+              <div id="adminRecentUsers" class="admin-list text-muted">
+                Loading...
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-lg-6">
+          <div class="card admin-panel-card h-100">
+            <div class="card-header admin-panel-card-header">
+              Recent Orders
+            </div>
+            <div class="card-body">
+              <div id="adminRecentOrders" class="admin-list text-muted">
+                Loading...
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row g-3 mb-4" style="margin-top: -18px;">
+        <div class="col-12 col-md-6">
+          <div class="card admin-metric-card h-100">
+            <div class="card-body">
+              <div class="admin-metric-label">Total Members (Registered)</div>
+              <div class="admin-metric-value" id="adminTotalMembers">0</div>
+              <div class="admin-metric-sub">Registered on this device</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="card admin-metric-card h-100">
+            <div class="card-body">
+              <div class="admin-metric-label">New Members Today</div>
+              <div class="admin-metric-value" id="adminTodayMembers">0</div>
+              <div class="admin-metric-sub">Created today (local)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card admin-panel-card">
+        <div class="card-header admin-panel-card-header">
+          Orders (Last 7 Days)
+        </div>
+        <div class="card-body">
+          <div id="adminOrders7dBars" class="admin-bars"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Signup -->
   <div id="signupSection" class="section fade-in">
     <header class="bg-light py-3 border-bottom">
