@@ -3714,48 +3714,33 @@ if (sectionId === 'adminDashboardSection') {
 
 // ==================== UPDATED FILTER FUNCTION (CUSTOM PLACEMENT SUPPORT) ====================
 function filterShopByCategory(category) {
-const searchBarContainer = document.getElementById("searchBarContainer");
-let filteredProducts = [...products];
-let countText = `${products.length} products`;
+  let filteredProducts = [...products];
+  let countText = `${products.length} products`;
 
-if (category === 'New Arrivals') {
-  // Special case: Show only products marked as "New Arrival" in additionalDetails
-  // Hide search bar for focused view
-  searchBarContainer.style.display = "none";
-  filteredProducts = products.filter(p => 
-    p.additionalDetails && 
-    p.additionalDetails.toLowerCase().includes('new arrival')
-  ).sort((a, b) => {
-    // ✅ CUSTOM SORT: Use newArrivalPosition (low to high) or fallback to ID descending
-    const posA = a.newArrivalPosition || a.id;
-    const posB = b.newArrivalPosition || b.id;
-    return posA - posB;  // Ascending: Lower position first (or higher ID if no position)
-  });
-  countText = `${filteredProducts.length} New Arrivals`;
-} else if (category && category !== 'All') {
-  // Existing category behavior
-  searchBarContainer.style.display = "none";
-  filteredProducts = products.filter(p => p.category === category);
-  countText = `${filteredProducts.length} ${category} products`;
-} else {
-  // "All" clicked → SHOW search bar + filters
-  searchBarContainer.style.display = "flex";
-  activeFilters = {}; // reset any previous filters
-  countText = `${products.length} products`;
-}
+  if (!category || category === 'All') {
+    // Show all
+    countText = `All ${products.length} products`;
+  } else if (category.toUpperCase() === 'NEW ARRIVALS') {
+    // Filter by newArrivalPosition or additionalDetails containing "new arrival"
+    filteredProducts = products.filter(p =>
+      p.newArrivalPosition ||
+      (p.additionalDetails && p.additionalDetails.toLowerCase().includes('new arrival'))
+    ).sort((a, b) => (a.newArrivalPosition || 999) - (b.newArrivalPosition || 999));
+    countText = `${filteredProducts.length} New Arrivals`;
+  } else {
+    // Case-insensitive category match
+    filteredProducts = products.filter(p =>
+      p.category.toUpperCase() === category.toUpperCase()
+    );
+    countText = `${filteredProducts.length} ${category} products`;
+  }
 
-// Update count
-const countEl = document.getElementById('shopResultsCount');
-if (countEl) countEl.textContent = countText;
+  const countEl = document.getElementById('shopResultsCount');
+  if (countEl) countEl.textContent = countText;
 
-// Generate products
-generateProducts("shopProductContainer", filteredProducts, true);
-
-// Show shop section (this also calls applyFilters() for full filter support)
-showSection('shopSection');
-
-// Scroll to top
-document.getElementById('shopSection').scrollIntoView({ behavior: 'smooth' });
+  generateProducts("shopProductContainer", filteredProducts, true);
+  showSection('shopSection');
+  document.getElementById('shopSection').scrollIntoView({ behavior: 'smooth' });
 }
 /* =====================================================
  NXew - Professional Animations & Enhancements JS
