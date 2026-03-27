@@ -2867,40 +2867,13 @@ body.dark-mode .card-title {
 }
 /* 1. Force the home section to fill the viewport without any internal spacing */
 #homeSection {
-  min-height: 100vh !important;
-  padding: 0 !important;
-  margin-top: -50px !important;
-  background: transparent !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
+
+  padding: 10px !important;
+  margin-top: -75px !important;
+
 }
 
-/* 2. Make the carousel wrapper fill the entire viewport */
-#homeSection .full-screen-wrapper {
-  height: 100vh !important;
-  width: 100% !important;
-  position: relative !important;
-  margin-top: 0px !important;
-  padding: 0 !important;
-}
 
-/* 3. Ensure the carousel itself fills its parent */
-#homeSection .full-screen-carousel,
-#homeSection .carousel-inner,
-#homeSection .carousel-item {
-  height: 100% !important;
-}
 
-/* 4. Remove body padding when home is active (already present, but ensure it’s applied) */
-body.home-section-active {
-  padding-top: 0 !important;
-}
 
-/* Optional: If the fixed header is still creating a gap on the image,
-   you can make it transparent for the home section only */
-body.home-section-active header {
-  background: transparent !important;
-  backdrop-filter: blur(10px) !important; /* or simply make it transparent */
-  box-shadow: none !important;
-  border-bottom: none !important;
-}
+
