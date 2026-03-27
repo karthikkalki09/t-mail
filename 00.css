@@ -2867,8 +2867,8 @@ body.dark-mode .card-title {
 }
 /* 1. Force the home section to fill the viewport without any internal spacing */
 #homeSection {
-  padding: 0 !important;
-   margin-top: -65px !important;
+  padding: 1px!important;
+   margin-top: -70px !important;
   
 }
 
