@@ -4120,3 +4120,37 @@ function filterShopByCategory(category) {
   });
 
 })();
+
+
+// === HISTORY NAVIGATION PATCH ===
+// Wrap showSection so every navigation pushes a history entry,
+// enabling Android back-button / browser back to navigate between pages.
+(function() {
+  const _orig = window.showSection || showSection;
+  
+  function _showSectionInternal(sectionId) {
+    _orig(sectionId);
+    // Update active nav item highlight
+    document.querySelectorAll('.nav-link[data-section]').forEach(el => {
+      el.classList.toggle('active-nav', el.dataset.section === sectionId);
+    });
+  }
+  window._showSectionInternal = _showSectionInternal;
+
+  // Replace the global showSection
+  window.showSection = function(sectionId) {
+    _showSectionInternal(sectionId);
+    // Push to browser history so back button works
+    if (!(history.state && history.state.section === sectionId)) {
+      history.pushState({ section: sectionId }, '', '#' + sectionId);
+    }
+  };
+})();
+
+// Initialize on load
+window.addEventListener('DOMContentLoaded', () => {
+  // Make sure home state is in history
+  if (!history.state) {
+    history.replaceState({ section: 'homeSection' }, '', '#homeSection');
+  }
+});
