@@ -174,7 +174,42 @@ const products = [
 
 // UPDATED PRODUCT (ID 3) - SET TO NEW ARRIVAL
 {
-id: 1,
+  "id": 1,
+  "name": "NXew:Oversized Puff Printed T-Shirt",
+  "description": "A bold oversized black t-shirt featuring premium Puff Print for a modern streetwear look. Designed for comfort and style with a relaxed fit.",
+  "category": "T-Shirts",
+  "price": 549.99,
+  "discount": 29,
+  "size": "L",
+  "color": "Black",
+  "clothType": "100% Cotton",
+  "fit": "Oversized Streetwear Fit",
+  "neck": "Crewneck",
+  "printType": "Puff Print",
+  "deliveryTime": "3-5 days",
+  "returnPolicy": "5 days return policy",
+  "additionalDetails": "Features reinforced stitching and  breathable fabric. Perfect for casual and urban fashion.",
+  "newArrivalPosition": 1,
+  "images": [
+    "https://i.pinimg.com/736x/ee/dd/63/eedd63db9e3fc4ad30768afa10273690.jpg",
+    "https://i.pinimg.com/736x/98/f3/42/98f342f105d69d3d72c141c5264f56e0.jpg",
+    
+  ],
+  "colorImages": {
+    "Black": "https://i.pinimg.com/736x/98/f3/42/98f342f105d69d3d72c141c5264f56e0.jpg"
+  },
+  "specifications": {
+    "Material": "100% Cotton",
+    "Sleeve": "Half Sleeves",
+    "Neck": "Crewneck",
+    "Fit": "Oversized",
+    "Print": "Puff Print",
+    "Pattern": "Solid with Front Graphic",
+    "Occasion": "Casual / Streetwear"
+  }
+},
+{
+id: 2,
 name: "Men's Green-White Checked Shirt",
 description: "A stylish green checked shirt perfect for casual wear",
 category: "Shirts",
@@ -203,9 +238,44 @@ specifications: {
   Pattern: "Checked"
 }
 },
+{
+  "id": 3,
+  "name": "NXew:Oversized Puff Printed T-Shirt",
+  "description": "A bold oversized black t-shirt featuring premium Puff Print  for a modern streetwear look. Designed for comfort and style with a relaxed fit.",
+  "category": "T-Shirts",
+  "price": 529.99,
+  "discount": 19,
+  "size": "L",
+  "color": "Grey",
+  "clothType": "100% Cotton",
+  "fit": "Oversized Streetwear Fit",
+  "neck": "Crewneck",
+  "printType": "Puff Print",
+  "deliveryTime": "3-5 days",
+  "returnPolicy": "5 days return policy",
+  "additionalDetails": "Features reinforced stitching and  breathable fabric. Perfect for casual and urban fashion.",
+  "newArrivalPosition": 1,
+  "images": [
+    "https://i.pinimg.com/736x/b3/85/2a/b3852a87f4d7f8fd8172dac5fe8b471f.jpg",
+    "https://i.pinimg.com/736x/71/a2/c7/71a2c79bd4814c14a7f4b4ee7581d991.jpg",
+    
+  ],
+  "colorImages": {
+    "Grey": "https://i.pinimg.com/736x/71/a2/c7/71a2c79bd4814c14a7f4b4ee7581d991.jpg"
+  },
+  "specifications": {
+    "Material": "100% Cotton",
+    "Sleeve": "Half Sleeves",
+    "Neck": "Crewneck",
+    "Fit": "Oversized",
+    "Print": "Puff Print",
+    "Pattern": "Solid with Front Graphic",
+    "Occasion": "Casual / Streetwear"
+  }
+},
 // UPDATED PRODUCT (ID 4) - SET TO NEW ARRIVAL
 {
-id: 2,
+id: 4,
 name: "Men's Rust & Charcoal Plaid Shirt",
 description: "The warm rust tones are layered with charcoal and black intersecting lines, accented by stark white buttons for a clean contrast, it offers a soft, lived-in feel perfect for casual or smart-casual wear.",
 category: "Shirts",
@@ -242,7 +312,7 @@ specifications: {
 }
 },
 {
-  id: 3,
+  id: 5,
   name: "Men's Yellow with Brown strips  Shirt",
 description: "A fresh, vibrant button-down featuring a multi-colored grid plaid pattern. Set against a creamy off-white base, the shirt is detailed with bold salmon-coral and light sky-blue intersecting lines. Designed with a tailored slim fit and a button-down collar, it offers a crisp, modern aesthetic perfect for warm-weather outings or semi-casual events.",
   category: "Shirts",
@@ -272,7 +342,7 @@ additionalDetails: "Slim-fit checkered shirt with button-down collar and brand h
   }
 },
 {
-  id: 4,
+  id: 6,
   name: "Men's Green-White plaid Shirt",
   description: "A fresh, vibrant button-down featuring a multi-colored grid plaid pattern,the shirt is detailed with light Green and white intersecting lines.",
   category: "Shirts",
@@ -309,7 +379,7 @@ additionalDetails: "Slim-fit checkered shirt with button-down collar and brand h
   }
 },
 {
-  id: 5,
+  id: 7,
   name: "Men's Brown & White  Shirt",
   description: "A stylish brown and white checked shirt perfect for casual wear, both formal and casual occasions, featuring a classic checked pattern in brown and white, designed with a comfortable fit and made from a cotton blend fabric for all-day wear.",
   category: "Shirts",
@@ -340,7 +410,7 @@ additionalDetails: "Slim-fit checkered shirt with button-down collar and brand h
   }
 },
 {
-  id: 6,
+  id: 8,
   name: "Men's Brown and Charcoal Black Shirt",
   description: "This is a large-scale plaid with a brushed or distressed texture, giving it a soft, slightly rugged appearance rather than sharp, clean lines",
   category: "Shirts",
@@ -374,7 +444,7 @@ additionalDetails: "Slim-fit checkered shirt with button-down collar and brand h
 },
 
 {
-  id: 7,
+  id: 9,
   name: "Men's Yellow & Black Checks Shirt",
   description: "Premium Yellow  and Black  checked casual shirt designed for a modern smart look. Soft fabric with a comfortable slim fit, perfect for daily wear and casual outings.",
   category: "Shirts",
@@ -409,7 +479,7 @@ additionalDetails: "Slim-fit checkered shirt with button-down collar and brand h
   }
 },
 {
-  id: 8,
+  id:10,
   name: "Men's Brown Slim Fit Shirt",
   description: "Designed in a slim fit, a look that bridges dressy and casual",
   category: "Shirts",
@@ -440,7 +510,7 @@ additionalDetails: "Slim-fit checkered shirt with button-down collar and brand h
 },
 
 {
-  id: 9,
+  id: 11,
   name: "Men's Black Jordan Oversized T-Shirt",
   description: "Comfortable and stylish men's oversized t-shirt",
   category: "T-Shirts",
@@ -469,7 +539,7 @@ additionalDetails: "Slim-fit checkered shirt with button-down collar and brand h
   }
 },
 {
-  id: 10,
+  id: 12,
   name: "Nxew's Men's Oversized T-Shirt",
   description: "Comfortable and stylish men's oversized t-shirt",
   category: "T-Shirts",
@@ -500,7 +570,7 @@ additionalDetails: "Slim-fit checkered shirt with button-down collar and brand h
   }
 },
 {
-  id: 11,
+  id: 13,
   name: "Alien Men's Oversized T-Shirt",
   description: "Comfortable and stylish oversized t-shirt with alien graphic",
   category: "T-Shirts",
@@ -530,7 +600,7 @@ additionalDetails: "Slim-fit checkered shirt with button-down collar and brand h
   }
 },
 {
-  id: 12,
+  id: 14,
   name: "Nxew's White Sweat T-Shirt",
   description: "Stylish and comfortable sweat t-shirt for cooler days",
   category: "Sweat T-Shirts",
@@ -558,7 +628,7 @@ additionalDetails: "Slim-fit checkered shirt with button-down collar and brand h
   }
 },
 {
-  id: 13,
+  id: 15,
   name: "Nxew's Black Sweat T-Shirt",
   description: "Weatherproof black sweat t-shirt for versatile wear",
   category: "Sweat T-Shirts",
@@ -586,7 +656,7 @@ additionalDetails: "Slim-fit checkered shirt with button-down collar and brand h
   }
 },
 {
-  id: 14,
+  id: 16,
   name: "Nxew's Half Sleeve Embroidered Shirt",
   description: "Relaxed fit embroidered half-sleeve shirt",
   category: "Half Sleeve Shirts",
@@ -614,7 +684,7 @@ additionalDetails: "Slim-fit checkered shirt with button-down collar and brand h
   }
 },
 {
-  id: 15,
+  id: 17,
   name: "Half Sleeve Acid Wash T-Shirt",
   description: "Relaxed fit embroidered acid wash t-shirt",
   category: "T-Shirts",
@@ -644,7 +714,7 @@ additionalDetails: "Slim-fit checkered shirt with button-down collar and brand h
 },
  
  {
-  id: 16,
+  id: 18,
   name: "White and Blue Checked Shirt",
   description: "A classic checked pattern in white and blue",
   category: "Shirts",
@@ -676,7 +746,7 @@ additionalDetails: "Slim-fit checkered shirt with button-down collar and brand h
 },
 
 {
-  "id": 17,
+  "id": 19,
   "name": "Men's White & Red Strips Shirt",
   "description": "Classic white and red striped shirt for versatile casual wear and formal wear. The shirt features a timeless design with bold red stripes on a crisp white background, making it a stylish choice for both casual and formal occasions.",
   "category": "Shirts",
