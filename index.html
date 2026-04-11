@@ -179,34 +179,6 @@
     </div>
   </div>
 
-  <header class="site-brand-header footer-nav" aria-label="Primary">
-    <div class="container">
-      <div class="site-brand-header__inner">
-        <button class="site-brand-header__menu btn text-dark" data-bs-toggle="offcanvas" data-bs-target="#menuCanvas" aria-controls="menuCanvas" aria-label="Open menu">
-          <i class="bi bi-list"></i>
-          <span>Menu</span>
-        </button>
-
-        <a href="#" class="site-brand-header__logo" onclick="showSection('homeSection'); return false;" aria-label="NXew Home">
-          <img src="assets/header-logo.png" alt="NXew">
-        </a>
-
-        <nav class="site-brand-header__actions" aria-label="Quick actions">
-          <a href="#" class="nav-link" data-section="searchSection" onclick="showSection('searchSection'); return false;" aria-label="Search">
-            <i class="bi bi-search"></i>
-          </a>
-          <a href="#" class="nav-link" data-section="cartSection" onclick="showSection('cartSection'); return false;" aria-label="Your Bag">
-            <i class="bi bi-bag"></i>
-            <span class="badge" id="footerBagBadge">0</span>
-          </a>
-          <a href="#" class="nav-link" data-section="accountSection" onclick="showSection('accountSection'); return false;" aria-label="Account">
-            <i class="bi bi-person"></i>
-          </a>
-        </nav>
-      </div>
-    </div>
-  </header>
-
   <!-- ============================================================
        HOME SECTION
        ERROR FIX #2: The original closed homeSection's <div> after
@@ -226,7 +198,7 @@
           </div>
           <div class="carousel-inner">
             <div class="carousel-item active" onclick="showSection('shopSection')">
-              <img src="https://i.pinimg.com/736x/56/d0/70/56d0705031de549fcef7b999e31eaaae.jpg" class="d-block w-80" alt="Product Highlight 1">
+              <img src="https://i.pinimg.com/736x/d5/5e/bc/d55ebc351a5425c3ea8c3ec62b317325.jpg" class="d-block w-80" alt="Product Highlight 1">
               <div class="carousel-caption d-none d-md-block">
                 <h5>Luxury in Every Stitch</h5>
                 <p>Clothing is a form of self-expression.</p>
@@ -1434,6 +1406,47 @@
     </div>
   </div>
 
+  <!-- ============================================================
+       FIXED BOTTOM NAV
+       ERROR FIX #12: The original nav had broken HTML structure:
+         - <button> was missing its closing </button> tag
+         - A duplicate stray </li> tag appeared after the button
+         - The last <li> (account) was missing its closing </li> tag
+         - The <ul> was missing its closing </ul> tag
+       All corrected below.
+  ============================================================ -->
+  <footer class="footer-nav fixed-bottom">
+    <div class="container">
+      <ul class="nav-list">
+        <li class="nav-item">
+          <a href="#" class="nav-link" data-section="homeSection" onclick="showSection('homeSection'); return false;" aria-label="Home">
+            <i class="bi bi-house"></i>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link" data-section="searchSection" onclick="showSection('searchSection'); return false;" aria-label="Search">
+            <i class="bi bi-search"></i>
+          </a>
+        </li>
+        <li class="nav-item">
+          <button class="btn text-dark" data-bs-toggle="offcanvas" data-bs-target="#menuCanvas" aria-controls="menuCanvas" aria-label="Toggle Menu">
+            <span>MENU</span>
+          </button>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link" data-section="cartSection" onclick="showSection('cartSection'); return false;" aria-label="Your Bag">
+            <i class="bi bi-bag"></i>
+            <span class="badge" id="footerBagBadge">0</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link" data-section="accountSection" onclick="showSection('accountSection'); return false;" aria-label="Account">
+            <i class="bi bi-person"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </footer>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="00.js"></script>
 </body>
