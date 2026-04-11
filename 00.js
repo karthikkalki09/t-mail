@@ -684,69 +684,7 @@ additionalDetails: "Slim-fit checkered shirt with button-down collar and brand h
   }
 },
 {
-  id: 17,
-  name: "Half Sleeve Acid Wash T-Shirt",
-  description: "Relaxed fit embroidered acid wash t-shirt",
-  category: "T-Shirts",
-  price: 249.99,
-  discount: 24,
-  size: "L",
-  color: "Blue",
-  clothType: "100% Cotton",
-  deliveryTime: "3-5 days",
-  returnPolicy: "5 days return policy",
-  additionalDetails: "Men's Blue Hustle Typography Oversized Acid Wash T-shirt",
-
-  images: [
-    "https://i.pinimg.com/736x/8b/0b/21/8b0b21072e783ba7534c8975519f2d85.jpg",
-    "https://i.pinimg.com/736x/81/91/62/81916265cf66a6079ff353528add0773.jpg",
-    "https://i.pinimg.com/736x/03/ab/0c/03ab0c096a7b92e5609cd7b72ec585f6.jpg"
-  ],
-  colorImages: {
-    "Blue": "https://i.pinimg.com/736x/8b/0b/21/8b0b21072e783ba7534c8975519f2d85.jpg"
-  },
-  specifications: {
-    Material: "100% Cotton",
-    Fit: "Relaxed Fit",
-    Sleeve: "Half Sleeves",
-    Neck: "Round Neck"
-  }
-},
- 
- {
-  id: 18,
-  name: "White and Blue Checked Shirt",
-  description: "A classic checked pattern in white and blue",
-  category: "Shirts",
-  price: 449.99,
-  discount: 25,
-  size: "M, L, XL",
-  color: "White/Blue",
-  clothType: "100% Cotton",
-  deliveryTime: "3-5 days",
-  returnPolicy: "5 days return policy",
-  additionalDetails: "Machine washable and weatherproof",
-
-  images: [
-    "https://i.pinimg.com/736x/21/18/fd/2118fdf81834bed89278637cc28a4b6b.jpg",
-    "https://i.pinimg.com/736x/a9/6a/4d/a96a4d91674df0aa24b501cfd3ed0a7f.jpg",
-    "https://i.pinimg.com/736x/de/50/26/de50269b67041f424977c20648f7f695.jpg",
-    "https://i.pinimg.com/736x/ca/fb/cd/cafbcd9c7bff346dfc123b50a8c78949.jpg"
-  ],
-  colorImages: {
-    "White/Blue": "https://i.pinimg.com/736x/21/18/fd/2118fdf81834bed89278637cc28a4b6b.jpg"
-  },
-  specifications: {
-    Material: "100% Cotton",
-    Fit: "Regular Fit",
-    Sleeve: "Full Sleeve",
-    Wear: "Casual, Formal",
-    Collar: "Spread Collar with checked pattern"
-  }
-},
-
-{
-  "id": 19,
+  "id": 17,
   "name": "Men's White & Red Strips Shirt",
   "description": "Classic white and red striped shirt for versatile casual wear and formal wear. The shirt features a timeless design with bold red stripes on a crisp white background, making it a stylish choice for both casual and formal occasions.",
   "category": "Shirts",
