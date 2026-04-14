@@ -76,6 +76,11 @@ let currentUser = null;
 // Admin session (fixed credentials)
 const ADMIN_EMAIL = "nxew.com@gmail.com";
 const ADMIN_PASSWORD = "766183@Kk";
+const OWNER_NOTIFICATION_EMAIL = ADMIN_EMAIL;
+const EMAILJS_PUBLIC_KEY = "uNU6LHQHe2zyexNEo";
+const EMAILJS_SERVICE_ID = "service_t95u5og";
+const EMAILJS_TEMPLATE_ID = "template_ciqxjv9";
+const EMAIL_REQUEST_TIMEOUT_MS = 15000;
 let currentAdmin = null;
 let visitorPresenceInterval = null;
 let adminRealtimeInterval = null;
@@ -94,6 +99,32 @@ const locations = ['New York', 'Los Angeles', 'Chicago', 'Houston', 'Phoenix'];
 const colorMap = { 'Blue': '#0000FF', 'Red': '#FF0000', 'Black': '#000000', 'Brown': '#8B4513', 'White': '#FFFFFF' };
 let currentOrderIndexForMessage = null;
 let shopSearchTimeout = null;
+
+function sendEmailWithTimeout(templateParams, options = {}) {
+  if (typeof emailjs === "undefined") {
+    return Promise.reject(new Error("EmailJS is not available."));
+  }
+
+  const serviceId = options.serviceId || EMAILJS_SERVICE_ID;
+  const templateId = options.templateId || EMAILJS_TEMPLATE_ID;
+  const timeoutMs = options.timeoutMs || EMAIL_REQUEST_TIMEOUT_MS;
+
+  return new Promise((resolve, reject) => {
+    const timeoutId = setTimeout(() => {
+      reject(new Error(`Email request timed out after ${timeoutMs}ms.`));
+    }, timeoutMs);
+
+    Promise.resolve(emailjs.send(serviceId, templateId, templateParams))
+      .then((response) => {
+        clearTimeout(timeoutId);
+        resolve(response);
+      })
+      .catch((error) => {
+        clearTimeout(timeoutId);
+        reject(error);
+      });
+  });
+}
 
 // Function to generate a random 8-character coupon code
 function generateCouponCode() {
@@ -1852,7 +1883,7 @@ if (product) {
 document.addEventListener('DOMContentLoaded', function() {
 // Initialize EmailJS
 if (typeof emailjs !== 'undefined') {
-  emailjs.init("uNU6LHQHe2zyexNEo"); // Your EmailJS public key
+  emailjs.init(EMAILJS_PUBLIC_KEY); // Your EmailJS public key
 }
 
 const buyFormModal = document.getElementById("buyForm");
@@ -1872,7 +1903,7 @@ if (buyFormModal) {
     const details = document.getElementById("additionalDetails").value;
     const product = currentProductForPurchase;
 // Send form via EmailJS with proper parameters for BUY NOW
-    emailjs.send("service_t95u5og", "template_ciqxjv9", {
+    sendEmailWithTimeout({
       address: address,
       phone: mobile,
       details: details,
@@ -1882,6 +1913,7 @@ if (buyFormModal) {
       color: product.selectedColor,
       buyer_name: currentUser ? `${currentUser.firstName} ${currentUser.lastName}` : "Guest",
       buyer_email: currentUser ? currentUser.email : "No email provided",
+      to_email: OWNER_NOTIFICATION_EMAIL,
       message_type: "new_order"
     })
       .then(function () {
@@ -3309,7 +3341,7 @@ document.getElementById('finalPrice').value = totalAmount.toFixed(2);
         showSection("homeSection");
        });
 
-       document.getElementById("customizationForm")?.addEventListener("submit", function(e) {
+       document.getElementById("customizationForm")?.addEventListener("submit", async function(e) {
          e.preventDefault();
 
          const submitBtn = this.querySelector('button[type="submit"]');
@@ -3326,7 +3358,6 @@ document.getElementById('finalPrice').value = totalAmount.toFixed(2);
          const sizeRequirement = document.getElementById("customSizeRequirement").value;
          const colorPreference = document.getElementById("customColorPreference").value;
          const patternPreference = document.getElementById("customPatternPreference").value;
-         const budgetRange = document.getElementById("customBudgetRange").value;
          const occasion = document.getElementById("customOccasion").value || "Not specified";
          const quantity = document.getElementById("customQuantity").value || "Not specified";
          const deadline = document.getElementById("customDeadline").value || "Not specified";
@@ -3344,7 +3375,6 @@ document.getElementById('finalPrice').value = totalAmount.toFixed(2);
            sizeRequirement,
            colorPreference,
            patternPreference,
-           budgetRange,
            occasion,
            quantity,
            deadline,
@@ -3355,7 +3385,7 @@ document.getElementById('finalPrice').value = totalAmount.toFixed(2);
            date: new Date().toLocaleString()
          };
 
-         const customizationMessage = `New customization request: Category - ${customizationRequest.category}, Product - ${customizationRequest.productType}, Fit - ${customizationRequest.fitPreference}, Fabric - ${customizationRequest.fabricPreference}, Size - ${customizationRequest.sizeRequirement}, Colors - ${customizationRequest.colorPreference}, Pattern - ${customizationRequest.patternPreference || 'None'}, Budget - ${customizationRequest.budgetRange}, Occasion - ${customizationRequest.occasion}, Features - ${customizationRequest.selectedFeatures}, Quantity - ${customizationRequest.quantity}, Deadline - ${customizationRequest.deadline}, Inspiration - ${customizationRequest.inspiration}, Notes - ${customizationRequest.notes}, From - ${customizationRequest.user}`;
+         const customizationMessage = `New customization request: Category - ${customizationRequest.category}, Product - ${customizationRequest.productType}, Fit - ${customizationRequest.fitPreference}, Fabric - ${customizationRequest.fabricPreference}, Size - ${customizationRequest.sizeRequirement}, Colors - ${customizationRequest.colorPreference}, Pattern - ${customizationRequest.patternPreference || 'None'}, Occasion - ${customizationRequest.occasion}, Features - ${customizationRequest.selectedFeatures}, Quantity - ${customizationRequest.quantity}, Deadline - ${customizationRequest.deadline}, Inspiration - ${customizationRequest.inspiration}, Notes - ${customizationRequest.notes}, From - ${customizationRequest.user}`;
 
          const customizationEmailDetails = [
            `Category: ${customizationRequest.category}`,
@@ -3365,7 +3395,6 @@ document.getElementById('finalPrice').value = totalAmount.toFixed(2);
            `Size Requirement: ${customizationRequest.sizeRequirement}`,
            `Color Preference: ${customizationRequest.colorPreference}`,
            `Pattern Preference: ${customizationRequest.patternPreference || 'None'}`,
-           `Budget Range: ${customizationRequest.budgetRange}`,
            `Occasion: ${customizationRequest.occasion}`,
            `Required Features: ${customizationRequest.selectedFeatures}`,
            `Quantity: ${customizationRequest.quantity}`,
@@ -3383,39 +3412,32 @@ document.getElementById('finalPrice').value = totalAmount.toFixed(2);
            showSection("homeSection");
          };
 
-         if (typeof emailjs === 'undefined') {
+         try {
+           await sendEmailWithTimeout({
+             address: "Customization Request",
+             phone: currentUser?.mobile || "Not provided",
+             details: customizationEmailDetails,
+             product: `Customization - ${customizationRequest.productType}`,
+             price: "Not specified",
+             size: customizationRequest.sizeRequirement,
+             color: customizationRequest.colorPreference,
+             buyer_name: currentUser ? `${currentUser.firstName} ${currentUser.lastName}` : "Guest",
+             buyer_email: currentUser ? currentUser.email : "No email provided",
+             to_email: OWNER_NOTIFICATION_EMAIL,
+             reply_to: currentUser ? currentUser.email : "",
+             message_type: "customization_request"
+           });
+
            handleCustomizationSuccess();
+         } catch (error) {
+           showNotification("Failed to send customization request email. Please try again.", "danger");
+           console.error("Customization Email Error:", error);
+         } finally {
            if (submitBtn) {
              submitBtn.textContent = originalText;
              submitBtn.disabled = false;
            }
-           return;
          }
-
-         emailjs.send("service_t95u5og", "template_ciqxjv9", {
-           address: "Customization Request",
-           phone: currentUser?.mobile || "Not provided",
-           details: customizationEmailDetails,
-           product: `Customization - ${customizationRequest.productType}`,
-           price: customizationRequest.budgetRange,
-           size: customizationRequest.sizeRequirement,
-           color: customizationRequest.colorPreference,
-           buyer_name: currentUser ? `${currentUser.firstName} ${currentUser.lastName}` : "Guest",
-           buyer_email: currentUser ? currentUser.email : "No email provided",
-           message_type: "customization_request"
-         })
-           .then(function () {
-             handleCustomizationSuccess();
-           }, function (error) {
-             showNotification("Failed to send customization request email. Please try again.", "danger");
-             console.error("EmailJS Error:", error);
-           })
-           .finally(function () {
-             if (submitBtn) {
-               submitBtn.textContent = originalText;
-               submitBtn.disabled = false;
-             }
-           });
        });
         // QR Code Generation and Download Functionality
 function generateQRCode(content) {
