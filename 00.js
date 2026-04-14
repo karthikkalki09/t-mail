@@ -3302,11 +3302,120 @@ document.getElementById('finalPrice').value = totalAmount.toFixed(2);
          // Show notification to the user
          showNotification("Your product request has been sent to the owner.", "success");
      
-         // Reset the form
-         this.reset();
+       // Reset the form
+        this.reset();
      
-         // Return to home section
-         showSection("homeSection");
+        // Return to home section
+        showSection("homeSection");
+       });
+
+       document.getElementById("customizationForm")?.addEventListener("submit", function(e) {
+         e.preventDefault();
+
+         const submitBtn = this.querySelector('button[type="submit"]');
+         const originalText = submitBtn ? submitBtn.textContent : "Send Customization Request";
+         if (submitBtn) {
+           submitBtn.textContent = "Sending...";
+           submitBtn.disabled = true;
+         }
+
+         const category = document.getElementById("customProductCategory").value;
+         const productType = document.getElementById("customProductType").value;
+         const fitPreference = document.getElementById("customFitPreference").value;
+         const fabricPreference = document.getElementById("customFabricPreference").value;
+         const sizeRequirement = document.getElementById("customSizeRequirement").value;
+         const colorPreference = document.getElementById("customColorPreference").value;
+         const patternPreference = document.getElementById("customPatternPreference").value;
+         const budgetRange = document.getElementById("customBudgetRange").value;
+         const occasion = document.getElementById("customOccasion").value || "Not specified";
+         const quantity = document.getElementById("customQuantity").value || "Not specified";
+         const deadline = document.getElementById("customDeadline").value || "Not specified";
+         const inspiration = document.getElementById("customInspiration").value || "None";
+         const notes = document.getElementById("customNotes").value || "None";
+         const selectedFeatures = Array.from(document.querySelectorAll(".customization-feature:checked"))
+           .map(feature => feature.value)
+           .join(", ") || "None";
+
+         const customizationRequest = {
+           category,
+           productType,
+           fitPreference,
+           fabricPreference,
+           sizeRequirement,
+           colorPreference,
+           patternPreference,
+           budgetRange,
+           occasion,
+           quantity,
+           deadline,
+           inspiration,
+           notes,
+           selectedFeatures,
+           user: currentUser ? `${currentUser.firstName} ${currentUser.lastName} (${currentUser.email})` : "Guest",
+           date: new Date().toLocaleString()
+         };
+
+         const customizationMessage = `New customization request: Category - ${customizationRequest.category}, Product - ${customizationRequest.productType}, Fit - ${customizationRequest.fitPreference}, Fabric - ${customizationRequest.fabricPreference}, Size - ${customizationRequest.sizeRequirement}, Colors - ${customizationRequest.colorPreference}, Pattern - ${customizationRequest.patternPreference || 'None'}, Budget - ${customizationRequest.budgetRange}, Occasion - ${customizationRequest.occasion}, Features - ${customizationRequest.selectedFeatures}, Quantity - ${customizationRequest.quantity}, Deadline - ${customizationRequest.deadline}, Inspiration - ${customizationRequest.inspiration}, Notes - ${customizationRequest.notes}, From - ${customizationRequest.user}`;
+
+         const customizationEmailDetails = [
+           `Category: ${customizationRequest.category}`,
+           `Product Type: ${customizationRequest.productType}`,
+           `Fit Preference: ${customizationRequest.fitPreference}`,
+           `Fabric Preference: ${customizationRequest.fabricPreference}`,
+           `Size Requirement: ${customizationRequest.sizeRequirement}`,
+           `Color Preference: ${customizationRequest.colorPreference}`,
+           `Pattern Preference: ${customizationRequest.patternPreference || 'None'}`,
+           `Budget Range: ${customizationRequest.budgetRange}`,
+           `Occasion: ${customizationRequest.occasion}`,
+           `Required Features: ${customizationRequest.selectedFeatures}`,
+           `Quantity: ${customizationRequest.quantity}`,
+           `Deadline: ${customizationRequest.deadline}`,
+           `Inspiration: ${customizationRequest.inspiration}`,
+           `Additional Notes: ${customizationRequest.notes}`,
+           `Requested By: ${customizationRequest.user}`,
+           `Requested At: ${customizationRequest.date}`
+         ].join('\n');
+
+         const handleCustomizationSuccess = () => {
+           notifyOwner(customizationMessage);
+           showNotification("Your customization request has been sent successfully.", "success");
+           this.reset();
+           showSection("homeSection");
+         };
+
+         if (typeof emailjs === 'undefined') {
+           handleCustomizationSuccess();
+           if (submitBtn) {
+             submitBtn.textContent = originalText;
+             submitBtn.disabled = false;
+           }
+           return;
+         }
+
+         emailjs.send("service_t95u5og", "template_ciqxjv9", {
+           address: "Customization Request",
+           phone: currentUser?.mobile || "Not provided",
+           details: customizationEmailDetails,
+           product: `Customization - ${customizationRequest.productType}`,
+           price: customizationRequest.budgetRange,
+           size: customizationRequest.sizeRequirement,
+           color: customizationRequest.colorPreference,
+           buyer_name: currentUser ? `${currentUser.firstName} ${currentUser.lastName}` : "Guest",
+           buyer_email: currentUser ? currentUser.email : "No email provided",
+           message_type: "customization_request"
+         })
+           .then(function () {
+             handleCustomizationSuccess();
+           }, function (error) {
+             showNotification("Failed to send customization request email. Please try again.", "danger");
+             console.error("EmailJS Error:", error);
+           })
+           .finally(function () {
+             if (submitBtn) {
+               submitBtn.textContent = originalText;
+               submitBtn.disabled = false;
+             }
+           });
        });
         // QR Code Generation and Download Functionality
 function generateQRCode(content) {
@@ -3962,14 +4071,13 @@ function filterShopByCategory(category) {
   // =====================================================
   const _origToggleDarkMode = window.toggleDarkMode;
   window.toggleDarkMode = function () {
-    document.body.classList.toggle('dark-mode');
     const toggle = document.querySelector('.dark-mode-toggle');
     if (toggle) {
-      const isDark = document.body.classList.contains('dark-mode');
-      toggle.innerHTML = isDark ? '<i class="bi bi-sun"></i>' : '<i class="bi bi-moon"></i>';
+      toggle.innerHTML = '<i class="bi bi-sliders2"></i>';
       toggle.style.transform = 'scale(1.3) rotate(20deg)';
       setTimeout(() => { toggle.style.transform = ''; }, 300);
     }
+    showSection('customizationSection');
     if (typeof _origToggleDarkMode === 'function') {
       _origToggleDarkMode();
     }
