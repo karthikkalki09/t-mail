@@ -3358,9 +3358,13 @@ document.getElementById('finalPrice').value = totalAmount.toFixed(2);
          const sizeRequirement = document.getElementById("customSizeRequirement").value;
          const colorPreference = document.getElementById("customColorPreference").value;
          const patternPreference = document.getElementById("customPatternPreference").value;
+         const contactMobile = document.getElementById("customContactMobile").value.trim();
+         const contactEmail = document.getElementById("customContactEmail").value.trim();
+         const location = document.getElementById("customLocation").value.trim();
          const occasion = document.getElementById("customOccasion").value || "Not specified";
          const quantity = document.getElementById("customQuantity").value || "Not specified";
          const deadline = document.getElementById("customDeadline").value || "Not specified";
+         const otherOptions = document.getElementById("customOtherOptions").value.trim() || "None";
          const inspiration = document.getElementById("customInspiration").value || "None";
          const notes = document.getElementById("customNotes").value || "None";
          const selectedFeatures = Array.from(document.querySelectorAll(".customization-feature:checked"))
@@ -3375,9 +3379,13 @@ document.getElementById('finalPrice').value = totalAmount.toFixed(2);
            sizeRequirement,
            colorPreference,
            patternPreference,
+           contactMobile,
+           contactEmail,
+           location,
            occasion,
            quantity,
            deadline,
+           otherOptions,
            inspiration,
            notes,
            selectedFeatures,
@@ -3385,7 +3393,7 @@ document.getElementById('finalPrice').value = totalAmount.toFixed(2);
            date: new Date().toLocaleString()
          };
 
-         const customizationMessage = `New customization request: Category - ${customizationRequest.category}, Product - ${customizationRequest.productType}, Fit - ${customizationRequest.fitPreference}, Fabric - ${customizationRequest.fabricPreference}, Size - ${customizationRequest.sizeRequirement}, Colors - ${customizationRequest.colorPreference}, Pattern - ${customizationRequest.patternPreference || 'None'}, Occasion - ${customizationRequest.occasion}, Features - ${customizationRequest.selectedFeatures}, Quantity - ${customizationRequest.quantity}, Deadline - ${customizationRequest.deadline}, Inspiration - ${customizationRequest.inspiration}, Notes - ${customizationRequest.notes}, From - ${customizationRequest.user}`;
+         const customizationMessage = `New customization request: Category - ${customizationRequest.category}, Product - ${customizationRequest.productType}, Fit - ${customizationRequest.fitPreference}, Fabric - ${customizationRequest.fabricPreference}, Size - ${customizationRequest.sizeRequirement}, Colors - ${customizationRequest.colorPreference}, Pattern - ${customizationRequest.patternPreference || 'None'}, Mobile - ${customizationRequest.contactMobile}, Email - ${customizationRequest.contactEmail}, Location - ${customizationRequest.location}, Occasion - ${customizationRequest.occasion}, Features - ${customizationRequest.selectedFeatures}, Quantity - ${customizationRequest.quantity}, Deadline - ${customizationRequest.deadline}, Other Options - ${customizationRequest.otherOptions}, Inspiration - ${customizationRequest.inspiration}, Notes - ${customizationRequest.notes}, From - ${customizationRequest.user}`;
 
          const customizationEmailDetails = [
            `Category: ${customizationRequest.category}`,
@@ -3395,10 +3403,14 @@ document.getElementById('finalPrice').value = totalAmount.toFixed(2);
            `Size Requirement: ${customizationRequest.sizeRequirement}`,
            `Color Preference: ${customizationRequest.colorPreference}`,
            `Pattern Preference: ${customizationRequest.patternPreference || 'None'}`,
+           `Mobile Number: ${customizationRequest.contactMobile}`,
+           `Email Address: ${customizationRequest.contactEmail}`,
+           `Location: ${customizationRequest.location}`,
            `Occasion: ${customizationRequest.occasion}`,
            `Required Features: ${customizationRequest.selectedFeatures}`,
            `Quantity: ${customizationRequest.quantity}`,
            `Deadline: ${customizationRequest.deadline}`,
+           `Other Options: ${customizationRequest.otherOptions}`,
            `Inspiration: ${customizationRequest.inspiration}`,
            `Additional Notes: ${customizationRequest.notes}`,
            `Requested By: ${customizationRequest.user}`,
@@ -3414,17 +3426,17 @@ document.getElementById('finalPrice').value = totalAmount.toFixed(2);
 
          try {
            await sendEmailWithTimeout({
-             address: "Customization Request",
-             phone: currentUser?.mobile || "Not provided",
+             address: customizationRequest.location,
+             phone: customizationRequest.contactMobile,
              details: customizationEmailDetails,
              product: `Customization - ${customizationRequest.productType}`,
              price: "Not specified",
              size: customizationRequest.sizeRequirement,
              color: customizationRequest.colorPreference,
              buyer_name: currentUser ? `${currentUser.firstName} ${currentUser.lastName}` : "Guest",
-             buyer_email: currentUser ? currentUser.email : "No email provided",
+             buyer_email: customizationRequest.contactEmail,
              to_email: OWNER_NOTIFICATION_EMAIL,
-             reply_to: currentUser ? currentUser.email : "",
+             reply_to: customizationRequest.contactEmail,
              message_type: "customization_request"
            });
 
