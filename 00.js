@@ -1522,33 +1522,44 @@ if (!selectedSize || !selectedColor) {
 const product = products.find(p => p.id === productId);
 if (product) {
   currentProductForPurchase = { ...product, selectedSize, selectedColor };
-  const daysRange = product.deliveryTime.match(/\d+-\d+/)[0];
-  const maxDays = parseInt(daysRange.split("-")[1]);
+  const deliveryText = product.deliveryTime || "3-5 days";
+  const daysMatch = deliveryText.match(/\d+-\d+/);
+  const maxDays = daysMatch ? parseInt(daysMatch[0].split("-")[1], 10) : 5;
   const today = new Date();
   const estimatedDeliveryDate = new Date(today);
   estimatedDeliveryDate.setDate(today.getDate() + maxDays);
   const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
   const formattedDate = estimatedDeliveryDate.toLocaleDateString('en-US', options);
+  const priceText = typeof formatStorePrice === "function" ? formatStorePrice(product.price) : product.price.toFixed(2);
+  const imageSrc = product.images && product.images.length ? product.images[0] : "";
+
+  const form = document.getElementById("buyForm");
+  if (form) form.reset();
+
   document.getElementById("modalProductName").textContent = product.name;
   document.getElementById("modalProductSize").textContent = selectedSize;
   document.getElementById("modalProductColor").textContent = selectedColor;
-  document.getElementById("modalProductPrice").textContent = product.price.toFixed(2);
+  document.getElementById("modalProductPrice").textContent = priceText;
+  document.getElementById("modalSubtotal").textContent = priceText;
   document.getElementById("modalDeliveryTime").textContent = formattedDate;
-  document.getElementById("modalTotalAmount").textContent = (product.price + 5).toFixed(2); // Assuming +5 for shipping
-  
-  // Fill hidden fields for EmailJS
+  document.getElementById("modalTotalAmount").textContent = priceText;
+  document.getElementById("finalPrice").value = product.price.toFixed(2);
   document.getElementById("emailProduct").value = product.name;
   document.getElementById("emailPrice").value = product.price.toFixed(2);
   document.getElementById("emailSize").value = selectedSize;
   document.getElementById("emailColor").value = selectedColor;
 
-  // Clear user fields
-  const form = document.getElementById("buyForm");
-  if (form) {
-    form.reset();
+  const modalImg = document.getElementById("modalProductImage");
+  if (modalImg) {
+    if (imageSrc) {
+      modalImg.src = imageSrc;
+      modalImg.alt = product.name;
+      modalImg.hidden = false;
+    } else {
+      modalImg.hidden = true;
+    }
   }
 
-  // Show modal
   const buyModal = new bootstrap.Modal(document.getElementById("buyModal"));
   buyModal.show();
 }
@@ -1703,51 +1714,72 @@ buyModal.hide();
 
 // Update cart count badge
 function updateCartCountBadge() {
-const badge = document.getElementById("headerBagBadge") || document.getElementById("footerBagBadge");
-if (badge) badge.textContent = cart.length;
+  const count = cart.length;
+  ["headerBagBadge", "menuBagBadge", "footerBagBadge"].forEach(id => {
+    const badge = document.getElementById(id);
+    if (badge) {
+      badge.textContent = count;
+      badge.style.display = count > 0 ? "flex" : "none";
+    }
+  });
 }
 
 // Update cart section
 function updateCartSection() {
-const cartContent = document.getElementById("cartContent");
-if (cart.length === 0) {
-  cartContent.innerHTML = `
-    <div class="card nxew-cart-empty border-0 shadow-sm">
-      <div class="card-body text-center">
-        <div class="nxew-cart-empty-icon">
-          <i class="bi bi-bag-x"></i>
-        </div>
-        <h4 class="mt-3 mb-1">Your NXew Bag is Empty</h4>
-        <p class="text-muted mb-3">Explore colorful picks and add something new to your cart.</p>
-        <button class="btn btn-primary" onclick="showSection('shopSection')">
-          Continue Shopping
+  const cartContent = document.getElementById("cartContent");
+  if (!cartContent) return;
+
+  if (cart.length === 0) {
+    cartContent.innerHTML = `
+      <div class="haux-cart-empty">
+        <svg class="haux-bag-icon haux-cart-empty-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M6.5 8.5h11l-.9 12.5H7.4L6.5 8.5Z" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linejoin="round"/>
+          <path d="M9 8.5V7a3 3 0 0 1 6 0v1.5" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round"/>
+        </svg>
+        <h2>Your bag is empty</h2>
+        <p>Add something you love from our latest drop.</p>
+        <button class="store-submit-btn store-submit-btn-outline" type="button" onclick="showSection('shopSection')">Continue Shopping</button>
+      </div>
+    `;
+    return;
+  }
+
+  const total = cart.reduce((sum, item) => sum + item.price, 0);
+  let itemsHtml = "";
+
+  cart.forEach((item, index) => {
+    const image = item.images && item.images.length
+      ? item.images[0]
+      : "https://via.placeholder.com/400x500?text=" + encodeURIComponent(item.name);
+
+    itemsHtml += `
+      <article class="haux-cart-item">
+        <button type="button" class="haux-cart-item-media" onclick="showProductDetails(${item.id})" aria-label="View ${item.name}">
+          <img src="${image}" alt="${item.name}" loading="lazy">
         </button>
+        <div class="haux-cart-item-info">
+          <h3 onclick="showProductDetails(${item.id})" role="button" tabindex="0">${item.name}</h3>
+          <p class="haux-cart-meta">${item.selectedSize || "—"} · ${item.selectedColor || "—"}</p>
+          <p class="haux-cart-price">Rs. ${formatStorePrice(item.price)}</p>
+        </div>
+        <button type="button" class="haux-cart-remove" onclick="removeFromCart(${index})" aria-label="Remove ${item.name}">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </article>
+    `;
+  });
+
+  cartContent.innerHTML = `
+    <div class="haux-cart-shell">
+      <div class="haux-cart-summary">
+        <span>${cart.length} item${cart.length === 1 ? "" : "s"}</span>
+        <span>Rs. ${formatStorePrice(total)}</span>
       </div>
+      <div class="haux-cart-items">${itemsHtml}</div>
+      <p class="haux-cart-note">Taxes included. Shipping calculated at checkout.</p>
+      <button class="store-submit-btn" type="button" onclick="showSection('shopSection')">Continue Shopping</button>
     </div>
   `;
-  return;
-}
-let html = "";
-cart.forEach((item, index) => {
-  html += `
-    <div class="card mb-3 shadow-sm product-card" onclick="showProductDetails(${item.id})" style="cursor: pointer;">
-      <div class="row g-0">
-        <div class="col-4">
-          <img src="${item.images && item.images.length ? item.images[0] : 'https://via.placeholder.com/400x300?text=' + encodeURIComponent(item.name)}" class="img-fluid rounded-start" alt="${item.name}">
-        </div>
-        <div class="col-8">
-          <div class="card-body">
-            <h5 class="card-title">${item.name}</h5>
-            <p class="card-text">Size: ${item.selectedSize}, Color: ${item.selectedColor}</p>
-            <p class="card-text"><small class="text-muted">${item.category} |  ₹${(item.price * 1.2).toFixed(2)}₹${item.price.toFixed(2)}</small></p>
-            <button class="btn btn-sm btn-danger" onclick="event.stopPropagation(); removeFromCart(${index})"><i class="bi bi-trash me-1"></i> Remove</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  `;
-});
-cartContent.innerHTML = html;
 }
 
 // Remove from cart
@@ -2541,20 +2573,23 @@ return `<img id="mainProductImage" src="${defaultImage}" class="product-detail-i
 }
 
 // Update menu account details
-           function updateMenuAccountDetails() {
-             const container = document.getElementById("menuAccountDetails");
-             if (currentUser) {
-               container.innerHTML = `<i class="bi bi-person-circle me-2"></i><h4 class="d-inline">${currentUser.firstName} ${currentUser.lastName}</h4><br><small>${currentUser.email}</small>`;
-               if (currentUser.email === "tedpole.in@gmail.com") {
-                 document.getElementById("sellerDashboardMenuItem").style.display = "block";
-                 document.getElementById("ownerDashboardMenuItem").style.display = "block";
-               }
-             } else {
-               container.innerHTML = `<h4>Welcome Guest</h4>`;
-               document.getElementById("sellerDashboardMenuItem").style.display = "none";
-               document.getElementById("ownerDashboardMenuItem").style.display = "none";
-             }
-           }
+function updateMenuAccountDetails() {
+  const loginBtn = document.getElementById("menuLoginButton");
+  const loginText = document.getElementById("menuLoginText");
+  if (currentUser) {
+    if (loginText) loginText.textContent = "My Account";
+    if (loginBtn) loginBtn.onclick = () => { hideMenu(); showSection("accountSection"); };
+    if (currentUser.email === "tedpole.in@gmail.com") {
+      document.getElementById("sellerDashboardMenuItem").style.display = "block";
+      document.getElementById("ownerDashboardMenuItem").style.display = "block";
+    }
+  } else {
+    if (loginText) loginText.textContent = "Log in";
+    if (loginBtn) loginBtn.onclick = () => { hideMenu(); showSection("loginSection"); };
+    document.getElementById("sellerDashboardMenuItem").style.display = "none";
+    document.getElementById("ownerDashboardMenuItem").style.display = "none";
+  }
+}
        
            // Logout
            function logout() {
@@ -2955,7 +2990,10 @@ document.getElementById('buyModal').addEventListener('shown.bs.modal', function 
 document.getElementById('couponCode').value = '';
 document.getElementById('couponMessage').textContent = '';
 const product = currentProductForPurchase;
-document.getElementById('modalTotalAmount').textContent = product.price.toFixed(2);
+if (!product) return;
+const priceText = typeof formatStorePrice === "function" ? formatStorePrice(product.price) : product.price.toFixed(2);
+document.getElementById('modalSubtotal').textContent = priceText;
+document.getElementById('modalTotalAmount').textContent = priceText;
 document.getElementById('finalPrice').value = product.price.toFixed(2);
 });
 
@@ -2977,7 +3015,8 @@ if (couponCode && validCoupons.includes(couponCode)) {
 }
 
 document.getElementById('couponMessage').textContent = message;
-document.getElementById('modalTotalAmount').textContent = totalAmount.toFixed(2);
+const totalText = typeof formatStorePrice === "function" ? formatStorePrice(totalAmount) : totalAmount.toFixed(2);
+document.getElementById('modalTotalAmount').textContent = totalText;
 document.getElementById('finalPrice').value = totalAmount.toFixed(2);
 });
 
@@ -3918,3 +3957,410 @@ window.addEventListener('DOMContentLoaded', () => {
     history.replaceState({ section: 'homeSection' }, '', '#homeSection');
   }
 });
+
+// Final storefront product renderer override.
+function formatStorePrice(amount) {
+  const value = Number(amount);
+  if (!Number.isFinite(value)) return "0.00";
+  return value.toLocaleString("en-IN", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
+function getStoreProductColumnClass(containerId) {
+  return containerId === "featuredProductsContainer" ? "col-6" : "col-6 col-md-4 col-lg-3";
+}
+
+function generateProducts(containerId, productList, showDiscount = true) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  const displayList = containerId === "featuredProductsContainer" ? (productList || []).slice(0, 8) : (productList || []);
+  const columnClass = getStoreProductColumnClass(containerId);
+
+  if (containerId !== "featuredProductsContainer") {
+    const countElement = document.getElementById(`${containerId.replace("Container", "")}ResultsCount`);
+    if (countElement) countElement.textContent = `${displayList.length} products`;
+  }
+
+  if (!displayList || displayList.length === 0) {
+    container.innerHTML = `
+      <div class="col-12 text-center py-5">
+        <i class="bi bi-search" style="font-size: 3rem; color: #b8bcc6;"></i>
+        <h4 class="mt-3">No products found</h4>
+        <p>Try adjusting your search</p>
+      </div>
+    `;
+    return;
+  }
+
+  container.innerHTML = displayList.map(product => {
+    const discount = product.discount || 0;
+    const originalPrice = discount > 0 ? (product.price / (1 - discount / 100)).toFixed(2) : product.price.toFixed(2);
+    const isSoldOut = (product.additionalDetails || "").toLowerCase().includes("sold out");
+    const image = product.images && product.images.length ? product.images[0] : 'https://via.placeholder.com/400x500?text=' + encodeURIComponent(product.name);
+
+    return `
+      <div class="${columnClass} mb-4">
+        <article class="store-product-card" onclick="showProductDetails(${product.id})" role="button" tabindex="0" aria-label="View ${product.name}">
+          <div class="store-product-media">
+            <img src="${image}" alt="${product.name}" loading="lazy">
+            ${showDiscount && discount > 0 ? `<span class="store-sale-badge">Sale</span>` : ''}
+            ${isSoldOut ? `<span class="store-sold-badge">Sold Out</span>` : ''}
+          </div>
+          <div class="store-product-info">
+            <h3>${product.name}</h3>
+            <div class="store-price-row">
+              ${showDiscount && discount > 0 ? `<span class="store-old-price">Rs. ${formatStorePrice(originalPrice)}</span>` : ''}
+              <span class="store-current-price">Rs. ${formatStorePrice(product.price)}</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    `;
+  }).join("");
+}
+
+// Final product detail renderer override.
+function showProductDetails(productId) {
+  const product = products.find(p => p.id === productId);
+  if (!product) return;
+
+  const sizes = (product.size || "M").split(",").map(s => s.trim()).filter(Boolean);
+  const colorsFromField = (product.color || "").split(",").map(c => c.trim()).filter(Boolean);
+  const colorsFromImages = Object.keys(product.colorImages || {});
+  const colors = [...new Set([...colorsFromField, ...colorsFromImages])];
+  const defaultColor = colors[0] || "Default";
+  const images = product.images && product.images.length ? product.images : ['https://via.placeholder.com/600x800?text=' + encodeURIComponent(product.name)];
+  const discount = product.discount || 0;
+  const originalPrice = discount > 0 ? (product.price / (1 - discount / 100)).toFixed(2) : product.price.toFixed(2);
+  const ratingInfo = getProductRating(productId);
+  const specs = product.specifications || {
+    Material: product.clothType || "Premium cotton blend",
+    Fit: product.fit || "Regular",
+    Neck: product.neck || "Round neck",
+    Print: product.printType || "Graphic"
+  };
+
+  const carouselHtml = `
+    <div id="productCarousel" class="carousel slide product-detail-gallery" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        ${images.map((img, index) => `
+          <div class="carousel-item ${index === 0 ? 'active' : ''}">
+            <img ${index === 0 ? 'id="mainProductImage"' : ''} src="${img}" class="product-detail-img" alt="${product.name}">
+          </div>
+        `).join("")}
+      </div>
+      ${images.length > 1 ? `
+        <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      ` : ''}
+    </div>
+  `;
+
+  const colorThumbnails = (colors.length ? colors : [defaultColor]).map(color => {
+    const imageUrl = product.colorImages?.[color] || images[0];
+    return `
+      <button type="button" class="color-thumb ${color === defaultColor ? 'selected' : ''}" data-color="${color}" onclick="selectColor('${color.replace(/'/g, "\\'")}')" title="${color}" aria-label="Select color ${color}">
+        <img src="${imageUrl}" alt="${color}">
+      </button>
+    `;
+  }).join("");
+
+  const sizeButtons = sizes.map(size => `
+    <button type="button" class="size-btn ${size === sizes[0] ? 'active' : ''}" data-size="${size}" onclick="selectSize('${size}')">${size}</button>
+  `).join("");
+
+  const specTiles = Object.entries(specs).map(([key, value]) => `
+    <div class="detail-spec-tile">
+      <span>${key}</span>
+      <strong>${value}</strong>
+    </div>
+  `).join("");
+
+  const recommendationsHTML = generateRecommendedProducts(getRecommendedProducts(productId));
+  const isSoldOut = (product.additionalDetails || "").toLowerCase().includes("sold out");
+
+  document.getElementById("productDetailPage").innerHTML = `
+    <div class="product-detail-shell">
+      <div class="product-detail-grid">
+        <div>
+          ${carouselHtml}
+          <div class="detail-thumb-row">
+            ${images.slice(0, 5).map((img, index) => `
+              <button type="button" onclick="setProductCarouselSlide(${index})" aria-label="View image ${index + 1}">
+                <img src="${img}" alt="${product.name}">
+              </button>
+            `).join("")}
+          </div>
+        </div>
+        <div class="product-detail-panel">
+          <div class="detail-kicker">${product.category || "NXew"}</div>
+          <h2>${product.name}</h2>
+          <div class="detail-rating-row">
+            ${ratingInfo ? `<span><i class="bi bi-star-fill"></i> ${ratingInfo.average} (${ratingInfo.count})</span>` : `<span>New arrival</span>`}
+            ${discount > 0 ? `<span>${discount}% off</span>` : ''}
+            ${isSoldOut ? `<span>Sold out</span>` : ''}
+          </div>
+          <div class="detail-price-row">
+            ${discount > 0 ? `<span class="detail-old-price">Rs. ${originalPrice}</span>` : ''}
+            <span class="detail-current-price">Rs. ${product.price.toFixed(2)}</span>
+          </div>
+          <p class="detail-description">${product.description || ""}</p>
+
+          <div class="detail-option-block">
+            <div class="detail-option-title">Color <span id="selectedColorText">${defaultColor}</span></div>
+            <div class="colors-row" role="list" aria-label="Available colors">${colorThumbnails}</div>
+          </div>
+
+          <div class="detail-option-block">
+            <div class="detail-option-title">Size</div>
+            <div class="detail-size-row">${sizeButtons}</div>
+          </div>
+
+          <div class="detail-action-row">
+            <button class="btn detail-add-btn" onclick="addToCartWithSelection(${product.id})">
+              <i class="bi bi-bag-plus"></i> Add to Bag
+            </button>
+            <button class="btn detail-buy-btn" onclick="buyProductWithSelection(${product.id})">
+              <i class="bi bi-lightning-charge"></i> Buy Now
+            </button>
+          </div>
+
+          <div class="detail-service-grid">
+            <div><i class="bi bi-truck"></i><strong>${product.deliveryTime || "3-5 days"}</strong><span>Delivery</span></div>
+            <div><i class="bi bi-arrow-counterclockwise"></i><strong>${product.returnPolicy || "5 days return"}</strong><span>Returns</span></div>
+          </div>
+
+          <div class="detail-spec-grid">${specTiles}</div>
+          ${product.additionalDetails ? `<p class="detail-note">${product.additionalDetails}</p>` : ''}
+        </div>
+      </div>
+      <div class="row mt-5">${recommendationsHTML}</div>
+    </div>
+  `;
+
+  const detailSection = document.getElementById("productDetailSection");
+  detailSection.dataset.productId = productId;
+  detailSection.dataset.selectedColor = defaultColor;
+  detailSection.dataset.selectedSize = sizes[0];
+  showSection("productDetailSection");
+  history.pushState({ section: 'productDetailSection', productId: productId }, '', `#productDetailSection-${productId}`);
+}
+
+function setProductCarouselSlide(index) {
+  const carousel = document.getElementById("productCarousel");
+  if (!carousel || typeof bootstrap === "undefined") return;
+  bootstrap.Carousel.getOrCreateInstance(carousel).to(index);
+}
+
+// Haux-style recommended product cards.
+function generateRecommendedProducts(recommendations) {
+  if (!recommendations || recommendations.length === 0) return "";
+
+  return `
+    <section class="recommendations-section haux-recommendations">
+      <p class="home-drop-kicker">YOU MAY ALSO LIKE</p>
+      <h3 class="recommendations-title">Recommended Products</h3>
+      <div class="row">
+        ${recommendations.slice(0, 4).map(product => {
+          const discount = product.discount || 0;
+          const originalPrice = discount > 0 ? (product.price / (1 - discount / 100)).toFixed(2) : product.price.toFixed(2);
+          const image = product.images && product.images.length ? product.images[0] : 'https://via.placeholder.com/400x500?text=' + encodeURIComponent(product.name);
+          return `
+            <div class="col-6">
+              <article class="store-product-card" onclick="showProductDetails(${product.id})" role="button" tabindex="0" aria-label="View ${product.name}">
+                <div class="store-product-media">
+                  <img src="${image}" alt="${product.name}" loading="lazy">
+                  ${discount > 0 ? `<span class="store-sale-badge">Sale</span>` : ""}
+                </div>
+                <div class="store-product-info">
+                  <h3>${product.name}</h3>
+                  <div class="store-price-row">
+                    ${discount > 0 ? `<span class="store-old-price">Rs. ${formatStorePrice(originalPrice)}</span>` : ""}
+                    <span class="store-current-price">Rs. ${formatStorePrice(product.price)}</span>
+                  </div>
+                </div>
+              </article>
+            </div>
+          `;
+        }).join("")}
+      </div>
+    </section>
+  `;
+}
+
+// Haux-style product detail page: image first, controls/count below, details after.
+function showProductDetails(productId) {
+  const product = products.find(p => p.id === productId);
+  if (!product) return;
+
+  const sizes = (product.size || "M").split(",").map(s => s.trim()).filter(Boolean);
+  const colorsFromField = (product.color || "").split(",").map(c => c.trim()).filter(Boolean);
+  const colorsFromImages = Object.keys(product.colorImages || {});
+  const colors = [...new Set([...colorsFromField, ...colorsFromImages])];
+  const defaultColor = colors[0] || "Default";
+  const images = product.images && product.images.length ? product.images : ['https://via.placeholder.com/700x850?text=' + encodeURIComponent(product.name)];
+  const discount = product.discount || 0;
+  const originalPrice = discount > 0 ? (product.price / (1 - discount / 100)).toFixed(2) : product.price.toFixed(2);
+  const specs = product.specifications || {
+    Material: product.clothType || "Premium cotton blend",
+    Fit: product.fit || "Relaxed",
+    Neck: product.neck || "Crewneck",
+    Print: product.printType || "Graphic"
+  };
+
+  const colorThumbnails = (colors.length ? colors : [defaultColor]).map(color => {
+    const imageUrl = product.colorImages?.[color] || images[0];
+    return `
+      <button type="button" class="color-thumb ${color === defaultColor ? 'selected' : ''}" data-color="${color}" onclick="selectColor('${color.replace(/'/g, "\\'")}')" title="${color}" aria-label="Select color ${color}">
+        <img src="${imageUrl}" alt="${color}">
+      </button>
+    `;
+  }).join("");
+
+  const sizeButtons = sizes.map(size => `
+    <button type="button" class="size-btn ${size === sizes[0] ? 'active' : ''}" data-size="${size}" onclick="selectSize('${size}')">${size}</button>
+  `).join("");
+
+  const specTiles = Object.entries(specs).map(([key, value]) => `
+    <div class="detail-spec-tile">
+      <span>${key}</span>
+      <strong>${value}</strong>
+    </div>
+  `).join("");
+
+  const priceFormatted = typeof formatStorePrice === "function" ? formatStorePrice(product.price) : product.price.toFixed(2);
+  const originalFormatted = discount > 0
+    ? (typeof formatStorePrice === "function" ? formatStorePrice(originalPrice) : originalPrice)
+    : "";
+
+  const thumbStrip = images.map((img, index) => `
+    <button type="button" class="haux-detail-thumb ${index === 0 ? "active" : ""}" onclick="setProductCarouselSlide(${index})" aria-label="View image ${index + 1}">
+      <img src="${img}" alt="${product.name} view ${index + 1}">
+    </button>
+  `).join("");
+
+  document.getElementById("productDetailPage").innerHTML = `
+    <div class="haux-detail-shell">
+      <section class="haux-detail-media">
+        <button class="haux-zoom-btn" type="button" onclick="showProductImagesModal(${product.id})" aria-label="Zoom product image">
+          <i class="bi bi-arrows-fullscreen"></i>
+        </button>
+        ${discount > 0 ? `<span class="store-sale-badge haux-detail-sale">Sale</span>` : ""}
+        <div id="productCarousel" class="carousel slide haux-detail-carousel" data-bs-ride="false">
+          <div class="carousel-inner">
+            ${images.map((img, index) => `
+              <div class="carousel-item ${index === 0 ? "active" : ""}">
+                <img ${index === 0 ? 'id="mainProductImage"' : ""} src="${img}" class="product-detail-img haux-detail-img" alt="${product.name}">
+              </div>
+            `).join("")}
+          </div>
+        </div>
+      </section>
+
+      <div class="haux-detail-nav" aria-label="Product gallery controls">
+        <button type="button" onclick="setProductCarouselSlideByStep(-1)" aria-label="Previous image">
+          <i class="bi bi-chevron-left"></i>
+        </button>
+        <span id="productSlideCount">1 / ${images.length}</span>
+        <button type="button" onclick="setProductCarouselSlideByStep(1)" aria-label="Next image">
+          <i class="bi bi-chevron-right"></i>
+        </button>
+      </div>
+
+      ${images.length > 1 ? `<div class="haux-detail-thumbs">${thumbStrip}</div>` : ""}
+
+      <section class="haux-detail-info">
+        <p class="haux-detail-kicker">${product.category || "NXew"}</p>
+        <h2>${product.name}</h2>
+        <div class="haux-price-row">
+          ${discount > 0 ? `<span class="detail-old-price">Rs. ${originalFormatted}</span>` : ""}
+          <span class="detail-current-price">Rs. ${priceFormatted}</span>
+        </div>
+        <p class="haux-tax-note">Taxes included · Free shipping on all orders</p>
+
+        <div class="detail-option-block">
+          <div class="detail-option-title">Color <span id="selectedColorText">${defaultColor}</span></div>
+          <div class="colors-row" role="list" aria-label="Available colors">${colorThumbnails}</div>
+        </div>
+
+        <div class="detail-option-block">
+          <div class="detail-option-title">Size</div>
+          <div class="detail-size-row">${sizeButtons}</div>
+        </div>
+
+        <div class="detail-action-row haux-detail-actions">
+          <button type="button" class="detail-add-btn" onclick="addToCartWithSelection(${product.id})">
+            Add to Bag
+          </button>
+          <button type="button" class="detail-buy-btn" onclick="buyProductWithSelection(${product.id})">
+            Buy Now
+          </button>
+        </div>
+
+        <div class="detail-service-grid haux-detail-services">
+          <div><i class="bi bi-truck"></i><strong>${product.deliveryTime || "3-5 days"}</strong><span>Delivery</span></div>
+          <div><i class="bi bi-arrow-counterclockwise"></i><strong>${product.returnPolicy || "5 days return"}</strong><span>Returns</span></div>
+        </div>
+
+        ${product.description ? `<div class="haux-detail-copy"><p class="detail-description">${product.description}</p></div>` : ""}
+        ${product.additionalDetails ? `<p class="detail-note">${product.additionalDetails}</p>` : ""}
+
+        <div class="haux-detail-specs">
+          <h3 class="haux-detail-specs-title">Details</h3>
+          <div class="detail-spec-grid">${specTiles}</div>
+        </div>
+      </section>
+
+      <div class="haux-detail-sticky-bar" aria-hidden="true">
+        <button type="button" class="detail-add-btn" onclick="addToCartWithSelection(${product.id})">Add to Bag</button>
+        <button type="button" class="detail-buy-btn" onclick="buyProductWithSelection(${product.id})">Buy Now</button>
+      </div>
+
+      ${generateRecommendedProducts(getRecommendedProducts(productId))}
+    </div>
+  `;
+
+  const detailSection = document.getElementById("productDetailSection");
+  detailSection.dataset.productId = productId;
+  detailSection.dataset.selectedColor = defaultColor;
+  detailSection.dataset.selectedSize = sizes[0];
+  detailSection.dataset.slideIndex = "0";
+  detailSection.dataset.slideCount = String(images.length);
+  showSection("productDetailSection");
+
+  const carousel = document.getElementById("productCarousel");
+  if (carousel) {
+    carousel.addEventListener("slid.bs.carousel", event => {
+      const index = event.to || 0;
+      detailSection.dataset.slideIndex = String(index);
+      updateProductSlideCount(index);
+    });
+  }
+
+  history.pushState({ section: 'productDetailSection', productId: productId }, '', `#productDetailSection-${productId}`);
+}
+
+function updateProductSlideCount(index) {
+  const detailSection = document.getElementById("productDetailSection");
+  const count = Number(detailSection?.dataset.slideCount || 1);
+  const countEl = document.getElementById("productSlideCount");
+  if (countEl) countEl.textContent = `${index + 1} / ${count}`;
+  document.querySelectorAll(".haux-detail-thumb").forEach((thumb, thumbIndex) => {
+    thumb.classList.toggle("active", thumbIndex === index);
+  });
+}
+
+function setProductCarouselSlideByStep(step) {
+  const detailSection = document.getElementById("productDetailSection");
+  const count = Number(detailSection?.dataset.slideCount || 1);
+  const current = Number(detailSection?.dataset.slideIndex || 0);
+  const next = (current + step + count) % count;
+  if (detailSection) detailSection.dataset.slideIndex = String(next);
+  setProductCarouselSlide(next);
+  updateProductSlideCount(next);
+}
