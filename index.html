@@ -130,25 +130,40 @@
   <!-- Toast Container -->
   <div id="toastContainer"></div>
 
-  <header class="app-header">
+  <header class="app-header home-store-header">
+    <div class="store-welcome-bar">Welcome to our store</div>
     <div class="app-header-inner">
-       <button class="app-nav-button" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuCanvas" aria-controls="menuCanvas" aria-label="Open Menu">
-          <i class="bi bi-list"></i>
-        </button>
-      <div class="app-header-left">
-        <button class="app-logo-button" type="button" onclick="showSection('homeSection')" aria-label="NXew Home">
-          <img src="https://i.pinimg.com/736x/2b/0b/a3/2b0ba3cd35a7c7ae28f8f987ec8d55c3.jpg" alt="NXew">
-        </button>
-       
-      </div>
+      <button class="app-nav-button" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuCanvas" aria-controls="menuCanvas" aria-label="Open Menu">
+        <i class="bi bi-list"></i>
+      </button>
+      <button class="app-logo-button" type="button" onclick="showSection('homeSection')" aria-label="NXew Home">
+        <img src="assets/145.png" alt="NXew">
+      </button>
       <div class="app-header-right">
-       
+        
+        </button>
         <button class="app-nav-button" type="button" onclick="showSection('customizationSection')" aria-label="Customization">
           <i class="bi bi-magic"></i>
         </button>
-        <a href="#" class="app-nav-button" data-section="accountSection" onclick="showSection('accountSection'); return false;" aria-label="Account">
-          <i class="bi bi-person"></i>
-        </a>
+        <button class="app-nav-button app-bag-button haux-bag-button" type="button" onclick="showSection('cartSection')" aria-label="Your Bag">
+          <svg class="haux-bag-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M6.5 8.5h11l-.9 12.5H7.4L6.5 8.5Z" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linejoin="round"/>
+            <path d="M9 8.5V7a3 3 0 0 1 6 0v1.5" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round"/>
+          </svg>
+          <span id="headerBagBadge" class="haux-bag-badge">0</span>
+        </button>
+      </div>
+    </div>
+    <div class="store-service-strip" aria-label="Store service information">
+      <div class="store-marquee-track">
+        <span>Fast Dispatch in 48 Hrs</span>
+        <span>Pan India Delivery</span>
+        <span>Fast Dispatch in 48 Hrs</span>
+        <span>Pan India Delivery</span>
+        <span>Fast Dispatch in 48 Hrs</span>
+        <span>Pan India Delivery</span>
+        <span>Fast Dispatch in 48 Hrs</span>
+        <span>Pan India Delivery</span>
       </div>
     </div>
   </header>
@@ -169,30 +184,50 @@
     </div>
   </div>
 
-  <!-- Offcanvas Menu -->
-  <div class="offcanvas offcanvas-start" tabindex="-1" id="menuCanvas" aria-labelledby="menuCanvasLabel">
-    <div class="offcanvas-header">
-      <h5 class="offcanvas-title" id="menuCanvasLabel">Menu</h5>
-      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  <!-- Offcanvas Menu — Haux style -->
+  <div class="offcanvas offcanvas-start haux-menu-offcanvas" tabindex="-1" id="menuCanvas" aria-labelledby="menuCanvasLabel">
+    <div class="haux-menu-header">
+      <button class="haux-menu-close" type="button" data-bs-dismiss="offcanvas" aria-label="Close menu">
+        <i class="bi bi-x-lg"></i>
+      </button>
+      <button class="haux-menu-logo" type="button" onclick="hideMenu(); showSection('homeSection')" aria-label="NXew Home">
+        <img src="assets/145.png" alt="NXew">
+      </button>
+      <div class="haux-menu-header-right">
+        <button class="haux-menu-icon-btn" type="button" onclick="hideMenu(); showSection('searchSection')" aria-label="Search">
+          <i class="bi bi-search"></i>
+        </button>
+        <button class="haux-menu-icon-btn haux-bag-button" type="button" onclick="hideMenu(); showSection('cartSection')" aria-label="Your Bag">
+          <svg class="haux-bag-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M6.5 8.5h11l-.9 12.5H7.4L6.5 8.5Z" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linejoin="round"/>
+            <path d="M9 8.5V7a3 3 0 0 1 6 0v1.5" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round"/>
+          </svg>
+          <span id="menuBagBadge" class="haux-bag-badge">0</span>
+        </button>
+      </div>
     </div>
-    <div id="menuAccountDetails">
-      <i class="bi bi-person-circle me-2"></i><span id="menuAccountText">Welcome Guest</span>
-    </div>
-    <ul class="list-unstyled">
-      <li class="custom-menu-item" onclick="hideMenu(); showSection('ordersSection');"><i class="bi bi-receipt me-2"></i> My Orders</li>
-      <li id="sellerDashboardMenuItem" class="custom-menu-item" onclick="hideMenu(); showSection('sellerDashboard');" style="display: none;"><i class="bi bi-speedometer me-2"></i> Seller Dashboard</li>
-      <li id="ownerDashboardMenuItem" class="custom-menu-item" onclick="hideMenu(); showSection('ownerDashboard');" style="display: none;"><i class="bi bi-graph-up me-2"></i> Owner Dashboard</li>
-      <li class="custom-menu-item" onclick="hideMenu(); showSection('aboutSection');"><i class="bi bi-info-circle me-2"></i> About Us</li>
-      <li class="custom-menu-item" onclick="hideMenu(); showSection('contactSection');"><i class="bi bi-envelope me-2"></i> Contact Us</li>
-      <li class="custom-menu-item" onclick="hideMenu(); showSection('couponsSection');"><i class="bi bi-tag me-2"></i> Coupons</li>
-      <li class="custom-menu-item" onclick="hideMenu(); showSection('offerZoneSection');"><i class="bi bi-star me-2"></i> Offer Zone</li>
-      <li class="custom-menu-item" onclick="hideMenu(); showSection('helpSection');"><i class="bi bi-question-circle me-2"></i> Help Line</li>
-      <li class="custom-menu-item" onclick="hideMenu(); showSection('feedbackSection');"><i class="bi bi-chat-square-text me-2"></i> Feedback</li>
-    </ul>
-    <div id="menuSocialSection" class="mt-3 text-center">
-      <a href="https://www.instagram.com/nxew.in" target="_blank" class="mx-2"><i class="bi bi-instagram" style="color:#E1306C;"></i></a>
-      <a href="https://x.com/nxew_in" target="_blank" class="mx-2"><i class="bi bi-twitter" style="color:#1DA1F2;"></i></a>
-      <a href="https://www.linkedin.com/in/yourprofile" target="_blank" class="mx-2"><i class="bi bi-linkedin" style="color:#0077B5;"></i></a>
+
+    <div class="haux-menu-body">
+      <nav class="haux-menu-nav" aria-label="Main navigation">
+        <button type="button" class="haux-menu-link" onclick="hideMenu(); showSection('homeSection')">Home</button>
+        <div class="haux-menu-divider" role="separator"></div>
+        <button type="button" class="haux-menu-link" onclick="hideMenu(); showSection('ordersSection')">My Orders</button>
+        <button type="button" id="sellerDashboardMenuItem" class="haux-menu-link" onclick="hideMenu(); showSection('sellerDashboard');" style="display: none;">Seller Dashboard</button>
+        <button type="button" id="ownerDashboardMenuItem" class="haux-menu-link" onclick="hideMenu(); showSection('ownerDashboard');" style="display: none;">Owner Dashboard</button>
+        <button type="button" class="haux-menu-link" onclick="hideMenu(); showSection('aboutSection')">About Us</button>
+        <button type="button" class="haux-menu-link" onclick="hideMenu(); showSection('contactSection')">Contact Us</button>
+        <button type="button" class="haux-menu-link" onclick="hideMenu(); showSection('couponsSection')">Coupons</button>
+        <button type="button" class="haux-menu-link" onclick="hideMenu(); showSection('offerZoneSection')">Offer Zone</button>
+        <button type="button" class="haux-menu-link" onclick="hideMenu(); showSection('helpSection')">Help Line</button>
+        <button type="button" class="haux-menu-link" onclick="hideMenu(); showSection('feedbackSection')">Feedback</button>
+      </nav>
+
+      <div class="haux-menu-footer">
+        <button type="button" class="haux-menu-login" id="menuLoginButton">
+          <i class="bi bi-person"></i>
+          <span id="menuLoginText">Log in</span>
+        </button>
+      </div>
     </div>
   </div>
 
@@ -207,39 +242,51 @@
   ============================================================ -->
   <div id="homeSection" class="section active-section fade-in">
 
-    <section class="product-highlight">
-      <div class="full-screen-wrapper">
-        <div id="productHighlightCarousel" class="carousel slide full-screen-carousel carousel-fade" data-bs-ride="carousel" data-bs-interval="3000">
-          <div class="carousel-indicators">
-            <button type="button" data-bs-target="#productHighlightCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-          </div>
+    <section class="product-highlight home-hero-section">
+      <div class="full-screen-wrapper home-hero-wrapper">
+        <div id="productHighlightCarousel" class="carousel slide full-screen-carousel carousel-fade home-hero-carousel" data-bs-ride="carousel" data-bs-interval="5000">
           <div class="carousel-inner">
             <div class="carousel-item active" onclick="showSection('shopSection')">
-              <img src="https://i.pinimg.com/736x/08/1a/14/081a148920549d6a607ab8509b529986.jpg" class="d-block w-80" alt="Product Highlight 1">
-              <div class="carousel-caption d-none d-md-block">
-                <h5>Luxury in Every Stitch</h5>
-                <p>Clothing is a form of self-expression.</p>
-              </div>
+              <img src="https://i.pinimg.com/736x/08/1a/14/081a148920549d6a607ab8509b529986.jpg" class="home-hero-image" alt="NXew Collection">
             </div>
-           
           </div>
-         
         </div>
       </div>
     </section>
 
     <!-- Featured Products -->
-    <section class="featured-products py-5">
+    <section class="featured-products home-drop-section py-5">
       <div class="container">
-        <h2 class="text-center mb-4">Featured Products</h2>
+        <p class="home-drop-kicker">LATEST DROP</p>
+        <h2 class="section-title mb-4">Shop Oversized Essentials</h2>
         <div class="row" id="featuredProductsContainer"></div>
+        <div class="home-discover-wrap">
+          <button class="home-discover-btn" type="button" onclick="showSection('shopSection')">DISCOVER MORE</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="home-promo-marquee" aria-label="Current offers">
+      <div class="store-marquee-track store-marquee-track-slow">
+        <span>FREE SHIPPING</span>
+        <span>NXEW100 for Rs. 100 Off</span>
+        <span>FREE SHIPPING</span>
+        <span>NXEW100 for Rs. 100 Off</span>
+        <span>FREE SHIPPING</span>
+        <span>NXEW100 for Rs. 100 Off</span>
+        <span>FREE SHIPPING</span>
+        <span>NXEW100 for Rs. 100 Off</span>
+        <span>FREE SHIPPING</span>
+        <span>NXEW100 for Rs. 100 Off</span>
+        <span>FREE SHIPPING</span>
+        <span>NXEW100 for Rs. 100 Off</span>
       </div>
     </section>
 
   </div><!-- /homeSection -->
 
   <!-- About Us -->
-  <div id="aboutSection" class="section fade-in">
+  <div id="aboutSection" class="section fade-in store-page">
     <header class="py-3 border-bottom bg-light">
       <div class="container d-flex justify-content-between align-items-center">
         <button class="btn" onclick="showSection('homeSection')" aria-label="Back"><i class="bi bi-arrow-left"></i> Home</button>
@@ -253,7 +300,7 @@
   </div>
 
   <!-- Contact Us -->
-  <div id="contactSection" class="section fade-in">
+  <div id="contactSection" class="section fade-in store-page">
     <header class="py-3 border-bottom bg-light">
       <div class="container d-flex justify-content-between align-items-center">
         <button class="btn" onclick="showSection('homeSection')" aria-label="Back to Home"><i class="bi bi-arrow-left"></i> Home</button>
@@ -281,7 +328,7 @@
   </div>
 
   <!-- Coupons -->
-  <div id="couponsSection" class="section fade-in">
+  <div id="couponsSection" class="section fade-in store-page">
     <header class="py-3 border-bottom bg-light">
       <div class="container d-flex justify-content-between align-items-center">
         <button class="btn" onclick="showSection('homeSection')" aria-label="Back to Home"><i class="bi bi-arrow-left"></i> Home</button>
@@ -315,7 +362,7 @@
   </div>
 
   <!-- Offer Zone -->
-  <div id="offerZoneSection" class="section fade-in">
+  <div id="offerZoneSection" class="section fade-in store-page">
     <header class="py-3 border-bottom bg-light">
       <div class="container d-flex justify-content-between align-items-center">
         <button class="btn" onclick="showSection('homeSection')" aria-label="Back to Home"><i class="bi bi-arrow-left"></i> Home</button>
@@ -339,7 +386,7 @@
   </div>
 
   <!-- Help Line -->
-  <div id="helpSection" class="section fade-in">
+  <div id="helpSection" class="section fade-in store-page">
     <header class="py-3 border-bottom bg-light">
       <div class="container d-flex justify-content-between align-items-center">
         <button class="btn" onclick="showSection('homeSection')" aria-label="Back to Home"><i class="bi bi-arrow-left"></i> Home</button>
@@ -391,7 +438,7 @@
   </div>
 
   <!-- Login -->
-  <div id="loginSection" class="section fade-in">
+  <div id="loginSection" class="section fade-in store-page">
     <header class="bg-light py-3 border-bottom">
       <div class="container d-flex justify-content-between align-items-center">
         <button class="btn" onclick="showSection('homeSection')" aria-label="Back to Home"><i class="bi bi-arrow-left"></i> Home</button>
@@ -588,7 +635,7 @@
   </div>
 
   <!-- Signup -->
-  <div id="signupSection" class="section fade-in">
+  <div id="signupSection" class="section fade-in store-page">
     <header class="bg-light py-3 border-bottom">
       <div class="container d-flex justify-content-between align-items-center">
         <button class="btn" onclick="showSection('homeSection')" aria-label="Back to Home"><i class="bi bi-arrow-left"></i> Home</button>
@@ -647,7 +694,7 @@
   </div>
 
   <!-- Account -->
-  <div id="accountSection" class="section fade-in">
+  <div id="accountSection" class="section fade-in store-page">
     <header class="py-3 border-bottom bg-light">
       <div class="container d-flex justify-content-between align-items-center">
         <button class="btn" onclick="showSection('homeSection')" aria-label="Back to Home"><i class="bi bi-arrow-left"></i> Home</button>
@@ -659,15 +706,17 @@
   </div>
 
   <!-- Cart -->
-  <div id="cartSection" class="section fade-in">
-    <header class="py-3 border-bottom bg-light">
-      <div class="container d-flex justify-content-between align-items-center">
-        <button class="btn" onclick="showSection('homeSection')" aria-label="Back to Home"><i class="bi bi-arrow-left"></i> Home</button>
-        <h1 class="h5 mb-0">Your Bag</h1>
-        <div></div>
+  <div id="cartSection" class="section fade-in store-page">
+    <header class="store-page-header">
+      <div class="store-page-header-inner">
+        <button class="store-back-btn" type="button" onclick="showSection('homeSection')" aria-label="Back to Home">
+          <i class="bi bi-arrow-left"></i>
+        </button>
+        <h1>Your Bag</h1>
+        <div class="store-page-header-spacer"></div>
       </div>
     </header>
-    <div class="container my-4" id="cartContent"></div>
+    <div class="store-page-body" id="cartContent"></div>
   </div>
 
   <!-- ============================================================
@@ -732,7 +781,7 @@
   </div>
 
   <!-- Orders -->
-  <div id="ordersSection" class="section fade-in">
+  <div id="ordersSection" class="section fade-in store-page">
     <header class="py-3 border-bottom bg-light">
       <div class="container d-flex justify-content-between align-items-center">
         <button class="btn" onclick="showSection('homeSection')" aria-label="Back to Home"><i class="bi bi-arrow-left"></i> Home</button>
@@ -789,155 +838,138 @@
     <div class="container my-4" id="productDetailPage"></div>
   </div>
   <!-- Customization Request -->
-  <div id="customizationSection" class="section fade-in">
-    <header class="py-3 border-bottom bg-light">
-      <div class="container d-flex justify-content-between align-items-center">
-        <button class="btn" onclick="showSection('homeSection')" aria-label="Back to Home">
-          <i class="bi bi-arrow-left"></i> Home
+  <div id="customizationSection" class="section fade-in store-page">
+    <header class="store-page-header">
+      <div class="store-page-header-inner">
+        <button class="store-back-btn" type="button" onclick="showSection('homeSection')" aria-label="Back to Home">
+          <i class="bi bi-arrow-left"></i>
         </button>
-        <h1 class="h5 mb-0">Customization Request</h1>
-        <div></div>
+        <h1>Customization</h1>
+        <div class="store-page-header-spacer"></div>
       </div>
     </header>
-    <div class="container my-4">
-      <form id="customizationForm">
-        <div class="mb-3">
-          <label for="customProductCategory" class="form-label">Product Category</label>
-          <select class="form-select" id="customProductCategory" required>
-            <option value="">Select Category</option>
-           
-            <option value="T-Shirts">T-Shirts</option>
-           
-            <option value="Hoodies">Hoodies</option>
-            
-          </select>
-        </div>
-
-        <div class="mb-3">
-          <label for="customProductType" class="form-label">What do you want customized?</label>
-          <input type="text" class="form-control" id="customProductType" placeholder="e.g., Oversized shirt, printed t-shirt" required>
-        </div>
-
-        <div class="mb-3">
-          <label for="customFitPreference" class="form-label">Fit Preference</label>
-          <select class="form-select" id="customFitPreference" required>
-            <option value="">Select Fit</option>
-            <option value="Regular Fit">Regular Fit</option>
-            <option value="Slim Fit">Slim Fit</option>
-            <option value="Oversized Fit">Oversized Fit</option>
-            <option value="Relaxed Fit">Relaxed Fit</option>
-            <option value="Tailored Fit">Tailored Fit</option>
-          </select>
-        </div>
-
-        <div class="mb-3">
-          <label for="customFabricPreference" class="form-label">Fabric / Material Preference</label>
-          <input type="text" class="form-control" id="customFabricPreference" placeholder="e.g., Cotton, denim, linen blend" required>
-        </div>
-
-        <div class="mb-3">
-          <label for="customSizeRequirement" class="form-label">Size Requirement</label>
-          <input type="text" class="form-control" id="customSizeRequirement" placeholder="e.g., M, 32, XL" required>
-        </div>
-
-        <div class="mb-3">
-          <label for="customColorPreference" class="form-label">Preferred Colors</label>
-          <input type="text" class="form-control" id="customColorPreference" placeholder="e.g., Black, beige, navy blue" required>
-        </div>
-
-        <div class="mb-3">
-          <label for="customPatternPreference" class="form-label">Pattern / Design Preference</label>
-          <input type="text" class="form-control" id="customPatternPreference" placeholder="e.g., Solid, checks, puff print, minimal logo">
-        </div>
-
-        <div class="mb-3">
-          <label for="customContactMobile" class="form-label">Mobile Number</label>
-          <input type="text" class="form-control" id="customContactMobile" placeholder="Enter your mobile number" required>
-        </div>
-
-        <div class="mb-3">
-          <label for="customContactEmail" class="form-label">Email Address</label>
-          <input type="email" class="form-control" id="customContactEmail" placeholder="Enter your email address" required>
-        </div>
-
-        <div class="mb-3">
-          <label for="customLocation" class="form-label">Location</label>
-          <input type="text" class="form-control" id="customLocation" placeholder="Enter your city or full location" required>
-        </div>
-
-        <div class="mb-3">
-          <label for="customOccasion" class="form-label">Occasion</label>
-          <select class="form-select" id="customOccasion">
-            <option value="">Select Occasion</option>
-            <option value="Daily Wear">Daily Wear</option>
-            <option value="Casual Outing">Casual Outing</option>
-            <option value="Office Wear">Office Wear</option>
-            <option value="Party Wear">Party Wear</option>
-            <option value="College Wear">College Wear</option>
-            <option value="Gift">Gift</option>
-          </select>
-        </div>
-
-        <div class="mb-3">
-          <label class="form-label d-block">Required Features</label>
-          <div class="form-check">
-            <input class="form-check-input customization-feature" type="checkbox" value="Breathable Fabric" id="featureBreathable">
-            <label class="form-check-label" for="featureBreathable">Breathable Fabric</label>
+    <div class="store-page-body customization-shell">
+      <p class="customization-intro">Tell us what you want made. Share your product idea, fit, fabric, and any design notes — we'll get back to you.</p>
+      <form id="customizationForm" class="customization-form">
+        <section class="customization-group">
+          <h2 class="customization-group-title">Product</h2>
+          <div class="store-field">
+            <label for="customProductCategory">Product Category</label>
+            <select class="store-input" id="customProductCategory" required>
+              <option value="">Select Category</option>
+              <option value="T-Shirts">T-Shirts</option>
+              <option value="Hoodies">Hoodies</option>
+            </select>
           </div>
-          <div class="form-check">
-            <input class="form-check-input customization-feature" type="checkbox" value="Stretch Material" id="featureStretch">
-            <label class="form-check-label" for="featureStretch">Stretch Material</label>
+          <div class="store-field">
+            <label for="customProductType">What do you want customized?</label>
+            <input type="text" class="store-input" id="customProductType" placeholder="e.g., Oversized shirt, printed t-shirt" required>
           </div>
-          <div class="form-check">
-            <input class="form-check-input customization-feature" type="checkbox" value="Premium Finish" id="featurePremium">
-            <label class="form-check-label" for="featurePremium">Premium Finish</label>
+          <div class="store-field">
+            <label for="customFitPreference">Fit Preference</label>
+            <select class="store-input" id="customFitPreference" required>
+              <option value="">Select Fit</option>
+              <option value="Regular Fit">Regular Fit</option>
+              <option value="Slim Fit">Slim Fit</option>
+              <option value="Oversized Fit">Oversized Fit</option>
+              <option value="Relaxed Fit">Relaxed Fit</option>
+              <option value="Tailored Fit">Tailored Fit</option>
+            </select>
           </div>
-          <div class="form-check">
-            <input class="form-check-input customization-feature" type="checkbox" value="Minimal Design" id="featureMinimal">
-            <label class="form-check-label" for="featureMinimal">Minimal Design</label>
+          <div class="store-field">
+            <label for="customFabricPreference">Fabric / Material</label>
+            <input type="text" class="store-input" id="customFabricPreference" placeholder="e.g., Cotton, denim, linen blend" required>
           </div>
-          <div class="form-check">
-            <input class="form-check-input customization-feature" type="checkbox" value="Custom Print" id="featurePrint">
-            <label class="form-check-label" for="featurePrint">Custom Print</label>
+          <div class="store-field-row">
+            <div class="store-field">
+              <label for="customSizeRequirement">Size</label>
+              <input type="text" class="store-input" id="customSizeRequirement" placeholder="e.g., M, XL" required>
+            </div>
+            <div class="store-field">
+              <label for="customColorPreference">Colors</label>
+              <input type="text" class="store-input" id="customColorPreference" placeholder="e.g., Black, navy" required>
+            </div>
           </div>
-          <div class="form-check">
-            <input class="form-check-input customization-feature" type="checkbox" value="Fast Delivery" id="featureFastDelivery">
-            <label class="form-check-label" for="featureFastDelivery">Fast Delivery</label>
+          <div class="store-field">
+            <label for="customPatternPreference">Pattern / Design</label>
+            <input type="text" class="store-input" id="customPatternPreference" placeholder="e.g., Solid, puff print, minimal logo">
           </div>
-        </div>
+        </section>
 
-        <div class="mb-3">
-          <label for="customQuantity" class="form-label">Quantity Needed</label>
-          <input type="number" class="form-control" id="customQuantity" min="1" placeholder="e.g., 1, 2, 10">
-        </div>
+        <section class="customization-group">
+          <h2 class="customization-group-title">Contact</h2>
+          <div class="store-field-row">
+            <div class="store-field">
+              <label for="customContactMobile">Mobile</label>
+              <input type="text" class="store-input" id="customContactMobile" placeholder="Your mobile number" required>
+            </div>
+            <div class="store-field">
+              <label for="customContactEmail">Email</label>
+              <input type="email" class="store-input" id="customContactEmail" placeholder="Your email address" required>
+            </div>
+          </div>
+          <div class="store-field">
+            <label for="customLocation">Location</label>
+            <input type="text" class="store-input" id="customLocation" placeholder="City or full location" required>
+          </div>
+        </section>
 
-        <div class="mb-3">
-          <label for="customDeadline" class="form-label">When do you need it?</label>
-          <input type="text" class="form-control" id="customDeadline" placeholder="e.g., Within 1 week, before a function">
-        </div>
+        <section class="customization-group">
+          <h2 class="customization-group-title">Details</h2>
+          <div class="store-field">
+            <label for="customOccasion">Occasion</label>
+            <select class="store-input" id="customOccasion">
+              <option value="">Select Occasion</option>
+              <option value="Daily Wear">Daily Wear</option>
+              <option value="Casual Outing">Casual Outing</option>
+              <option value="Office Wear">Office Wear</option>
+              <option value="Party Wear">Party Wear</option>
+              <option value="College Wear">College Wear</option>
+              <option value="Gift">Gift</option>
+            </select>
+          </div>
+          <div class="store-field">
+            <span class="store-field-label">Required Features</span>
+            <div class="customization-features">
+              <label class="store-check"><input class="customization-feature" type="checkbox" value="Breathable Fabric" id="featureBreathable"><span>Breathable Fabric</span></label>
+              <label class="store-check"><input class="customization-feature" type="checkbox" value="Stretch Material" id="featureStretch"><span>Stretch Material</span></label>
+              <label class="store-check"><input class="customization-feature" type="checkbox" value="Premium Finish" id="featurePremium"><span>Premium Finish</span></label>
+              <label class="store-check"><input class="customization-feature" type="checkbox" value="Minimal Design" id="featureMinimal"><span>Minimal Design</span></label>
+              <label class="store-check"><input class="customization-feature" type="checkbox" value="Custom Print" id="featurePrint"><span>Custom Print</span></label>
+              <label class="store-check"><input class="customization-feature" type="checkbox" value="Fast Delivery" id="featureFastDelivery"><span>Fast Delivery</span></label>
+            </div>
+          </div>
+          <div class="store-field-row">
+            <div class="store-field">
+              <label for="customQuantity">Quantity</label>
+              <input type="number" class="store-input" id="customQuantity" min="1" placeholder="e.g., 1, 10">
+            </div>
+            <div class="store-field">
+              <label for="customDeadline">Deadline</label>
+              <input type="text" class="store-input" id="customDeadline" placeholder="e.g., Within 1 week">
+            </div>
+          </div>
+          <div class="store-field">
+            <label for="customOtherOptions">Other Options</label>
+            <textarea class="store-input store-textarea" id="customOtherOptions" rows="3" placeholder="Logo placement, sleeve style, embroidery, packaging…"></textarea>
+          </div>
+          <div class="store-field">
+            <label for="customInspiration">Reference / Inspiration</label>
+            <textarea class="store-input store-textarea" id="customInspiration" rows="3" placeholder="Style, brand look, or design inspiration"></textarea>
+          </div>
+          <div class="store-field">
+            <label for="customNotes">Additional Requirements</label>
+            <textarea class="store-input store-textarea" id="customNotes" rows="4" placeholder="Special instructions, collar type, sleeve requirements…"></textarea>
+          </div>
+        </section>
 
-        <div class="mb-3">
-          <label for="customOtherOptions" class="form-label">Other Options</label>
-          <textarea class="form-control" id="customOtherOptions" rows="3" placeholder="Add any extra options like logo placement, sleeve style, neck type, packaging, embroidery, or anything else"></textarea>
-        </div>
-
-        <div class="mb-3">
-          <label for="customInspiration" class="form-label">Reference / Inspiration Details</label>
-          <textarea class="form-control" id="customInspiration" rows="3" placeholder="Describe the style, brand look, or design inspiration"></textarea>
-        </div>
-
-        <div class="mb-3">
-          <label for="customNotes" class="form-label">Additional Requirements</label>
-          <textarea class="form-control" id="customNotes" rows="4" placeholder="Add any special instructions, design notes, sleeve requirements, collar type, etc."></textarea>
-        </div>
-
-        <button type="submit" class="btn btn-primary">Send Customization Request</button>
+        <button type="submit" class="store-submit-btn">Send Customization Request</button>
       </form>
     </div>
   </div>
 
   <!-- Feedback -->
-  <div id="feedbackSection" class="section fade-in">
+  <div id="feedbackSection" class="section fade-in store-page">
     <header class="py-3 border-bottom bg-light">
       <div class="container d-flex justify-content-between align-items-center">
         <button class="btn" onclick="showSection('homeSection')" aria-label="Back to Home"><i class="bi bi-arrow-left"></i> Home</button>
@@ -964,7 +996,7 @@
        Navigating to them would cause showSection() to silently fail
        (querySelector returns null, no section becomes visible).
   ============================================================ -->
-  <div id="notificationsSection" class="section fade-in">
+  <div id="notificationsSection" class="section fade-in store-page">
     <header class="py-3 border-bottom bg-light">
       <div class="container d-flex justify-content-between align-items-center">
         <button class="btn" onclick="showSection('homeSection')" aria-label="Back to Home"><i class="bi bi-arrow-left"></i> Home</button>
@@ -975,7 +1007,7 @@
     <div class="container my-4" id="notificationsList"></div>
   </div>
 
-  <div id="sellerDashboard" class="section fade-in">
+  <div id="sellerDashboard" class="section fade-in store-page">
     <header class="py-3 border-bottom bg-light">
       <div class="container d-flex justify-content-between align-items-center">
         <button class="btn" onclick="showSection('homeSection')" aria-label="Back to Home"><i class="bi bi-arrow-left"></i> Home</button>
@@ -986,7 +1018,7 @@
     <div class="container my-4" id="sellerDashboardContent"></div>
   </div>
 
-  <div id="ownerDashboard" class="section fade-in">
+  <div id="ownerDashboard" class="section fade-in store-page">
     <header class="py-3 border-bottom bg-light">
       <div class="container d-flex justify-content-between align-items-center">
         <button class="btn" onclick="showSection('homeSection')" aria-label="Back to Home"><i class="bi bi-arrow-left"></i> Home</button>
@@ -1017,58 +1049,93 @@
        submit event. Restructured so <form> wraps modal-body + submit.
   ============================================================ -->
   <div class="modal fade" id="buyModal" tabindex="-1" aria-labelledby="buyModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="buyModalLabel">Buy Now</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <form id="buyForm">
-          <div class="modal-body">
-            <input type="hidden" name="product" id="emailProduct">
-            <input type="hidden" name="price"   id="emailPrice">
-            <input type="hidden" name="size"     id="emailSize">
-            <input type="hidden" name="color"    id="emailColor">
-            <!-- FIX #8: added missing finalPrice hidden field -->
-            <input type="hidden" id="finalPrice" value="0">
-            <div class="mb-3">
-              <label for="shippingAddress" class="form-label">Address</label>
-              <textarea class="form-control" id="shippingAddress" required aria-label="Shipping Address"></textarea>
-            </div>
-            <div class="mb-3">
-              <label for="mobileNumber" class="form-label">Mobile Number</label>
-              <input type="text" class="form-control" id="mobileNumber" required aria-label="Mobile Number" />
-            </div>
-            <div class="mb-3">
-              <label for="additionalDetails" class="form-label">Additional Details</label>
-              <textarea class="form-control" id="additionalDetails" aria-label="Additional Details"></textarea>
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Payment Method</label>
-              <input type="text" class="form-control" value="Cash on Delivery" disabled aria-label="Payment Method" />
-            </div>
-            <div id="offerInfo" class="mb-3"></div>
-            <div class="mb-3">
-              <label for="couponCode" class="form-label">Coupon Code</label>
-              <div class="input-group">
-                <input type="text" class="form-control" id="couponCode" placeholder="Enter coupon code" aria-label="Coupon Code">
-                <button type="button" class="btn btn-outline-secondary" id="applyCouponButton">Apply</button>
-              </div>
-              <!-- FIX #9: only one couponMessage element (duplicate removed) -->
-              <p id="couponMessage" class="mt-2"></p>
-            </div>
-            <div class="mb-3">
-              <p><strong>Product:</strong> <span id="modalProductName"></span></p>
-              <p><strong>Size:</strong> <span id="modalProductSize"></span></p>
-              <p><strong>Color:</strong> <span id="modalProductColor"></span></p>
-              <p><strong>Price:</strong> ₹<span id="modalProductPrice"></span></p>
-              <p><strong>Shipping:</strong> FREE</p>
-              <p><strong>Estimated Delivery:</strong> <span id="modalDeliveryTime"></span></p>
-              <p><strong>Total Amount:</strong> ₹<span id="modalTotalAmount"></span></p>
-            </div>
-            <hr />
-            <button type="submit" class="btn btn-primary w-100">Confirm Order</button>
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable haux-buy-dialog">
+      <div class="modal-content haux-buy-modal">
+        <div class="haux-buy-header">
+          <div>
+            <p class="haux-buy-kicker">Secure Checkout</p>
+            <h5 class="modal-title" id="buyModalLabel">Complete Your Order</h5>
           </div>
+          <button type="button" class="haux-buy-close" data-bs-dismiss="modal" aria-label="Close">
+            <i class="bi bi-x-lg"></i>
+          </button>
+        </div>
+        <form id="buyForm" class="haux-buy-form">
+          <input type="hidden" name="product" id="emailProduct">
+          <input type="hidden" name="price" id="emailPrice">
+          <input type="hidden" name="size" id="emailSize">
+          <input type="hidden" name="color" id="emailColor">
+          <input type="hidden" id="finalPrice" value="0">
+
+          <div class="haux-buy-product-card">
+            <div class="haux-buy-product-media" id="modalProductImageWrap">
+              <img id="modalProductImage" src="" alt="" hidden>
+            </div>
+            <div class="haux-buy-product-info">
+              <h6 id="modalProductName"></h6>
+              <p><span id="modalProductSize"></span> · <span id="modalProductColor"></span></p>
+              <p class="haux-buy-product-price">Rs. <span id="modalProductPrice"></span></p>
+            </div>
+          </div>
+
+          <section class="haux-buy-section">
+            <h6 class="haux-buy-section-title">Delivery Details</h6>
+            <div class="store-field">
+              <label for="shippingAddress">Shipping Address</label>
+              <textarea class="store-input store-textarea" id="shippingAddress" rows="3" required placeholder="House no., street, city, pin code" aria-label="Shipping Address"></textarea>
+            </div>
+            <div class="store-field">
+              <label for="mobileNumber">Mobile Number</label>
+              <input type="text" class="store-input" id="mobileNumber" required placeholder="10-digit mobile number" aria-label="Mobile Number">
+            </div>
+            <div class="store-field">
+              <label for="additionalDetails">Order Notes <span class="haux-optional">(optional)</span></label>
+              <textarea class="store-input store-textarea" id="additionalDetails" rows="2" placeholder="Delivery instructions, gift wrap, etc." aria-label="Additional Details"></textarea>
+            </div>
+          </section>
+
+          <section class="haux-buy-section">
+            <h6 class="haux-buy-section-title">Payment</h6>
+            <div class="haux-pay-method">
+              <i class="bi bi-cash-coin"></i>
+              <div>
+                <strong>Cash on Delivery</strong>
+                <span>Pay when your order arrives</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="haux-buy-section">
+            <h6 class="haux-buy-section-title">Offers</h6>
+            <div id="offerInfo"></div>
+            <div class="haux-coupon-row">
+              <input type="text" class="store-input" id="couponCode" placeholder="Coupon code" aria-label="Coupon Code">
+              <button type="button" class="haux-coupon-btn" id="applyCouponButton">Apply</button>
+            </div>
+            <p id="couponMessage" class="haux-coupon-message"></p>
+          </section>
+
+          <section class="haux-buy-summary">
+            <div class="haux-buy-summary-row">
+              <span>Subtotal</span>
+              <span>Rs. <span id="modalSubtotal"></span></span>
+            </div>
+            <div class="haux-buy-summary-row">
+              <span>Shipping</span>
+              <span class="haux-free-tag">FREE</span>
+            </div>
+            <div class="haux-buy-summary-row">
+              <span>Estimated Delivery</span>
+              <span id="modalDeliveryTime"></span>
+            </div>
+            <div class="haux-buy-summary-total">
+              <span>Total</span>
+              <span>Rs. <span id="modalTotalAmount"></span></span>
+            </div>
+          </section>
+
+          <button type="submit" class="store-submit-btn haux-buy-submit">Confirm Order</button>
+          <p class="haux-buy-footnote">By confirming, you agree to our delivery and return policies.</p>
         </form>
       </div>
     </div>
