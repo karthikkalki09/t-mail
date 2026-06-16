@@ -3,7 +3,7 @@
 <head>
   <meta name="google-site-verification" content="ri9OvxTjbWWuIkPz8SraPsdvxP0fwADLdXDWU97SstQ" />
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=0.7, maximum-scale=1.0, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=0.8, maximum-scale=1.0, user-scalable=no" />
   <link rel="icon" type="image/png" href="assets/favicon.png" />
   <link rel="apple-touch-icon" href="assets/favicon.png" />
   <meta name="theme-color" content="#2a5298" />
@@ -61,8 +61,8 @@
       } else {
         new Notification('Welcome to NXew! 🛍️', {
           body: 'You will now receive updates on offers and your orders.',
-          icon: '/145.png',
-          badge: '/145.png'
+          icon: 'assets/145.png',
+          badge: 'assets/145.png'
         });
       }
     }
@@ -72,8 +72,8 @@
       if (Notification.permission !== 'granted') return;
       const opts = {
         body,
-        icon: '/145.png',
-        badge: '/145.png',
+        icon: 'assets/145.png',
+        badge: 'assets/145.png',
         vibrate: [200, 100, 200],
         ...options
       };
@@ -137,7 +137,7 @@
         <i class="bi bi-list"></i>
       </button>
       <button class="app-logo-button" type="button" onclick="showSection('homeSection')" aria-label="NXew Home">
-        <img src="assets/logo.png" alt="NXew">
+        <img src="assets/145.png" alt="NXew">
       </button>
       <div class="app-header-right">
         
