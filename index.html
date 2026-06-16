@@ -61,8 +61,8 @@
       } else {
         new Notification('Welcome to NXew! 🛍️', {
           body: 'You will now receive updates on offers and your orders.',
-          icon: '/logo_no_bg__1_.png',
-          badge: '/logo_no_bg__1_.png'
+          icon: '/145.png',
+          badge: '/145.png'
         });
       }
     }
@@ -72,8 +72,8 @@
       if (Notification.permission !== 'granted') return;
       const opts = {
         body,
-        icon: '/logo_no_bg__1_.png',
-        badge: '/logo_no_bg__1_.png',
+        icon: '/145.png',
+        badge: '/145.png',
         vibrate: [200, 100, 200],
         ...options
       };
@@ -137,7 +137,7 @@
         <i class="bi bi-list"></i>
       </button>
       <button class="app-logo-button" type="button" onclick="showSection('homeSection')" aria-label="NXew Home">
-        <img src="assets/145.png" alt="NXew">
+        <img src="assets/logo.png" alt="NXew">
       </button>
       <div class="app-header-right">
         
