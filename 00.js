@@ -96,9 +96,13 @@ let currentOrdersFilter = 'all';
 let product = []; // Initialize as empty; will be populated by loadProducts
 
 const locations = ['New York', 'Los Angeles', 'Chicago', 'Houston', 'Phoenix'];
-const colorMap = { 'Blue': '#0000FF', 'Red': '#FF0000', 'Black': '#000000', 'Brown': '#8B4513', 'White': '#FFFFFF' };
+const colorMap = { 'Blue': '#0000FF', 'Red': '#FF0000', 'Black': '#000000', 'Brown': '#8B4513', 'White': '#FFFFFF', 'Grey': '#808080', 'Gray': '#808080' };
 let currentOrderIndexForMessage = null;
 let shopSearchTimeout = null;
+
+function getColorSwatchValue(color) {
+  return colorMap[color] || color.toLowerCase();
+}
 
 function sendEmailWithTimeout(templateParams, options = {}) {
   if (typeof emailjs === "undefined") {
@@ -206,34 +210,32 @@ const products = [
 // UPDATED PRODUCT (ID 3) - SET TO NEW ARRIVAL
 {
   "id": 1,
-  "name": "NXew:Oversized Puff Printed T-Shirt",
-  "description": "A bold oversized black t-shirt featuring premium Puff Print for a modern streetwear look. Designed for comfort and style with a relaxed fit.",
+  "name": "CHEGUVERA Puff Printed oversized tee",
+  "description": "A bold oversized black t-shirt featuring premium Puff Print with  CHEGUVERA image . Designed for comfort and style with a relaxed fit.",
   "category": "T-Shirts",
-  "price": 549.99,
-  "discount": 29,
+  "price": 629.99,
+  "discount": 39,
   "size": "L",
-  "color": "Black",
+  "color": "Black,white,Grey",
   "clothType": "100% Cotton",
   "fit": "Oversized Streetwear Fit",
-  "neck": "Crewneck",
+  "neck": "Roundneck",
   "printType": "Puff Print",
   "deliveryTime": "3-5 days",
   "returnPolicy": "5 days return policy",
   "additionalDetails": "Features reinforced stitching and  breathable fabric. Perfect for casual and urban fashion.",
   "newArrivalPosition": 1,
   "images": [
-    "https://i.pinimg.com/736x/3a/01/1c/3a011c9b6f0299af74483af49ad1efb5.jpg",
-    "https://i.pinimg.com/736x/08/1a/14/081a148920549d6a607ab8509b529986.jpg",
-
+  "https://i.pinimg.com/736x/16/8f/30/168f3084fe8e64b1279bb8e2a212611e.jpg",
+    "https://i.pinimg.com/736x/f9/22/60/f92260fef0dbfcbcb00e3d307277361a.jpg",
+    "https://i.pinimg.com/736x/51/df/f2/51dff2634fc2f5c8c8b35d642385dd73.jpg"
     
   ],
-  "colorImages": {
-    "Black": "https://i.pinimg.com/736x/98/f3/42/98f342f105d69d3d72c141c5264f56e0.jpg"
-  },
+ 
   "specifications": {
     "Material": "100% Cotton",
     "Sleeve": "Half Sleeves",
-    "Neck": "Crewneck",
+    "Neck": "Roundneck",
     "Fit": "Oversized",
     "Print": "Puff Print",
     "Pattern": "Solid with Front Graphic",
@@ -242,35 +244,33 @@ const products = [
 },
 {
   "id": 3,
-  "name": "NXew:Oversized Puff Printed T-Shirt",
+  "name": "NXew : Oversized Puff Printed Tee",
   "description": "A bold oversized black t-shirt featuring premium Puff Print  for a modern streetwear look. Designed for comfort and style with a relaxed fit.",
   "category": "T-Shirts",
   "price": 529.99,
   "discount": 19,
   "size": "L",
-  "color": "Grey",
+  "color": "Black,white,Grey",
   "clothType": "100% Cotton",
   "fit": "Oversized Streetwear Fit",
-  "neck": "Crewneck",
+  "neck": "Roundneck",
   "printType": "Puff Print",
   "deliveryTime": "3-5 days",
   "returnPolicy": "5 days return policy",
   "additionalDetails": "Features reinforced stitching and  breathable fabric. Perfect for casual and urban fashion.",
   "newArrivalPosition": 1,
   "images": [
-        "https://i.pinimg.com/736x/8c/5a/19/8c5a19045ab7485b4568d27fc3a8a91d.jpg",
-
-    "https://i.pinimg.com/736x/51/f8/2c/51f82c08347267a0750dc389c3cbf667.jpg",
+        "https://i.pinimg.com/736x/85/37/86/853786c64d327060e6a0a5e60c19e855.jpg",
+"https://i.pinimg.com/736x/f9/22/60/f92260fef0dbfcbcb00e3d307277361a.jpg",
+    "https://i.pinimg.com/736x/0d/b4/8b/0db48bb9368b46e4ef89f626afb840c3.jpg",
 
     
   ],
-  "colorImages": {
-    "Grey": "https://i.pinimg.com/736x/71/a2/c7/71a2c79bd4814c14a7f4b4ee7581d991.jpg"
-  },
+
   "specifications": {
     "Material": "100% Cotton",
     "Sleeve": "Half Sleeves",
-    "Neck": "Crewneck",
+    "Neck": "Roundneck",
     "Fit": "Oversized",
     "Print": "Puff Print",
     "Pattern": "Solid with Front Graphic",
@@ -279,26 +279,26 @@ const products = [
 },
 {
   id: 7,
-  name: "Men's Black Jordan Oversized T-Shirt",
-  description: "Comfortable and stylish men's oversized t-shirt",
+  name: "Men's Black  Oversized Tee",
+  description: "Comfortable and stylish men's oversized t-shirt, with the puff print.",
   category: "T-Shirts",
-  price: 439.99,
+  price: 539.99,
   discount: 38,
   size: "L",
-  color: "Black",
+  color: "Black,white,Grey",
   clothType: "100% Cotton",
   deliveryTime: "3-5 days",
   returnPolicy: "5 days return policy",
   additionalDetails: "Machine washable and weatherproof.this product is sold out",
  
   images: [
-    "https://i.pinimg.com/736x/99/df/c6/99dfc6172b5df9a97c22d2af93aac789.jpg",
-    "https://i.pinimg.com/736x/71/ed/b3/71edb347dbbcc9f5708fb2e141b4e6c9.jpg",
-    "https://i.pinimg.com/736x/5e/06/2f/5e062fb9641aeb3558304ee1bb93a1d5.jpg"
+        "https://i.pinimg.com/736x/3f/3a/64/3f3a644afb769f5b258900ad33559b20.jpg",
+
+    "https://i.pinimg.com/736x/7a/d3/18/7ad318361ae6750be3dd19a2f2f1a673.jpg",
+    "https://i.pinimg.com/736x/f9/22/60/f92260fef0dbfcbcb00e3d307277361a.jpg",
+   
   ],
-  colorImages: {
-    "Black": "https://i.pinimg.com/736x/99/df/c6/99dfc6172b5df9a97c22d2af93aac789.jpg"
-  },
+
   specifications: {
     Material: "100% Cotton",
     Fit: "Oversized",
@@ -308,28 +308,25 @@ const products = [
 },
 {
   id: 8,
-  name: "Nxew's Men's Oversized T-Shirt",
-  description: "Comfortable and stylish men's oversized t-shirt",
+  name: "Nxew's Men's Oversized Tee",
+  description: "Comfortable and stylish men's oversized t-shirt, featuring a bold puff print. With the GSM of 260",
   category: "T-Shirts",
-  price: 399,
+  price: 549,
   discount: 42,
   size: "L",
-  color: "Black",
+  color: "Black,white,Grey",
   clothType: "100% Cotton",
   deliveryTime: "3-5 days",
   returnPolicy: "5 days return policy",
   additionalDetails: "Machine washable and weatherproof.this product is sold out",
 
   images: [
-    "https://i.pinimg.com/736x/78/3e/39/783e39cca642ba73cd5455ce8be39608.jpg",
-    "https://i.pinimg.com/736x/a8/03/b7/a803b71b74c0b3c7f70938556d480111.jpg",
-    "https://i.pinimg.com/736x/26/94/be/2694be21bc82399c67208bf6d65068a4.jpg",
-    "https://i.pinimg.com/736x/37/a7/e2/37a7e22ccccb2fd9e158db92d9fe094d.jpg",
-    "https://i.pinimg.com/736x/ae/36/14/ae36149467f17d37a86ab84051b321f7.jpg"
+    "https://i.pinimg.com/736x/90/5b/08/905b0815360167d9519139c4765bd564.jpg",
+    "https://i.pinimg.com/736x/f9/22/60/f92260fef0dbfcbcb00e3d307277361a.jpg",
+    "https://i.pinimg.com/736x/13/70/a5/1370a57730ac46d3895619e907358a3d.jpg",
+  
   ],
-  colorImages: {
-    "Black": "https://i.pinimg.com/736x/78/3e/39/783e39cca642ba73cd5455ce8be39608.jpg"
-  },
+ 
   specifications: {
     Material: "100% Cotton",
     Fit: "Oversized",
@@ -339,27 +336,25 @@ const products = [
 },
 {
   id: 9,
-  name: "Alien Men's Oversized T-Shirt",
-  description: "Comfortable and stylish oversized t-shirt with alien graphic",
+  name: " Men's Oversized Tee",
+  description: "Comfortable and stylish oversized t-shirt with hign GSM, featuring a bold puff print. With the GSM of 260",
   category: "T-Shirts",
   price: 349,
   discount: 26,
   size: "L",
-  color: "Black",
+  color: "Black,white,Grey",
   clothType: "100% Cotton",
   deliveryTime: "3-5 days",
   returnPolicy: "5 days return policy",
   additionalDetails: "Machine washable and weatherproof.this product is sold out",
 
   images: [
-    "https://i.pinimg.com/736x/22/3e/6e/223e6ec6ab0a025177a6502a10d4cceb.jpg",
-    "https://i.pinimg.com/736x/1f/f9/3e/1ff93ece8aa88d219e7f653815af9968.jpg",
-    "https://i.pinimg.com/736x/0a/71/e1/0a71e1b76821af8f9ef8ceb1d843a1b7.jpg",
-    "https://i.pinimg.com/736x/ad/35/e2/ad35e2b64522a040c6fc3d0c64e8c09f.jpg"
+    "https://i.pinimg.com/736x/b0/37/0a/b0370af52d0caff2f3951ca1fade4d9d.jpg",
+    "https://i.pinimg.com/736x/f9/22/60/f92260fef0dbfcbcb00e3d307277361a.jpg",
+    "https://i.pinimg.com/736x/39/d5/db/39d5dbca99080523f1455e2f35e7d766.jpg",
+   
   ],
-  colorImages: {
-    "Black": "https://i.pinimg.com/736x/22/3e/6e/223e6ec6ab0a025177a6502a10d4cceb.jpg"
-  },
+ 
   specifications: {
     Material: "100% Cotton",
     Fit: "Oversized",
@@ -369,60 +364,28 @@ const products = [
 },
 {
   id: 13,
-  name: "Nxew's Black Sweat T-Shirt",
-  description: "Weatherproof black sweat t-shirt for versatile wear",
+  name: "Nxew's Stylish caps",
+  description: "Weatherproof black caps with NXEW logo ",
   category: "Sweat T-Shirts",
   price: 499.99,
   discount: 37,
-  size: "XXL",
-  color: "Black",
+  size: "ADJUSTABLE",
+  color: "Black,Brown",
   clothType: "100% Cotton",
   deliveryTime: "3-5 days",
   returnPolicy: "5 days return policy",
   additionalDetails: "Breathable fabric, comfortable to wear",
  
   images: [
-    "https://i.pinimg.com/736x/a8/28/16/a82816b8a65b325163dd0271d08780c4.jpg",
-    "https://i.pinimg.com/736x/a7/00/04/a70004de24160bca35a5ce2a16012957.jpg"
+    "https://i.pinimg.com/736x/30/fc/31/30fc318ecf3b08a7d3c7ed37f9a59010.jpg",
+    "https://i.pinimg.com/736x/b4/67/94/b467949c9846c84de41743899e6a1c7d.jpg"
   ],
   colorImages: {
-    "Black": "https://i.pinimg.com/736x/68/41/79/684179f8e602a855fc3a87695ed47d76.jpg"
+    "Black": "https://i.pinimg.com/736x/30/fc/31/30fc318ecf3b08a7d3c7ed37f9a59010.jpg",
+    "Brown": "https://i.pinimg.com/736x/b4/67/94/b467949c9846c84de41743899e6a1c7d.jpg"
   },
-  specifications: {
-    Material: "100% Cotton",
-    Fit: "Regular Fit",
-    Sleeve: "Long Sleeve",
-    Neck: "Collarless"
-  }
-},
-{
-  id: 14,
-  name: "Nxew's Half Sleeve Embroidered Shirt",
-  description: "Relaxed fit embroidered half-sleeve shirt",
-  category: "Half Sleeve Shirts",
-  price: 349.99,
-  discount: 20,
-  size: "L",
-  color: "Blue",
-  clothType: "Cotton Viscose",
-  deliveryTime: "3-5 days",
-  returnPolicy: "5 days return policy",
-  additionalDetails: "Stylish and comfortable, perfect for casual outings.this product is sold out",
 
-  images: [
-    "https://i.pinimg.com/736x/ca/d0/dd/cad0dd3c7f3880dee714da8bdecdf723.jpg",
-    "https://i.pinimg.com/736x/13/1d/aa/131daac4414ce7338ccdd6941ad7d130.jpg"
-  ],
-  colorImages: {
-    "Blue": "https://i.pinimg.com/736x/ca/d0/dd/cad0dd3c7f3880dee714da8bdecdf723.jpg"
-  },
-  specifications: {
-    Material: "Cotton Viscose",
-    Fit: "Relaxed Fit",
-    Sleeve: "Half Sleeves",
-    Neck: "Cuban Collar"
-  }
-}
+},
 ];
 // Save data to localStorage
 function saveData() {
@@ -825,6 +788,21 @@ function adminLogout() {
 function hideMenu() {
 const menuCanvas = bootstrap.Offcanvas.getInstance(document.getElementById("menuCanvas"));
 if (menuCanvas) menuCanvas.hide();
+}
+
+function showSignupDetails(event) {
+  if (event) event.preventDefault();
+  hideMenu();
+
+  const accountPrompt = document.getElementById("accountPromptModal");
+  if (accountPrompt && typeof bootstrap !== "undefined") {
+    const modal = bootstrap.Modal.getInstance(accountPrompt);
+    if (modal) modal.hide();
+  }
+
+  showSection("signupSection");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+  setTimeout(() => document.getElementById("firstName")?.focus(), 120);
 }
 
 function getProductRating(productId) {
@@ -1341,11 +1319,9 @@ carouselHtml += `
   </div>
 `;
 
-// Generate color image thumbnails (like the screenshot)
+// Generate color swatches
 const colorThumbnails = (colors.length ? colors : [defaultColor]).map(color => {
-  const imageUrl =
-    product.colorImages?.[color] ||
-    (product.images && product.images.length ? product.images[0] : 'https://via.placeholder.com/200x200?text=' + encodeURIComponent(product.name));
+  const swatchColor = getColorSwatchValue(color);
   return `
     <button type="button"
             class="color-thumb ${color === defaultColor ? 'selected' : ''}"
@@ -1353,7 +1329,7 @@ const colorThumbnails = (colors.length ? colors : [defaultColor]).map(color => {
             onclick="selectColor('${color.replace(/'/g, "\\'")}')"
             title="${color}"
             aria-label="Select color ${color}">
-      <img src="${imageUrl}" alt="${color}">
+      <span class="color-swatch" style="background-color: ${swatchColor};" aria-hidden="true"></span>
     </button>
   `;
 }).join("");
@@ -1854,7 +1830,7 @@ if (currentUser) {
         </div>
         <h4 class="mt-3 mb-1">Create your NXew account</h4>
         <p class="text-muted mb-3">Faster checkout, order tracking, and a better lifestyle shopping experience.</p>
-        <button class="btn btn-primary" onclick="showSection('signupSection')">
+        <button class="btn btn-primary" onclick="showSignupDetails(event)">
           Create Account
         </button>
       </div>
@@ -3463,10 +3439,12 @@ function showSection(sectionId) {
 const sections = document.querySelectorAll('.section');
 sections.forEach(section => {
   section.classList.remove('fade-in');
+  section.classList.remove('active-section');
   section.style.display = 'none';
 });
 const activeSection = document.getElementById(sectionId);
 if (activeSection) {
+  activeSection.classList.add('active-section');
   activeSection.style.display = 'block';
   setTimeout(() => activeSection.classList.add('fade-in'), 10);
 }
@@ -4062,10 +4040,10 @@ function showProductDetails(productId) {
   `;
 
   const colorThumbnails = (colors.length ? colors : [defaultColor]).map(color => {
-    const imageUrl = product.colorImages?.[color] || images[0];
+    const swatchColor = getColorSwatchValue(color);
     return `
       <button type="button" class="color-thumb ${color === defaultColor ? 'selected' : ''}" data-color="${color}" onclick="selectColor('${color.replace(/'/g, "\\'")}')" title="${color}" aria-label="Select color ${color}">
-        <img src="${imageUrl}" alt="${color}">
+        <span class="color-swatch" style="background-color: ${swatchColor};" aria-hidden="true"></span>
       </button>
     `;
   }).join("");
@@ -4214,10 +4192,10 @@ function showProductDetails(productId) {
   };
 
   const colorThumbnails = (colors.length ? colors : [defaultColor]).map(color => {
-    const imageUrl = product.colorImages?.[color] || images[0];
+    const swatchColor = getColorSwatchValue(color);
     return `
       <button type="button" class="color-thumb ${color === defaultColor ? 'selected' : ''}" data-color="${color}" onclick="selectColor('${color.replace(/'/g, "\\'")}')" title="${color}" aria-label="Select color ${color}">
-        <img src="${imageUrl}" alt="${color}">
+        <span class="color-swatch" style="background-color: ${swatchColor};" aria-hidden="true"></span>
       </button>
     `;
   }).join("");
