@@ -5434,3 +5434,382 @@ body {
     max-height: 82vh;
   }
 }
+
+/* =====================================================
+   Responsive storefront polish
+   ===================================================== */
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 0;
+  overflow-x: hidden;
+}
+
+img,
+video,
+canvas,
+svg {
+  max-width: 100%;
+}
+
+.app-header-inner {
+  width: min(100%, 1180px);
+}
+
+.store-welcome-bar,
+.store-service-strip {
+  line-height: 1.3;
+}
+
+.section:not(#homeSection):not(#productDetailSection) > header {
+  padding: 10px 0 !important;
+}
+
+.section:not(#homeSection):not(#productDetailSection) > header .container,
+.store-page-header-inner {
+  width: min(100% - 28px, 1180px);
+  grid-template-columns: minmax(104px, auto) minmax(0, 1fr) minmax(44px, 104px);
+  min-height: 66px;
+  padding: 10px 0 !important;
+}
+
+.section:not(#homeSection):not(#productDetailSection) > header .btn,
+.store-back-btn {
+  width: auto !important;
+  min-width: 44px;
+  height: 44px;
+  padding: 0 14px !important;
+  gap: 8px;
+  border: 1px solid rgba(0, 19, 74, 0.12) !important;
+  border-radius: 999px !important;
+  background: rgba(255, 255, 255, 0.82) !important;
+  color: #00134a !important;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  text-transform: uppercase;
+  box-shadow: 0 10px 24px rgba(0, 19, 74, 0.08) !important;
+}
+
+.section:not(#homeSection):not(#productDetailSection) > header .btn:hover,
+.store-back-btn:hover {
+  background: #00134a !important;
+  color: #fff !important;
+  transform: translateY(-1px);
+}
+
+.section:not(#homeSection):not(#productDetailSection) > header .btn:focus-visible,
+.store-back-btn:focus-visible,
+.app-nav-button:focus-visible,
+.app-logo-button:focus-visible,
+.haux-menu-icon-btn:focus-visible,
+.haux-menu-close:focus-visible {
+  outline: 3px solid rgba(42, 82, 152, 0.26);
+  outline-offset: 3px;
+}
+
+.section:not(#homeSection):not(#productDetailSection) > header h1,
+.section:not(#homeSection):not(#productDetailSection) > header .h5,
+.store-page-header h1 {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  line-height: 1.25;
+}
+
+.section:not(#homeSection) .container.my-4,
+.section:not(#homeSection) .container.mt-5,
+.store-page-body {
+  width: min(100% - 28px, 920px);
+}
+
+.search-container {
+  width: 100%;
+}
+
+.search-container .input-group,
+.search-container form {
+  min-width: 0;
+}
+
+.search-container input {
+  min-width: 0;
+}
+
+#featuredProductsContainer,
+#productsContainer,
+#menswearProductsContainer,
+#accessoriesProductsContainer,
+#searchResultsContainer {
+  row-gap: 22px;
+}
+
+.card,
+.product-card,
+.admin-panel-card,
+.search-results-container,
+form {
+  max-width: 100%;
+}
+
+.form-control,
+.form-select,
+.btn {
+  min-height: 44px;
+}
+
+.footer-main {
+  overflow-x: hidden;
+}
+
+@media (min-width: 992px) {
+  .home-drop-section .container,
+  .featured-products .container {
+    max-width: 1180px;
+  }
+
+  .section:not(#homeSection) .container.my-4,
+  .section:not(#homeSection) .container.mt-5,
+  .store-page-body {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    padding-top: 116px !important;
+  }
+
+  .store-welcome-bar {
+    font-size: 0.74rem;
+    padding: 6px 10px;
+  }
+
+  .app-header-inner {
+    min-height: 58px;
+    padding: 7px 12px;
+  }
+
+  .home-store-header .app-logo-button,
+  .app-logo-button {
+    width: 42px !important;
+    height: 42px !important;
+    border-radius: 14px !important;
+  }
+
+  .home-store-header .app-logo-button img,
+  .app-logo-button img {
+    width: 30px !important;
+    height: 30px !important;
+    border-radius: 9px !important;
+  }
+
+  .home-store-header .app-nav-button,
+  .app-nav-button {
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 14px !important;
+  }
+
+  .section:not(#homeSection):not(#productDetailSection) > header .container,
+  .store-page-header-inner {
+    width: min(100% - 20px, 720px);
+    grid-template-columns: 44px minmax(0, 1fr) 44px;
+    min-height: 58px;
+    gap: 8px;
+  }
+
+  .section:not(#homeSection):not(#productDetailSection) > header .btn,
+  .store-back-btn {
+    width: 42px !important;
+    min-width: 42px;
+    height: 42px;
+    padding: 0 !important;
+    font-size: 0;
+    border-radius: 14px !important;
+  }
+
+  .section:not(#homeSection):not(#productDetailSection) > header .btn i,
+  .store-back-btn i {
+    margin: 0 !important;
+    font-size: 1.16rem !important;
+  }
+
+  .section:not(#homeSection):not(#productDetailSection) > header h1,
+  .section:not(#homeSection):not(#productDetailSection) > header .h5,
+  .store-page-header h1 {
+    font-size: clamp(0.74rem, 2.6vw, 0.9rem) !important;
+    letter-spacing: 0.11em !important;
+  }
+
+  .section:not(#homeSection) .container.my-4,
+  .section:not(#homeSection) .container.mt-5,
+  .store-page-body {
+    width: min(100% - 20px, 720px);
+    padding: 20px 0 34px !important;
+  }
+
+  .home-drop-section,
+  .featured-products {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .haux-cart-item,
+  .haux-buy-product-card {
+    grid-template-columns: 82px minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 420px) {
+  .app-header-inner {
+    padding-left: 9px;
+    padding-right: 9px;
+    gap: 6px;
+  }
+
+  .app-header-right {
+    gap: 6px;
+  }
+
+  .section:not(#homeSection):not(#productDetailSection) > header h1,
+  .section:not(#homeSection):not(#productDetailSection) > header .h5,
+  .store-page-header h1 {
+    letter-spacing: 0.08em !important;
+  }
+
+  .haux-coupon-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* About page readability */
+#aboutSection .about-content {
+  display: grid;
+  gap: 28px;
+  max-width: 980px !important;
+  padding: clamp(28px, 4vw, 48px) !important;
+}
+
+#aboutSection .about-content > p:last-child:not(.about-signature) {
+  display: none;
+}
+
+.about-intro {
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.about-kicker {
+  margin: 0 0 10px;
+  color: #00134a;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.about-intro h2 {
+  margin: 0 0 18px;
+  color: #00134a;
+  font-size: clamp(1.65rem, 4vw, 3rem);
+  font-weight: 600;
+  line-height: 1.08;
+}
+
+.about-intro p,
+.about-closing {
+  color: #23385f;
+  font-size: clamp(1rem, 1.5vw, 1.08rem);
+  line-height: 1.75;
+}
+
+.about-intro p {
+  margin: 0 auto 14px;
+}
+
+.about-values {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.about-value {
+  min-height: 190px;
+  padding: 22px;
+  background: #eef0f6;
+  border: 1px solid rgba(0, 19, 74, 0.08);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.about-value span {
+  color: rgba(0, 19, 74, 0.42);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+}
+
+.about-value h3 {
+  margin: 18px 0 10px;
+  color: #00134a;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.about-value p {
+  margin: 0;
+  color: #405273;
+  font-size: 0.94rem;
+  line-height: 1.65;
+}
+
+.about-closing {
+  max-width: 760px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.about-signature {
+  margin: 0;
+  padding-top: 10px;
+  color: #00134a;
+  text-align: center;
+  font-size: 0.86rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+  #aboutSection .about-content {
+    gap: 22px;
+    padding: 26px 18px !important;
+  }
+
+  .about-intro {
+    text-align: left;
+  }
+
+  .about-values {
+    grid-template-columns: 1fr;
+  }
+
+  .about-value {
+    min-height: 0;
+    padding: 18px;
+  }
+
+  .about-closing,
+  .about-signature {
+    text-align: left;
+  }
+}
