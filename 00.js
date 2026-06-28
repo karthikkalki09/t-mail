@@ -213,7 +213,7 @@ const products = [
   "name": "CHEGUVERA Puff Printed oversized tee",
   "description": "A bold oversized black t-shirt featuring premium Puff Print with  CHEGUVERA image . Designed for comfort and style with a relaxed fit.",
   "category": "T-Shirts",
-  "price": 629.99,
+  "price": 729.99,
   "discount": 39,
   "size": "L",
   "color": "Black,white,Grey",
@@ -247,7 +247,7 @@ const products = [
   "name": "NXew : Oversized Puff Printed Tee",
   "description": "A bold oversized black t-shirt featuring premium Puff Print  for a modern streetwear look. Designed for comfort and style with a relaxed fit.",
   "category": "T-Shirts",
-  "price": 529.99,
+  "price": 649.99,
   "discount": 19,
   "size": "L",
   "color": "Black,white,Grey",
@@ -311,7 +311,7 @@ const products = [
   name: "Nxew's Men's Oversized Tee",
   description: "Comfortable and stylish men's oversized t-shirt, featuring a bold puff print. With the GSM of 260",
   category: "T-Shirts",
-  price: 549,
+  price: 629.99,
   discount: 42,
   size: "L",
   color: "Black,white,Grey",
@@ -339,7 +339,7 @@ const products = [
   name: " Men's Oversized Tee",
   description: "Comfortable and stylish oversized t-shirt with hign GSM, featuring a bold puff print. With the GSM of 260",
   category: "T-Shirts",
-  price: 349,
+  price: 449,
   discount: 26,
   size: "L",
   color: "Black,white,Grey",
@@ -367,7 +367,7 @@ const products = [
   name: "Nxew's Stylish caps",
   description: "Weatherproof black caps with NXEW logo ",
   category: "Sweat T-Shirts",
-  price: 499.99,
+  price: 399.99,
   discount: 37,
   size: "ADJUSTABLE",
   color: "Black,Brown",
@@ -2552,18 +2552,20 @@ return `<img id="mainProductImage" src="${defaultImage}" class="product-detail-i
 function updateMenuAccountDetails() {
   const loginBtn = document.getElementById("menuLoginButton");
   const loginText = document.getElementById("menuLoginText");
+  const sellerDashboardMenuItem = document.getElementById("sellerDashboardMenuItem");
+  const ownerDashboardMenuItem = document.getElementById("ownerDashboardMenuItem");
   if (currentUser) {
     if (loginText) loginText.textContent = "My Account";
     if (loginBtn) loginBtn.onclick = () => { hideMenu(); showSection("accountSection"); };
     if (currentUser.email === "tedpole.in@gmail.com") {
-      document.getElementById("sellerDashboardMenuItem").style.display = "block";
-      document.getElementById("ownerDashboardMenuItem").style.display = "block";
+      if (sellerDashboardMenuItem) sellerDashboardMenuItem.style.display = "block";
+      if (ownerDashboardMenuItem) ownerDashboardMenuItem.style.display = "block";
     }
   } else {
     if (loginText) loginText.textContent = "Log in";
     if (loginBtn) loginBtn.onclick = () => { hideMenu(); showSection("loginSection"); };
-    document.getElementById("sellerDashboardMenuItem").style.display = "none";
-    document.getElementById("ownerDashboardMenuItem").style.display = "none";
+    if (sellerDashboardMenuItem) sellerDashboardMenuItem.style.display = "none";
+    if (ownerDashboardMenuItem) ownerDashboardMenuItem.style.display = "none";
   }
 }
        
